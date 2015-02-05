@@ -1,0 +1,40 @@
+body {
+	text-align: center;
+}
+
+#titleBar {
+
+}
+
+#accountsWrapper {
+	width: 480px;
+}	
+
+.acctItem {
+	height: 50px;
+	margin: 5px;
+	padding: 10px;
+	background-color: #ececec;
+}
+
+.acctLabel {
+	text-align: left;
+}
+
+.acctBal {
+	text-align: center;
+}
+
+.acctFormDiv {
+	display: none;
+	margin-top: 20px;
+	overflow: hidden;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
