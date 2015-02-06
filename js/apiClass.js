@@ -98,20 +98,28 @@ function apiClass(conf) {
 		action.method = action.method.toLowerCase();
 		
 		if (!action) deferred.resolve(null) 
-		else {		
-			/*request[action.method](conf.baseURL + action.target)
-				.auth(""+cred.userid, cred.pass) //superagent requires user to be a string
-				.query(action.query)
-				.send(action.inputs)
-				.end(function (err, res) { 
-					if (err) deferred.reject(new Error(err));
-					else if (!res || !res.body) deferred.reject(new Error('No response body.'));
+		else {
+			$.ajax({
+				url: conf.baseURL + action.target,
+				type: action.method,
+				headers: {
+					"Authorization": "Basic " + btoa(conf.userid + ":" + conf.pass)
+				},
+				dataType: 'json',
+				contentType: 'json',
+				data: JSON.stringify(action.inputs),
+				success: function (res) { 
+					if (!res || !res.body) deferred.reject(new Error('No response body.'));
 					else {
 						if (!res.body['@graph']) res.body = {'@graph': [res.body]};									
 						res.body['@graph'].map(indexGraph);
 						deferred.resolve(res);
 					}
-				});*/
+				},
+				error: function (xhr, status, text) {
+					deferred.reject(new Error(text));
+				}
+			})
 		}
 				
 		return deferred.promise;
