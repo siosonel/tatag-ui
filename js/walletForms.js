@@ -1,14 +1,21 @@
 function walletForms(api) {
 	function main() {}
 
-	main.showTxnForm = function showTxnForm(id) {
-		var arr = id.split("-"), action=arr.pop(), wrapperId = arr.join("-");
-		var relay = app.resources[wrapperId].relay[action+'-budget'];
-		var form = api.byId[app.resources[wrapperId].links[action+'-budget']];
+	main.showTxnForm = function showTxnForm(arg, action) {
+		if (typeof arg=='string') {
+			var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-");
+			var resource = app.resources[wrapperId];
+		}
+		else resource = arg; console.log(resource); console.log(api.byId); console.log(action);
 		
-		if (relay && form) $('#txnFormContent').html(main.renderTxnForm(form, app.resources[wrapperId]) +"<hr/><span><i>-- OR --</i></span>" + main.renderTxnRelay(relay));
-		else if (relay) $('#txnFormContent').html(main.renderTxnRelay(relay))
-		else $('#txnFormContent').html(main.renderTxnForm(form, app.resources[wrapperId]))
+		var relay = resource.relay[action+'-budget'];
+		var form = api.byId[resource.links[action+'-budget']];
+		
+		if (arguments.length==1 && relay && form) $('#txnFormContent').html(
+			main.renderTxnForm(form, resource) +"<hr/><span><i>-- OR --</i></span>" + main.renderTxnRelay(relay)
+		);
+		else if (arguments.length==1 && relay) $('#txnFormContent').html(main.renderTxnRelay(relay));
+		else $('#txnFormContent').html(main.renderTxnForm(form, resource));
 		
 		$('#txnForm').foundation('reveal','open');
 	}
