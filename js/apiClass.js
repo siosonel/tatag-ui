@@ -109,10 +109,10 @@ function apiClass(conf) {
 				contentType: 'json',
 				data: JSON.stringify(action.inputs),
 				success: function (res) { 
-					if (!res || !res.body) deferred.reject(new Error('No response body.'));
+					if (!res) deferred.reject(new Error('No response body.'));
 					else {
-						if (!res.body['@graph']) res.body = {'@graph': [res.body]};									
-						res.body['@graph'].map(indexGraph);
+						if (!res['@graph']) res = {'@graph': [res]};									
+						res['@graph'].map(indexGraph);
 						deferred.resolve(res);
 					}
 				},

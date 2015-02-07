@@ -6,12 +6,23 @@ body {
 
 }
 
-#accountsWrapper {
+#accountsWrapper, #recordsWrapper {
 	width: 480px;
 }	
 
 .acctItem {
 	height: 50px;
+	margin: 5px;
+	padding: 10px;
+	background-color: #ececec;
+}
+
+.acctRecordTitle {
+	
+}
+
+.recordItem {
+	height: 70px;
 	margin: 5px;
 	padding: 10px;
 	background-color: #ececec;

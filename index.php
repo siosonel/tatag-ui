@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Tatag UI</title>
+	<title>Wallet</title>
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/ui.css">
+	<link rel="stylesheet" href="css/wallet.css">
 	
 	<script type="text/javascript" src="/common2/lib/jQuery/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="/node_modules/q/q.js"></script>
@@ -21,11 +21,18 @@
 		<div class='large-12' id='titleBar'><b>Wallet</b></div>
 	</div>
 	<div class="row" id='accountsWrapper'></div>
+	<div class="row" id='recordsWrapper'></div>
 	<div id='txnForm' class="reveal-modal medium" style='min-height:50vh; top:30px;' data-reveal>
 		<p id='txnFormContent'></p>
 		<a class="close-reveal-modal">×</a>
 	</div>
-
-	<script type="text/javascript" src="js/ui.js"></script>
+	
+	<script type="text/javascript" src="js/walletMain.js"></script>
+	<script type="text/javascript" src="js/walletCards.js"></script>
+	<script type="text/javascript" src="js/walletRecords.js"></script>
+	<script type="text/javascript" src="js/walletForms.js"></script>
+	<script>
+		var app = walletMain();		
+	</script>
 </body>
 </html>
