@@ -6,7 +6,21 @@ body {
 
 }
 
-#accountsWrapper, #recordsWrapper {
+#mainWrapper {
+	position: absolute;
+}
+
+#accountsWrapper {
+	position: absolute;
+	top: 5px;
+	left: 0px;
+	width: 480px;
+}	
+
+#recordsWrapper {
+	position: absolute;
+	top: 5px;
+	left: 485px;
 	width: 480px;
 }	
 
@@ -17,8 +31,8 @@ body {
 	background-color: #ececec;
 }
 
-.acctRecordTitle {
-	
+#acctRecordTitle {
+	width: 480px;
 }
 
 .recordItem {

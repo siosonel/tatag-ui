@@ -19,15 +19,15 @@ function walletCards(api) {
 		+     "<span id='"+ wrapperId +"-name' style='font-weight:normal; display: none;'>&nbsp;#"+acct.account_id +' '+acctname+"</span>"
 		+		"</div>"
 		+ 	"<div class='large-4 medium-4 small-4 columns acctBal' id='"+wrapperId+"-bal'>"
-		+ 		(acct.sign*acct.balance).toFixed(2) +' >>'
+		+ 		(acct.sign*acct.balance).toFixed(2) +" &#9658;"
 		+		"</div>"
 		+ "</div>"
 		+ "<div class='row acctFormDiv' id='"+ wrapperId +"-forms'>"
 		+ 	"<div class='large-8 medium-8 small-8 columns'>"
 		//+			"<span>Relay:</span><br />"
 		//+ 		"<h1>"+ acct.holder_id +"-"+ acct.limkey +"</h1><br />"
-		+			"<a href=''>Review</a> | <a href=''>Edit</a><br />"
-		+			"<img id='"+ wrapperId +"-viz' class='left' src='http://placehold.it/300x150&text=[img]'/>"
+		//+			"<a href=''>Review</a> | <a href=''>Edit</a><br />"
+		+			"<img id='"+ wrapperId +"-viz' class='left' src='http://placehold.it/300x180&text=[img]'/>"
 		+		"</div>"
 		+ 	"<div class='large-4 medium-4 small-4 columns'>"
 		+ 		((acct.relay['add-budget'] || acct.links['add-budget']) ? "<button style='width:100px;' id='"+wrapperId+"-add'>Add</button><br />" : "")

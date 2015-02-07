@@ -28,8 +28,8 @@ function walletMain() {
 	})
 	
 	function main() {
-		$('#recordsWrapper').css('display','none');
-		$('#accountsWrapper').css('display','block');		
+		$('#recordsWrapper').animate({left: '485px'});
+		$('#accountsWrapper').animate({left: '0px'});
 	}
 
 	function loadUser(res) {

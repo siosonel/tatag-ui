@@ -4,6 +4,7 @@
 	<title>Wallet</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/wallet.css">
+	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
 	
 	<script type="text/javascript" src="/common2/lib/jQuery/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="/node_modules/q/q.js"></script>
@@ -20,8 +21,10 @@
 	<div class="row">
 		<div class='large-12' id='titleBar'><b>Wallet</b></div>
 	</div>
-	<div class="row" id='accountsWrapper'></div>
-	<div class="row" id='recordsWrapper'></div>
+	<div id='mainWrapper'>	
+		<div class="row" id='accountsWrapper'></div>
+		<div class="row" id='recordsWrapper'></div>
+	</div>	
 	<div id='txnForm' class="reveal-modal medium" style='min-height:50vh; top:30px;' data-reveal>
 		<p id='txnFormContent'></p>
 		<a class="close-reveal-modal">×</a>
