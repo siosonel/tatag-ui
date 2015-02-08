@@ -30,9 +30,9 @@ function walletCards(api) {
 		+			"<img id='"+ wrapperId +"-viz' class='left' src='http://placehold.it/300x180&text=[img]'/>"
 		+		"</div>"
 		+ 	"<div class='large-4 medium-4 small-4 columns'>"
-		+ 		((acct.relay['add-budget'] || acct.links['add-budget']) ? "<button style='width:100px;' id='"+wrapperId+"-add'>Add</button><br />" : "")
-		+ 		((acct.relay['transfer-budget'] || acct.links['transfer-budget']) ? "<button id='"+wrapperId+"-transfer' style='width:100px; padding-left: 1.3rem;'>Transfer</button><br />" : "")
-		+			((acct.relay['use-budget'] || acct.links['use-budget']) ? "<button id='"+wrapperId+"-use' style='width:100px'>Use</button><br />" : "")
+		+ 		((acct.relay['budget-add'] || acct.links['budget-add']) ? "<button style='width:100px;' id='"+wrapperId+"-add'>Add</button><br />" : "")
+		+ 		((acct.relay['budget-transfer'] || acct.links['budget-transfer']) ? "<button id='"+wrapperId+"-transfer' style='width:100px; padding-left: 1.3rem;'>Transfer</button><br />" : "")
+		+			((acct.relay['budget-use'] || acct.links['budget-use']) ? "<button id='"+wrapperId+"-use' style='width:100px'>Use</button><br />" : "")
 		+		"</div>" 	
 		+ "</div>"
 		+ "</div>");
@@ -40,7 +40,7 @@ function walletCards(api) {
 	
 	main.toggleAcctItem = function toggleAcctItem(e) {
 		if (e.target.id && e.target.id.slice(-3)=='bal') {app.records(app.resources[e.target.id.slice(0,-4)]); return;}
-		if (e.target.tagName.toUpperCase()=='BUTTON') {app.forms.showTxnForm(e.target.id); return;}
+		if (e.target.tagName.toUpperCase()=='BUTTON') {app.forms(e.target.id); return;}
 		if (e.target.tagName.toUpperCase()=='A') return false;
 		if (e.target.className.search('acctItem') == -1) return; 
 		

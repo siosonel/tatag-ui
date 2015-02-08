@@ -37,10 +37,13 @@ function walletRecords(api) {
 		var date = record.created.split(' ')[0].split('-'),
 			other = record.other_acct ? '#'+record.other : record.other;
 		
+		var divId = 'record-'+record.record_id;
+		app.resources[divId] = record;
+		
 		if (!record.links) var reversePrompt = ''; 
-		else if (record.links['reverse-add']) var reversePrompt = "<br /><button class='tiny' id='reverse-"+record.record_id+"-add'>reverse</button>";
-		else if (record.links['reverse-transfer']) var reversePrompt = "<br /><button class='tiny' id='reverse-"+record.record_id+"-transfer'>reverse</button>";
-		else if (record.links['reverse-use']) var reversePrompt = "<br /><button class='tiny' id='reverse-"+record.record_id+"-use'>reverse</button>";
+		else if (record.links['budget-unadd']) var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unadd'>reverse</button>";
+		else if (record.links['budget-untransfer']) var reversePrompt = "<br /><button class='tiny' id='"+divId+"-untransfer'>reverse</button>";
+		else if (record.links['budget-unuse']) var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unuse'>reverse</button>";
 		else var reversePrompt = '';
 		
 		$('#recordsWrapper').append(
@@ -61,11 +64,7 @@ function walletRecords(api) {
 		
 		if (idArr.indexOf('acctRecordTitle')!=-1) {app(); return;}		
 		
-		if (typeArr.indexOf('reverse')!=-1) {
-			var action = idArr[typeArr.indexOf('reverse')].split('-')[2];	
-			app.forms.showTxnForm(currAcct, action); 
-			return;
-		} 
+		if (e.target.tagName.toUpperCase()=='BUTTON') {app.forms(e.target.id); return;} 
 		
 		if (typeArr.indexOf('record')!=-1) {
 			$('#'+currRecordId).animate({height: '38px'});			

@@ -25,8 +25,28 @@
 		<div class="row" id='accountsWrapper'></div>
 		<div class="row" id='recordsWrapper'></div>
 	</div>	
-	<div id='txnForm' class="reveal-modal medium" style='min-height:50vh; top:30px;' data-reveal>
-		<p id='txnFormContent'></p>
+	<div id='txnForm' class="reveal-modal medium" style='min-height:50vh; top:30px;' data-reveal>		
+		<h4 id='form-title'></h4>
+		<form>
+			<div class='row'>
+				<div class='columns large-4 medium-4 small-4'>
+					<label>from<input type='text' id='form-from' value='' /></label>
+				</div>
+				<div class='columns large-4 medium-4 small-4'>
+					<label>to<input type='text' id='form-to' value='' /></label>
+				</div>
+				<div class='columns large-4 medium-4 small-4'>
+					<label>amount<input type='text' id='form-amount' value='' /></label>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='columns large-12 medium-12 small-12'>
+					<label>note<input type='text' id='form-note' value='' /></label>
+				</div>
+			</div>
+			<input type='hidden' id='form-orig_record_id' value='' /> 
+		</form>
+		<button id='form-submit'>Submit</button>		
 		<a class="close-reveal-modal">×</a>
 	</div>
 	

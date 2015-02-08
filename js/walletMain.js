@@ -42,6 +42,7 @@ function walletMain() {
 		User.userAccounts.items.map(cards);
 	}
 	
+	main.api = api;
 	main.resources = resources;
 	main.cards = cards;
 	main.forms = forms;
