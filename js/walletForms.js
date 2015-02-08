@@ -1,26 +1,22 @@
 function walletForms(api) {
 	var currResource, currForm, currInputs;
 	
-	function main(arg, action) {
-		if (typeof arg=='string') {
-			var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-");
-			currResource = app.resources[wrapperId];
-		}
-		else currResource = arg; //console.log(currResource); console.log(api.byId); console.log(action);
+	function main(arg) {		
+		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-");
+		currResource = app.resources[wrapperId]; //console.log(currResource); console.log(api.byId); console.log(action+' '+arguments.length);
 		
-		var relay = currResource.relay['budget-'+action];
-		currForm = api.byId[currResource.links['budget-'+action]];
+		var relay = !currResource.relay ? null : currResource.relay['budget-'+action];
+		currForm = !currResource.links ? null : api.byId[currResource.links['budget-'+action]];
 		
-		if (arguments.length==1 && relay && currForm) $('#txnFormContent').html(
-			renderForm(action) +"<hr/><span><i>-- OR --</i></span>" + renderRelay(relay)
-		);
-		else if (arguments.length==1 && relay) $('#txnFormContent').html(renderRelay(relay));
-		else $('#txnFormContent').html(renderForm(action));
-		
-		$('#txnForm').foundation('reveal','open');
+		renderForm(action);
+		renderRelay(relay);		
+		$('#modalDiv').foundation('reveal','open');
 	}
 	
 	function renderForm(action) {
+		if (!currForm) {$('#txnForm').css('display','none'); return;}
+		
+		$('#txnForm').css('display','block');
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);		
 		$('#form-title').html(currForm.title);	
 		currInputs.map(main[action]);
@@ -45,8 +41,17 @@ function walletForms(api) {
 		$('#form-'+inputName).prop('disabled', disabled)
 	}
 	
-	function renderRelay(relay) {
-		return "<span><br/><br/>Authorize the transaction originator with this 'to' value:<br/><br/><h1>"+ relay +"</h1></span>";
+	function renderRelay(relay) {		
+		if (!relay) {$('#relayInfo').css('display','none'); return;}
+		
+		var optionText = currForm ? "<hr/><span><i>-- OR --</i></span>" : "";
+		var promptText = currResource.record_id 
+			? "Authorize the reversal with this 'from' value"
+			: "Authorize the transaction originator with this 'to' value";
+		
+		$('#relayInfo')
+			.html(optionText+"<span><br/><br/>"+ promptText +":<br/><br/><h1>"+ relay +"</h1></span>")
+			.css('display','block');
 	}
 	
 	main.add = renderInputs
@@ -60,9 +65,18 @@ function walletForms(api) {
 	main.formClick = function formClick(e) {
 		if (e.target.id != 'form-submit') return;
 		
-		action = {target:'/budget/issued?brand_id='+ currResource.brand_id, method:'post', inputs:{}};
-		$('#txnForm').foundation('reveal','close');
-		currInputs.map(function (inputName) {action.inputs[inputName] = $('#form-'+inputName).val()}); console.log(action.inputs)
+		var params = [];
+		currForm.query.required.map(function (param) {params.push(param +'='+ currResource[param])});
+		params = '?' + params.join('&');
+		
+		action = {
+			target: currForm.target + params, 
+			method:'post', 
+			inputs:{}
+		};
+		
+		$('#modalDiv').foundation('reveal','close');
+		currInputs.map(function (inputName) {action.inputs[inputName] = $('#form-'+inputName).val()}); //console.log(action); return;
 		api.request(action).done(function (res) {console.log(res)}, app.errHandler)
 	}
 	

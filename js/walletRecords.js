@@ -40,19 +40,22 @@ function walletRecords(api) {
 		var divId = 'record-'+record.record_id;
 		app.resources[divId] = record;
 		
-		if (!record.links) var reversePrompt = ''; 
-		else if (record.links['budget-unadd']) var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unadd'>reverse</button>";
-		else if (record.links['budget-untransfer']) var reversePrompt = "<br /><button class='tiny' id='"+divId+"-untransfer'>reverse</button>";
-		else if (record.links['budget-unuse']) var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unuse'>reverse</button>";
+		if (!record.relay && !record.links) var reversePrompt = ''; 
+		else if (record.relay['budget-unadd'] || record.links['budget-unadd']) 
+			var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unadd' style='margin-top:5px;'>reverse</button>";
+		else if (record.relay['budget-untransfer'] || record.links['budget-untransfer']) 
+			var reversePrompt = "<br /><button class='tiny' id='"+divId+"-untransfer' style='margin-top:5px;'>reverse</button>";
+		else if (record.relay['budget-unuse'] || record.links['budget-unuse']) 
+			var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unuse' style='margin-top:5px;'>reverse</button>";
 		else var reversePrompt = '';
 		
 		$('#recordsWrapper').append(
 			"<div id='record-"+record.record_id+"' class='row recordItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left;'>"
-			+ 		record.direction+' '+ other +'<br /><i>'+ record.note +'</i>' + reversePrompt 
+			+ 		record.direction+' '+ other +'<br /><i>'+ record.note +'</i>' 
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ record.amount.toFixed(2) + "</div>"
+			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ record.amount.toFixed(2) + reversePrompt +"</div>"
 			+'</div>'
 		);
 	}
@@ -73,7 +76,7 @@ function walletRecords(api) {
 			currRecordId = idArr[typeArr.indexOf('record')];
 			
 			if (prevId == currRecordId) currRecordId='';
-			else $('#'+currRecordId).animate({height: '120px'});
+			else $('#'+currRecordId).animate({height: '100px'});
 			
 			return;
 		}
