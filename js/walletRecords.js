@@ -2,16 +2,18 @@ function walletRecords(api) {
 	 var currRecordId, currAcct;
 
 	function main(acct) {
-		currAcct = acct;
+		if (acct) currAcct = acct;
+		if (!currAcct || app.currView != 'records') return;
 		
-		var url = acct.links.accountRecords;		
+		var url = currAcct.links.accountRecords;		
 		$('#recordsWrapper').children().remove();
-		$('#recordsWrapper').append(setTitle(acct))
+		$('#recordsWrapper').append(setTitle(currAcct))
 		
 		$('#accountsWrapper').animate({left: '-485px'});
 		$('#recordsWrapper').animate({left: '0px'});
 		
-		api.loadId(url).then(renderRecords, app.errHandler)
+		//refresh info as needed using second argument to loadId
+		api.loadId(url, app.refresh).then(renderRecords, app.errHandler)
 	}
 	
 	
@@ -21,7 +23,6 @@ function walletRecords(api) {
 			
 		return	"<div id='acctRecordTitle' class='row'>"
 		+ "<div class='large-8 medium-8 small-8 columns acctLabel'>"
-		//+		"<img class='left' src='http://placehold.it/25x25&text=[img]'/>"
 		+ 	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+alias+"</span><br />"
 		+    "<span style='font-weight:normal;'>&nbsp;#"+acct.account_id +' '+acctname+"</span>"
 		+	"</div>"
@@ -29,7 +30,7 @@ function walletRecords(api) {
 		+ "</div>";
 	}
 	
-	function renderRecords(records) {		
+	function renderRecords(records) {
 		records.items.map(listRecord);
 	}
 	
@@ -40,13 +41,18 @@ function walletRecords(api) {
 		var divId = 'record-'+record.record_id;
 		app.resources[divId] = record;
 		
-		if (!record.relay && !record.links) var reversePrompt = ''; 
-		else if (record.relay['budget-unadd'] || record.links['budget-unadd']) 
+		var relay = record.relay ? record.relay : {};
+		var links = record.links ? record.links : {};
+		
+		if (relay['budget-unadd'] || links['budget-unadd']) 
 			var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unadd' style='margin-top:5px;'>reverse</button>";
-		else if (record.relay['budget-untransfer'] || record.links['budget-untransfer']) 
+		
+		else if (relay['budget-untransfer'] || links['budget-untransfer']) 
 			var reversePrompt = "<br /><button class='tiny' id='"+divId+"-untransfer' style='margin-top:5px;'>reverse</button>";
-		else if (record.relay['budget-unuse'] || record.links['budget-unuse']) 
+		
+		else if (relay['budget-unuse'] || links['budget-unuse']) 
 			var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unuse' style='margin-top:5px;'>reverse</button>";
+		
 		else var reversePrompt = '';
 		
 		$('#recordsWrapper').append(
@@ -65,9 +71,14 @@ function walletRecords(api) {
 		var idArr = [id, pid, ppid];
 		var typeArr = [id.split('-')[0], pid.split('-')[0], ppid.split('-')[0]];
 		
-		if (idArr.indexOf('acctRecordTitle')!=-1) {app(); return;}		
+		if (idArr.indexOf('acctRecordTitle')!=-1) {
+			app.currView = 'cards';
+			app(); return;
+		}		
 		
-		if (e.target.tagName.toUpperCase()=='BUTTON') {app.forms(e.target.id); return;} 
+		if (e.target.tagName.toUpperCase()=='BUTTON') {
+			app.forms(e.target.id); return;
+		} 
 		
 		if (typeArr.indexOf('record')!=-1) {
 			$('#'+currRecordId).animate({height: '38px'});			

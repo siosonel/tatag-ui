@@ -20,7 +20,7 @@ function walletMain() {
 		
 		api.init('/')
 			.then(loadUser)
-			.then(setUserAccounts, main.errHandler);
+			.then(setUser, main.errHandler);
 			
 		$('#accountsWrapper').click(cards.toggleAcctItem);
 		$('#recordsWrapper').click(records.toggleRecordItem);
@@ -36,14 +36,14 @@ function walletMain() {
 		return api.loadType('user');
 	}
 
-	function setUserAccounts(res) {
-		User = res; 
-		User.userAccounts = api.byId[User.links.userAccounts];
-		User.userAccounts.items.map(cards);
+	function setUser(res) { 
+		User = res;
+		cards(User.links.userAccounts);
 	}
 	
 	main.api = api;
 	main.resources = resources;
+	main.currView = 'cards';
 	main.cards = cards;
 	main.forms = forms;
 	main.records = records;

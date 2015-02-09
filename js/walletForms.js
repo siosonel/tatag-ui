@@ -34,7 +34,7 @@ function walletForms(api) {
 		var val = inputName=='to' ? currResource.relay['default'] 
 			: inputName=='orig_record_id' ? currResource['orig_record_id'] 
 			: "";
-			
+				
 		var disabled = inputName=='to' ? true : false;
 	
 		$('#form-'+inputName).val(val)
@@ -65,7 +65,7 @@ function walletForms(api) {
 	main.formClick = function formClick(e) {
 		if (e.target.id != 'form-submit') return;
 		
-		var params = [];
+		var params = [], isReversal = currInputs.indexOf('orig_record_id')!=-1;
 		currForm.query.required.map(function (param) {params.push(param +'='+ currResource[param])});
 		params = '?' + params.join('&');
 		
@@ -76,8 +76,19 @@ function walletForms(api) {
 		};
 		
 		$('#modalDiv').foundation('reveal','close');
-		currInputs.map(function (inputName) {action.inputs[inputName] = $('#form-'+inputName).val()}); //console.log(action); return;
-		api.request(action).done(function (res) {console.log(res)}, app.errHandler)
+		
+		currInputs.map(function (inputName) {
+			action.inputs[inputName] = $('#form-'+inputName).val();
+			if (inputName=='amount' && isReversal && 1*action.inputs[inputName]>0) action.inputs[inputName] = -1*action.inputs[inputName];
+		}); //console.log(action); return;
+		
+		api.request(action).then(main.refreshViews, app.errHandler);
+	}
+	
+	main.refreshViews = function (res) {
+		app.refresh=true; 
+		app.cards(); // will refresh/open records view as needed;
+		app.refresh=false;
 	}
 	
 	return main;
