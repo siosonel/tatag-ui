@@ -9,8 +9,8 @@ body {
 #mainWrapper {
 	position: absolute;
 	width: 480px;
-	min-height: 600px;
-	overflow: hidde;
+	min-height: 700px;
+	overflow: hidden;
 }
 
 #accountsWrapper {
@@ -20,14 +20,23 @@ body {
 	width: 480px;
 }	
 
-#recordsWrapper {
+.acctDivToggle, .recordDivToggle {
 	position: absolute;
-	top: 5px;
-	left: 485px;
-	width: 480px;
-}	
+	bottom: 5px;
+	left: 220px;
+	height: 10px;
+	line-height: 12px;
+	width: 50px;
+	padding: 0px;
+	text-align: center;
+	color: rgb(190,190,190);
+	font-size: 8px;
+	background-color: rgb(245,245,245);
+	border-radius: 2px;
+}
 
 .acctItem {
+	position: relative;
 	height: 50px;
 	margin: 5px;
 	padding: 10px;
@@ -38,7 +47,16 @@ body {
 	width: 480px;
 }
 
+
+#recordsWrapper {
+	position: absolute;
+	top: 5px;
+	left: 485px;
+	width: 480px;
+}	
+
 .recordItem {
+	position: relative;
 	height: 38px;
 	margin: 5px;
 	padding: 10px;

@@ -31,7 +31,8 @@ function walletRecords(api) {
 	}
 	
 	function renderRecords(records) {
-		records.items.map(listRecord);
+		if (!records.items || !records.items.length) $('#recordsWrapper').append("<div class='recordItem'>No transaction records found.</div>");
+		else records.items.map(listRecord);
 	}
 	
 	function listRecord(record) {
@@ -56,17 +57,20 @@ function walletRecords(api) {
 		else var reversePrompt = '';
 		
 		$('#recordsWrapper').append(
-			"<div id='record-"+record.record_id+"' class='row recordItem' style='margin: 5px;'>"
+			"<div id='"+divId+"' class='row recordItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left;'>"
 			+ 		record.direction+' '+ other +'<br /><i>'+ record.note +'</i>' 
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ record.amount.toFixed(2) + reversePrompt +"</div>"
+			+ 	"<div id='"+divId+"-toggle' class='recordDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		);
 	}
 	
 	main.toggleRecordItem = function (e) {
+		if (e.target.className.search('recordDivToggle') != -1) e.target = e.target.parentNode;
+	
 		var id = e.target.id, pid = e.target.parentNode.id, ppid = e.target.parentNode.parentNode.id;
 		var idArr = [id, pid, ppid];
 		var typeArr = [id.split('-')[0], pid.split('-')[0], ppid.split('-')[0]];
@@ -82,12 +86,19 @@ function walletRecords(api) {
 		
 		if (typeArr.indexOf('record')!=-1) {
 			$('#'+currRecordId).animate({height: '38px'});			
+			$('#'+currRecordId+'-toggle').html("&#9660;&#9660;&#9660;")
+				.css({'background-color': 'rgb(245,245,245)', 'color': 'rgb(190,190,190)'});
+			
 			var prevId = currRecordId;
 			
 			currRecordId = idArr[typeArr.indexOf('record')];
 			
 			if (prevId == currRecordId) currRecordId='';
-			else $('#'+currRecordId).animate({height: '100px'});
+			else {
+				$('#'+currRecordId).animate({height: '100px'});
+				$('#'+currRecordId+'-toggle').html("&#9650;&#9650;&#9650;")
+				.css({'background-color': '#007095', 'color': '#fff'});
+			}
 			
 			return;
 		}

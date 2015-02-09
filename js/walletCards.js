@@ -49,10 +49,15 @@ function walletCards(api) {
 		+			((acct.relay['budget-use'] || acct.links['budget-use']) ? "<button id='"+acctDivId+"-use' style='width:100px'>Use</button><br />" : "")
 		+		"</div>" 	
 		+ "</div>"
+		+ "<div id='"+acctDivId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
 		+ "</div>");
 	}
 	
 	main.toggleAcctItem = function toggleAcctItem(e) {
+		// change target to toggle-handle as needed
+		if (e.target.parentNode.className.search('acctLabel')!=-1) e.target = e.target.parentNode.parentNode.parentNode.lastChild; 
+		else if (e.target.className.search('acctLabel')!=-1) e.target = e.target.parentNode.parentNode.lastChild; 
+		
 		if (e.target.id && e.target.id.slice(-3)=='bal') {
 			currAcctDivId = e.target.id.slice(0,-4);
 			app.currView = 'records';
@@ -62,22 +67,28 @@ function walletCards(api) {
 		
 		if (e.target.tagName.toUpperCase()=='BUTTON') {app.forms(e.target.id); return;}
 		if (e.target.tagName.toUpperCase()=='A') return false;
-		if (e.target.className.search('acctItem') == -1) return; 
+		if (e.target.className.search('acctDivToggle') == -1) return; 
+		
+		var acctDivId = e.target.parentNode.id;
 		
 		$('#'+currAcctDivId).animate({height: '50px'});
 		$('#'+currAcctDivId+'-forms').css('display', 'none');
 		$('#'+currAcctDivId+'-label').css('font-weight', 'normal');
 		$('#'+currAcctDivId+'-img').animate({height:'25px', width:'25px'});
 		$('#'+currAcctDivId+'-name').css('display', 'none');
+		$('#'+currAcctDivId+'-toggle').html("&#9660;&#9660;&#9660;")
+			.css({'background-color': 'rgb(245,245,245)', 'color': 'rgb(190,190,190)'});
 		
-		if (currAcctDivId==e.target.id) {currAcctDivId = '';}
+		if (currAcctDivId==acctDivId) {currAcctDivId = '';}
 		else {
-			currAcctDivId =  e.target.id;
+			currAcctDivId =  acctDivId;
 			$('#'+currAcctDivId).animate({height: '300px'});	
 			$('#'+currAcctDivId+'-forms').css('display', 'block');
 			$('#'+currAcctDivId+'-label').css('font-weight', '700');
 			$('#'+currAcctDivId+'-img').animate({height:'50px', width:'50px'});
 			$('#'+currAcctDivId+'-name').css('display','inline');
+			$('#'+currAcctDivId+'-toggle').html("&#9650;&#9650;&#9650;")
+				.css({'background-color': '#007095', 'color': '#fff'});
 		}
 	}
 	
