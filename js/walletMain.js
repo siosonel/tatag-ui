@@ -1,6 +1,5 @@
 function walletMain() {
-	var User, resources={};
-	var cards, forms, records;
+	var User, resources={}, refresh=0;
 	
 	var api = apiClass({
 		'userid': '21', 
@@ -9,22 +8,19 @@ function walletMain() {
 	});
 	
 	$(document).ready(function () {
-		cards = walletCards(api);
-		main.cards = cards;
-		
-		forms = walletForms(api);
-		main.forms = forms;
-		
-		records = walletRecords(api);
-		main.records = records;
+		main.cards = walletCards(api);		
+		main.records = walletRecords(api);		
+		main.txn = walletTxn(api);		
+		main.edit = walletEdit(api);
 		
 		api.init('/')
 			.then(loadUser)
 			.then(setUser, main.errHandler);
 			
-		$('#accountsWrapper').click(cards.toggleAcctItem);
-		$('#recordsWrapper').click(records.toggleRecordItem);
-		$('#txnForm').click(forms.formClick);
+		$('#accountsWrapper').click(main.cards.toggleAcctItem);
+		$('#recordsWrapper').click(main.records.toggleRecordItem);
+		$('#txnForm').click(main.txn.formClick);
+		$('#editForm, #editPrompt').click(main.edit.formClick);
 	})
 	
 	function main() {
@@ -38,15 +34,18 @@ function walletMain() {
 
 	function setUser(res) { 
 		User = res;
-		cards(User.links.userAccounts);
+		main.cards(User.links.userAccounts);
 	}
 	
 	main.api = api;
 	main.resources = resources;
 	main.currView = 'cards';
-	main.cards = cards;
-	main.forms = forms;
-	main.records = records;
+	
+	main.refresh = function (num) { //argument=number of views to refresh
+		if (num) refresh=num;
+		else refresh = refresh-1;
+		return refresh+1;
+	}
 	
 	main.errHandler = function errHandler(err) {
 		console.log(err)

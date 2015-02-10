@@ -4,6 +4,7 @@ function walletRecords(api) {
 	function main(acct) {
 		if (acct) currAcct = acct;
 		if (!currAcct || app.currView != 'records') return;
+		app.currView = 'records';
 		
 		var url = currAcct.links.accountRecords;		
 		$('#recordsWrapper').children().remove();
@@ -11,9 +12,9 @@ function walletRecords(api) {
 		
 		$('#accountsWrapper').animate({left: '-485px'});
 		$('#recordsWrapper').animate({left: '0px'});
-		
+
 		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh).then(renderRecords, app.errHandler)
+		api.loadId(url, app.refresh()).then(renderRecords, app.errHandler)
 	}
 	
 	
@@ -32,7 +33,15 @@ function walletRecords(api) {
 	
 	function renderRecords(records) {
 		if (!records.items || !records.items.length) $('#recordsWrapper').append("<div class='recordItem'>No transaction records found.</div>");
-		else records.items.map(listRecord);
+		else {
+			records.items.map(listRecord);
+		
+			if (currRecordId) {
+				var recordId = currRecordId;
+				currRecordId = "";
+				$('#'+recordId+'-toggle').click();
+			}
+		}
 	}
 	
 	function listRecord(record) {
@@ -44,28 +53,49 @@ function walletRecords(api) {
 		
 		var relay = record.relay ? record.relay : {};
 		var links = record.links ? record.links : {};
-		
-		if (relay['budget-unadd'] || links['budget-unadd']) 
-			var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unadd' style='margin-top:5px;'>reverse</button>";
-		
-		else if (relay['budget-untransfer'] || links['budget-untransfer']) 
-			var reversePrompt = "<br /><button class='tiny' id='"+divId+"-untransfer' style='margin-top:5px;'>reverse</button>";
-		
-		else if (relay['budget-unuse'] || links['budget-unuse']) 
-			var reversePrompt = "<br /><button class='tiny' id='"+divId+"-unuse' style='margin-top:5px;'>reverse</button>";
-		
-		else var reversePrompt = '';
+		var actionPrompt = setActionPrompt(divId, record, relay, links);
+		var note = record.note ? record.note : "&nbsp;";
 		
 		$('#recordsWrapper').append(
 			"<div id='"+divId+"' class='row recordItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"</div>"
-			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left;'>"
-			+ 		record.direction+' '+ other +'<br /><i>'+ record.note +'</i>' 
+			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
+			+ 		record.direction+' '+ other +'<br /><i>'+ note +'</i>' + actionPrompt 
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ record.amount.toFixed(2) + reversePrompt +"</div>"
+			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"
+			+ 		(record.status<0 ? "<i>rejected</i>" : record.amount.toFixed(2))
+			+		"</div>"
 			+ 	"<div id='"+divId+"-toggle' class='recordDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		);
+	}
+	
+	function setActionPrompt(divId, record, relay, links) {		
+		if (relay['budget-unadd'] || links['budget-unadd']) 
+			return "<br /><button class='tiny' id='"+divId+"-unadd' style='margin-top:5px;'>reverse</button>";
+			
+		if (relay['budget-untransfer'] || links['budget-untransfer']) 
+			return "<br /><button class='tiny' id='"+divId+"-untransfer' style='margin-top:5px;'>reverse</button>";
+		
+		if (relay['budget-unuse'] || links['budget-unuse']) 
+			return "<br /><button class='tiny' id='"+divId+"-unuse' style='margin-top:5px;'>reverse</button>";
+		
+		var prompt = "";
+		
+		if (links['record-hold']) prompt += "<button id='"+divId+"-hold' class='tiny fi-lock' title='hold for manual approval or rejection'></button>";		
+		if (links['record-approve']) prompt += "<button id='"+divId+"-approve' class='fi-check tiny' title='manually approve'></button>"		
+		if (links['record-reject']) prompt += "<button id='"+divId+"-reject' class='fi-x tiny' title='reject transaction'></button>";
+		
+		if (!prompt) {
+			var status = record.status;
+			
+			if (status==0) prompt = '(pending auto-approval)';
+			if (status==5) prompt = '(pending manual approval by recipient)';
+			if (status==7) prompt = '(approved by recipient)';
+			if (status<0) prompt = "rejected amount="+ record.amount;
+		}
+		
+		return prompt ? "<br />"+prompt : "";
 	}
 	
 	main.toggleRecordItem = function (e) {
@@ -81,11 +111,12 @@ function walletRecords(api) {
 		}		
 		
 		if (e.target.tagName.toUpperCase()=='BUTTON') {
-			app.forms(e.target.id); return;
+			if (['hold', 'approve', 'reject'].indexOf(e.target.id.split('-')[2]) !=-1 ) app.edit(e.target.id); 
+			app.txn(e.target.id); return;
 		} 
 		
 		if (typeArr.indexOf('record')!=-1) {
-			$('#'+currRecordId).animate({height: '38px'});			
+			$('#'+currRecordId).animate({'max-height': '38px'});			
 			$('#'+currRecordId+'-toggle').html("&#9660;&#9660;&#9660;")
 				.css({'background-color': 'rgb(245,245,245)', 'color': 'rgb(190,190,190)'});
 			
@@ -95,7 +126,7 @@ function walletRecords(api) {
 			
 			if (prevId == currRecordId) currRecordId='';
 			else {
-				$('#'+currRecordId).animate({height: '100px'});
+				$('#'+currRecordId).animate({'max-height': '250px'});
 				$('#'+currRecordId+'-toggle').html("&#9650;&#9650;&#9650;")
 				.css({'background-color': '#007095', 'color': '#fff'});
 			}

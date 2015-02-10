@@ -1,4 +1,4 @@
-function walletForms(api) {
+function walletTxn(api) {
 	var currResource, currForm, currInputs;
 	
 	function main(arg) {		
@@ -10,7 +10,7 @@ function walletForms(api) {
 		
 		renderForm(action);
 		renderRelay(relay);		
-		$('#modalDiv').foundation('reveal','open');
+		$('#txnModal').foundation('reveal','open');
 	}
 	
 	function renderForm(action) {
@@ -18,7 +18,7 @@ function walletForms(api) {
 		
 		$('#txnForm').css('display','block');
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);		
-		$('#form-title').html(currForm.title);	
+		$('#txn-title').html(currForm.title);	
 		currInputs.map(main[action]);
 	}
 	
@@ -26,8 +26,8 @@ function walletForms(api) {
 		var val = inputName=='from' ? currResource.relay['default'] : "";
 		var disabled = inputName=='from' ? true : false;
 	
-		$('#form-'+inputName).val(val)
-		$('#form-'+inputName).prop('disabled', disabled)
+		$('#txn-'+inputName).val(val)
+		$('#txn-'+inputName).prop('disabled', disabled)
 	}
 	
 	function renderReverse(inputName) {
@@ -37,8 +37,8 @@ function walletForms(api) {
 				
 		var disabled = inputName=='to' ? true : false;
 	
-		$('#form-'+inputName).val(val)
-		$('#form-'+inputName).prop('disabled', disabled)
+		$('#txn-'+inputName).val(val)
+		$('#txn-'+inputName).prop('disabled', disabled)
 	}
 	
 	function renderRelay(relay) {		
@@ -63,22 +63,22 @@ function walletForms(api) {
 	main.unuse = renderReverse
 
 	main.formClick = function formClick(e) {
-		if (e.target.id != 'form-submit') return;
+		if (e.target.id != 'txn-submit') return;
 		
-		var params = [], isReversal = currInputs.indexOf('orig_record_id')!=-1;
-		currForm.query.required.map(function (param) {params.push(param +'='+ currResource[param])});
-		params = '?' + params.join('&');
+		var query = {}, isReversal = currInputs.indexOf('orig_record_id')!=-1;
+		currForm.query.required.map(function (param) {query[param] = currResource[param]});
 		
 		action = {
-			target: currForm.target + params, 
+			target: currForm.target, 
+			query: query,
 			method:'post', 
 			inputs:{}
 		};
 		
-		$('#modalDiv').foundation('reveal','close');
+		$('#txnModal').foundation('reveal','close');
 		
 		currInputs.map(function (inputName) {
-			action.inputs[inputName] = $('#form-'+inputName).val();
+			action.inputs[inputName] = $('#txn-'+inputName).val();
 			if (inputName=='amount' && isReversal && 1*action.inputs[inputName]>0) action.inputs[inputName] = -1*action.inputs[inputName];
 		}); //console.log(action); return;
 		
@@ -86,9 +86,8 @@ function walletForms(api) {
 	}
 	
 	main.refreshViews = function (res) {
-		app.refresh=true; 
+		app.refresh(2); 
 		app.cards(); // will refresh/open records view as needed;
-		app.refresh=false;
 	}
 	
 	return main;

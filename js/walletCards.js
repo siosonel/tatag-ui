@@ -5,14 +5,19 @@ function walletCards(api) {
 		if (userAccountsURL) currURL = userAccountsURL;		
 		$('#accountsWrapper').children().remove();
 		
-		api.loadId(currURL, app.refresh)
+		api.loadId(currURL, app.refresh())
 			.then(renderCards, main.errHandler);		
 	}
 	
 	function renderCards(userAccounts) {
 		currAccounts = userAccounts;
-		currAccounts.items.map(renderAcctDiv);
+		currAccounts.items.map(renderAcctDiv); 
 		if (app.currView=='records') app.records(app.resources[currAcctDivId]);
+		if (currAcctDivId) {
+			var acctDivId = currAcctDivId;
+			currAcctDivId=""; //clear so the triggered click is not detected as a closing click
+			$('#'+acctDivId+'-toggle').click();
+		}
 	}
 	
 	function renderAcctDiv(acct) {
@@ -29,7 +34,8 @@ function walletCards(api) {
 		+ "<div class='row' style='margin-bottom:30px;' id='"+ acctDivId +"-label'>"
 		+ 	"<div class='large-8 medium-8 small-8 columns acctLabel'>"
 		+			"<img id='"+ acctDivId +"-img' class='left' src='http://placehold.it/25x25&text=[img]'/>"
-		+ 		"<span style='vertical-align:top'>&nbsp;"+alias+"</span><br />"
+		+ 		"<span style='vertical-align:top'>&nbsp;"+alias+"&nbsp;</span>"
+		+			"<span id='"+acctDivId+"-edit' class='fi-pencil small' style='display:none'></span><br />"
 		+     "<span id='"+ acctDivId +"-name' style='font-weight:normal; display: none;'>&nbsp;#"+acct.account_id +' '+acctname+"</span>"
 		+		"</div>"
 		+ 	"<div class='large-4 medium-4 small-4 columns acctBal' id='"+acctDivId+"-bal'>"
@@ -54,6 +60,8 @@ function walletCards(api) {
 	}
 	
 	main.toggleAcctItem = function toggleAcctItem(e) {
+		if (e.target.id.slice(-5)=='-edit') {app.edit(e.target.id.slice(0,-5)); return;}
+		
 		// change target to toggle-handle as needed
 		if (e.target.parentNode.className.search('acctLabel')!=-1) e.target = e.target.parentNode.parentNode.parentNode.lastChild; 
 		else if (e.target.className.search('acctLabel')!=-1) e.target = e.target.parentNode.parentNode.lastChild; 
@@ -65,7 +73,7 @@ function walletCards(api) {
 			return;
 		}
 		
-		if (e.target.tagName.toUpperCase()=='BUTTON') {app.forms(e.target.id); return;}
+		if (e.target.tagName.toUpperCase()=='BUTTON') {app.txn(e.target.id); return;}
 		if (e.target.tagName.toUpperCase()=='A') return false;
 		if (e.target.className.search('acctDivToggle') == -1) return; 
 		
@@ -76,6 +84,7 @@ function walletCards(api) {
 		$('#'+currAcctDivId+'-label').css('font-weight', 'normal');
 		$('#'+currAcctDivId+'-img').animate({height:'25px', width:'25px'});
 		$('#'+currAcctDivId+'-name').css('display', 'none');
+		$('#'+currAcctDivId+'-edit').css('display', 'none');
 		$('#'+currAcctDivId+'-toggle').html("&#9660;&#9660;&#9660;")
 			.css({'background-color': 'rgb(245,245,245)', 'color': 'rgb(190,190,190)'});
 		
@@ -87,6 +96,7 @@ function walletCards(api) {
 			$('#'+currAcctDivId+'-label').css('font-weight', '700');
 			$('#'+currAcctDivId+'-img').animate({height:'50px', width:'50px'});
 			$('#'+currAcctDivId+'-name').css('display','inline');
+			$('#'+currAcctDivId+'-edit').css('display', 'inline');
 			$('#'+currAcctDivId+'-toggle').html("&#9650;&#9650;&#9650;")
 				.css({'background-color': '#007095', 'color': '#fff'});
 		}

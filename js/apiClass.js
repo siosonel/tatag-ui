@@ -98,9 +98,12 @@ function apiClass(conf) {
 		action.method = action.method.toLowerCase();
 		
 		if (!action) deferred.resolve(null) 
-		else {
+		else {			
+			var params = action.query ? $.param(action.query) : '';
+			if (action.target.search(/\?/)==-1) params = '?'+ params;
+			
 			$.ajax({
-				url: conf.baseURL + action.target,
+				url: conf.baseURL + action.target + params,
 				type: action.method,
 				headers: {
 					"Authorization": "Basic " + btoa(conf.userid + ":" + conf.pass)

@@ -10,7 +10,7 @@ body {
 	position: absolute;
 	width: 480px;
 	min-height: 700px;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 #accountsWrapper {
@@ -57,7 +57,7 @@ body {
 
 .recordItem {
 	position: relative;
-	height: 38px;
+	max-height: 38px;
 	margin: 5px;
 	padding: 10px;
 	background-color: #ececec;
