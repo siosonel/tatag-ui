@@ -31,15 +31,15 @@ function adminBrands(api) {
 			+ 		"About"
 			+		"</div>"
 			+ "</div>"			
-			+	"<div class='row'>"
+			+	"<div class='row' id='"+brandDivId+"-members'>"
 			+ 	"<div class='columns large-3 medium-3 small-3'>Memberships</div>"
 			+ 	"<div class='columns large-9 medium-9 small-9'>Total: "+ tally.numMembers +" members, "+ tally.totalMemberHours +" hours/week &#9658;</div>"
 			+	"</div>"
-			+	"<div class='row'>"
+			+	"<div class='row' id='"+brandDivId+"-accounts'>"
 			+ 	"<div class='columns large-3 medium-3 small-3'>Accounts</div>"
 			+ 	"<div class='columns large-9 medium-9 small-9'>Budgets: -"+ tally.revBudget +" rev., "+ tally.expBudget +" expense &#9658;</div>"
 			+	"</div>"
-			+	"<div class='row'>"
+			+	"<div class='row' id='"+brandDivId+"-issued'>"
 			+ 	"<div class='columns large-3 medium-3 small-3'>Transactions</div>"
 			+ 	"<div class='columns large-9 medium-9 small-9'>Added="+ tally.addedBudget +", In="+ tally.inflow +", Out="+ tally.outflow +" &#9658;</div>"
 			+	"</div>"
@@ -48,21 +48,13 @@ function adminBrands(api) {
 	}
 	
 	main.clickHandler = function (e) {
-		var id = e.target.id, pid = e.target.parentNode.id, ppid = e.target.parentNode.parentNode.id;
-		var idArr = [id, pid, ppid];
-		var typeArr = [id.split('-')[0], pid.split('-')[0], ppid.split('-')[0]];
+		var divId = app.getDivId(e,'brand'); console.log(divId)
+		if (!divId) return;
 		
-		if (typeArr.indexOf('brand')!=-1) {
-			currBrandDivId = idArr[typeArr.indexOf('brand')]; console.log(currBrandDivId)
-			//app.currView = 'members';
-			//app.members(app.resources[currBrandDivId]);
-			
-			//app.currView = 'accounts';
-			//app.accounts(app.resources[currBrandDivId]);
-			
-			app.currView = 'issued';
-			app.issued(app.resources[currBrandDivId]);
-		}
+		var id = divId.split('-');
+		currBrandDivId = id[0]+'-'+id[1];
+		app.currView = id[2];
+		app[app.currView](app.resources[currBrandDivId]);
 	}
 	
 	return main;

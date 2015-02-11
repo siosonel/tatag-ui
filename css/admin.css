@@ -37,6 +37,16 @@ body {
 	background-color: #ececec;
 }
 
+.subLabel {
+	text-align: left;
+}
+
+#membersWrapper, #accountsWrapper, #issuedWrapper {
+	position: absolute;
+	top: 5px;
+	left: 485px;
+	width: 480px;
+}	
 
 .memberDivToggle, .acctDivToggle, .recordDivToggle {
 	position: absolute;

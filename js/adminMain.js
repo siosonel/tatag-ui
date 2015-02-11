@@ -18,9 +18,15 @@ function adminMain() {
 			.then(setUser, main.errHandler);
 			
 		$('#brandsWrapper').click(main.brands.clickHandler);
+		$('#membersWrapper').click(main.members.clickHandler);
+		$('#accountsWrapper').click(main.accounts.clickHandler);
+		$('#issuedWrapper').click(main.issued.clickHandler);
 	});
 	
-	function main() {}
+	function main(otherWrapper) {
+		$('#brandsWrapper').animate({left: '0px'});
+		$('#'+otherWrapper).animate({left: '485px'});
+	}
 	
 	function loadUser(res) {
 		return api.loadType('user');
@@ -42,6 +48,14 @@ function adminMain() {
 	
 	main.errHandler = function errHandler(err) {
 		console.log(err)
+	}
+	
+	main.getDivId = function (e, type) {
+		var id = e.target.id, pid = e.target.parentNode.id, ppid = e.target.parentNode.parentNode.id;
+		var idArr = [id, pid, ppid];
+		var typeArr = [id.split('-')[0], pid.split('-')[0], ppid.split('-')[0]];
+		
+		if (typeArr.indexOf(type)!=-1) return idArr[typeArr.indexOf(type)];
 	}
 	
 	return main;

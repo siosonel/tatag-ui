@@ -1,5 +1,5 @@
 function adminMembers(api) {
-	var currURL, currResource;
+	var currURL, currBrand;
 	
 	function main(brand) {
 		if (brand) currBrand = brand; console.log(currBrand)
@@ -19,7 +19,11 @@ function adminMembers(api) {
 	
 	function setTitle() {
 		$('#membersWrapper').append(
-			"<div id='brandItemsHeading' class='row brandItem' style='margin: 5px;'>"
+			"<div class='subLabel'>"
+			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" members, </span>"
+			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			+"</div>"
+			+"<div id='brandItemsHeading' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>Joined</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		"Member Information"
@@ -47,6 +51,14 @@ function adminMembers(api) {
 			+ 	"<div id='"+divId+"-toggle' class='memberDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		)
+	}
+	
+	main.clickHandler = function (e) {
+		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className; console.log(e.target);
+		
+		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') { console.log(cls+'' +pCls+' '+ppCls);
+			app('membersWrapper');
+		}
 	}
 	
 	return main;
