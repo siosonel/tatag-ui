@@ -48,6 +48,7 @@ function walletEdit(api) {
 	}
 	
 	main.formClick = function formClick(e) {
+		if (e.target.id.search('-cancel')!=-1) {$('#editModal').foundation('reveal','close'); return;}
 		if (e.target.id != 'edit-submit' && e.target.id != 'editRecord-submit') return;
 		
 		var params = [];

@@ -101,6 +101,7 @@ function apiClass(conf) {
 		else {			
 			var params = action.query ? $.param(action.query) : '';
 			if (action.target.search(/\?/)==-1) params = '?'+ params;
+			else params = '&'+params;
 			
 			$.ajax({
 				url: conf.baseURL + action.target + params,

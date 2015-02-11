@@ -14,7 +14,7 @@ function adminBrands(api) {
 		currBrands.map(renderBrandDiv);
 	}
 	
-	function renderBrandDiv(brand) { console.log(brand);
+	function renderBrandDiv(brand) { //console.log(brand);
 		var tally = brand.tally, brandDivId='brand-'+brand.brand_id;		
 		app.resources[brandDivId] = brand;
 	
@@ -48,7 +48,7 @@ function adminBrands(api) {
 	}
 	
 	main.clickHandler = function (e) {
-		var divId = app.getDivId(e,'brand'); console.log(divId)
+		var divId = app.getDivId(e,'brand');
 		if (!divId) return;
 		
 		var id = divId.split('-');

@@ -12,6 +12,7 @@ function adminMain() {
 		main.members = adminMembers(api);
 		main.accounts = adminAccounts(api);
 		main.issued = adminBudgetIssued(api);
+		main.forms = adminForms(api);
 		
 		api.init('/')
 			.then(loadUser)
@@ -21,6 +22,7 @@ function adminMain() {
 		$('#membersWrapper').click(main.members.clickHandler);
 		$('#accountsWrapper').click(main.accounts.clickHandler);
 		$('#issuedWrapper').click(main.issued.clickHandler);
+		$('.formModal').click(main.forms.clickHandler);
 	});
 	
 	function main(otherWrapper) {

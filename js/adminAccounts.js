@@ -2,7 +2,7 @@ function adminAccounts(api) {
 	var currURL, currResource;
 	
 	function main(brand) {
-		if (brand) currBrand = brand; console.log(currBrand)
+		if (brand) currBrand = brand; 
 		if (!currBrand || app.currView != 'accounts') return;
 		app.currView = 'accounts';
 		
@@ -33,13 +33,14 @@ function adminAccounts(api) {
 		);
 	}
 	
-	function renderAccounts(accounts) { //console.log(accounts)
+	function renderAccounts(accounts) { 
 		accounts.items.map(renderItem)
 	}
 	
-	function renderItem(account) { //console.log(account)
+	function renderItem(account) {
 		var date = account.created.split(' ')[0].split('-');
-		var divId = 'acct-'+ account.account_id; //console.log(divId)
+		var divId = 'acct-'+ account.account_id;
+		app.resources[divId] = account;
 		
 		$('#accountsWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
@@ -54,11 +55,16 @@ function adminAccounts(api) {
 	}
 	
 	main.clickHandler = function (e) {
-		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className; console.log(e.target);
+		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className;
 		
-		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') { console.log(cls+'' +pCls+' '+ppCls);
+		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') {
 			app('accountsWrapper');
 		}
+		
+		var divId = app.getDivId(e, 'acct');
+		if (!divId) return;
+		
+		app.forms(divId, 'accounts', '/forms#admin-account-edit');
 	}
 	
 	return main;

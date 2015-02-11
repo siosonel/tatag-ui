@@ -69,14 +69,15 @@
 					</div>
 				</div>
 			</form>
-			<button id='edit-submit'>Submit</button>
+			<button id='edit-submit'>Submit</button>&nbsp;
+			<button id='editHolding-cancel'>Cancel</button>
 		</div>
 				
 		<div id='editPrompt'>
 			<p id='editRecordConfirm'></p>
 			<input type='hidden' id='edit-status' value=''/>
 			<button id='editRecord-submit'>Submit</button>&nbsp;
-			<button id='editRecord-submit'>Cancel</button>
+			<button id='editRecord-cancel'>Cancel</button>
 		</div>
 		
 		<a class="close-reveal-modal">×</a>

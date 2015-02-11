@@ -2,7 +2,7 @@ function adminMembers(api) {
 	var currURL, currBrand;
 	
 	function main(brand) {
-		if (brand) currBrand = brand; console.log(currBrand)
+		if (brand) currBrand = brand;
 		if (!currBrand || app.currView != 'members') return;
 		app.currView = 'members';
 		
@@ -40,6 +40,7 @@ function adminMembers(api) {
 	function renderItem(member) { //console.log(member)
 		var date = member.created.split(' ')[0].split('-');
 		var divId = 'member-'+ member.member_id; //console.log(divId)
+		app.resources[divId] = member;
 		
 		$('#membersWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
@@ -54,11 +55,16 @@ function adminMembers(api) {
 	}
 	
 	main.clickHandler = function (e) {
-		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className; console.log(e.target);
+		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className;
 		
-		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') { console.log(cls+'' +pCls+' '+ppCls);
-			app('membersWrapper');
+		if ([cls, pCls, ppCls].indexOf('subLabel')!=-1) { 
+			app('membersWrapper'); return;
 		}
+		
+		var divId = app.getDivId(e, 'member');
+		if (!divId) return;
+		
+		app.forms(divId, 'members', '/forms#admin-member-edit');
 	}
 	
 	return main;

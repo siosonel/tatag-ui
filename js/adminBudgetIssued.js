@@ -2,7 +2,7 @@ function adminBudgetIssued(api) {
 	var currURL, currResource;
 	
 	function main(brand) {
-		if (brand) currBrand = brand; console.log(currBrand)
+		if (brand) currBrand = brand;
 		if (!currBrand || app.currView != 'issued') return;
 		app.currView = 'issued';
 		
@@ -33,7 +33,7 @@ function adminBudgetIssued(api) {
 		);
 	}
 	
-	function renderRecords(records) { console.log(records)
+	function renderRecords(records) {
 		records.items.map(renderItem)
 	}
 	
@@ -54,7 +54,7 @@ function adminBudgetIssued(api) {
 	}
 	
 	main.clickHandler = function (e) {
-		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className; console.log(e.target);
+		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className; 
 		
 		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') { console.log(cls+'' +pCls+' '+ppCls);
 			app('issuedWrapper');
