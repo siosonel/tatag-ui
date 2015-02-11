@@ -1,0 +1,64 @@
+body {
+	text-align: center;
+}
+
+#titleBar {
+
+}
+
+#mainWrapper {
+	position: absolute;
+	width: 480px;
+	min-height: 700px;
+	overflow-x: hidden;
+}
+
+#brandsWrapper {
+	position: absolute;
+	top: 5px;
+	left: 0px;
+	width: 480px;
+}	
+
+.brandItem, .acctItem {
+	position: relative;
+	margin: 5px;
+	padding: 10px;
+	background-color: #ececec;
+}
+
+
+.brandLabel {
+	font-weight: 700;
+	text-align: left;
+}
+
+.tally {
+	background-color: #ececec;
+}
+
+
+.memberDivToggle, .acctDivToggle, .recordDivToggle {
+	position: absolute;
+	bottom: 5px;
+	left: 220px;
+	height: 10px;
+	line-height: 12px;
+	width: 50px;
+	padding: 0px;
+	text-align: center;
+	color: rgb(190,190,190);
+	font-size: 8px;
+	background-color: rgb(245,245,245);
+	border-radius: 2px;
+	margin-bottom: -5px;
+}
+
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}

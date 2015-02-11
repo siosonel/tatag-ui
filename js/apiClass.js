@@ -42,7 +42,7 @@ function apiClass(conf) {
 		var deferred = Q.defer();
 		
 		if (!url) deferred.reject(new Error('Blank url.'));
-		else if (byId[url] && !refresh) {deferred.resolve(byId[url]);} // console.log("          (cache:"+url+")");}
+		else if (byId[url] && !refresh) deferred.resolve(byId[url]); // console.log("          (cache:"+url+")");}
 		else $.ajax({
 			url: conf.baseURL + url,
 			headers: {
