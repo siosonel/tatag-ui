@@ -35,6 +35,10 @@ body {
 	border-radius: 2px;
 }
 
+ .recordDivToggle {
+	margin-bottom: -5px;
+}
+
 .acctItem {
 	position: relative;
 	height: 50px;

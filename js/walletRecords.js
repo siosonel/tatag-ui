@@ -1,5 +1,6 @@
 function walletRecords(api) {
 	 var currRecordId, currAcct;
+	 var maxHeight = '250px';
 
 	function main(acct) {
 		if (acct) currAcct = acct;
@@ -34,13 +35,8 @@ function walletRecords(api) {
 	function renderRecords(records) {
 		if (!records.items || !records.items.length) $('#recordsWrapper').append("<div class='recordItem'>No transaction records found.</div>");
 		else {
-			records.items.map(listRecord);
-		
-			if (currRecordId) {
-				var recordId = currRecordId;
-				currRecordId = "";
-				$('#'+recordId+'-toggle').click();
-			}
+			records.items.map(listRecord);		
+			$('#'+currRecordId).css('max-height', maxHeight);
 		}
 	}
 	
@@ -62,9 +58,7 @@ function walletRecords(api) {
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		record.direction+' '+ other +'<br /><i>'+ note +'</i>' + actionPrompt 
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"
-			+ 		(record.status<0 ? "<i>rejected</i>" : record.amount.toFixed(2))
-			+		"</div>"
+			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ displayAmount(record) +"</div>"
 			+ 	"<div id='"+divId+"-toggle' class='recordDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		);
@@ -98,6 +92,18 @@ function walletRecords(api) {
 		return prompt ? "<br />"+prompt : "";
 	}
 	
+	function displayAmount(record) {
+		if (record.status<0) return "<i>rejected</i>"; 
+		
+		var amount = record.amount.toFixed(2);		
+		if (record.status!=7) {			
+			if ((record.direction=='from' && amount>0) || (record.direction=='to' && amount<0)) amount = '('+ amount +')';
+			if (record.status==5) amount = '*'+amount; //highlight the need for manual approval, since auto-approval was disabled
+		}
+		
+		return amount;
+	}
+	
 	main.toggleRecordItem = function (e) {
 		if (e.target.className.search('recordDivToggle') != -1) e.target = e.target.parentNode;
 	
@@ -126,7 +132,7 @@ function walletRecords(api) {
 			
 			if (prevId == currRecordId) currRecordId='';
 			else {
-				$('#'+currRecordId).animate({'max-height': '250px'});
+				$('#'+currRecordId).animate({'max-height': maxHeight});
 				$('#'+currRecordId+'-toggle').html("&#9650;&#9650;&#9650;")
 				.css({'background-color': '#007095', 'color': '#fff'});
 			}

@@ -8,7 +8,7 @@ function walletEdit(api) {
 			action = arr.length==3 ? arr.pop() : "", 
 			recordDivId = arr.join("-");
 				
-		currResource = app.resources[recordDivId]; console.log(currId); console.log(currResource);		
+		currResource = app.resources[recordDivId]; //console.log(currId); console.log(currResource);		
 		renderAcctForm(action);
 		renderRecordForm(action);
 		
@@ -48,7 +48,7 @@ function walletEdit(api) {
 	}
 	
 	main.formClick = function formClick(e) {
-		if (e.target.id != 'edit-submit' && e.target.id != 'editRecord-submit') return; console.log(currForm);
+		if (e.target.id != 'edit-submit' && e.target.id != 'editRecord-submit') return;
 		
 		var params = [];
 		currForm.query.required.map(function (param) {params.push(param +'='+ currResource[param])});
@@ -65,7 +65,7 @@ function walletEdit(api) {
 		currInputs.map(function (inputName) {
 			action.inputs[inputName] = $('#edit-'+inputName).val();
 			if (inputName=='status') action.inputs[inputName] = 1*action.inputs[inputName];
-		}); console.log(action); //return;
+		}); //console.log(action); //return;
 		
 		api.request(action).then(main.refreshViews, app.errHandler);
 	}

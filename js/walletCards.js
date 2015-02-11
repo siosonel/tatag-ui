@@ -1,5 +1,6 @@
 function walletCards(api) {	
 	var currURL, currAccounts, currAcctDivId;
+	var openHeight='300px';
 	
 	function main(userAccountsURL) {		
 		if (userAccountsURL) currURL = userAccountsURL;		
@@ -13,11 +14,8 @@ function walletCards(api) {
 		currAccounts = userAccounts;
 		currAccounts.items.map(renderAcctDiv); 
 		if (app.currView=='records') app.records(app.resources[currAcctDivId]);
-		if (currAcctDivId) {
-			var acctDivId = currAcctDivId;
-			currAcctDivId=""; //clear so the triggered click is not detected as a closing click
-			$('#'+acctDivId+'-toggle').click();
-		}
+		$('#'+currAcctDivId).css('height', openHeight);
+		$('#'+currAcctDivId+'-forms').css('display', 'block');
 	}
 	
 	function renderAcctDiv(acct) {
@@ -91,7 +89,7 @@ function walletCards(api) {
 		if (currAcctDivId==acctDivId) {currAcctDivId = '';}
 		else {
 			currAcctDivId =  acctDivId;
-			$('#'+currAcctDivId).animate({height: '300px'});	
+			$('#'+currAcctDivId).animate({height: openHeight});	
 			$('#'+currAcctDivId+'-forms').css('display', 'block');
 			$('#'+currAcctDivId+'-label').css('font-weight', '700');
 			$('#'+currAcctDivId+'-img').animate({height:'50px', width:'50px'});
