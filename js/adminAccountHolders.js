@@ -22,6 +22,7 @@ function adminAccountHolders(api) {
 			"<div class='subLabel'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currResource.name+" holders, </span>"
 			+  "<span style='font-weight:normal;'>&nbsp; account#"+ currResource.account_id +"</span>"
+			+	 "<button id='addAccountHolder' class='right tiny'>+New Accountholder</button>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>Created</div>"
@@ -34,6 +35,7 @@ function adminAccountHolders(api) {
 	}
 	
 	function renderAccounts(holders) { 
+		currCollection = holders;
 		holders.items.map(renderItem)
 	}
 	
@@ -57,6 +59,13 @@ function adminAccountHolders(api) {
 	}
 	
 	main.clickHandler = function (e) {
+		if (e.target.id=='addAccountHolder') {
+			$('#holders-new-row').css('display', 'block');
+			app.forms(currCollection, 'holders', '/forms#holder-add');
+			return;
+		}		
+		
+		$('#holders-new-row').css('display', 'none');		
 		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className;
 		
 		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') {

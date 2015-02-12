@@ -39,7 +39,7 @@ function adminBrands(api) {
 			+ 	"<div class='columns large-3 medium-3 small-3'>Accounts</div>"
 			+ 	"<div class='columns large-9 medium-9 small-9'>Budgets: -"+ tally.revBudget +" rev., "+ tally.expBudget +" expense &#9658;</div>"
 			+	"</div>"
-			+	"<div class='row' id='"+brandDivId+"-issued'>"
+			+	"<div class='row' id='"+brandDivId+"-records'>"
 			+ 	"<div class='columns large-3 medium-3 small-3'>Transactions</div>"
 			+ 	"<div class='columns large-9 medium-9 small-9'>Added="+ tally.addedBudget +", In="+ tally.inflow +", Out="+ tally.outflow +" &#9658;</div>"
 			+	"</div>"

@@ -1,5 +1,5 @@
 function adminMemberAccounts(api) {
-	var currURL, currResource;
+	var currURL, currResource, currCollection;
 	
 	function main(member) {
 		if (member) currResource = member; 
@@ -22,6 +22,7 @@ function adminMemberAccounts(api) {
 			"<div class='subLabel'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currResource.name+" accounts, </span>"
 			+  "<span style='font-weight:normal;'>&nbsp; member#"+ currResource.member_id +"</span>"
+			+	 "<button id='addAccountHolding' class='right tiny'>+New Accountholding</button>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>Created</div>"
@@ -34,6 +35,7 @@ function adminMemberAccounts(api) {
 	}
 	
 	function renderAccounts(accounts) {
+		currCollection = accounts;
 		accounts.items.map(renderItem)
 	}
 	
@@ -57,6 +59,13 @@ function adminMemberAccounts(api) {
 	}
 	
 	main.clickHandler = function (e) {
+		if (e.target.id=='addAccountHolding') {
+			$('#holders-new-row').css('display', 'block');
+			app.forms(currCollection, 'holders', '/forms#holder-add');
+			return;
+		}		
+		
+		$('#holders-new-row').css('display', 'none');
 		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className;
 		
 		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') {

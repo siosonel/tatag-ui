@@ -1,19 +1,20 @@
 function adminForms(api) {
 	var currResource, currType, currForm, currInputs;
 
-	function main(divId, type, formURL, altType) {
-		currResource = app.resources[divId]; 
+	function main(div, type, formURL, altType) {
+		currResource = typeof div=='string' ? app.resources[div] : div; //console.log(currResource)
 		currType = type;
-		currForm = api.byId[formURL];	
+		currForm = api.byId[formURL];	//console.log(currForm)
 		currAltType = altType ? altType : "";
 		
 		renderForm();
-		$('#'+type+'Modal').foundation('reveal','open');
+		$('#'+currType+'-formTitle').html(currForm.title)
+		$('#'+currType+'Modal').foundation('reveal','open');
 	}
 	
 	function renderForm() { 
-		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);		
-		currInputs.map(renderInput);
+		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);				
+		currInputs.map(renderInput);		
 	}
 	
 	function renderInput(inputName) {	
@@ -38,7 +39,7 @@ function adminForms(api) {
 		
 		currInputs.map(function (inputName) {
 			action.inputs[inputName] = $('#'+currType+'-'+inputName).val();
-		}); //console.log(action); //return;
+		}); //console.log(action); return;
 		
 		api.request(action).then(main.refreshViews, app.errHandler);
 	}

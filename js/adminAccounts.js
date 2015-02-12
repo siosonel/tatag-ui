@@ -1,5 +1,5 @@
 function adminAccounts(api) {
-	var currBrand, currResource;
+	var currBrand, currResource, currCollection;
 	
 	function main(brand) {
 		if (brand) currBrand = brand; 
@@ -22,6 +22,7 @@ function adminAccounts(api) {
 			"<div class='subLabel'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" accounts, </span>"
 			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			+	 "<button id='addAccount' class='right tiny'>+New Account</button>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>Created</div>"
@@ -34,6 +35,7 @@ function adminAccounts(api) {
 	}
 	
 	function renderAccounts(accounts) { 
+		currCollection = accounts;
 		accounts.items.map(renderItem)
 	}
 	
@@ -57,6 +59,13 @@ function adminAccounts(api) {
 	}
 	
 	main.clickHandler = function (e) {
+		if (e.target.id=='addAccount') {
+			$('#accounts-sign-row').css('display','block');
+			app.forms(currCollection, 'accounts', '/forms#account-add');
+			return;
+		}
+		
+		$('#accounts-sign-row').css('display','none');
 		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className;
 		
 		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') {

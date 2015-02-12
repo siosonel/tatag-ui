@@ -1,5 +1,5 @@
 function adminMembers(api) {
-	var currURL, currBrand;
+	var currURL, currBrand, currCollection;
 	
 	function main(brand) {
 		if (brand) currBrand = brand;
@@ -22,6 +22,7 @@ function adminMembers(api) {
 			"<div class='subLabel'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" members, </span>"
 			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			+	 "<button id='addMember' class='right tiny'>+New Member</button>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>Joined</div>"
@@ -34,6 +35,7 @@ function adminMembers(api) {
 	}
 	
 	function renderMembers(members) {
+		currCollection = members;
 		members.items.map(renderItem)
 	}
 	
@@ -56,7 +58,14 @@ function adminMembers(api) {
 		)
 	}
 	
-	main.clickHandler = function (e) {
+	main.clickHandler = function (e) {		
+		if (e.target.id=='addMember') {
+			$('#members-user_id-row').css('display','block');
+			app.forms(currCollection, 'members', '/forms#member-add');
+			return;
+		}
+		
+		$('#members-user_id-row').css('display','none');			
 		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className;
 		
 		if ([cls, pCls, ppCls].indexOf('subLabel')!=-1) { 

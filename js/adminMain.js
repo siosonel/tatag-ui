@@ -13,9 +13,8 @@ function adminMain() {
 		main.memberAccounts = adminMemberAccounts(api);
 		main.accounts = adminAccounts(api);
 		main.accountHolders = adminAccountHolders(api);
-		main.issued = adminBudgetIssued(api);
+		main.records = adminRecords(api);
 		main.forms = adminForms(api);
-		
 		
 		api.init('/')
 			.then(loadUser)
@@ -26,7 +25,7 @@ function adminMain() {
 		$('#memberAccountsWrapper').click(main.memberAccounts.clickHandler);
 		$('#accountsWrapper').click(main.accounts.clickHandler);
 		$('#accountHoldersWrapper').click(main.accountHolders.clickHandler);
-		$('#issuedWrapper').click(main.issued.clickHandler);
+		$('#recordsWrapper').click(main.records.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
 	});
 	
@@ -50,6 +49,8 @@ function adminMain() {
 	main.refresh = function (num) { //argument=number of views to refresh
 		if (num) refresh=num;
 		else refresh = refresh-1;
+		
+		if (refresh<0) refresh=-1;
 		return refresh+1;
 	}
 	
