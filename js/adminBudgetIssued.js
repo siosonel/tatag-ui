@@ -48,7 +48,7 @@ function adminBudgetIssued(api) {
 			+ 		"#"+record.from_acct +" to #"+record.to_acct+'<br />'+ record.note
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ record.amount.toFixed(2) +"</div>"
-			+ 	"<div id='"+divId+"-toggle' class='recordDivToggle'>&#9660;&#9660;&#9660;</div>"
+			//+ 	"<div id='"+divId+"-toggle' class='recordDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		)
 	}

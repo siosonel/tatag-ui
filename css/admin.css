@@ -41,7 +41,8 @@ body {
 	text-align: left;
 }
 
-#membersWrapper, #accountsWrapper, #issuedWrapper {
+#membersWrapper, #accountsWrapper, #issuedWrapper, 
+#memberAccountsWrapper, #accountHoldersWrapper {
 	position: absolute;
 	top: 5px;
 	left: 485px;

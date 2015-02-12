@@ -10,9 +10,12 @@ function adminMain() {
 	$(document).ready(function () {
 		main.brands = adminBrands(api);
 		main.members = adminMembers(api);
+		main.memberAccounts = adminMemberAccounts(api);
 		main.accounts = adminAccounts(api);
+		main.accountHolders = adminAccountHolders(api);
 		main.issued = adminBudgetIssued(api);
 		main.forms = adminForms(api);
+		
 		
 		api.init('/')
 			.then(loadUser)
@@ -20,7 +23,9 @@ function adminMain() {
 			
 		$('#brandsWrapper').click(main.brands.clickHandler);
 		$('#membersWrapper').click(main.members.clickHandler);
+		$('#memberAccountsWrapper').click(main.memberAccounts.clickHandler);
 		$('#accountsWrapper').click(main.accounts.clickHandler);
+		$('#accountHoldersWrapper').click(main.accountHolders.clickHandler);
 		$('#issuedWrapper').click(main.issued.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
 	});

@@ -1,5 +1,5 @@
 function adminAccounts(api) {
-	var currURL, currResource;
+	var currBrand, currResource;
 	
 	function main(brand) {
 		if (brand) currBrand = brand; 
@@ -46,10 +46,12 @@ function adminAccounts(api) {
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		account.name+"<br />#"+account.account_id+', '+ account.authcode
+			+ 		account.name+"<br />#"+account.account_id+', '+ account.authcode +'&nbsp;'
+			+			"<span class='fi-pencil small'>&nbsp;</span>"
+			+			"<span href='"+account.links.holders+"' style='text-decoration:underline'>holders</span>"
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ account.balance +"</div>"
-			+ 	"<div id='"+divId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
+			//+ 	"<div id='"+divId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		)
 	}
@@ -63,6 +65,12 @@ function adminAccounts(api) {
 		
 		var divId = app.getDivId(e, 'acct');
 		if (!divId) return;
+		
+		if ($(e.target).attr('href')) { console.log($(e.target).attr('href'));
+			app.currView = 'accountHolders';
+			app.accountHolders(app.resources[e.target.parentNode.parentNode.id]);
+			return;
+		}
 		
 		app.forms(divId, 'accounts', '/forms#admin-account-edit');
 	}

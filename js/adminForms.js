@@ -1,15 +1,17 @@
 function adminForms(api) {
 	var currResource, currType, currForm, currInputs;
 
-	function main(divId, type, formURL) {
-		currResource = app.resources[divId];
+	function main(divId, type, formURL, altType) {
+		currResource = app.resources[divId]; 
 		currType = type;
-		currForm = api.byId[formURL];		
+		currForm = api.byId[formURL];	
+		currAltType = altType ? altType : "";
+		
 		renderForm();
 		$('#'+type+'Modal').foundation('reveal','open');
 	}
 	
-	function renderForm() { console.log(currForm)
+	function renderForm() { 
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);		
 		currInputs.map(renderInput);
 	}
@@ -36,14 +38,14 @@ function adminForms(api) {
 		
 		currInputs.map(function (inputName) {
 			action.inputs[inputName] = $('#'+currType+'-'+inputName).val();
-		}); console.log(action); //return;
+		}); //console.log(action); //return;
 		
 		api.request(action).then(main.refreshViews, app.errHandler);
 	}
 	
 	main.refreshViews = function (res) {
 		app.refresh(2); 
-		app[currType](); // will refresh/open records view as needed;
+		app[currAltType ? currAltType : currType](); // will refresh/open records view as needed;
 	}
 	
 	return main;

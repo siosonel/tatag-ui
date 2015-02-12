@@ -24,7 +24,9 @@
 	<div id='mainWrapper'>	
 		<div id='brandsWrapper'></div>
 		<div id='membersWrapper'></div>
+		<div id='memberAccountsWrapper'></div>
 		<div id='accountsWrapper'></div>
+		<div id='accountHoldersWrapper'></div>
 		<div id='issuedWrapper'></div>		
 	</div>	
 	
@@ -66,10 +68,28 @@
 		<a class="close-reveal-modal">×</a>
 	</div>
 	
+	<div id='holdersModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
+		<div id='holdersForm'>		
+			<h4>Edit Account Information</h4>
+			<form>
+				<div class='row'>
+					<div class='columns large-12 medium-12 small-12'>
+						<label>Permission<input type='text' id='holders-authcode' value='' /></label>
+					</div>
+				</div>
+			</form>
+			<button id='holders-submit'>Submit</button>&nbsp;
+			<button id='holders-cancel'>Cancel</button>
+		</div>
+		<a class="close-reveal-modal">×</a>
+	</div>
+	
 	<script src='js/adminMain.js'></script>
 	<script src='js/adminBrands.js'></script>
 	<script src='js/adminMembers.js'></script>
+	<script src='js/adminMemberAccounts.js'></script>
 	<script src='js/adminAccounts.js'></script>
+	<script src='js/adminAccountHolders.js'></script>
 	<script src='js/adminBudgetIssued.js'></script>
 	<script src='js/adminForms.js'></script>
 	<script>
