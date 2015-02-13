@@ -10,8 +10,8 @@ function adminAccounts(api) {
 		$('#accountsWrapper').children().remove();
 		$('#accountsWrapper').append(setTitle(currBrand))
 		
-		$('#brandsWrapper').animate({left: '-485px'});
-		$('#accountsWrapper').animate({left: '0px'});
+		$('#brandsWrapper').animate({left: '-100%'});
+		$('#accountsWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
 		api.loadId(url, app.refresh()).then(renderAccounts, app.errHandler)

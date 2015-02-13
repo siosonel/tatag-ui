@@ -9,6 +9,7 @@ function adminMain() {
 	
 	$(document).ready(function () {
 		main.brands = adminBrands(api);
+		main.about = adminAbout(api);
 		main.members = adminMembers(api);
 		main.memberAccounts = adminMemberAccounts(api);
 		main.accounts = adminAccounts(api);
@@ -21,6 +22,7 @@ function adminMain() {
 			.then(setUser, main.errHandler);
 			
 		$('#brandsWrapper').click(main.brands.clickHandler);
+		$('#aboutWrapper').click(main.about.clickHandler);
 		$('#membersWrapper').click(main.members.clickHandler);
 		$('#memberAccountsWrapper').click(main.memberAccounts.clickHandler);
 		$('#accountsWrapper').click(main.accounts.clickHandler);
@@ -30,8 +32,8 @@ function adminMain() {
 	});
 	
 	function main(otherWrapper) {
-		$('#brandsWrapper').animate({left: '0px'});
-		$('#'+otherWrapper).animate({left: '485px'});
+		$('#brandsWrapper').animate({left: '0'});
+		$('#'+otherWrapper).animate({left: '100%'});
 	}
 	
 	function loadUser(res) {

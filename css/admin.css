@@ -7,8 +7,10 @@ body {
 }
 
 #mainWrapper {
-	position: absolute;
-	width: 480px;
+	position: relative;
+	/*left:0;*/
+	/*width: 100%;*/
+	/*max-width: 480px;*/
 	min-height: 700px;
 	overflow-x: hidden;
 }
@@ -16,9 +18,9 @@ body {
 #brandsWrapper {
 	position: absolute;
 	top: 5px;
-	left: 0px;
-	width: 480px;
-}	
+	left: 0%;
+	width: 100%;
+}
 
 .brandItem, .acctItem {
 	position: relative;
@@ -26,7 +28,6 @@ body {
 	padding: 10px;
 	background-color: #ececec;
 }
-
 
 .brandLabel {
 	font-weight: 700;
@@ -38,15 +39,17 @@ body {
 }
 
 .subLabel {
+	height: 30px;
+	padding: 5px;
 	text-align: left;
 }
 
-#membersWrapper, #accountsWrapper, #recordsWrapper, 
+#aboutWrapper, #membersWrapper, #accountsWrapper, #recordsWrapper, 
 #memberAccountsWrapper, #accountHoldersWrapper {
 	position: absolute;
 	top: 5px;
-	left: 485px;
-	width: 480px;
+	left: 100%;
+	width: 100%;
 }	
 
 .memberDivToggle, .acctDivToggle, .recordDivToggle {
@@ -65,10 +68,9 @@ body {
 	margin-bottom: -5px;
 }
 
-
 #recordsType {
 	position: relative;
-	width: 480px;
+	width: auto;
 	margin: 5px;
 	height: 25px;
 }

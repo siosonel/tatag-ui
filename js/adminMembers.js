@@ -10,8 +10,8 @@ function adminMembers(api) {
 		$('#membersWrapper').children().remove();
 		$('#membersWrapper').append(setTitle(currBrand))
 		
-		$('#brandsWrapper').animate({left: '-485px'});
-		$('#membersWrapper').animate({left: '0px'});
+		$('#brandsWrapper').animate({left: '-100%'});
+		$('#membersWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
 		api.loadId(url, app.refresh()).then(renderMembers, app.errHandler)

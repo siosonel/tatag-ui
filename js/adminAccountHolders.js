@@ -10,8 +10,8 @@ function adminAccountHolders(api) {
 		$('#accountHoldersWrapper').children().remove();
 		$('#accountHoldersWrapper').append(setTitle(currResource))
 		
-		$('#accountsWrapper').animate({left: '-485px'});
-		$('#accountHoldersWrapper').animate({left: '0px'});
+		$('#accountsWrapper').animate({left: '-100%'});
+		$('#accountHoldersWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
 		api.loadId(url, app.refresh()).then(renderAccounts, app.errHandler)
@@ -70,7 +70,7 @@ function adminAccountHolders(api) {
 		
 		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') {
 			$('#accountsWrapper').animate({left: '0px'});
-			$('#accountHoldersWrapper').animate({left: '485px'});
+			$('#accountHoldersWrapper').animate({left: '100%'});
 			app.currView = 'accounts';
 		}
 		

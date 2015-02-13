@@ -28,7 +28,7 @@ function adminBrands(api) {
 			+     "<span id='"+ brandDivId +"-name' style='font-weight:normal;'>&nbsp;#"+ brand.brand_id +"</span>"
 			+		"</div>"
 			+ 	"<div class='large-4 medium-4 small-4 columns brandAbout' id='"+brandDivId+"-about'>"
-			+ 		"About"
+			+ 		"About &#9658;"
 			+		"</div>"
 			+ "</div>"			
 			+	"<div class='row' id='"+brandDivId+"-members'>"

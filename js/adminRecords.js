@@ -11,8 +11,8 @@ function adminRecords(api) {
 		$('#recordsTitle, #recordsItems').children().remove();
 		setTitle(currBrand);
 		
-		$('#brandsWrapper').animate({left: '-485px'});
-		$('#recordsWrapper').animate({left: '0px'});
+		$('#brandsWrapper').animate({left: '-100%'});
+		$('#recordsWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
 		api.loadId(url, app.refresh()).then(derefLinks, app.errHandler)
