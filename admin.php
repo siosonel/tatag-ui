@@ -33,12 +33,12 @@
 			<div id='recordsWrapper'>
 				<div id='recordsTitle'></div>
 				<div id='recordsType' class='row'>
-					<button id='records-issued' class='columns large-2 medium-2 small-2 tiny'>Added</button>
-					<button id='records-revTransfer' class='columns large-2 medium-2 small-2 tiny'>N-to-N</button>
-					<button id='records-expTransfer' class='columns large-2 medium-2 small-2 tiny'>P-to-P</button>
-					<button id='records-intrause' class='columns large-2 medium-2 small-2 tiny'>Intra</button>
-					<button id='records-inflow' class='columns large-2 medium-2 small-2 tiny'>Inflow</button>
-					<button id='records-outflow' class='columns large-2 medium-2 small-2 tiny'>Outflow</button>
+					<button id='records-issued' class='columns small-2 tiny'>Added</button>
+					<button id='records-revTransfer' class='columns small-2 tiny'>N-to-N</button>
+					<button id='records-expTransfer' class='columns small-2 tiny'>P-to-P</button>
+					<button id='records-intrause' class='columns small-2 tiny'>Intra</button>
+					<button id='records-inflow' class='columns small-2 tiny'>Inflow</button>
+					<button id='records-outflow' class='columns small-2 tiny'>Outflow</button>
 				</div>
 				<div id='recordsItems'></div>
 			</div>		
@@ -52,15 +52,15 @@
 				<h4 id='members-formTitle'>Edit Membership</h4>
 				<form>
 					<div class='row'>
-						<div class='columns large-8 medium-8 small-8'>
+						<div class='columns small-8'>
 							<label>Role<input type='text' id='members-role' value='' /></label>
 						</div>
-						<div class='columns large-4 medium-4 small-4'>
+						<div class='columns small-4'>
 							<label>Hours per week<input type='text' id='members-hours' value='' /></label>
 						</div>
 					</div>
 					<div class='row' style='text-align: center;' id='members-user_id-row'>
-						<div class='columns large-4 medium-4 small-4'>
+						<div class='columns small-4 small-centered'>
 							<label>User Id<input type='text' id='members-user_id' value='' /></label>
 						</div>
 					</div>
@@ -76,15 +76,15 @@
 				<h4 id='accounts-formTitle'></h4>
 				<form>
 					<div class='row'>
-						<div class='columns large-8 medium-8 small-8'>
+						<div class='columns small-8'>
 							<label>Name<input type='text' id='accounts-name' value='' /></label>
 						</div>
-						<div class='columns large-4 medium-4 small-4'>
+						<div class='columns small-4'>
 							<label>Permission<input type='text' id='accounts-authcode' value='' /></label>
 						</div>
 					</div>
 					<div class='row' style='text-align: center;' id='accounts-sign-row'>
-						<div class='columns large-4 medium-4 small-4'>
+						<div class='columns small-4'>
 							<label>Sign (-1 OR 1)<input type='text' id='accounts-sign' value='' /></label>
 						</div>
 					</div>
@@ -100,15 +100,15 @@
 				<h4 id='holders-formTitle'>Edit Account Information</h4>
 				<form>
 					<div class='row'>
-						<div class='columns large-12 medium-12 small-12'>
+						<div class='columns small-12'>
 							<label>Permission<input type='text' id='holders-authcode' value='' /></label>
 						</div>
 					</div>			
 					<div class='row' style='text-align: center;' id='holders-new-row'>
-						<div class='columns large-6 medium-6 small-6'>
+						<div class='columns small-6'>
 							<label>User ID<input type='text' id='holders-user_id' value='' /></label>
 						</div>
-						<div class='columns large-6 medium-6 small-6'>
+						<div class='columns small-6'>
 							<label>Account ID<input type='text' id='holders-account_id' value='' /></label>
 						</div>
 					</div>
