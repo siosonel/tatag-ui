@@ -4,6 +4,7 @@ function adminBrands(api) {
 	function main(brandURL) {		
 		if (brandURL) currURL = brandURL;
 		$('#brandsWrapper').children().remove(); //console.log(currURL); console.log(api.byId[currURL]);
+		$('#brandsWrapper').append("<div style='height: 28px; margin: 5px;'><button id='addBrand' class='right tiny'>+New Brand</button></div>")
 		
 		api.deref(currURL, app.refresh())
 			.then(renderBrands, app.errHandler);	
@@ -19,7 +20,7 @@ function adminBrands(api) {
 		app.resources[brandDivId] = brand;
 	
 		$('#brandsWrapper').append(
-			 "<div class='large-12 brandItem' id='"+brandDivId+"'>"
+			"<div class='large-12 brandItem' id='"+brandDivId+"'>"
 			+ "<div class='row' style='margin-bottom:30px;' id='"+ brandDivId +"-label'>"
 			+ 	"<div class='large-8 medium-8 small-8 columns brandLabel'>"
 			+			"<img id='"+ brandDivId +"-img' class='left' src='http://placehold.it/50x50&text=[img]'/>"
@@ -47,7 +48,12 @@ function adminBrands(api) {
 		);
 	}
 	
-	main.clickHandler = function (e) {
+	main.clickHandler = function (e) {		
+		if (e.target.id=='addBrand') {
+			app.forms({}, 'about', '/forms#brand-registration', 'init');
+			return;
+		}
+		
 		var divId = app.getDivId(e,'brand');
 		if (!divId) return;
 		

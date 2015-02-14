@@ -17,9 +17,7 @@ function adminMain() {
 		main.records = adminRecords(api);
 		main.forms = adminForms(api);
 		
-		api.init('/')
-			.then(loadUser)
-			.then(setUser, main.errHandler);
+		init();
 			
 		$('#brandsWrapper').click(main.brands.clickHandler);
 		$('#aboutWrapper').click(main.about.clickHandler);
@@ -31,21 +29,29 @@ function adminMain() {
 		$('.formModal').click(main.forms.clickHandler);
 	});
 	
+	function init() {
+		api.init('/')
+			.then(loadUser)
+			.then(setUser, main.errHandler);
+	}
+	
 	function main(otherWrapper) {
 		$('#brandsWrapper').animate({left: '0'});
 		$('#'+otherWrapper).animate({left: '100%'});
 	}
 	
 	function loadUser(res) {
-		return api.loadType('user');
+		return api.loadType('user', main.refresh());
 	}
 	
 	function setUser(res) {
 		User = res;
+		main.User = User;
 		main.brands(User.links.brand);
 	}
 	
 	main.api = api;
+	main.init = init;
 	main.resources = resources;
 	
 	main.refresh = function (num) { //argument=number of views to refresh

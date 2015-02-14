@@ -26,10 +26,10 @@ function apiClass(conf) {
 		return main.loadId(root);
 	}
 		
-	main.loadType = function (type) {		
-		if (!byType[type]) {
+	main.loadType = function (type, refresh) {
+		if (!byType[type] || refresh) {
 			var url = byId[root][type];
-			return main.loadId(url);
+			return main.loadId(url, true);
 		}
 		else { //console.log("          (cache:"+type+")");
 			var deferred = Q.defer();
