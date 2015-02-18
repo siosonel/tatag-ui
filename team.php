@@ -52,7 +52,7 @@
 	<script src='js/teamAccounts.js'></script>
 	<script src='js/teamRecords.js'></script>
 	<script>
-		var app = teamMain();		
+		var app = teamMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
 	</script>
 </body>
 </html>

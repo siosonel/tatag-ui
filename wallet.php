@@ -89,7 +89,7 @@
 	<script type="text/javascript" src="js/walletTxn.js"></script>
 	<script type="text/javascript" src="js/walletEdit.js"></script>
 	<script>
-		var app = walletMain();		
+		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
 	</script>
 </body>
 </html>

@@ -156,7 +156,7 @@
 	<script src='js/adminRecords.js'></script>
 	<script src='js/adminForms.js'></script>
 	<script>
-		var app = adminMain();		
+		var app = adminMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
 	</script>
 </body>
 </html>

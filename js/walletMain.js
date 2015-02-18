@@ -1,9 +1,9 @@
-function walletMain() {
+function walletMain(conf) {
 	var User, resources={}, refresh=0;
 	
 	var api = apiClass({
-		'userid': '21', 
-		'pass': 'pass2',
+		'userid': conf.userid, 
+		'pass': conf.pass,
 		'baseURL': '/tatag' //will be used as prefix
 	});
 	
