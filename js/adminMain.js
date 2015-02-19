@@ -8,6 +8,8 @@ function adminMain(conf) {
 	});
 	
 	$(document).ready(function () {
+		history.replaceState({}, "admin", "/ui/admin");
+		
 		main.brands = adminBrands(api);
 		main.about = adminAbout(api);
 		main.members = adminMembers(api);

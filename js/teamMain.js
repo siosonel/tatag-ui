@@ -7,16 +7,16 @@ function teamMain(conf) {
 		'baseURL': '/tatag' //will be used as prefix
 	});
 	
-	$(document).ready(function () {
+	$(document).ready(function () {		
+		history.replaceState({}, "team", "/ui/team");
+	
 		main.brands = teamBrands(api);
 		main.about = teamAbout(api);
 		main.members = teamMembers(api);
 		main.accounts = teamAccounts(api);
 		main.records = teamRecords(api);
 		
-		api.init('/')
-			.then(loadUser)
-			.then(setUser, main.errHandler);
+		init();
 			
 		$('#brandsWrapper').click(main.brands.clickHandler);
 		$('#aboutWrapper').click(main.about.clickHandler);
@@ -24,6 +24,12 @@ function teamMain(conf) {
 		$('#accountsWrapper').click(main.accounts.clickHandler);
 		$('#recordsWrapper').click(main.records.clickHandler);
 	});
+	
+	function init() {
+		api.init('/')
+			.then(loadUser)
+			.then(setUser, main.errHandler);
+	}
 	
 	function main(otherWrapper) {
 		$('#brandsWrapper').animate({left: '0'});

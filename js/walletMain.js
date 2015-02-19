@@ -8,6 +8,8 @@ function walletMain(conf) {
 	});
 	
 	$(document).ready(function () {
+		history.replaceState({}, "wallet", "/ui/wallet");
+		
 		main.cards = walletCards(api);		
 		main.records = walletRecords(api);		
 		main.txn = walletTxn(api);		
