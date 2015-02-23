@@ -2,13 +2,13 @@ function adminForms(api) {
 	var currResource, currType, currForm, currInputs;
 
 	function main(div, type, formURL, altType) {
-		currResource = typeof div=='string' ? app.resources[div] : div; //console.log(currResource)
+		currResource = typeof div=='string' ? app.resources[div] : div;
 		currType = type;
 		currForm = api.byId[formURL];	//console.log(currForm)
 		currAltType = altType ? altType : "";
 		
 		renderForm();
-		$('#'+currType+'-formTitle').html(currForm.title)
+		$('#'+currType+'-formTitle').html(currForm.title); 
 		$('#'+currType+'Modal').foundation('reveal','open');
 	}
 	
@@ -17,8 +17,16 @@ function adminForms(api) {
 		currInputs.map(renderInput);		
 	}
 	
-	function renderInput(inputName) {	
-		$('#'+currType+'-'+inputName).val(currResource[inputName]);
+	function renderInput(inputName) {	//console.log(inputName+ '#'+currType+'-'+inputName + currResource[inputName])
+		if (currResource[inputName] || ['ended', 'joined', 'revoked'].indexOf(inputName) == -1) 
+			var val = currResource[inputName];
+			
+		else var date = new Date(), 
+				d=(""+date).split(' '), 
+				m=date.getMonth()+1, 
+				val = d[3]+'-'+m+'-'+d[2]+' '+d[4];
+		
+		$('#'+currType+'-'+inputName).val(val);
 	}
 	
 	main.clickHandler = function formClick(e) {		

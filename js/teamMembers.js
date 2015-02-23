@@ -6,7 +6,7 @@ function teamMembers(api) {
 		if (!currBrand || app.currView != 'members') return;
 		app.currView = 'members';
 		
-		var url = currBrand.links.brandMembers;		
+		var url = currBrand.links.teamMembers;		
 		$('#membersWrapper').children().remove();
 		$('#membersWrapper').append(setTitle(currBrand))
 		

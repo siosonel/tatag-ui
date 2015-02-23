@@ -46,12 +46,45 @@
 		<div class='small-0 medium-3 large-6 columns' >&nbsp;</div>
 	</div>
 	
+	<div id='acceptModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
+		<div id='acceptForm'>		
+			<h4 id='accept-formTitle'></h4>
+			<form>
+				<div class='row'>
+					<div class='columns small-12'>
+						<label>Join on<input type='text' id='accept-joined' value='' /></label>
+					</div>
+				</div>
+			</form>
+			<button id='accept-submit'>Submit</button>&nbsp;
+			<button id='accept-cancel'>Cancel</button>
+		</div>
+		<a class="close-reveal-modal">×</a>
+	</div>
+	
+	<div id='revokeModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
+		<div id='revokeForm'>		
+			<h4 id='revoke-formTitle'></h4>
+			<form>
+				<div class='row'>
+					<div class='columns small-12'>
+						<label>Revoke on<input type='text' id='revoke-revoked' value='' /></label>
+					</div>
+				</div>
+			</form>
+			<button id='revoke-submit'>Submit</button>&nbsp;
+			<button id='revoke-cancel'>Cancel</button>
+		</div>
+		<a class="close-reveal-modal">×</a>
+	</div>
+	
 	<script src='js/teamMain.js'></script>
 	<script src='js/teamBrands.js'></script>
 	<script src='js/teamAbout.js'></script>
 	<script src='js/teamMembers.js'></script>
 	<script src='js/teamAccounts.js'></script>
 	<script src='js/teamRecords.js'></script>
+	<script src='js/adminForms.js'></script>
 	<script>
 		var app = teamMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
 	</script>

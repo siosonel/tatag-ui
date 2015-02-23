@@ -52,7 +52,8 @@ function adminMembers(api) {
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		member.name+"<br />#"+member.member_id+', '+ member.role +'&nbsp;'
+			+ 		member.name+"<br />#"+member.member_id+', '
+			+ 		(member.joined ? member.role +'&nbsp;' : '[pending '+ member.role +']&nbsp;')
 			+			"<span class='fi-pencil small'>&nbsp;</span>"
 			+			"<span href='"+member.links.accounts+"' style='text-decoration:underline'>accounts</span>"
 			+		"</div>"

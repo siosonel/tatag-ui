@@ -15,6 +15,7 @@ function teamMain(conf) {
 		main.members = teamMembers(api);
 		main.accounts = teamAccounts(api);
 		main.records = teamRecords(api);
+		main.forms = adminForms(api);
 		
 		init();
 			
@@ -23,6 +24,7 @@ function teamMain(conf) {
 		$('#membersWrapper').click(main.members.clickHandler);
 		$('#accountsWrapper').click(main.accounts.clickHandler);
 		$('#recordsWrapper').click(main.records.clickHandler);
+		$('.formModal').click(main.forms.clickHandler);
 	});
 	
 	function init() {
@@ -42,7 +44,8 @@ function teamMain(conf) {
 	
 	function setUser(res) {
 		User = res;
-		main.brands(User.links.brand);
+		if (!User.links.team || !User.links.team.length) $("#brandsWrapper").html("You do not have any current team memberships.");
+		main.brands(User.links.team);
 	}
 	
 	main.api = api;
