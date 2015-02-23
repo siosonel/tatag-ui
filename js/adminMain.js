@@ -76,5 +76,13 @@ function adminMain(conf) {
 		if (typeArr.indexOf(type)!=-1) return idArr[typeArr.indexOf(type)];
 	}
 	
+	main.getCls = function (e) {
+		var cls = e.target.className.split(' '), 
+			pCls = e.target.parentNode.className.split(' '), 
+			ppCls = e.target.parentNode.parentNode.className.split(' ');
+		
+		return cls.concat(pCls).concat(ppCls) 
+	}
+	
 	return main;
 }

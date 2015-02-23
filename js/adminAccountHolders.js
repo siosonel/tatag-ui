@@ -19,17 +19,21 @@ function adminAccountHolders(api) {
 	
 	function setTitle() {
 		$('#accountHoldersWrapper').append(
-			"<div class='subLabel'>"
+			"<div class='row subLabel'>"
+			+	"<div class='columns small-8'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currResource.name+" holders, </span>"
 			+  "<span style='font-weight:normal;'>&nbsp; account#"+ currResource.account_id +"</span>"
-			+	 "<button id='addAccountHolder' class='right tiny'>+New Accountholder</button>"
+			+	"</div>"
+			+	"<div class='columns small-4'>"
+			+	 "<button id='addAccountHolder' class='right tiny' style='margin:0;'>+New Accountholder</button>"
+			+ "</div>"
 			+"</div>"
-			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 5px;'>"
-			+		"<div class='large-2 medium-2 small-2 columns'>Created</div>"
-			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
+			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 0 5px;'>"
+			+		"<div class='small-2 columns'>Created</div>"
+			+ 	"<div class='small-7 columns' style='margin-bottom:10px;'>"
 			+ 		"Account Information"
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>Balance</div>"
+			+ 	"<div class='small-3 columns' style='text-align: right;'>Balance</div>"
 			+'</div>'
 		);
 	}
@@ -66,9 +70,8 @@ function adminAccountHolders(api) {
 		}		
 		
 		$('#holders-new-row').css('display', 'none');		
-		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className;
 		
-		if (cls=='subLabel' || pCls=='subLabel' || ppCls=='subLabel') {
+		if (app.getCls(e).indexOf('subLabel') != -1) {
 			$('#accountsWrapper').animate({left: '0px'});
 			$('#accountHoldersWrapper').animate({left: '100%'});
 			app.currView = 'accounts';

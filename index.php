@@ -12,7 +12,7 @@ if (isset($_GET['token_id']) AND is_numeric($_GET['token_id']) AND isset($_GET['
 	if (is_array($data) AND $data[0]) { 
 		$_SESSION['TOKEN_ID'] = 'token-'.$data[0]->token_id;
 		$_SESSION['TOKEN_VAL'] = $data[0]->token_val;
-		$_SESSION['TOKEN_EXP'] = time() + 600;
+		$_SESSION['TOKEN_EXP'] = time() + 3600;
 	} //else {print_r($data); exit();}
 }
 

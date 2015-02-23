@@ -35,7 +35,7 @@ function walletEdit(api) {
 		currForm = !currResource.links ? null : api.byId[currResource.links['record-'+action]];
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
 		
-		var text = action=='hold' ? "Hold the record for manual (instead of autoamted) approval or rejection?"
+		var text = action=='hold' ? "Hold the record for manual (instead of automated) approval or rejection?"
 			: action=="approve" ? "Manually approve the record?"
 			: action=="reject" ? "Manually reject the transaction?"
 			: "unknown action='"+ action +"'";

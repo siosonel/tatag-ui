@@ -1,5 +1,6 @@
 body {
 	text-align: center;
+	background-color: #ececec;
 }
 
 #titleBar {
@@ -8,22 +9,24 @@ body {
 
 #mainWrapper {
 	position: absolute;
-	width: 480px;
+	width: calc(100% - 10px);
 	min-height: 700px;
 	overflow-x: hidden;
+	background-color: #ececec;
+	font-size: 0.92rem;
 }
 
 #accountsWrapper {
 	position: absolute;
 	top: 5px;
 	left: 0px;
-	width: 480px;
+	/*width: 480px;*/
 }	
 
 .acctDivToggle, .recordDivToggle {
 	position: absolute;
 	bottom: 5px;
-	left: 220px;
+	left: 45%;
 	height: 10px;
 	line-height: 12px;
 	width: 50px;
@@ -44,11 +47,12 @@ body {
 	height: 50px;
 	margin: 5px;
 	padding: 10px;
-	background-color: #ececec;
+	background-color: #fff;	
+	border: 1px solid #d8d8d8;
 }
 
 #acctRecordTitle {
-	width: 480px;
+	/*width: 480px;*/
 }
 
 
@@ -56,7 +60,7 @@ body {
 	position: absolute;
 	top: 5px;
 	left: 485px;
-	width: 480px;
+	/*width: 480px;*/
 }	
 
 .recordItem {
@@ -66,6 +70,8 @@ body {
 	padding: 10px;
 	background-color: #ececec;
 	overflow: hidden;
+	background-color: #fff;
+	border: 1px solid #d8d8d8;
 }
 
 .acctLabel {

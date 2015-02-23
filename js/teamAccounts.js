@@ -24,11 +24,11 @@ function teamAccounts(api) {
 			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 5px;'>"
-			+		"<div class='large-2 medium-2 small-2 columns'>Created</div>"
-			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
+			+		"<div class='small-2 columns'>Created</div>"
+			+ 	"<div class='small-7 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		"Account Information"
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>Balance</div>"
+			+ 	"<div class='small-3 columns' style='text-align: right;'>Balance</div>"
 			+'</div>'
 		);
 	}
@@ -45,11 +45,11 @@ function teamAccounts(api) {
 		
 		$('#accountsWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
-			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
-			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
+			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
+			+ 	"<div class='small-7 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		account.name+"<br />#"+account.account_id+', '+ account.authcode +'&nbsp;'
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ account.balance +"</div>"
+			+ 	"<div class='small-3 columns' style='text-align: right;'>"+ account.balance +"</div>"
 			//+ 	"<div id='"+divId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		)

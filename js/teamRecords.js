@@ -28,8 +28,8 @@ function teamRecords(api) {
 		
 		$('#recordsItems').append(
 			"<div id='brandItemsHeading' class='row brandItem' style='margin: 5px;'>"
-			+		"<div class='large-2 medium-2 small-2 columns'>Date</div>"
-			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
+			+		"<div class='small-2 columns'>Date</div>"
+			+ 	"<div class='small-7 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		"Record Details"
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>Amount</div>"

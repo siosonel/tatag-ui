@@ -19,17 +19,21 @@ function adminMembers(api) {
 	
 	function setTitle() {
 		$('#membersWrapper').append(
-			"<div class='subLabel'>"
+			"<div class='row subLabel'>"
+			+	"<div class='columns small-8'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" members, </span>"
 			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
-			+	 "<button id='addMember' class='right tiny'>+New Member</button>"
+			+	"</div>"
+			+	"<div class='columns small-4'>"
+			+	 "<button id='addMember' class='right tiny' style='margin:0;'>+New Member</button>"
+			+ "</div>"
 			+"</div>"
-			+"<div id='brandItemsHeading' class='row brandItem' style='margin: 5px;'>"
-			+		"<div class='large-2 medium-2 small-2 columns'>Joined</div>"
-			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
+			+"<div id='brandItemsHeading' class='row brandItem' style='margin: 0 5px;'>"
+			+		"<div class='small-2 columns'>Joined</div>"
+			+ 	"<div class='small-7 columns' style='margin-bottom:10px;'>"
 			+ 		"Member Information"
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>Hours/Week</div>"
+			+ 	"<div class='small-3 columns' style='text-align: right;'>Hours/ Week</div>"
 			+'</div>'
 		);
 	}
@@ -66,13 +70,12 @@ function adminMembers(api) {
 		}
 		
 		$('#members-user_id-row').css('display','none');			
-		var cls = e.target.className, pCls = e.target.parentNode.className, ppCls = e.target.parentNode.parentNode.className;
 		
-		if ([cls, pCls, ppCls].indexOf('subLabel')!=-1) { 
+		if (app.getCls(e).indexOf('subLabel') != -1) {
 			app('membersWrapper'); return;
 		}
 		
-		if ($(e.target).attr('href')) { console.log($(e.target).attr('href'));
+		if ($(e.target).attr('href')) {
 			app.currView = 'memberAccounts';
 			app.memberAccounts(app.resources[e.target.parentNode.parentNode.id]);
 			return;

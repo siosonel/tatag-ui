@@ -30,27 +30,30 @@ function walletCards(api) {
 		
 		$('#accountsWrapper').append("<div class='large-12 acctItem' id='"+acctDivId+"'>"
 		+ "<div class='row' style='margin-bottom:30px;' id='"+ acctDivId +"-label'>"
-		+ 	"<div class='large-8 medium-8 small-8 columns acctLabel'>"
+		+ 	"<div class='small-8 columns acctLabel'>"
 		+			"<img id='"+ acctDivId +"-img' class='left' src='http://placehold.it/25x25&text=[img]'/>"
 		+ 		"<span style='vertical-align:top'>&nbsp;"+alias+"&nbsp;</span>"
 		+			"<span id='"+acctDivId+"-edit' class='fi-pencil small' style='display:none'></span><br />"
 		+     "<span id='"+ acctDivId +"-name' style='font-weight:normal; display: none;'>&nbsp;#"+acct.account_id +' '+acctname+"</span>"
 		+		"</div>"
-		+ 	"<div class='large-4 medium-4 small-4 columns acctBal' id='"+acctDivId+"-bal'>"
+		+ 	"<div class='small-4 columns acctBal' id='"+acctDivId+"-bal'>"
 		+ 		(acct.sign*acct.balance).toFixed(2) +" &#9658;"
 		+		"</div>"
 		+ "</div>"
 		+ "<div class='row acctFormDiv' id='"+ acctDivId +"-forms'>"
-		+ 	"<div class='large-8 medium-8 small-8 columns'>"
+		+ 	"<div class='small-8 columns'>"
 		//+			"<span>Relay:</span><br />"
 		//+ 		"<h1>"+ acct.holder_id +"-"+ acct.limkey +"</h1><br />"
 		//+			"<a href=''>Review</a> | <a href=''>Edit</a><br />"
 		+			"<img id='"+ acctDivId +"-viz' class='left' src='http://placehold.it/300x180&text=[img]'/>"
 		+		"</div>"
-		+ 	"<div class='large-4 medium-4 small-4 columns'>"
-		+ 		((acct.relay['budget-add'] || acct.links['budget-add']) ? "<button style='width:100px;' id='"+acctDivId+"-add'>Add</button><br />" : "")
-		+ 		((acct.relay['budget-transfer'] || acct.links['budget-transfer']) ? "<button id='"+acctDivId+"-transfer' style='width:100px; padding-left: 1.3rem;'>Transfer</button><br />" : "")
-		+			((acct.relay['budget-use'] || acct.links['budget-use']) ? "<button id='"+acctDivId+"-use' style='width:100px'>Use</button><br />" : "")
+		+ 	"<div class='small-4 columns'>"
+		+ 		((acct.relay['budget-add'] || acct.links['budget-add']) 
+			? "<button class='tiny' id='"+acctDivId+"-add' style='width:5.0rem; margin-bottom:0.5rem;'>Add</button><br />" : "")
+		+ 		((acct.relay['budget-transfer'] || acct.links['budget-transfer']) 
+			? "<button id='"+acctDivId+"-transfer' class='tiny' style='width:5.0rem; margin-bottom:0.5rem;'>Transfer</button><br />" : "")
+		+			((acct.relay['budget-use'] || acct.links['budget-use']) 
+			? "<button id='"+acctDivId+"-use' class='tiny' style='width:5.0rem; margin-bottom:0.5rem;'>Use</button><br />" : "")
 		+		"</div>" 	
 		+ "</div>"
 		+ "<div id='"+acctDivId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"

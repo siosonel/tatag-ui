@@ -24,11 +24,11 @@ function teamMembers(api) {
 			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row brandItem' style='margin: 5px;'>"
-			+		"<div class='large-2 medium-2 small-2 columns'>Joined</div>"
-			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
+			+		"<div class='small-2 columns'>Joined</div>"
+			+ 	"<div class='small-7 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		"Member Information"
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>Hours/Week</div>"
+			+ 	"<div class='small-3 columns' style='text-align: right;'>Hours/ Week</div>"
 			+'</div>'
 		);
 	}
@@ -45,11 +45,11 @@ function teamMembers(api) {
 		
 		$('#membersWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
-			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
-			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
+			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
+			+ 	"<div class='small-7 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		member.name+"<br />#"+member.member_id+', '+ member.role +'&nbsp;'
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ member.hours +"</div>"
+			+ 	"<div class='small-3 columns' style='text-align: right;'>"+ member.hours +"</div>"
 			//+ 	"<div id='"+divId+"-toggle' class='memberDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		)
