@@ -59,11 +59,13 @@ function teamBrands(api) {
 	}
 	
 	main.clickHandler = function (e) {
-		var divIdArr = app.getDivId(e,'brand').split('-'), action = divIdArr.pop(), divId=divIdArr.join('-');		
+		var divId = app.getDivId(e,'brand');		
 		if (!divId) return;	
 		
-		if (e.target.tagName.toUpperCase()=="BUTTON") app.forms(divId, action, '/forms#member-'+action, 'brands');
-		
+		if (e.target.tagName.toUpperCase()=="BUTTON") {		
+			var divIdArr = app.getDivId(e,'brand').split('-'), action = divIdArr.pop(), divId=divIdArr.join('-');		
+			app.forms(divId, action, '/forms#member-'+action, 'brands');
+		}		
 		else {
 			var id = divId.split('-');
 			currBrandDivId = id[0]+'-'+id[1];

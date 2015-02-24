@@ -56,9 +56,11 @@ function walletRecords(api) {
 			"<div id='"+divId+"' class='row recordItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		record.direction+' '+ other +'<br /><i>'+ note +'</i>' + actionPrompt 
+			+ 		record.direction+' '+ other +'<br /><i>'+ note +'</i>' + actionPrompt
 			+		"</div>"
-			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ displayAmount(record) +"</div>"
+			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"
+			+     displayAmount(record) + displayAdvise(record) 
+			+   "</div>"
 			+ 	"<div id='"+divId+"-toggle' class='recordDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		);
@@ -90,6 +92,14 @@ function walletRecords(api) {
 		}
 		
 		return prompt ? "<br />"+prompt : "";
+	}
+	
+	function displayAdvise(record) {
+		if (!record.advisory) return "";
+		var advise = record.advisory.advise,
+			color = advise=='accept' ? '#0f0' : '#f00';
+		
+		return "<br /><span style='font-weight:700;color:"+color+"'>"+ advise +"?<span>";
 	}
 	
 	function displayAmount(record) {
