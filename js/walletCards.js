@@ -46,6 +46,7 @@ function walletCards(api) {
 		//+ 		"<h1>"+ acct.holder_id +"-"+ acct.limkey +"</h1><br />"
 		//+			"<a href=''>Review</a> | <a href=''>Edit</a><br />"
 		+			"<img id='"+ acctDivId +"-viz' class='left' src='http://placehold.it/300x180&text=[img]'/>"
+		+			(acct.throttle_id ? "<span>(This account is throttled, #"+acct.throttle_id+")</span>" : "")
 		+		"</div>"
 		+ 	"<div class='small-4 columns'>"
 		+ 		((acct.relay['budget-add'] || acct.links['budget-add']) 

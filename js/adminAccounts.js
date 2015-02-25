@@ -53,7 +53,8 @@ function adminAccounts(api) {
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		account.name+"<br />#"+account.account_id+', '+ account.authcode +'&nbsp;'
-			+			"<span class='fi-pencil small'>&nbsp;</span>"
+			+			(account.throttle_id ? "<span>, throttle #"+account.throttle_id+"&nbsp;</span>" : "")
+			+			"<span class='fi-pencil small'>&nbsp;</span><br />"
 			+			"<span href='"+account.links.holders+"' style='text-decoration:underline'>holders</span>"
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ account.balance +"</div>"

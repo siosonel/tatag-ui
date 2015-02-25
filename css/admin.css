@@ -49,7 +49,7 @@ body {
 }
 
 #aboutWrapper, #membersWrapper, #accountsWrapper, #recordsWrapper, 
-#memberAccountsWrapper, #accountHoldersWrapper {
+#memberAccountsWrapper, #accountHoldersWrapper, #throttlesWrapper {
 	position: absolute;
 	top: 5px;
 	left: 100%;

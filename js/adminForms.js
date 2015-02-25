@@ -4,7 +4,7 @@ function adminForms(api) {
 	function main(div, type, formURL, altType) {
 		currResource = typeof div=='string' ? app.resources[div] : div;
 		currType = type;
-		currForm = api.byId[formURL];	//console.log(currForm)
+		currForm = api.byId[formURL];
 		currAltType = altType ? altType : "";
 		
 		renderForm();

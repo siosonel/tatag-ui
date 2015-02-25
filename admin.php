@@ -31,6 +31,7 @@
 		<div id='memberAccountsWrapper'></div>
 		<div id='accountsWrapper'></div>
 		<div id='accountHoldersWrapper'></div>
+		<div id='throttlesWrapper'></div>
 		<div id='recordsWrapper'>
 			<div id='recordsTitle'></div>
 			<div id='recordsType' class='row'>
@@ -86,8 +87,15 @@
 							</label>
 						</div>
 					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Throttle ID (optional usage limit)
+								<input type='text' id='accounts-throttle_id' value='' />
+							</label>
+						</div>
+					</div>
 					<div class='row' style='text-align: center;' id='accounts-sign-row'>
-						<div class='columns small-4'>
+						<div class='columns small-12'>
 							<label>Sign (-1 OR 1)<input type='text' id='accounts-sign' value='' /></label>
 						</div>
 					</div>
@@ -120,6 +128,43 @@
 				</form>
 				<button id='holders-submit'>Submit</button>&nbsp;
 				<button id='holders-cancel'>Cancel</button>
+			</div>
+			<a class="close-reveal-modal">×</a>
+		</div>
+		
+		<div id='throttlesModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
+			<div id='throttlesForm'>		
+				<h4 id='throttles-formTitle'></h4>
+				<form>
+					<div class='row' id='throttleID-formDiv'>
+						<div class='columns small-12'>
+							<label>Throttle ID#<input type='hidden' id='throttles-throttle_id' value='' disabled='disabled'/></label>
+						</div>
+					</div>				
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Apply to last seconds=<input type='text' id='throttles-period' value='' /></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Total limit<input type='text' id='throttles-by_all' value='' />
+							</label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Limit by brand<input type='text' id='throttles-by_brand' value='' /></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Limit by user<input type='text' id='throttles-by_user' value='' /></label>
+						</div>
+					</div>
+				</form>
+				<button id='throttles-submit'>Submit</button>&nbsp;
+				<button id='throttles-cancel'>Cancel</button>
 			</div>
 			<a class="close-reveal-modal">×</a>
 		</div>
@@ -160,6 +205,7 @@
 	<script src='js/adminAccountHolders.js'></script>
 	<script src='js/adminRecords.js'></script>
 	<script src='js/adminForms.js'></script>
+	<script src='js/adminThrottles.js'></script>
 	<script>
 		var app = adminMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
 	</script>

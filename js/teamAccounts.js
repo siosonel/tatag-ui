@@ -48,6 +48,7 @@ function teamAccounts(api) {
 			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='small-7 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		account.name+"<br />#"+account.account_id+', '+ account.authcode +'&nbsp;'
+			+			(account.throttle_id ? "<span>, throttle #"+account.throttle_id+"&nbsp;</span>" : "")
 			+		"</div>"
 			+ 	"<div class='small-3 columns' style='text-align: right;'>"+ account.balance +"</div>"
 			//+ 	"<div id='"+divId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
