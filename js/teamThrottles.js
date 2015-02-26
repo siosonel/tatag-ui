@@ -1,4 +1,4 @@
-function adminThrottles(api) {
+function teamThrottles(api) {
 	var currBrand, currResource, currCollection;
 	
 	function main(brand) {
@@ -6,7 +6,7 @@ function adminThrottles(api) {
 		if (!currBrand || app.currView != 'throttles') return;
 		app.currView = 'throttles';
 		
-		var url = currBrand.links.budgetThrottles;		
+		var url = currBrand.links.teamThrottles;		
 		$('#throttlesWrapper').children().remove();
 		$('#throttlesWrapper').append(setTitle(currBrand))
 		
@@ -20,17 +20,14 @@ function adminThrottles(api) {
 	function setTitle() {
 		$('#throttlesWrapper').append(
 			"<div class='row subLabel'>"
-			+	"<div class='columns small-8'>"
+			+	"<div class='columns small-12'>"
 			+  	"<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" throttles, </span>"
 			+  	"<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
 			+	"</div>"
-			+	"<div class='columns small-4'>"
-			+	 	"<button id='addThrottle' class='right tiny' style='margin:0;'>+New Throttle</button>"
-			+ "</div>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 0 5px;'>"
 			+		"<div class='small-2 columns'>Created</div>"
-			+ 	"<div class='small-10 columns' style='margin-bottom:10px;'>"
+			+ 	"<div class='small-10 columns'>"
 			+ 		"Throttle Information"
 			+		"</div>"
 			+'</div>'
@@ -51,7 +48,7 @@ function adminThrottles(api) {
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='small-10 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		"Throttle #"+throttle.throttle_id +" <span class='fi-pencil small'>&nbsp;</span><br />"
+			+ 		"Throttle #"+throttle.throttle_id +"<br />"
 			+			"Applies to the last "+ throttle.period +" seconds</br >"
 			+			"("+ Math.round(throttle.period/60) +" min. || "
 			+ 		(throttle.period/3600).toFixed(1) +" hours || "
@@ -65,22 +62,13 @@ function adminThrottles(api) {
 		)
 	}
 	
-	main.clickHandler = function (e) {
-		if (e.target.id=='addThrottle') { 
-			$('#throttleID-formDiv').css('display','none')
-			app.forms(currCollection, 'throttles', '/forms#throttle-add');
-			return;
-		}		
-		
+	main.clickHandler = function (e) {		
 		if (app.getCls(e).indexOf('subLabel') != -1) {
 			app('throttlesWrapper');
 		}
 	
-		var divId = app.getDivId(e, 'throttles'); console.log(divId)
+		var divId = app.getDivId(e, 'throttles'); 
 		if (!divId) return;
-		
-		$('#throttleID-formDiv').css('display','none')
-		app.forms(divId, 'throttles', '/forms#admin-throttle-edit');
 	}
 	
 	return main;

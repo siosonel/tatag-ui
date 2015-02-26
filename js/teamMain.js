@@ -15,6 +15,7 @@ function teamMain(conf) {
 		main.members = teamMembers(api);
 		main.accounts = teamAccounts(api);
 		main.records = teamRecords(api);
+		main.throttles = teamThrottles(api);
 		main.forms = adminForms(api);
 		
 		init();
@@ -24,6 +25,7 @@ function teamMain(conf) {
 		$('#membersWrapper').click(main.members.clickHandler);
 		$('#accountsWrapper').click(main.accounts.clickHandler);
 		$('#recordsWrapper').click(main.records.clickHandler);
+		$('#throttlesWrapper').click(main.throttles.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
 	});
 	
@@ -69,6 +71,14 @@ function teamMain(conf) {
 		var typeArr = [id.split('-')[0], pid.split('-')[0], ppid.split('-')[0]];
 		
 		if (typeArr.indexOf(type)!=-1) return idArr[typeArr.indexOf(type)];
+	}
+	
+	main.getCls = function (e) {
+		var cls = e.target.className.split(' '), 
+			pCls = e.target.parentNode.className.split(' '), 
+			ppCls = e.target.parentNode.parentNode.className.split(' ');
+		
+		return cls.concat(pCls).concat(ppCls) 
 	}
 	
 	return main;

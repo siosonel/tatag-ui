@@ -29,6 +29,7 @@
 			<div id='aboutWrapper'></div>
 			<div id='membersWrapper'></div>
 			<div id='accountsWrapper'></div>
+			<div id='throttlesWrapper'></div>
 			<div id='recordsWrapper'>
 				<div id='recordsTitle'></div>
 				<div id='recordsType' class='row'>
@@ -84,6 +85,7 @@
 	<script src='js/teamMembers.js'></script>
 	<script src='js/teamAccounts.js'></script>
 	<script src='js/teamRecords.js'></script>
+	<script src='js/teamThrottles.js'></script>
 	<script src='js/adminForms.js'></script>
 	<script>
 		var app = teamMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
