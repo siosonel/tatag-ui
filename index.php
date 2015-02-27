@@ -1,5 +1,6 @@
 <?php 
-session_start(); //$_SESSION=array(); exit();
+session_start(); 
+if (isset($_GET['clearSession'])) $_SESSION=array();
 
 if (isset($_GET['token_id']) AND is_numeric($_GET['token_id']) AND isset($_GET['otk'])) {
 	include_once("common.php");

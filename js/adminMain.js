@@ -66,8 +66,8 @@ function adminMain(conf) {
 		return refresh+1;
 	}
 	
-	main.errHandler = function errHandler(err) {
-		console.log(err)
+	main.errHandler = function errHandler(err) { console.log(err.message)
+		if (err.message=="Unauthorized") window.location.href = window.location.pathname +"?clearSession=1"
 	}
 	
 	main.getDivId = function (e, type) {

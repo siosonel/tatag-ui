@@ -21,7 +21,11 @@
 </head>
 <body>
 	<div class="row">
-		<div class='small-12' id='titleBar'><b>Wallet</b></div>
+		<div class='small-12' id='titleBar'>
+			<span class='fi-refresh'>&nbsp;</span><a href="/ui/wallet" style="color: #000;">Wallet</a> |
+			<a href="/ui/team">Teams</a> | 
+			<a href="/ui/admin">Admin</a>
+		</div>
 	</div>
 	<div id='mainWrapper'>	
 		<div class="row" id='accountsWrapper'></div>
