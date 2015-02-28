@@ -74,6 +74,13 @@ body {
 	border: 1px solid #d8d8d8;
 }
 
+#scrollTo {
+	display:none;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+
 .acctLabel {
 	text-align: left;
 }

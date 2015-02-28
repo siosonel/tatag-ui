@@ -21,6 +21,7 @@ function walletMain(conf) {
 			
 		$('#accountsWrapper').click(main.cards.toggleAcctItem);
 		$('#recordsWrapper').click(main.records.toggleRecordItem);
+		$('#scrollTo').click(main.records.scrollMore);
 		$('#txnForm').click(main.txn.formClick);
 		$('#editForm, #editPrompt').click(main.edit.formClick);
 	})

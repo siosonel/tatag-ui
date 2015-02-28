@@ -30,6 +30,7 @@
 	<div id='mainWrapper'>	
 		<div class="row" id='accountsWrapper'></div>
 		<div class="row" id='recordsWrapper'></div>
+		<button id='scrollTo' class='tiny'>more...</button>
 	</div>	
 	
 	<div id='txnModal' class="reveal-modal medium" style='min-height:50vh; top:30px;' data-reveal>

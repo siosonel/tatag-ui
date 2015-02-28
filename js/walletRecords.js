@@ -1,6 +1,7 @@
 function walletRecords(api) {
-	 var currRecordId, currAcct;
+	 var currRecordId, currAcct, currCollection;
 	 var maxHeight = '250px';
+	 var scrollTo="";
 
 	function main(acct) {
 		if (acct) currAcct = acct;
@@ -35,7 +36,8 @@ function walletRecords(api) {
 	function renderRecords(records) {
 		if (!records.items || !records.items.length) $('#recordsWrapper').append("<div class='recordItem'>No transaction records found.</div>");
 		else {
-			records.items.map(listRecord);		
+			records.items.map(listRecord);
+			paginate(records);
 			$('#'+currRecordId).css('max-height', maxHeight);
 		}
 	}
@@ -112,6 +114,17 @@ function walletRecords(api) {
 		}
 		
 		return amount;
+	}
+	
+	function paginate(records) {
+		scrollTo=""
+		if (records.pageOrder=='desc' && records.prev) scrollTo = records.prev;
+		if (records.pageOrder=='asc' && records.next) scrollTo = records.next;
+		$('#scrollTo').css('display', scrollTo ? 'block' : 'none');		
+	}
+	
+	main.scrollMore = function (e) {
+		api.loadId(scrollTo).then(renderRecords, app.errHandler)
 	}
 	
 	main.toggleRecordItem = function (e) {
