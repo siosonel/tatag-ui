@@ -28,29 +28,27 @@
 			<a href="/ui/admin">Admin</a>
 		</div>
 	</div>
-	<div class='row'>
-		<div id='mainWrapper' class='small-12 medium-9 large-6 columns '>	
-			<div id='brandsWrapper'></div>
-			<div id='aboutWrapper'></div>
-			<div id='membersWrapper'></div>
-			<div id='accountsWrapper'></div>
-			<div id='throttlesWrapper'></div>
-			<div id='recordsWrapper'>
-				<div id='recordsTitle'></div>
-				<div id='recordsType' class='row'>
-					<button id='records-issued' class='columns small-2 tiny'>Added</button>
-					<button id='records-revTransfer' class='columns small-2 tiny'>N=>N</button>
-					<button id='records-expTransfer' class='columns small-2 tiny'>P=>P</button>
-					<button id='records-intrause' class='columns small-2 tiny'>Intra</button>
-					<button id='records-inflow' class='columns small-2 tiny'>Inflow</button>
-					<button id='records-outflow' class='columns small-2 tiny'>Outflow</button>
-				</div>
-				<div id='recordsItems'></div>
-			</div>		
-		</div>	
+	
+	<div id='mainWrapper'>	
+		<div id='brandsWrapper' class="row"></div>
+		<div id='aboutWrapper' class="row"></div>
+		<div id='membersWrapper' class="row"></div>
+		<div id='accountsWrapper' class="row"></div>
+		<div id='throttlesWrapper' class="row"></div>
+		<div id='recordsWrapper' class="row">
+			<div id='recordsTitle'></div>
+			<div id='recordsType' class='row'>
+				<button id='records-issued' class='columns small-2 tiny'>Added</button>
+				<button id='records-revTransfer' class='columns small-2 tiny'>N=>N</button>
+				<button id='records-expTransfer' class='columns small-2 tiny'>P=>P</button>
+				<button id='records-intrause' class='columns small-2 tiny'>Intra</button>
+				<button id='records-inflow' class='columns small-2 tiny'>Inflow</button>
+				<button id='records-outflow' class='columns small-2 tiny'>Outflow</button>
+			</div>
+			<div id='recordsItems'></div>
+		</div>		
+	</div>	
 		
-		<div class='small-0 medium-3 large-6 columns' >&nbsp;</div>
-	</div>
 	
 	<div id='acceptModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
 		<div id='acceptForm'>		

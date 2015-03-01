@@ -12,8 +12,8 @@ function walletRecords(api) {
 		$('#recordsWrapper').children().remove();
 		$('#recordsWrapper').append(setTitle(currAcct))
 		
-		$('#accountsWrapper').animate({left: '-485px'});
-		$('#recordsWrapper').animate({left: '0px'});
+		$('#accountsWrapper').animate({left: '-100%'});
+		$('#recordsWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
 		api.loadId(url, app.refresh()).then(renderRecords, app.errHandler)

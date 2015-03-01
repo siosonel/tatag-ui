@@ -32,7 +32,7 @@ function walletCards(api) {
 		if (!acct.links) acct.links = {};
 		
 		
-		$('#accountsWrapper').append("<div class='large-12 acctItem' id='"+acctDivId+"'>"
+		$('#accountsWrapper').append("<div class='small-12 acctItem' id='"+acctDivId+"'>"
 		+ "<div class='row' style='margin-bottom:30px;' id='"+ acctDivId +"-label'>"
 		+ 	"<div class='small-8 columns acctLabel'>"
 		+			"<img id='"+ acctDivId +"-img' class='left' src='http://placehold.it/25x25&text=[img]'/>"

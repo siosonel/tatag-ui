@@ -28,6 +28,7 @@
 			<a href="/ui/admin">Admin</a>
 		</div>
 	</div>
+	
 	<div id='mainWrapper'>	
 		<div class="row" id='accountsWrapper'></div>
 		<div class="row" id='recordsWrapper'></div>

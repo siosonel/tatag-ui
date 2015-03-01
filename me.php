@@ -4,12 +4,11 @@
 	<p>Login Provider: <span id='meLoginProvider'></span><p>
 	
 	<p style='background-color:#ececec'>
-		If you are seeing missing or unexpected information, you can 
-		log out and back in by clicking on a specific social
-		sign-in below:<br />
-		<a href='?provider=gp'><span class='fi-social-google-plus large' style='font-size: 30px;'>&nbsp;&nbsp;</span></a>
-		<a href='?provider=fb'><span class='fi-social-facebook large' style='font-size: 30px;'>&nbsp;&nbsp;</span></a>
-		<a href='?provider=tw'><span class='fi-social-twitter large' style='font-size: 30px;'>&nbsp;&nbsp;</span></a>
+		If you see missing or inconsistent information, 
+		refresh the page by clicking a sign-in icon below:<br />
+		<a href='?provider=gp'><span class='fi-social-google-plus large' style='font-size: 30px; color: #dd4b39;'>&nbsp;&nbsp;</span></a>
+		<a href='?provider=fb'><span class='fi-social-facebook large' style='font-size: 30px; color: #3b5998;'>&nbsp;&nbsp;</span></a>
+		<a href='?provider=tw'><span class='fi-social-twitter large' style='font-size: 30px; color:#55acee;'>&nbsp;&nbsp;</span></a>
 	</p>
 	
 	<a class="close-reveal-modal">×</a>
@@ -18,6 +17,7 @@
 <script>
 	function me() {
 		var provider = {fb: 'facebook', tw: 'twitter', gp: 'google-plus'};
+		var color = {fb: '#3b5998', tw: '#55acee', gp: '#dd4b39'};
 	
 		$(document).ready(function () {
 			$('#mainWrapper').append($('#meModal'));
@@ -26,7 +26,7 @@
 		
 		function main(userID, userName, loginProvider) {
 			$('#login_provider').html(
-				"<span class='fi-social-"+provider[loginProvider] +"'>me</span>"				
+				"<span class='fi-social-"+provider[loginProvider] +"' style='opacity: 0.9; color:"+ color[loginProvider] +"'></span>me"				
 			);
 			
 			$('#meUserID').html(userID);

@@ -46,11 +46,14 @@ function walletTxn(api) {
 		
 		var optionText = currForm ? "<hr/><span><i>-- OR --</i></span>" : "";
 		var promptText = currResource.record_id 
-			? "Authorize the reversal with this 'from' value"
+			? "Authorize the refund with this 'from' value"
 			: "Authorize the transaction originator with this 'to' value";
 		
 		$('#relayInfo')
-			.html(optionText+"<span><br/><br/>"+ promptText +":<br/><br/><h1>"+ relay +"</h1></span>")
+			.html(optionText
+				+"<span><br/><br/>"+ promptText +":<br/><br/>"
+				+"<h1>"+ relay +"</h1><button class='medium' id='postRelayBtn'>Check Records</button></span>"
+			)
 			.css('display','block');
 	}
 	
@@ -61,7 +64,14 @@ function walletTxn(api) {
 	main.unadd = renderReverse
 	main.untransfer = renderReverse
 	main.unuse = renderReverse
-
+	
+	main.postRelayRefresh = function (e) {
+		if (e.target.id!='postRelayBtn') return;
+		app.currView='records'; 		
+		main.refreshViews(); 
+		$('#txnModal').foundation('reveal','close');
+	}
+	
 	main.formClick = function formClick(e) {
 		if (e.target.id != 'txn-submit') return;
 		

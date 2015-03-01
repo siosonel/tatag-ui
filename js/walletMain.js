@@ -24,12 +24,13 @@ function walletMain(conf) {
 		$('#recordsWrapper').click(main.records.toggleRecordItem);
 		$('#scrollTo').click(main.records.scrollMore);
 		$('#txnForm').click(main.txn.formClick);
+		$('#relayInfo').click(main.txn.postRelayRefresh);
 		$('#editForm, #editPrompt').click(main.edit.formClick);
 	})
 	
 	function main() {
-		$('#recordsWrapper').animate({left: '485px'});
-		$('#accountsWrapper').animate({left: '0px'});
+		$('#accountsWrapper').animate({left: '0'});
+		$('#recordsWrapper').animate({left: '100%'});
 	}
 
 	function loadUser(res) {

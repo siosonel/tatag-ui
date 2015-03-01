@@ -15,7 +15,7 @@ body {
 #mainWrapper {
 	position: relative;
 	/*left:0;*/
-	/*width: 100%;*/
+	width: calc(100% - 10px);
 	/*max-width: 480px;*/	
 	min-height: 700px;
 	overflow-x: hidden;
@@ -27,12 +27,12 @@ body {
 	position: absolute;
 	top: 5px;
 	left: 0%;
-	width: calc(100% - 10px);
+	/*width: calc(100% - 10px);*/
 }
 
 .brandItem, .acctItem {
 	position: relative;
-	margin: 5px;
+	margin: 5px 0 0 5px;
 	padding: 10px;
 	background-color: #fff;
 	border: 1px solid #d8d8d8;
@@ -58,7 +58,7 @@ body {
 	position: absolute;
 	top: 5px;
 	left: 100%;
-	width: calc(100% - 10px);
+	/*width: calc(100% - 10px);*/
 }	
 
 .memberDivToggle, .acctDivToggle, .recordDivToggle {

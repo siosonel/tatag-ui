@@ -30,14 +30,14 @@
 	</div>
 
 	<div id='mainWrapper'>	
-		<div id='brandsWrapper'></div>
-		<div id='aboutWrapper'></div>
-		<div id='membersWrapper'></div>
-		<div id='memberAccountsWrapper'></div>
-		<div id='accountsWrapper'></div>
-		<div id='accountHoldersWrapper'></div>
-		<div id='throttlesWrapper'></div>
-		<div id='recordsWrapper'>
+		<div id='brandsWrapper' class="row"></div>
+		<div id='aboutWrapper' class="row"></div>
+		<div id='membersWrapper' class="row"></div>
+		<div id='memberAccountsWrapper' class="row"></div>
+		<div id='accountsWrapper' class="row"></div>
+		<div id='accountHoldersWrapper' class="row"></div>
+		<div id='throttlesWrapper' class="row"></div>
+		<div id='recordsWrapper' class="row">
 			<div id='recordsTitle'></div>
 			<div id='recordsType' class='row'>
 				<button id='records-issued' class='columns small-2 tiny'>Added</button>

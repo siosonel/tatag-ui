@@ -1,7 +1,4 @@
 <?php
-define("CONSUMER_ID", 2);
-define("CONSUMER_SECRET", "pass2");
-
 
 function request($domain,$method,$data) {	
 	$context=stream_context_create(array("http" => array(
