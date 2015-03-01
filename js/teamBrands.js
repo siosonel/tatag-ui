@@ -1,7 +1,12 @@
 function teamBrands(api) {
 	var currURL, currBrands;
 
-	function main(brandURL) {		
+	function main(brandURL) {	
+		if (!brandURL || !brandURL.length) {
+			$("#brandsWrapper").html("You do not have any current team memberships.");
+			return;
+		}
+	
 		if (brandURL) currURL = brandURL;
 		$('#brandsWrapper').children().remove(); //console.log(currURL); console.log(api.byId[currURL]);
 		

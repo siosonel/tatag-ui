@@ -20,7 +20,8 @@
 	<style></style>
 </head>
 <body>
-	<div class="row">
+	<div id='login_provider'></div>
+	<div class='row'>
 		<div class='small-12' id='titleBar'>
 			<a href="/ui/wallet">Wallet</a> |
 			<a href="/ui/team">Teams</a> |
@@ -213,5 +214,7 @@
 	<script>
 		var app = adminMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
 	</script>
+		
+	<?php include "me.php" ?>
 </body>
 </html>

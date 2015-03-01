@@ -2,7 +2,7 @@ function walletCards(api) {
 	var currURL, currAccounts, currAcctDivId;
 	var openHeight='300px';
 	
-	function main(userAccountsURL) {		
+	function main(userAccountsURL) {
 		if (userAccountsURL) currURL = userAccountsURL;		
 		$('#accountsWrapper').children().remove();
 		
@@ -11,11 +11,15 @@ function walletCards(api) {
 	}
 	
 	function renderCards(userAccounts) {
-		currAccounts = userAccounts;
-		currAccounts.items.map(renderAcctDiv); 
-		if (app.currView=='records') app.records(app.resources[currAcctDivId]);
-		$('#'+currAcctDivId).css('height', openHeight);
-		$('#'+currAcctDivId+'-forms').css('display', 'block');
+		if (!userAccounts.items.length) 
+			$("#accountsWrapper").append("<div>You do not have any accounts in your wallet.</div>");
+		else {
+			currAccounts = userAccounts;
+			currAccounts.items.map(renderAcctDiv); 
+			if (app.currView=='records') app.records(app.resources[currAcctDivId]);
+			$('#'+currAcctDivId).css('height', openHeight);
+			$('#'+currAcctDivId+'-forms').css('display', 'block');
+		}
 	}
 	
 	function renderAcctDiv(acct) {

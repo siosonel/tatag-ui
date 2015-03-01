@@ -1,6 +1,7 @@
 <?php 
 session_start(); 
-if (isset($_GET['clearSession'])) $_SESSION=array();
+if (isset($_GET['clearSession']) OR isset($_GET['provider'])) $_SESSION['TOKEN_ID']=0;
+if (isset($_GET['clearSession'])) exit();
 
 if (isset($_GET['token_id']) AND is_numeric($_GET['token_id']) AND isset($_GET['otk'])) {
 	include_once("common.php");
@@ -23,9 +24,8 @@ if (!$handler) $handler='wallet';
 
 if (
 	!isset($_SESSION) 
-	OR !$_SESSION['TOKEN_ID'] 
-	OR !$_SESSION['TOKEN_VAL'] 
-	OR !$_SESSION['TOKEN_EXP'] 
+	OR !$_SESSION['TOKEN_ID']
+	OR !$_SESSION['TOKEN_VAL']
 	OR time() > $_SESSION['TOKEN_EXP']
 ) {
 	include_once("common.php");
@@ -35,7 +35,9 @@ if (
 	$token_id = $data[0]->token_id;
 	$otk = $data[0]->otk; 
 	$next = urlencode("http://localhost/ui/$handler");
-	header("location: http://localhost/tatag/login.php?token_id=$token_id&otk=$otk&next=$next");
+	$provider = isset($_GET['provider']) ? "&provider=". $_GET['provider'] : '';
+	
+	header("location: http://localhost/tatag/login.php?token_id=$token_id&otk=$otk". $provider ."&next=$next");
 }
 else {
 	include "$handler.php";

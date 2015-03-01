@@ -25,11 +25,14 @@ function walletRecords(api) {
 			acctname = alias==acct.account_name ? "" : acct.account_name;
 			
 		return	"<div id='acctRecordTitle' class='row'>"
-		+ "<div class='large-8 medium-8 small-8 columns acctLabel'>"
+		+ "<div class='small-8 columns acctLabel'>"
 		+ 	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+alias+"</span><br />"
 		+    "<span style='font-weight:normal;'>&nbsp;#"+acct.account_id +' '+acctname+"</span>"
 		+	"</div>"
-		+  "<div class='large-4 medium-4 small-4 columns acctBal' style='text-align:right;'>"+ (acct.sign*acct.balance).toFixed(2) + "</div>"
+		+ "<div class='small-4 columns acctBal' style='text-align:right;'>"
+		+ 	(acct.sign*acct.balance).toFixed(2) + "&nbsp;&nbsp;<br />"
+		+ 	"<button class='tiny' style='float:right; margin:0 5px -5px 0;'><span class='fi-magnifying-glass'></span></div>"		
+		+ "</div>"
 		+ "</div>";
 	}
 	

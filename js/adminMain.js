@@ -19,6 +19,7 @@ function adminMain(conf) {
 		main.accountHolders = adminAccountHolders(api);
 		main.records = adminRecords(api);
 		main.forms = adminForms(api);
+		main.me = me();
 		
 		init();
 			
@@ -51,6 +52,7 @@ function adminMain(conf) {
 	function setUser(res) {
 		User = res;
 		main.User = User;
+		main.me(User.user_id, User.name, User.login_provider);
 		main.brands(User.links.brand);
 	}
 	
@@ -67,7 +69,7 @@ function adminMain(conf) {
 	}
 	
 	main.errHandler = function errHandler(err) { console.log(err.message)
-		if (err.message=="Unauthorized") window.location.href = window.location.pathname +"?clearSession=1"
+		if (err.message=="Unauthorized") main.me.modal();
 	}
 	
 	main.getDivId = function (e, type) {

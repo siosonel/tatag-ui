@@ -20,6 +20,7 @@
 	<style></style>
 </head>
 <body>
+	<div id='login_provider'></div>
 	<div class="row">
 		<div class='small-12' id='titleBar'>
 			<span class='fi-refresh'>&nbsp;</span><a href="/ui/wallet" style="color: #000;">Wallet</a> |
@@ -98,5 +99,7 @@
 	<script>
 		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
 	</script>
+	
+	<?php include "me.php" ?>
 </body>
 </html>

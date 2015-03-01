@@ -14,6 +14,7 @@ function walletMain(conf) {
 		main.records = walletRecords(api);		
 		main.txn = walletTxn(api);		
 		main.edit = walletEdit(api);
+		main.me = me();
 		
 		api.init('/')
 			.then(loadUser)
@@ -37,6 +38,7 @@ function walletMain(conf) {
 
 	function setUser(res) { 
 		User = res;
+		main.me(User.user_id, User.name, User.login_provider);
 		main.cards(User.links.userAccounts);
 	}
 	
@@ -51,7 +53,7 @@ function walletMain(conf) {
 	}
 	
 	main.errHandler = function errHandler(err) { console.log(err.message)
-		if (err.message=="Unauthorized") window.location.href = window.location.pathname +"?clearSession=1"
+		if (err.message=="Unauthorized") main.me.modal();
 	}
 	
 	return main

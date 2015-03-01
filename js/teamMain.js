@@ -17,6 +17,7 @@ function teamMain(conf) {
 		main.records = teamRecords(api);
 		main.throttles = teamThrottles(api);
 		main.forms = adminForms(api);
+		main.me = me();
 		
 		init();
 			
@@ -46,7 +47,7 @@ function teamMain(conf) {
 	
 	function setUser(res) {
 		User = res;
-		if (!User.links.team || !User.links.team.length) $("#brandsWrapper").html("You do not have any current team memberships.");
+		main.me(User.user_id, User.name, User.login_provider);
 		main.brands(User.links.team);
 	}
 	
@@ -62,7 +63,7 @@ function teamMain(conf) {
 	}
 	
 	main.errHandler = function errHandler(err) { console.log(err.message)
-		if (err.message=="Unauthorized") window.location.href = window.location.pathname +"?clearSession=1"
+		if (err.message=="Unauthorized") main.me.modal();
 	}
 	
 	main.getDivId = function (e, type) {

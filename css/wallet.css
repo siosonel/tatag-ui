@@ -3,6 +3,11 @@ body {
 	background-color: #ececec;
 }
 
+#login_provider {
+	position: absolute;
+	left: 5px;
+}
+
 #titleBar {
 
 }

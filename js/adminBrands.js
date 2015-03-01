@@ -11,8 +11,15 @@ function adminBrands(api) {
 	}
 	
 	function renderBrands(brands) {
-		currBrands = brands;
-		currBrands.map(renderBrandDiv);
+		if (!brands.length) $("#brandsWrapper").append("<div><br />"
+			+ "You are currently not an admin in any brand."
+			+ "<br />To have an admin role, request a brand admin to assign that role to you. "
+			+ "<br />-OR-,<br />You could create a new currency brand to administer."
+		+"</div>");
+		else {
+			currBrands = brands;
+			currBrands.map(renderBrandDiv);
+		}
 	}
 	
 	function renderBrandDiv(brand) { //console.log(brand);
