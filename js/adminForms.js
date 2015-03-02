@@ -1,5 +1,5 @@
 function adminForms(api) {
-	var currResource, currType, currForm, currInputs;
+	var currResource, currType, currAltType, currForm, currInputs;
 
 	function main(div, type, formURL, altType) {
 		currResource = typeof div=='string' ? app.resources[div] : div;
@@ -52,8 +52,8 @@ function adminForms(api) {
 		api.request(action).then(main.refreshViews, app.errHandler);
 	}
 	
-	main.refreshViews = function (res) {
-		app.refresh(2); 
+	main.refreshViews = function (res) { //console.log(currAltType+' '+currType); console.log(currResource);
+		app.refresh(currType=='revoke' ? 1 : 2); 
 		app[currAltType ? currAltType : currType](); // will refresh/open records view as needed;
 	}
 	

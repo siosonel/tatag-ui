@@ -21,21 +21,30 @@
 			text-align: center;
 			background-color: #ececec;
 		}	
+		
+		#wrapper {
+			background-color:#fff;
+			margin-top: 30px;
+			width: 80%;
+			padding: 30px 10px 10px 10px;
+			margin: 50px auto;
+		}
 	</style>
 </head>
 <body>
-	<br /><br />
-	<h2>Login using</h2>
-	<p>
-		<a href='<?php echo "$location&provider=gp&next=$next"; ?>'>
-			<span class='fi-social-google-plus large' style='font-size: 30px; color: #dd4b39;'>&nbsp;&nbsp;</span>
-		</a>
-		<a href='<?php echo "$location&provider=fb&next=$next"; ?>'>
-			<span class='fi-social-facebook large' style='font-size: 30px; color: #3b5998;'>&nbsp;&nbsp;</span>
-		</a>
-		<a href='<?php echo "$location&provider=tw&next=$next"; ?>'>
-			<span class='fi-social-twitter large' style='font-size: 30px; color:#55acee;'>&nbsp;&nbsp;</span>
-		</a>
-	</p>
+	<div id='wrapper'>	
+		<h2>Login using</h2>
+		<p style='padding-left: 20px;'>
+			<a href='<?php echo "$location&provider=gp&next=$next"; ?>'>
+				<span class='fi-social-google-plus large' style='font-size: 40px; color: #dd4b39;'>&nbsp;&nbsp;</span>
+			</a>
+			<a href='<?php echo "$location&provider=fb&next=$next"; ?>'>
+				<span class='fi-social-facebook large' style='font-size: 40px; color: #3b5998;'>&nbsp;&nbsp;</span>
+			</a>
+			<a href='<?php echo "$location&provider=tw&next=$next"; ?>'>
+				<span class='fi-social-twitter large' style='font-size: 40px; color:#55acee;'>&nbsp;&nbsp;</span>
+			</a>
+		</p>
+	</div>
 </body>
 </html>

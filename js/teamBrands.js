@@ -1,8 +1,8 @@
 function teamBrands(api) {
 	var currURL, currBrands;
 
-	function main(brandURL) {	
-		if (!brandURL || !brandURL.length) {
+	function main(brandURL) {
+		if (!currURL && (!brandURL || !brandURL.length)) {
 			$("#brandsWrapper").html("You do not have any current team memberships.");
 			return;
 		}
@@ -20,6 +20,8 @@ function teamBrands(api) {
 	}
 	
 	function renderBrandDiv(brand) { //console.log(brand);
+		if (!brand.member_id) return;
+		
 		var tally = brand.tally, brandDivId='brand-'+brand.brand_id;		
 		app.resources[brandDivId] = brand;
 	

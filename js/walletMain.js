@@ -50,6 +50,8 @@ function walletMain(conf) {
 	main.refresh = function (num) { //argument=number of views to refresh
 		if (num) refresh=num;
 		else refresh = refresh-1;
+		
+		if (refresh<0) return 0;		
 		return refresh+1;
 	}
 	

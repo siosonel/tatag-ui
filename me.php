@@ -6,9 +6,9 @@
 	<p style='background-color:#ececec'>
 		If you see missing or inconsistent information, 
 		refresh the page by clicking a sign-in icon below:<br />
-		<a href='?provider=gp'><span class='fi-social-google-plus large' style='font-size: 30px; color: #dd4b39;'>&nbsp;&nbsp;</span></a>
-		<a href='?provider=fb'><span class='fi-social-facebook large' style='font-size: 30px; color: #3b5998;'>&nbsp;&nbsp;</span></a>
-		<a href='?provider=tw'><span class='fi-social-twitter large' style='font-size: 30px; color:#55acee;'>&nbsp;&nbsp;</span></a>
+		<a href='?provider=gp'><span class='fi-social-google-plus large' style='font-size: 40px; color: #dd4b39;'>&nbsp;&nbsp;</span></a>
+		<a href='?provider=fb'><span class='fi-social-facebook large' style='font-size: 40px; color: #3b5998;'>&nbsp;&nbsp;</span></a>
+		<a href='?provider=tw'><span class='fi-social-twitter large' style='font-size: 40px; color:#55acee;'>&nbsp;&nbsp;</span></a>
 	</p>
 	
 	<a class="close-reveal-modal">×</a>
