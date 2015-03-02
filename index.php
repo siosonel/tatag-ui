@@ -4,6 +4,9 @@ require_once "config.php";
 session_start(); 
 if (isset($_GET['clearSession']) OR isset($_GET['provider'])) $_SESSION['TOKEN_ID']=0;
 if (isset($_GET['clearSession'])) exit();
+if (!isset($_SESSION['TOKEN_ID'])) $_SESSION['TOKEN_ID'] = 0;
+if (!isset($_SESSION['TOKEN_EXP'])) $_SESSION['TOKEN_EXP'] = 0;
+if (!isset($_SESSION['TOKEN_VAL'])) $_SESSION['TOKEN_VAL'] = 0;
 
 if (isset($_GET['token_id']) AND is_numeric($_GET['token_id']) AND isset($_GET['otk'])) {
 	include_once("common.php");

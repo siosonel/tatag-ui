@@ -36,13 +36,13 @@
 		<h2>Login using</h2>
 		<p style='padding-left: 20px;'>
 			<a href='<?php echo "$location&provider=gp&next=$next"; ?>'>
-				<span class='fi-social-google-plus large' style='font-size: 40px; color: #dd4b39;'>&nbsp;&nbsp;</span>
+				<span class='fi-social-google-plus large' style='font-size: 49px; color: #dd4b39;'>&nbsp;&nbsp;</span>
 			</a>
 			<a href='<?php echo "$location&provider=fb&next=$next"; ?>'>
-				<span class='fi-social-facebook large' style='font-size: 40px; color: #3b5998;'>&nbsp;&nbsp;</span>
+				<span class='fi-social-facebook large' style='font-size: 50px; color: #3b5998;'>&nbsp;&nbsp;</span>
 			</a>
 			<a href='<?php echo "$location&provider=tw&next=$next"; ?>'>
-				<span class='fi-social-twitter large' style='font-size: 40px; color:#55acee;'>&nbsp;&nbsp;</span>
+				<span class='fi-social-twitter large' style='font-size: 50px; color:#55acee;'>&nbsp;&nbsp;</span>
 			</a>
 		</p>
 	</div>
