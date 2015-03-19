@@ -30,9 +30,9 @@
 		
 		function main(userID, userName, loginProvider) {
 			$('#login_provider').html(
-				"<button class='tiny' style='padding: 0 2px; background-color: #ccc;'>"
-				+"<span class='fi-social-"+provider[loginProvider] +"' style='line-height: 14px; font-size: 16px; color:"+ color[loginProvider] +"'></span>"
-				+"<span style='font-size: 14px; line-height: 14px; vertical-align: top;'>me</span>"
+				"<button class='tiny' style='padding: 0 5px; background-color: #999;'>"
+				//+"<span class='fi-social-"+provider[loginProvider] +"' style='line-height: 14px; font-size: 16px; color:"+ color[loginProvider] +"'></span>"
+				+"<span style='font-size: 14px; line-height: 13px; vertical-align: top;'>me</span>"
 				+"</button>"				
 			);
 			

@@ -43,7 +43,7 @@ if (
 	$provider = isset($_GET['provider']) ? $_GET['provider'] : '';
 	
 	if (!$provider) include_once "ui_login.php";
-	else header("location: http://localhost/tatag/login.php?token_id=$token_id&otk=$otk&provider=$provider&next=$next");
+	else header("location: ". TATAG_DOMAIN ."/login.php?token_id=$token_id&otk=$otk&provider=$provider&next=$next");
 }
 else {
 	include "$handler.php";
