@@ -8,10 +8,13 @@
 			If you see missing or inconsistent information, 
 			refresh the page by clicking a sign-in icon below:
 		</p>
-		<p style='padding-left: 30px;'>
+		<p style='padding-left: 30px;'>			
 			<a href='?provider=gp'><span class='fi-social-google-plus large' style='font-size: 49px; color: #dd4b39;'>&nbsp;&nbsp;</span></a>
 			<a href='?provider=fb'><span class='fi-social-facebook large' style='font-size: 50px; color: #3b5998;'>&nbsp;&nbsp;</span></a>
 			<a href='?provider=tw'><span class='fi-social-twitter large' style='font-size: 50px; color:#55acee;'>&nbsp;&nbsp;</span></a>
+			<span><br />-OR-<br /></span>
+			<span>text a PIN# to<br /></span>
+			<a href=''>(2 5 6) 4 8 5 - 4 4 7 6</a>
 		</p>
 	</div>
 	

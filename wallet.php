@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Wallet</title>
+	<link rel="icon" type="image/png" href="css/logo5.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<link rel="stylesheet" href="css/normalize.css">
