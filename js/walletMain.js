@@ -4,7 +4,7 @@ function walletMain(conf) {
 	var api = apiClass({
 		'userid': conf.userid, 
 		'pass': conf.pass,
-		'baseURL': window.location.host.slice(-3)=='.cc' ? '/api' : '/tatag'//will be used as prefix
+		'baseURL': conf.baseURL
 	});
 	
 	$(document).ready(function () {

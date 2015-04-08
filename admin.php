@@ -213,7 +213,7 @@
 	<script src='js/adminForms.js'></script>
 	<script src='js/adminThrottles.js'></script>
 	<script>
-		var app = adminMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
+		var app = adminMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);		
 	</script>
 		
 	<?php include "me.php" ?>

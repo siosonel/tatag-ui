@@ -99,7 +99,7 @@
 	<script type="text/javascript" src="js/walletTxn.js"></script>
 	<script type="text/javascript" src="js/walletEdit.js"></script>
 	<script>
-		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'"}'; ?>);		
+		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);		
 	</script>
 	
 	<?php include "me.php" ?>

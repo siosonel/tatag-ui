@@ -8,7 +8,7 @@
 # Date: 2015-03-16
 #############################################################
 
-APP="ui1"  # deploy to old directory name for now
+APP="ui"  # deploy to old directory name for now
 if [[ "$USER" == "" ]]; then USER="root"; fi
 
 
@@ -17,7 +17,13 @@ case $AUDIENCE in
 				# build_delete="php/config-internal.php php/config-experts.php php/mortFileSha1.php README.txt"
 		
         # for integration testing of new features, debugged code				
-				if [[ "$ENV" == "live" ]]; then
+				if [[ "$ENV" == "stage" ]]; then
+					SERVER=tatag.cc
+					REMOTE_DIR=/var/www/html/stage/$APP
+					URL="http://tatag.cc/stage/$APP/"
+					xhome="~/builds/"
+				
+				elif [[ "$ENV" == "live" ]]; then
 					SERVER=tatag.cc
 					REMOTE_DIR=/var/www/html/$APP
 					URL="http://tatag.cc/$APP/"
