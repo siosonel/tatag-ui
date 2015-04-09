@@ -118,6 +118,7 @@ ssh -t $USER@$SERVER "
 		$as_user mv -f $REMOTE_DIR $REMOTE_DIR-X
 	fi
 
+	$as_user chmod -R 755 $REMOTE_DIR
 	$as_user mv -f $tempdir $REMOTE_DIR	
 	$as_user rm -Rf $REMOTE_DIR-X
 "

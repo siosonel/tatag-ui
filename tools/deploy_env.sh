@@ -8,7 +8,7 @@
 # Date: 2015-03-16
 #############################################################
 
-APP="ui"  # deploy to old directory name for now
+APP="ui"
 if [[ "$USER" == "" ]]; then USER="root"; fi
 
 
@@ -19,8 +19,8 @@ case $AUDIENCE in
         # for integration testing of new features, debugged code				
 				if [[ "$ENV" == "stage" ]]; then
 					SERVER=tatag.cc
-					REMOTE_DIR=/var/www/html/stage/$APP
-					URL="http://tatag.cc/stage/$APP/"
+					REMOTE_DIR=/var/www/stage/$APP
+					URL="http://stage.tatag.cc/$APP/"
 					xhome="~/builds/"
 				
 				elif [[ "$ENV" == "live" ]]; then
