@@ -196,6 +196,16 @@
 					</div>
 					<div class='row'>
 						<div class='columns small-12'>
+							<label>URL<textarea id='about-url'/></textarea></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Advisor<textarea id='about-advisor'/></textarea></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
 							<label>Type System
 								<select id='about-type_system'/>
 									<option value='nonprofit'>Nonprofit</option>

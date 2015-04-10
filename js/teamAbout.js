@@ -45,6 +45,22 @@ function teamAbout(api) {
 			+			"<div class='small-3 columns'>Description:</div>"
 			+ 		"<div class='small-9 columns'>"+ about.description +"</div>"
 			+		"</div>"
+			+		"<div class='row'>"
+			+			"<div class='small-3 columns'>URL:</div>"
+			+ 		"<div class='small-9 columns'>"+ about.url +"</div>"
+			+		"</div>"
+			+		"<div class='row'>"
+			+			"<div class='small-3 columns'>Advisor:</div>"
+			+ 		"<div class='small-9 columns'>"+ about.advisor +"</div>"
+			+		"</div>"
+			+		"<div class='row'>"
+			+			"<div class='small-3 columns'>Type:</div>"
+			+ 		"<div class='small-9 columns'>"+ about.type_system +": "+ types[about.type_system].types[about.type_id-1].type +"</div>"
+			+		"</div>"
+			+		"<div class='row'>"
+			+			"<div class='small-3 columns'>Location:</div>"
+			+ 		"<div class='small-9 columns'>"+ byIso3[about.country_code][0] +": "+ about.area_codes[about.area_code] +"</div>"
+			+		"</div>"
 			+'</div>'
 		)
 	}

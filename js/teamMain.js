@@ -51,6 +51,8 @@ function teamMain(conf) {
 		main.brands(User.links.team);
 	}
 	
+	main.refs = {types: types}
+	main.params = {}	
 	main.api = api;
 	main.resources = resources;
 	

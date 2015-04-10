@@ -92,6 +92,11 @@
 	<script src='js/teamThrottles.js'></script>
 	<script src='js/adminForms.js'></script>
 	<script>
+		var types = <?php echo file_get_contents(TATAG_DOMAIN ."/ref/brand_classification.json"); ?>;
+		var locs = <?php echo file_get_contents(TATAG_DOMAIN ."/ref/countries.json"); ?>;
+		var byIso3 = {};
+		locs.map(function (d) {byIso3[d[3]]=d;});
+		
 		var app = teamMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);		
 	</script>
 	
