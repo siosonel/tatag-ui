@@ -129,9 +129,10 @@ function apiClass(conf) {
 		return deferred.promise;
 	}	
 	
-	main.byId = byId
+	main.baseURL = conf.baseURL;
+	main.byId = byId;
 	main.byType = byType;	
-	main.curr = curr
+	main.curr = curr;
 	
 	return main;
 }

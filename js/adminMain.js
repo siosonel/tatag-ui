@@ -32,6 +32,13 @@ function adminMain(conf) {
 		$('#accountHoldersWrapper').click(main.accountHolders.clickHandler);
 		$('#recordsWrapper').click(main.records.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
+		
+		main.forms.setTypeOpts();
+		$('#about-type_system').change(main.forms.setTypeOpts);
+		
+		main.forms.setLocOpts();		
+		$('#about-country_code').val('USA').change(main.forms.setAreaCodes);
+		main.forms.setAreaCodes();
 	});
 	
 	function init() {
@@ -56,6 +63,8 @@ function adminMain(conf) {
 		main.brands(User.links.brand);
 	}
 	
+	main.refs = {types: types}
+	main.params = {}
 	main.api = api;
 	main.init = init;
 	main.resources = resources;
@@ -68,7 +77,7 @@ function adminMain(conf) {
 		return refresh+1;
 	}
 	
-	main.errHandler = function errHandler(err) { console.log(err.message)
+	main.errHandler = function errHandler(err) {
 		if (err.message=="Unauthorized") main.me.modal();
 	}
 	

@@ -45,6 +45,14 @@ function adminAbout(api) {
 			+			"<div class='small-3 columns'>Description:</div>"
 			+ 		"<div class='small-9 columns'>"+ about.description +" <span class='fi-pencil small'>&nbsp;</span></div>"
 			+		"</div>"
+			+		"<div class='row'>"
+			+			"<div class='small-3 columns'>Type:</div>"
+			+ 		"<div class='small-9 columns'>"+ about.type_system +": "+ app.refs.types[about.type_system].types[about.type_id-1].type +"<span class='fi-pencil small'>&nbsp;</span></div>"
+			+		"</div>"
+			+		"<div class='row'>"
+			+			"<div class='small-3 columns'>Location:</div>"
+			+ 		"<div class='small-9 columns'>"+ app.refs.byIso3[about.country_code][0] +": "+ app.refs.areaCodesByNum[about.country_code][about.area_code] +" <span class='fi-pencil small'>&nbsp;</span></div>"
+			+		"</div>"
 			+'</div>'
 		)
 	}

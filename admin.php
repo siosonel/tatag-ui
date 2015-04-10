@@ -186,12 +186,43 @@
 					</div>
 					<div class='row'>
 						<div class='columns small-12'>
-							<label>Mission<textarea id='about-mission'/></textarea>
+							<label>Mission<textarea id='about-mission'/></textarea></label>
 						</div>
 					</div>
 					<div class='row'>
 						<div class='columns small-12'>
-							<label>Description<textarea id='about-description'/></textarea>
+							<label>Description<textarea id='about-description'/></textarea></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Type System
+								<select id='about-type_system'/>
+									<option value='nonprofit'>Nonprofit</option>
+									<option value='for-profit'>For-profit</option>
+									<option value='gov'>Government</option>
+								</select>
+							</label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label for='about-type_id'>Type Detail</label>
+							<select id='about-type_id'/></select>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label for='about-country_code'>Country</label>
+							<select id='about-country_code'/></select>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Phone Area Code
+								<select id='about-area_code'/>
+								</select>
+							</label>
 						</div>
 					</div>
 				</form>
@@ -213,6 +244,9 @@
 	<script src='js/adminForms.js'></script>
 	<script src='js/adminThrottles.js'></script>
 	<script>
+		var types = <?php echo file_get_contents(TATAG_DOMAIN ."/ref/brand_classification.json"); ?>;
+		var locs = <?php echo file_get_contents(TATAG_DOMAIN ."/ref/countries.json"); ?>;
+	
 		var app = adminMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);		
 	</script>
 		

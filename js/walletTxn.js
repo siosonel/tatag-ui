@@ -26,8 +26,11 @@ function walletTxn(api) {
 		var val = inputName=='from' ? currResource.relay['default'] : "";
 		var disabled = inputName=='from' ? true : false;
 	
-		$('#txn-'+inputName).val(val)
-		$('#txn-'+inputName).prop('disabled', disabled)
+		$('#txn-'+inputName).val(val);
+		$('#txn-'+inputName).prop('disabled', disabled);
+		
+		if (inputName=='to') $('#txnToDiv').css('display','inline-block');
+		else if (inputName=='from') $('#txnFromDiv').css('display','none');
 	}
 	
 	function renderReverse(inputName) {
@@ -37,8 +40,11 @@ function walletTxn(api) {
 				
 		var disabled = inputName=='to' ? true : false;
 	
-		$('#txn-'+inputName).val(val)
-		$('#txn-'+inputName).prop('disabled', disabled)
+		$('#txn-'+inputName).val(val);
+		$('#txn-'+inputName).prop('disabled', disabled); console.log(inputName);
+		
+		if (inputName=='to') $('#txnToDiv').css('display','none');
+		else if (inputName=='from') $('#txnFromDiv').css('display','inline-block');
 	}
 	
 	function renderRelay(relay) {		

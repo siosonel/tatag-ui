@@ -1,5 +1,6 @@
 function adminBrands(api) {
 	var currURL, currBrands;
+	var addBrandInit = 0; //to be used to avoid weird ignore of form select defaults
 
 	function main(brandURL) {		
 		if (brandURL) currURL = brandURL;
@@ -60,7 +61,13 @@ function adminBrands(api) {
 	
 	main.clickHandler = function (e) {		
 		if (e.target.id=='addBrand') {
-			app.forms({}, 'about', '/forms#brand-registration', 'init');
+			app.forms({}, 'about', '/forms#brand-registration');
+			if (!addBrandInit) {
+				$('#about-type_id').val(9);
+				$('#about-country_code').val('USA'); 
+				addBrandInit = 1;
+			}
+			
 			return;
 		}
 		

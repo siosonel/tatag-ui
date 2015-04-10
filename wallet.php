@@ -41,11 +41,11 @@
 			<h4 id='txn-title'></h4>
 			<form>
 				<div class='row'>
-					<div class='columns small-4'>
-						<label>from<input type='text' id='txn-from' value='' /></label>
+					<div class='columns small-8' id='txnFromDiv'>
+						<label>Recipient<input type='text' id='txn-from' value='' /></label>
 					</div>
-					<div class='columns small-4'>
-						<label>to<input type='text' id='txn-to' value='' /></label>
+					<div class='columns small-8' id='txnToDiv'>
+						<label>Recipient<input type='text' id='txn-to' value='' /></label>
 					</div>
 					<div class='columns small-4'>
 						<label>amount<input type='text' id='txn-amount' value='' /></label>

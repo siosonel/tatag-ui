@@ -1,3 +1,4 @@
+_exclude/*
 config/*
 config.php
 tools/builds/*
