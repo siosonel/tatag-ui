@@ -206,6 +206,11 @@
 					</div>
 					<div class='row'>
 						<div class='columns small-12'>
+							<label>Logo (image URL)<textarea id='about-logo'/></textarea></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
 							<label>Type System
 								<select id='about-type_system'/>
 									<option value='nonprofit'>Nonprofit</option>

@@ -59,7 +59,7 @@ function teamAbout(api) {
 			+		"</div>"
 			+		"<div class='row'>"
 			+			"<div class='small-3 columns'>Location:</div>"
-			+ 		"<div class='small-9 columns'>"+ byIso3[about.country_code][0] +": "+ about.area_codes[about.area_code] +"</div>"
+			+ 		"<div class='small-9 columns'>"+ byIso3[about.country_code][0] +": "+ about.area_name +"</div>"
 			+		"</div>"
 			+'</div>'
 		)

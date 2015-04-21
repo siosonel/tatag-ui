@@ -1,6 +1,6 @@
 function teamBrands(api) {
 	var currURL, currBrands;
-
+		
 	function main(brandURL) {
 		if (!currURL && (!brandURL || !brandURL.length)) {
 			$("#brandsWrapper").html("You do not have any current team memberships.");
@@ -24,12 +24,14 @@ function teamBrands(api) {
 		
 		var tally = brand.tally, brandDivId='brand-'+brand.brand_id;		
 		app.resources[brandDivId] = brand;
-	
+		
+		var b = main.brandColors(brandDivId, brand);		
+		
 		$('#brandsWrapper').append(
-			 "<div class='large-12 brandItem' id='"+brandDivId+"'>"
+			"<div class='large-12 brandItem' id='"+brandDivId+"' style='background-color: "+ b.divBg +"'>"
 			+ "<div class='row' style='margin-bottom:30px;' id='"+ brandDivId +"-label'>"
 			+ 	"<div class='small-8 columns brandLabel'>"
-			+			"<img id='"+ brandDivId +"-img' class='left' src='http://placehold.it/50x50&text=[img]'/>"
+			+			b.logo
 			+ 		"<span style='vertical-align:top'>&nbsp;"+brand.name+"&nbsp;</span>"
 			+     "<span id='"+ brandDivId +"-name' style='font-weight:normal;'>&nbsp;#"+ brand.brand_id +"</span>"
 			+		"</div>"
@@ -67,6 +69,34 @@ function teamBrands(api) {
 			+"</div>"
 		);
 	}
+	
+	main.brandColors = (function () {
+		//colorbrewer RdYlBu[11]
+		var colors = [
+			"rgb(165,0,38)","rgb(215,48,39)","rgb(244,109,67)","rgb(253,174,97)",
+			"rgb(254,224,144)","rgb(255,255,191)","rgb(224,243,248)","rgb(171,217,233)",
+			"rgb(116,173,209)","rgb(69,117,180)","rgb(49,54,149)"
+		];
+		
+		var colorIndex = {};
+		
+		function main(divId, obj) { 
+			if (!colorIndex[divId]) {
+				var i = obj.brand_id % 11;
+				colorIndex[divId] = {
+					logoBg: colors[i],
+					divBg: colors[11-i].replace("rgb", "rgba").replace(")", ",0.4)"),
+					logo: obj.brand_logo
+						? "<img id='"+ divId +"-img' class='left logoDiv' src='"+ obj.brand_logo +"'/>"
+						: "<div id='"+ divId +"-img' class='left logoDiv' style='background-color: "+ colors[i] +"'>"+ obj.brand_name.substr(0,1).toUpperCase() +"</div>"
+				}
+			}
+			
+			return colorIndex[divId];
+		}
+		
+		return main;
+	})();
 	
 	main.clickHandler = function (e) {
 		var divId = app.getDivId(e,'brand');		

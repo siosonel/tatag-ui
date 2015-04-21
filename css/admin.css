@@ -38,6 +38,17 @@ body {
 	border: 1px solid #d8d8d8;
 }
 
+
+.logoDiv {
+	width: 25px;
+	height: 25px;
+	font-size: 25px;
+	line-height: 25px;
+	background-color: #ececec;
+	text-align: center;
+	font-weight: normal;
+}
+
 .brandLabel {
 	font-weight: 700;
 	text-align: left;

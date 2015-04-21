@@ -61,7 +61,7 @@ function walletRecords(api) {
 			"<div id='"+divId+"' class='row recordItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		record.direction+' '+ other +'<br /><i>'+ note +'</i>' + actionPrompt
+			+ 		record.direction+' '+ other +'<br /><i>'+ note +'</i><br />record id: '+ record.record_id + actionPrompt
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"
 			+     displayAmount(record) + displayAdvise(record) 
