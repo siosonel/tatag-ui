@@ -33,6 +33,7 @@
 	<div id='mainWrapper'>	
 		<div class="row" id='accountsWrapper'></div>
 		<div class="row" id='recordsWrapper'></div>
+		<div class="row" id='relaysWrapper'></div>
 		<button id='scrollTo' class='tiny'>more...</button>
 	</div>	
 	
@@ -67,7 +68,7 @@
 	</div>
 	
 	<div id='editModal' class="reveal-modal medium" style='min-height:50vh; top:30px;' data-reveal>
-		<div id='editForm'>		
+		<div id='editCard'>		
 			<h4 id='edit-title'></h4>
 			<form>
 				<div class='row'>
@@ -82,7 +83,48 @@
 			<button id='edit-submit'>Submit</button>&nbsp;
 			<button id='editHolding-cancel'>Cancel</button>
 		</div>
-				
+		
+		<div id='editRelay'>		
+			<h4 id='editRelay-title'></h4>
+			<form>
+				<div class='row'>
+					<div class='columns small-6'>
+						<label>Amount Min<input type='text' id='editRelay-amount_min' value='0.00' /></label>
+					</div>
+					<div class='columns small-6'>
+						<label>Amount Max<input type='text' id='editRelay-amount_max' value='9999999.00' /></label>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='columns small-12'>
+						<label>Redirect (optional)<input type='text' id='editRelay-redirect' value='' /></label>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='columns small-12'>
+						<label>Tag (optional)<input type='text' id='editRelay-tag' value='' /></label>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='columns small-12'>
+						<label>Relay token for
+							<select id='editRelay-txntype'/>
+								<option value='pn'>budget use</option>								
+								<option value='np'>budget issuance</option>
+							</select>
+						</label>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='columns small-12'>
+						<label>Secret<input type='text' id='editRelay-secret' value='' /></label>
+					</div>
+				</div>
+			</form>
+			<button id='editRelay-submit'>Submit</button>&nbsp;
+			<button id='editRelay-cancel'>Cancel</button>
+		</div>
+		
 		<div id='editPrompt'>
 			<p id='editRecordConfirm'></p>
 			<input type='hidden' id='edit-status' value=''/>
@@ -98,6 +140,7 @@
 	<script type="text/javascript" src="js/walletRecords.js"></script>
 	<script type="text/javascript" src="js/walletTxn.js"></script>
 	<script type="text/javascript" src="js/walletEdit.js"></script>
+	<script type="text/javascript" src="js/walletRelays.js"></script>
 	<script>
 		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);		
 	</script>

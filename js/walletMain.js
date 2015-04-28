@@ -14,6 +14,7 @@ function walletMain(conf) {
 		main.records = walletRecords(api);		
 		main.txn = walletTxn(api);		
 		main.edit = walletEdit(api);
+		main.relays = walletRelays(api);
 		main.me = me();
 		
 		api.init('/')
@@ -22,15 +23,16 @@ function walletMain(conf) {
 			
 		$('#accountsWrapper').click(main.cards.toggleAcctItem);
 		$('#recordsWrapper').click(main.records.toggleRecordItem);
+		$('#relaysWrapper').click(main.relays.toggleRelayItem);
 		$('#scrollTo').click(main.records.scrollMore);
 		$('#txnForm').click(main.txn.formClick);
 		$('#relayInfo').click(main.txn.postRelayRefresh);
-		$('#editForm, #editPrompt').click(main.edit.formClick);
-	})
+		$('#editCard, #editRelay, #editPrompt').click(main.edit.formClick);
+	});
 	
-	function main() {
+	function main(wrapperId) {
 		$('#accountsWrapper').animate({left: '0'});
-		$('#recordsWrapper').animate({left: '100%'});
+		$(wrapperId ? '#'+wrapperId : '#recordsWrapper').animate({left: '100%'});
 	}
 
 	function loadUser(res) {

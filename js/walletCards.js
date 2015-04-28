@@ -11,8 +11,9 @@ function walletCards(api) {
 	}
 	
 	function renderCards(userAccounts) {
-		if (!userAccounts.items.length) 
+		if (!userAccounts.items.length) {
 			$("#accountsWrapper").append("<div>You do not have any accounts in your wallet.</div>");
+		}
 		else {
 			currAccounts = userAccounts;
 			currAccounts.items.map(renderAcctDiv); 
@@ -52,7 +53,8 @@ function walletCards(api) {
 		//+			"<a href=''>Review</a> | <a href=''>Edit</a><br />"
 		+			"<div id='"+ acctDivId +"-viz' class='left detailsDiv'>"
 		+				"Brand <b>"+ acct.brand_name +"</b><br />"
-		+				"Brand #"+ acct.brand_id  +", Unit: "+ acct.unit
+		+				"Brand #"+ acct.brand_id  +", Unit: "+ acct.unit +"<br />"
+		+				"<span id='"+ acctDivId+"-relays'>Relay Token: <b>" + acct.relay['default'] +"</b><br />(or see token list &#9658;)</span>"
 		+			"</div>"
 		+			(acct.throttle_id ? "<span>(This account is throttled, #"+acct.throttle_id+")</span>" : "")
 		+		"</div>"
@@ -108,6 +110,13 @@ function walletCards(api) {
 			currAcctDivId = e.target.id.slice(0,-4);
 			app.currView = 'records';
 			app.records(app.resources[currAcctDivId]); 
+			return;
+		}
+		
+		if (e.target.id && e.target.id.slice(-7)=='-relays') {
+			currAcctDivId = e.target.id.slice(0,-7);
+			app.currView = 'relays';
+			app.relays(app.resources[currAcctDivId]); 
 			return;
 		}
 		

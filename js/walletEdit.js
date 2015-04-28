@@ -1,5 +1,5 @@
 function walletEdit(api) {
-	var currResource, currForm, currId;
+	var currResource, currForm, currId, idPrefix;
 
 	function main(id) {
 		if (id) currId = id;
@@ -11,20 +11,42 @@ function walletEdit(api) {
 		currResource = app.resources[recordDivId]; //console.log(currId); console.log(currResource);		
 		renderAcctForm(action);
 		renderRecordForm(action);
+		renderRelayForm(action);
 		
 		$('#editModal').foundation('reveal','open');
 	}
 	
 	function renderAcctForm(action) {
 		if (currResource['@type']!='userAccount') {		
-			$('#editForm').css('display','none'); return;
+			$('#editCard').css('display','none'); return;
 		}
 		
 		currForm = !currResource.links ? null : api.byId[currResource.links['holder-edit']];
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
 		$('#edit-alias').val(currResource.alias);
 		$('#edit-limkey').val(currResource.limkey);		
-		$('#editForm').css('display','block');
+		$('#editCard').css('display','block');
+		idPrefix = 'edit-';
+	}
+	
+	function renderRelayForm(action) {
+		if (currResource['@type']!='relay' && currResource['@type']!='holderRelays') {		
+			$('#editRelay').css('display','none'); return;
+		}
+		
+		currForm = !currResource.links ? null 
+			: currResource['@type']=='holderRelays' ? api.byId[currResource.links['relay-add']]
+			: api.byId[currResource.links['relay-edit']];
+			
+		if (currForm) {
+			currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
+			for(var i=0; i<currInputs.length; i++) {
+				$('#editRelay-'+currInputs[i]).val(currResource[currInputs[i]]);
+			}
+		}
+		
+		$('#editRelay').css('display','block');
+		idPrefix = 'editRelay-';
 	}
 	
 	function renderRecordForm(action) {
@@ -45,14 +67,15 @@ function walletEdit(api) {
 		$('#editRecordConfirm').html(text);
 		$('#edit-status').val(status[action]);
 		$('#editPrompt').css('display','block');
+		idPrefix = 'edit-';
 	}
 	
 	main.formClick = function formClick(e) {
 		if (e.target.id.search('-cancel')!=-1) {$('#editModal').foundation('reveal','close'); return;}
-		if (e.target.id != 'edit-submit' && e.target.id != 'editRecord-submit') return;
+		if (e.target.id != 'edit-submit' && e.target.id != 'editRecord-submit' && e.target.id != 'editRelay-submit') return;
 		
 		var params = [];
-		currForm.query.required.map(function (param) {params.push(param +'='+ currResource[param])});
+		if (currForm.query && currForm.query.required) currForm.query.required.map(function (param) {params.push(param +'='+ currResource[param])});
 		params = '?' + params.join('&');
 		
 		action = {
@@ -63,8 +86,8 @@ function walletEdit(api) {
 		
 		$('#editModal').foundation('reveal','close');
 		
-		currInputs.map(function (inputName) {
-			action.inputs[inputName] = $('#edit-'+inputName).val();
+		currInputs.map(function (inputName) {		
+			action.inputs[inputName] = $('#'+idPrefix+inputName).val();
 			if (inputName=='status') action.inputs[inputName] = 1*action.inputs[inputName];
 		}); //console.log(action); //return;
 		
@@ -73,7 +96,8 @@ function walletEdit(api) {
 	
 	main.refreshViews = function (res) {
 		app.refresh(2); 
-		app.cards(); // will refresh/open records view as needed;
+		if (currResource['@type']=='relay' || currResource['@type']=='holderRelays') app.relays(); 
+		else app.cards(); // will refresh/open records view as needed;
 	}
 	
 	return main;
