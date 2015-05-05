@@ -42,6 +42,7 @@ if (
 	$nextParams = array();
 	if (isset($_GET['to'])) $nextParams[] = 'to='. $_GET['to'];
 	if (isset($_GET['amount'])) $nextParams[] = 'amount='. $_GET['amount'];
+	if (isset($_GET['note'])) $nextParams[] = 'note='. $_GET['note'];
 	$nextParams = implode("&", $nextParams);
 	
 	$next = urlencode(UI_DOMAIN."/$handler?$nextParams");

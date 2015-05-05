@@ -27,8 +27,7 @@ function walletTxn(api) {
 	}
 	
 	function renderInputs(inputName) {
-		var val = inputName=='to' && params.to ? params.to
-			: inputName=='amount' && params.amount ? params.amount
+		var val = ['to','amount','note'].indexOf(inputName)!=-1 && params[inputName] ? params[inputName]
 			: inputName=='from' ? currResource.relay['default'] 
 			: "";
 			

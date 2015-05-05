@@ -46,9 +46,9 @@
 			<a href='<?php echo "$location&provider=tw&next=$next"; ?>'>
 				<span class='fi-social-twitter large' style='font-size: 50px; color:#55acee;'>&nbsp;&nbsp;</span>
 			</a>
-			<span><br />-OR-<br /></span>
+			<!--<span><br />-OR-<br /></span>
 			<span>SMS text your email address to: <br /></span>
-			<a href='sms:2564854476'>(256) 485-4476</a>
+			<a href='sms:2564854476'>(256) 485-4476</a>-->
 		</p>
 	</div>
 </body>

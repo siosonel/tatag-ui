@@ -41,7 +41,7 @@ tar --append --file=build.tar rev.txt config.php --exclude-vcs
 
 # delete files as necessary
 echo "Deleting from built tar: $build_delete"
-tar --delete --file=build.tar tools test $DELETES
+tar --delete --file=build.tar tools $DELETES
 
 gzip -vf build.tar
 
