@@ -1,10 +1,12 @@
 function walletCards(api) {	
-	var currURL, currAccounts, currAcctDivId;
+	var currURL, currAccounts, currAcctDivId, acctsToUse=[], params;
 	var openHeight='300px';
 	
 	function main(userAccountsURL) {
-		if (userAccountsURL) currURL = userAccountsURL;		
+		params = app.params();
+		if (typeof userAccountsURL=='string') currURL = userAccountsURL;		
 		$('#accountsWrapper').children().remove();
+		$('#expenseAcctToUse').children().remove();
 		
 		api.loadId(currURL, app.refresh())
 			.then(renderCards, main.errHandler);		
@@ -20,6 +22,13 @@ function walletCards(api) {
 			if (app.currView=='records') app.records(app.resources[currAcctDivId]);
 			$('#'+currAcctDivId).css('height', openHeight);
 			$('#'+currAcctDivId+'-forms').css('display', 'block');
+			
+			if (params.to) { 
+				if (!params.expenseAcctToUse) params.expenseAcctToUse = $('#expenseAcctToUse').val();
+				$('#expenseAcctToUse').val(params.expenseAcctToUse);
+				$('#'+ params.expenseAcctToUse +'-use').trigger('click');
+				delete params.to;
+			}
 		}
 	}
 	
@@ -69,6 +78,8 @@ function walletCards(api) {
 		+ "</div>"
 		+ "<div id='"+acctDivId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
 		+ "</div>");
+		
+		if (acct.sign==1 && acct) $('#expenseAcctToUse').append("<option value='"+ acctDivId +"'>#"+ acct.account_id+' '+ alias +" @"+ acct.brand_name +"</option>");
 	}
 	
 	main.brandColors = (function () {
@@ -120,7 +131,13 @@ function walletCards(api) {
 			return;
 		}
 		
-		if (e.target.tagName.toUpperCase()=='BUTTON') {app.txn(e.target.id); return;}
+		if (e.target.tagName.toUpperCase()=='BUTTON') {
+			if (!params.expenseAcctToUse) params.expenseAcctToUse = e.target.parentNode.id;
+			$('#expenseAcctToUse').val(params.expenseAcctToUse);
+			app.txn(e.target.id); 
+			return;
+		}
+		
 		if (e.target.tagName.toUpperCase()=='A') return false;
 		if (e.target.className.search('acctDivToggle') == -1) return; 
 		

@@ -1,5 +1,5 @@
 function walletMain(conf) {
-	var User, resources={}, refresh=0;
+	var User, resources={}, refresh=0, params;
 	
 	var api = apiClass({
 		'userid': conf.userid, 
@@ -8,7 +8,8 @@ function walletMain(conf) {
 	});
 	
 	$(document).ready(function () {
-		history.replaceState({}, "wallet", "/ui/wallet");
+		params = main.getQueryParams();
+		//history.replaceState({}, "wallet", "/ui/wallet");
 		
 		main.cards = walletCards(api);		
 		main.records = walletRecords(api);		
@@ -28,6 +29,10 @@ function walletMain(conf) {
 		$('#txnForm').click(main.txn.formClick);
 		$('#relayInfo').click(main.txn.postRelayRefresh);
 		$('#editCard, #editRelay, #editPrompt').click(main.edit.formClick);
+		$('#expenseAcctToUse').change(function () {
+			params.expenseAcctToUse = $('#expenseAcctToUse').val();
+			$('#txn-from').val(params.expenseAcctToUse);
+		});
 	});
 	
 	function main(wrapperId) {
@@ -49,6 +54,8 @@ function walletMain(conf) {
 	main.resources = resources;
 	main.currView = 'cards';
 	
+	main.params = function () {return params}
+	
 	main.refresh = function (num) { //argument=number of views to refresh
 		if (num) refresh=num;
 		else refresh = refresh-1;
@@ -59,6 +66,28 @@ function walletMain(conf) {
 	
 	main.errHandler = function errHandler(err) { console.log(err.message)
 		if (err.message=="Unauthorized") main.me.modal();
+	}
+	
+	main.getQueryParams = function () {
+		var result = {}
+	
+		location.search.substr(1).split("&").forEach(function(part) {
+			if(!part) return;
+			var item = part.split("=");
+			var key = item[0];
+			var from = key.indexOf("[");
+			if(from==-1) result[key] = decodeURIComponent(item[1]);
+			else {
+				var to = key.indexOf("]");
+				var index = key.substring(from+1,to);
+				key = key.substring(0,from);
+				if(!result[key]) result[key] = [];
+				if(!index) result[key].push(item[1]);
+				else result[key][index] = item[1];
+			}
+		})
+		
+		return result;
 	}
 	
 	return main

@@ -37,10 +37,16 @@ if (
 	
 	$data = request(TATAG_DOMAIN ."/token", "POST", new stdClass()); 
 	$token_id = $data[0]->token_id;
-	$otk = $data[0]->otk; 
-	$next = urlencode(UI_DOMAIN."/$handler");
+	$otk = $data[0]->otk;
+		
+	$nextParams = array();
+	if (isset($_GET['to'])) $nextParams[] = 'to='. $_GET['to'];
+	if (isset($_GET['amount'])) $nextParams[] = 'amount='. $_GET['amount'];
+	$nextParams = implode("&", $nextParams);
+	
+	$next = urlencode(UI_DOMAIN."/$handler?$nextParams");
 	$location = TATAG_DOMAIN ."/login.php?token_id=$token_id&otk=$otk";
-	$provider = isset($_GET['provider']) ? $_GET['provider'] : '';
+	$provider = isset($_GET['provider']) ? $_GET['provider'] : ''; //exit($next);
 	
 	if (!$provider) include_once "ui_login.php";
 	else header("location: ". TATAG_DOMAIN ."/login.php?token_id=$token_id&otk=$otk&provider=$provider&next=$next");

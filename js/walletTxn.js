@@ -1,12 +1,16 @@
 function walletTxn(api) {
-	var currResource, currForm, currInputs;
+	var currResource, currForm, currInputs, params;
 	
 	function main(arg) {		
+		params = app.params();
+	
 		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-");
 		currResource = app.resources[wrapperId]; //console.log(currResource); console.log(api.byId); console.log(action+' '+arguments.length);
 		
 		var relay = !currResource.relay ? null : currResource.relay['budget-'+action];
 		currForm = !currResource.links ? null : api.byId[currResource.links['budget-'+action]];
+		
+		$('#expenseSelectDiv').css('display', action=='use' ? 'block' : 'none');
 		
 		renderForm(action);
 		renderRelay(relay);		
@@ -23,7 +27,11 @@ function walletTxn(api) {
 	}
 	
 	function renderInputs(inputName) {
-		var val = inputName=='from' ? currResource.relay['default'] : "";
+		var val = inputName=='to' && params.to ? params.to
+			: inputName=='amount' && params.amount ? params.amount
+			: inputName=='from' ? currResource.relay['default'] 
+			: "";
+			
 		var disabled = inputName=='from' ? true : false;
 	
 		$('#txn-'+inputName).val(val);

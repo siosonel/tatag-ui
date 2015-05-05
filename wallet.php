@@ -42,6 +42,11 @@
 			<h4 id='txn-title'></h4>
 			<form>
 				<div class='row'>
+					<div class='columns small-12' id='expenseSelectDiv'>
+						<label>Expense account to use<select id='expenseAcctToUse'></select></label>
+					</div>
+				</div>
+				<div class='row'>
 					<div class='columns small-8' id='txnFromDiv'>
 						<label>Recipient<input type='text' id='txn-from' value='' /></label>
 					</div>
@@ -142,7 +147,7 @@
 	<script type="text/javascript" src="js/walletEdit.js"></script>
 	<script type="text/javascript" src="js/walletRelays.js"></script>
 	<script>
-		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);		
+		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);
 	</script>
 	
 	<?php include "me.php" ?>
