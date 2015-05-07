@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php 
+
+unset($_SERVER['TOKEN_ID']);
+
+?><!DOCTYPE html>
 <html>
 <head>
 	<title>Login</title>	
@@ -34,7 +38,8 @@
 	</style>
 </head>
 <body>
-	<div id='wrapper'>	
+	<div id='wrapper'>
+		<i>You are currently logged out.</i>
 		<h2>Login using</h2>
 		<p style='padding-left: 20px;'>
 			<a href='<?php echo "$location&provider=gp&next=$next"; ?>'>

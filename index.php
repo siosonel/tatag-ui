@@ -2,7 +2,7 @@
 require_once "config.php";
 
 session_start(); 
-if (isset($_GET['clearSession']) OR isset($_GET['provider'])) $_SESSION['TOKEN_ID']=0;
+if (isset($_GET['clearSession']) OR isset($_GET['logout']) OR isset($_GET['provider'])) $_SESSION['TOKEN_ID']=0;
 if (isset($_GET['clearSession'])) exit();
 if (!isset($_SESSION['TOKEN_ID'])) $_SESSION['TOKEN_ID'] = 0;
 if (!isset($_SESSION['TOKEN_EXP'])) $_SESSION['TOKEN_EXP'] = 0;
