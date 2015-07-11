@@ -1,5 +1,6 @@
 function adminMain(conf) {
 	var User, resources={}, refresh=0;
+	var autocomplete;
 	
 	var api = apiClass({
 		'userid': conf.userid, 
@@ -16,6 +17,7 @@ function adminMain(conf) {
 		main.memberAccounts = adminMemberAccounts(api);
 		main.accounts = adminAccounts(api);
 		main.throttles = adminThrottles(api);
+		main.filters = adminFilters(api);
 		main.accountHolders = adminAccountHolders(api);
 		main.records = adminRecords(api);
 		main.forms = adminForms(api);
@@ -29,6 +31,7 @@ function adminMain(conf) {
 		$('#memberAccountsWrapper').click(main.memberAccounts.clickHandler);
 		$('#accountsWrapper').click(main.accounts.clickHandler);
 		$('#throttlesWrapper').click(main.throttles.clickHandler);
+		$('#filtersWrapper').click(main.filters.clickHandler);
 		$('#accountHoldersWrapper').click(main.accountHolders.clickHandler);
 		$('#recordsWrapper').click(main.records.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
