@@ -15,7 +15,7 @@ function adminForms(api) {
 	
 	function renderForm() { 
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);				
-		currInputs.map(renderInput);		
+		currInputs.map(renderInput);
 	}
 	
 	function renderInput(inputName) {	//console.log(inputName+ '#'+currType+'-'+inputName + currResource[inputName])

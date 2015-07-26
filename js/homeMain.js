@@ -1,4 +1,4 @@
-function adminMain(conf) {
+function homeMain(conf) {
 	var User, resources={}, refresh=0;
 	var autocomplete;
 	
@@ -9,37 +9,17 @@ function adminMain(conf) {
 	});
 	
 	$(document).ready(function () {
-		history.replaceState({}, "admin", "/ui/admin");
+		history.replaceState({}, "home", "/ui/home");
 		
-		main.brands = adminBrands(api);
-		main.about = adminAbout(api);
-		main.members = adminMembers(api);
-		main.memberAccounts = adminMemberAccounts(api);
-		main.accounts = adminAccounts(api);
-		main.throttles = adminThrottles(api);
-		main.accountHolders = adminAccountHolders(api);
-		main.records = adminRecords(api);
+		main.ratings = homeRatings(api);
 		main.forms = adminForms(api);
 		main.me = me();
 		
 		init();
-			
-		$('#brandsWrapper').click(main.brands.clickHandler);
-		$('#aboutWrapper').click(main.about.clickHandler);
-		$('#membersWrapper').click(main.members.clickHandler);
-		$('#memberAccountsWrapper').click(main.memberAccounts.clickHandler);
-		$('#accountsWrapper').click(main.accounts.clickHandler);
-		$('#throttlesWrapper').click(main.throttles.clickHandler);
-		$('#accountHoldersWrapper').click(main.accountHolders.clickHandler);
-		$('#recordsWrapper').click(main.records.clickHandler);
+		
+		$('#homeWrapper').click(main.clickHandler);
+		$('#ratingsWrapper').click(main.ratings.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
-		
-		main.forms.setTypeOpts();
-		$('#about-type_system').change(main.forms.setTypeOpts);
-		
-		main.forms.setLocOpts();		
-		$('#about-country_code').val('USA').change(main.forms.setAreaCodes);
-		main.forms.setAreaCodes();
 	});
 	
 	function init() {
@@ -49,7 +29,7 @@ function adminMain(conf) {
 	}
 	
 	function main(otherWrapper) {
-		$('#brandsWrapper').animate({left: '0'});
+		$('#homeWrapper').animate({left: '5px'});
 		$('#'+otherWrapper).animate({left: '100%'});
 	}
 	
@@ -61,10 +41,8 @@ function adminMain(conf) {
 		User = res;
 		main.User = User;
 		main.me(User.user_id, User.name, User.login_provider);
-		main.brands(User.links.brand);
 	}
 	
-	main.refs = {types: types}
 	main.params = {}
 	main.api = api;
 	main.init = init;
@@ -80,6 +58,11 @@ function adminMain(conf) {
 	
 	main.errHandler = function errHandler(err) {
 		if (err.message=="Unauthorized") main.me.modal();
+	}
+	
+	main.clickHandler = function (e) {
+		app.currView = "ratings";
+		app.ratings(User);
 	}
 	
 	main.getDivId = function (e, type) {

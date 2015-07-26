@@ -24,6 +24,7 @@
 	<div id='login_provider'></div>
 	<div class="row">
 		<div class='small-12' id='titleBar'>
+			<a href="/ui/home">Home</a> |
 			<a href="/ui/wallet">Wallet</a> | 
 			<span class='fi-refresh'>&nbsp;</span><a href="/ui/team" style="color: #000;">Teams</a> |
 			<a href="/ui/admin">Admin</a>

@@ -26,6 +26,7 @@
 	<div id='login_provider'></div>
 	<div class='row'>
 		<div class='small-12' id='titleBar'>
+			<a href="/ui/home">Home</a> |
 			<a href="/ui/wallet">Wallet</a> |
 			<a href="/ui/team">Teams</a> |
 			<span class='fi-refresh'>&nbsp;</span><a href="/ui/admin" style="color: #000;">Admin</a>
@@ -40,7 +41,6 @@
 		<div id='accountsWrapper' class="row"></div>
 		<div id='accountHoldersWrapper' class="row"></div>
 		<div id='throttlesWrapper' class="row"></div>
-		<div id='filtersWrapper' class="row"></div>
 		<div id='recordsWrapper' class="row">
 			<div id='recordsTitle'></div>
 			<div id='recordsType' class='row'>
@@ -178,43 +178,6 @@
 			<a class="close-reveal-modal">×</a>
 		</div>
 		
-		<div id='filtersModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
-			<div id='fitlersForm'>		
-				<h4 id='filters-formTitle'></h4>
-				<form>
-					<div class='row' id='filterID-formDiv' style='display:none'>
-						<div class='columns small-12'>
-							<label>Filter ID#<input type='text' id='filters-filter_id' value='' disabled='disabled'/></label>
-						</div>
-					</div>				
-					<div class='row' id='filtersOtherId-formDiv'>
-						<div class='columns small-12'>
-							<label>Other ID#<input type='text' id='filters-other_id' value='' placeholder='Nearby ...' disabled='disabled'/></label>
-						</div>
-					</div>
-					<!--<div class='row' id='filtersOtherName-formDiv'>
-						<div class='columns small-12'>
-							<label>Brand Name<input type='text' id='filters-other_name' value='' disabled='disabled'/></label>
-						</div>
-					</div>-->
-					<div class='row'>
-						<div class='columns small-12'>
-							<label>Accept<input type='text' id='filters-accept' value='' /></label>
-						</div>
-					</div>
-					<div class='row'>
-						<div class='columns small-12'>
-							<label>Reason<input type='text' id='filters-reason' value='' />
-							</label>
-						</div>
-					</div>
-				</form>
-				<button id='filters-submit'>Submit</button>&nbsp;
-				<button id='filters-cancel'>Cancel</button>
-			</div>
-			<a class="close-reveal-modal">×</a>
-		</div>
-		
 		<div id='aboutModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
 			<div id='aboutForm'>		
 				<h4 id='about-formTitle'></h4>
@@ -298,7 +261,6 @@
 	<script src='js/adminRecords.js'></script>
 	<script src='js/adminForms.js'></script>
 	<script src='js/adminThrottles.js'></script>
-	<script src='js/adminFilters.js'></script>
 	<script>
 		var types = <?php echo file_get_contents(TATAG_DOMAIN ."/ref/brand_classification.json"); ?>;
 		var locs = <?php echo file_get_contents(TATAG_DOMAIN ."/ref/countries.json"); ?>;
