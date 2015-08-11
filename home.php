@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php 
+$protocol = (isset($_SERVER['HTTPS']) AND $_SERVER['HTTPS']) ? 'https' : 'http';
+$ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
+
+?><!DOCTYPE html>
 <html>
 <head>
 	<title>Home</title>	
@@ -35,7 +39,15 @@
 
 	<div id='mainWrapper'>
 		<div id='homeWrapper'>
-			<b>My Ratings &#9658;</b>
+			<div class='panel'>
+				<b>My Ratings &#9658;</b>
+			</div>
+			<div id='arrowFrameDiv' class='panel'>
+				<iframe id='arrowFrame' src='<?php echo $ProtDomain ?>/viz/arrow.php' width="100%" height="610px" scrolling="no" frameborder="no"></iframe>
+			</div>
+			<div id='chordFrameDiv' class='panel'>
+				<iframe id='chordFrame' src='<?php echo $ProtDomain ?>/viz/chord_m.php' width="100%" height="700px" scrolling="no" frameborder="no"></iframe>
+			</div>
 		</div>
 		<div id='ratingsWrapper' class="row"></div>
 	</div>
@@ -79,6 +91,14 @@
 	<script src='js/homeRatings.js'></script>
 	<script>	
 		var app = homeMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);		
+		resize();
+		$(window).resize(resize);
+		
+		function resize() {
+			var width = $('body').width();
+			$('#arrowFrame').attr('height', width<400 ? 710 : 610);
+			$('#chordFrame').attr('height', width<400 ? 400 : width+100);
+		}
 	</script>
 		
 	<?php include "me.php" ?>

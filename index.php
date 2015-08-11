@@ -53,6 +53,7 @@ if (
 	else header("location: ". TATAG_DOMAIN ."/login.php?token_id=$token_id&otk=$otk&provider=$provider&next=$next");
 }
 else {
+	$_SESSION['TOKEN_EXP'] = time() + 3600; 
 	include "$handler.php";
 }
 
