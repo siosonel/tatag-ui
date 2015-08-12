@@ -1,6 +1,9 @@
 <?php 
 require_once "config.php";
 
+$time = time();
+$expiration = $time + 5400;
+
 session_start(); 
 if (isset($_GET['clearSession']) OR isset($_GET['logout']) OR isset($_GET['provider'])) $_SESSION['TOKEN_ID']=0;
 if (isset($_GET['clearSession'])) exit();
@@ -19,7 +22,7 @@ if (isset($_GET['token_id']) AND is_numeric($_GET['token_id']) AND isset($_GET['
 	if (is_array($data) AND $data[0]) { 
 		$_SESSION['TOKEN_ID'] = 'token-'.$data[0]->token_id;
 		$_SESSION['TOKEN_VAL'] = $data[0]->token_val;
-		$_SESSION['TOKEN_EXP'] = time() + 3600;
+		$_SESSION['TOKEN_EXP'] = $expiration;
 	} //else {print_r($data); exit();}
 }
 
@@ -31,7 +34,7 @@ if (
 	!isset($_SESSION) 
 	OR !$_SESSION['TOKEN_ID']
 	OR !$_SESSION['TOKEN_VAL']
-	OR time() > $_SESSION['TOKEN_EXP']
+	OR $time > $_SESSION['TOKEN_EXP']
 ) {
 	require_once "common.php";
 	
@@ -53,7 +56,7 @@ if (
 	else header("location: ". TATAG_DOMAIN ."/login.php?token_id=$token_id&otk=$otk&provider=$provider&next=$next");
 }
 else {
-	$_SESSION['TOKEN_EXP'] = time() + 3600; 
+	$_SESSION['TOKEN_EXP'] = $expiration; 
 	include "$handler.php";
 }
 
