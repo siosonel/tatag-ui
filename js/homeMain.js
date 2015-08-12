@@ -1,6 +1,7 @@
 function homeMain(conf) {
 	var User, resources={}, refresh=0;
 	var autocomplete;
+	var clickedBrand={};
 	
 	var api = apiClass({
 		'userid': conf.userid, 
@@ -43,6 +44,15 @@ function homeMain(conf) {
 		main.me(User.user_id, User.name, User.login_provider);
 	}
 	
+	function openForm() {
+		var elemId = main.ratings.findRenderedItem(clickedBrand.brand_id);
+		if (elemId) $('#'+elemId).click();
+		else {
+			$('#addRating').click();
+			$('#ratings-brand_id').val(clickedBrand.name);
+		}
+	}
+	
 	main.params = {}
 	main.api = api;
 	main.init = init;
@@ -79,6 +89,14 @@ function homeMain(conf) {
 			ppCls = e.target.parentNode.parentNode.className.split(' ');
 		
 		return cls.concat(pCls).concat(ppCls) 
+	}
+	
+	main.openRatingsForm = function (d) {
+		if (d) {
+			clickedBrand = d;
+			$('#ratingsDivPrompt').click();
+			main.ratings.postRenderFxn = openForm;
+		}
 	}
 	
 	return main;

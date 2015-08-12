@@ -40,7 +40,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<div id='mainWrapper'>
 		<div id='homeWrapper'>
 			<div class='panel'>
-				<b>My Ratings &#9658;</b>
+				<div id='ratingsDivPrompt' style='font-weight: 900'>My Ratings &#9658;</div>
 			</div>
 			<div id='arrowFrameDiv' class='panel'>
 				<iframe id='arrowFrame' src='<?php echo $ProtDomain ?>/viz/arrow.php' width="100%" height="610px" scrolling="no" frameborder="no"></iframe>

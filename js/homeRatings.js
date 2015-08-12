@@ -1,5 +1,6 @@
 function homeRatings(api) {
 	var currUser, currResource, currCollection;
+	var postRenderFxn;
 	
 	function main(user) {
 		if (user) currUser = user; 
@@ -40,6 +41,10 @@ function homeRatings(api) {
 	function renderRatings(ratings) { 
 		currCollection = ratings;
 		ratings.items.map(renderItem);
+		if (main.postRenderFxn) {
+			main.postRenderFxn();
+			main.postRenderFxn = null;
+		}
 	}
 	
 	function renderItem(rating) {
@@ -129,6 +134,14 @@ function homeRatings(api) {
 		$('#ratings-brand_id').prop('disabled',true).val(rating.brand_name);
 		app.forms(divId, 'ratings', '/forms#rating-edit');
 	}
+	
+	main.findRenderedItem = function (brand_id) {
+		var clickedElemId;
+		currCollection.items.map(function (d) {
+			if (d.brand_id==brand_id) clickedElemId = 'ratings-'+d.rating_id;
+		})
+		return clickedElemId;
+	} 
 	
 	return main;
 }

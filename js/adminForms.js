@@ -18,7 +18,7 @@ function adminForms(api) {
 		currInputs.map(renderInput);
 	}
 	
-	function renderInput(inputName) {	//console.log(inputName+ '#'+currType+'-'+inputName + currResource[inputName])
+	function renderInput(inputName) {
 		if (currResource[inputName] || ['ended', 'joined', 'revoked'].indexOf(inputName) == -1) 
 			var val = currResource[inputName]; 
 			
