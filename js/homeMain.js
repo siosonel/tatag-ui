@@ -18,9 +18,11 @@ function homeMain(conf) {
 		
 		init();
 		
-		$('#homeWrapper').click(main.clickHandler);
+		$('#ratingPromptDiv').click(main.clickHandler);
 		$('#ratingsWrapper').click(main.ratings.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
+		
+		$('#ratings-rating').val(90);
 	});
 	
 	function init() {
@@ -53,6 +55,10 @@ function homeMain(conf) {
 		}
 	}
 	
+	 function clickAddRatingBtn() {
+		$('#addRating').click();
+	}
+	
 	main.params = {}
 	main.api = api;
 	main.init = init;
@@ -73,6 +79,10 @@ function homeMain(conf) {
 	main.clickHandler = function (e) {
 		app.currView = "ratings";
 		app.ratings(User);
+		
+		if (e.target.id=='addRatingLink') {
+			app.ratings.postRenderFxn = clickAddRatingBtn
+		}
 	}
 	
 	main.getDivId = function (e, type) {

@@ -143,5 +143,13 @@ function homeRatings(api) {
 		return clickedElemId;
 	} 
 	
+	main.setRatingBySlider = function (e) {
+		$('#ratings-rating').val($('#ratings-slider').val());
+	}
+	
+	main.setSliderByText = function (e) {
+		$('#ratings-slider').val($('#ratings-rating').val());
+	}
+	
 	return main;
 }

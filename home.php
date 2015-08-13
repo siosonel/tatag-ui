@@ -24,7 +24,31 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	
 	<link rel="stylesheet" href="css/admin.css">
 	
-	<style></style>
+	<style>
+		#ratingsDivPrompt {}
+		
+		#addRatingLink {
+			cursor: pointer;
+		}
+		
+		#addRatingLink:hover {
+			color: #00f;
+		}
+		
+		#ratings-rating	{
+			display: inline;
+			width: 30%;
+			font-size: 2em;
+			vertical-align: top;
+			height: 1.2em;
+			margin: -10px 0 0 10px;
+			text-align: center;
+		}
+		
+		#ratings-slider {
+			width: 60%;
+		}
+	</style>
 </head>
 <body>
 	<div id='login_provider'></div>
@@ -39,8 +63,14 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 
 	<div id='mainWrapper'>
 		<div id='homeWrapper'>
-			<div class='panel'>
-				<div id='ratingsDivPrompt' style='font-weight: 900'>My Ratings &#9658;</div>
+			<div id='ratingPromptDiv' class='panel'> 
+				<span id='addRatingLink' style='font-weight: 700;'>+New Rating</span>
+				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<span id='ratingsDivPrompt' style='font-weight: 700'>Ratings List&#9658;</span>
+				<!--<textarea id='ratingByText' style='color: #bbb; font-style: italic;' rows='3'>brand...
+rating...
+reason(s)</textarea>
+				<button id='ratingByTextBtn' class='tiny' style='left: 35%;'>Submit</button>-->
 			</div>
 			<div id='arrowFrameDiv' class='panel'>
 				<iframe id='arrowFrame' src='<?php echo $ProtDomain ?>/viz/arrow.php' width="100%" height="610px" scrolling="no" frameborder="no"></iframe>
@@ -69,7 +99,9 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					</div>
 					<div class='row'>
 						<div class='columns small-12'>
-							<label>Rating (0-100)<input type='text' id='ratings-rating' value='' /></label>
+							<label for='ratings-rating'>Rating (0-100) &nbsp;&nbsp;&nbsp;</label>
+							<input type='range' id='ratings-slider' min='0' max='100' value='90' onchange='app.ratings.setRatingBySlider()' oninput='app.ratings.setRatingBySlider()'/>
+							<input type='text' id='ratings-rating' value='90' onchange='app.ratings.setSliderByText()'/>
 						</div>
 					</div>
 					<div class='row'>

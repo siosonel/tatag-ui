@@ -33,7 +33,10 @@ function adminForms(api) {
 			if (inputName=='type_system') main.setTypeOpts();
 			else if (inputName=='country_code') main.setAreaCodes();
 			else if (inputName=='area_code') currAreaCode = val;
-		} 
+		}
+		else if (currType=='ratings') {
+			if (inputName=='rating') $('#ratings-slider').val(val);
+		}
 	}
 	
 	main.clickHandler = function formClick(e) {		
