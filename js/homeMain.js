@@ -1,7 +1,11 @@
 function homeMain(conf) {
 	var User, resources={}, refresh=0;
-	var autocomplete;
 	var clickedBrand={};
+	var completer = autoComplete({
+		selector: '#ratings-reason',
+		source: autocompleteSource,
+		minLength: 2
+	});
 	
 	var api = apiClass({
 		'userid': conf.userid, 
@@ -23,6 +27,7 @@ function homeMain(conf) {
 		$('.formModal').click(main.forms.clickHandler);
 		
 		$('#ratings-rating').val(90);
+		$('#ratings-reason').on('input', completer);
 	});
 	
 	function init() {
@@ -108,6 +113,8 @@ function homeMain(conf) {
 			main.ratings.postRenderFxn = openForm;
 		}
 	}
+	
+	main.completer = completer;
 	
 	return main;
 }

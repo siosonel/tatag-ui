@@ -48,6 +48,17 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		#ratings-slider {
 			width: 60%;
 		}
+		
+		#autoCompleteMatchedDisplay {
+			border: 1px solid #eee;
+			margin-top: -17px;
+			list-style-type: none;
+		}
+		
+		#autoCompleteMatchedDisplay li {
+			/*margin-top: -17px;*/
+		}
+		
 	</style>
 </head>
 <body>
@@ -67,10 +78,6 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<span id='addRatingLink' style='font-weight: 700;'>+New Rating</span>
 				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 				<span id='ratingsDivPrompt' style='font-weight: 700'>Ratings List&#9658;</span>
-				<!--<textarea id='ratingByText' style='color: #bbb; font-style: italic;' rows='3'>brand...
-rating...
-reason(s)</textarea>
-				<button id='ratingByTextBtn' class='tiny' style='left: 35%;'>Submit</button>-->
 			</div>
 			<div id='arrowFrameDiv' class='panel'>
 				<iframe id='arrowFrame' src='<?php echo $ProtDomain ?>/viz/arrow.php' width="100%" height="610px" scrolling="no" frameborder="no"></iframe>
@@ -106,8 +113,7 @@ reason(s)</textarea>
 					</div>
 					<div class='row'>
 						<div class='columns small-12'>
-							<label>Reason<input type='text' id='ratings-reason' value='' />
-							</label>
+							<label for='ratings-reason'>Reason</label><input type='text' id='ratings-reason' value='' />
 						</div>
 					</div>
 				</form>
@@ -121,7 +127,20 @@ reason(s)</textarea>
 	<script src='js/homeMain.js'></script>
 	<script src='js/adminForms.js'></script>
 	<script src='js/homeRatings.js'></script>
+	<script src='js/autoComplete.js'></script>
 	<script>	
+		var autocompleteSource = [
+			'artistry',
+			'product quality', 'price', 'customer service',
+			'technical excellence',
+			'ethics', 'organizational culture',
+			'union relations',
+			'social responsibility', 'community involvment',
+			'environmental impact', 'climate responsibility',
+			'fair trade', 
+			'dietary health'
+		];
+	
 		var app = homeMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);		
 		resize();
 		$(window).resize(resize);

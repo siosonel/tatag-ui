@@ -116,6 +116,7 @@ function homeRatings(api) {
 	
 	main.clickHandler = function (e) {
 		if (e.target.id=='addRating') { 
+			app.completer.reset();
 			$('#ratings-brand_id').prop('disabled',false).val('');
 			app.forms(currCollection, 'ratings', '/forms#rating-add');
 			initPlaces();
