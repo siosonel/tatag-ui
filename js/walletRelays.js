@@ -56,7 +56,10 @@ function walletRelays(api) {
 			+ "<div class='right'><span id='"+divId+"-edit' class='fi-pencil small'></span></div>"
 			+ 'Token: <b>' + token + '</b><br />'
 			+	'For: ' + txntype[relay.txntype] +'<br />'
-			+ 'Amount: ' + relay.amount_min.toFixed(2) +' to '+ relay.amount_max.toFixed(2) + '<br />'
+			+ 'Amount: ' + relay.amount_min.toFixed(2) +' to '+ relay.amount_max.toFixed(2) + '<br /><br />'
+			+ 'Usage Limits Per Week: '+ relay.redirect + '<br />'
+			+ 'Total: <b>'+ relay.by_all_limit +'</b>, By Brand: <b>'+ relay.by_brand_limit +'</b><br />'
+			+ 'By User: <b>'+ relay.by_user_limit +'</b>, Reuse Wait: <b>'+ relay.by_user_wait +'</b> hours<br /><br />'
 			+ 'Redirect: '+ relay.redirect + '<br />'
 			+	'Tag: '+ relay.tag + '<br />'
 			+	'Secret: '+ (relay.secret ? relay.secret : '') 

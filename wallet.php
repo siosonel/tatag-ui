@@ -94,6 +94,21 @@
 			<h4 id='editRelay-title'></h4>
 			<form>
 				<div class='row'>
+					<div class='columns small-12'>
+						<label>Relay token for
+							<select id='editRelay-txntype'>
+								<option value='pn'>budget use</option>								
+								<option value='np'>budget issuance</option>
+							</select>
+						</label>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='columns small-12'>
+						<label>Secret (optional)<input type='text' id='editRelay-secret' value='' /></label>
+					</div>
+				</div>
+				<div class='row'>	
 					<div class='columns small-6'>
 						<label>Amount Min<input type='text' id='editRelay-amount_min' value='0.00' /></label>
 					</div>
@@ -112,18 +127,22 @@
 					</div>
 				</div>
 				<div class='row'>
-					<div class='columns small-12'>
-						<label>Relay token for
-							<select id='editRelay-txntype'/>
-								<option value='pn'>budget use</option>								
-								<option value='np'>budget issuance</option>
-							</select>
-						</label>
+					<div class='columns small-12'>Limits on usage per week</div>
+				</div>
+				<div class='row'>
+					<div class='columns small-6'>
+						<label>Total<input type='text' id='editRelay-by_all_limit' value='25' /></label>
+					</div>
+					<div class='columns small-6'>
+						<label>By brand<input type='text' id='editRelay-by_brand_limit' value='5' /></label>
 					</div>
 				</div>
 				<div class='row'>
-					<div class='columns small-12'>
-						<label>Secret<input type='text' id='editRelay-secret' value='' /></label>
+					<div class='columns small-6'>
+						<label>By user<input type='text' id='editRelay-by_user_limit' value='2' /></label>
+					</div>
+					<div class='columns small-6'>
+						<label>Reuse wait (in hours)<input type='text' id='editRelay-by_user_wait' value='48' /></label>
 					</div>
 				</div>
 			</form>
