@@ -16,6 +16,7 @@ function adminMain(conf) {
 		main.members = adminMembers(api);
 		main.memberAccounts = adminMemberAccounts(api);
 		main.accounts = adminAccounts(api);
+		main.promos = adminPromos(api);
 		main.throttles = adminThrottles(api);
 		main.accountHolders = adminAccountHolders(api);
 		main.records = adminRecords(api);
@@ -29,6 +30,7 @@ function adminMain(conf) {
 		$('#membersWrapper').click(main.members.clickHandler);
 		$('#memberAccountsWrapper').click(main.memberAccounts.clickHandler);
 		$('#accountsWrapper').click(main.accounts.clickHandler);
+		$('#promosWrapper').click(main.promos.clickHandler);
 		$('#throttlesWrapper').click(main.throttles.clickHandler);
 		$('#accountHoldersWrapper').click(main.accountHolders.clickHandler);
 		$('#recordsWrapper').click(main.records.clickHandler);

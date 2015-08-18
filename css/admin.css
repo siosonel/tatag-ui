@@ -76,7 +76,7 @@ body {
 
 #aboutWrapper, #membersWrapper, #accountsWrapper, #recordsWrapper, 
 #memberAccountsWrapper, #accountHoldersWrapper, #throttlesWrapper,
-#ratingsWrapper {
+#ratingsWrapper, #promosWrapper {
 	position: absolute;
 	top: 5px;
 	left: 100%;

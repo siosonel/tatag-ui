@@ -56,8 +56,8 @@ function adminThrottles(api) {
 			+			"("+ Math.round(throttle.period/60) +" min. || "
 			+ 		(throttle.period/3600).toFixed(1) +" hours || "
 			+ 		(throttle.period/86400).toFixed(2) +" days)<br />"
-			+			"Total Limit: "+ throttle.by_all +"</br >"
-			+			"Limit by brand: "+ throttle.by_brand +"</br >"
+			+			"Total Limit: "+ throttle.by_all +"<br />"
+			+			"Limit by brand: "+ throttle.by_brand +"<br />"
 			+			"Limit by user: "+ throttle.by_user 
 			+		"</div>"
 			//+ 	"<div id='"+divId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
