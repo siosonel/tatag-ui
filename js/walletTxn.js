@@ -48,7 +48,7 @@ function walletTxn(api) {
 		var disabled = inputName=='to' ? true : false;
 	
 		$('#txn-'+inputName).val(val);
-		$('#txn-'+inputName).prop('disabled', disabled); console.log(inputName);
+		$('#txn-'+inputName).prop('disabled', disabled);
 		
 		if (inputName=='to') $('#txnToDiv').css('display','none');
 		else if (inputName=='from') $('#txnFromDiv').css('display','inline-block');
@@ -103,12 +103,25 @@ function walletTxn(api) {
 		currInputs.map(function (inputName) {
 			action.inputs[inputName] = $('#txn-'+inputName).val();
 			if (inputName=='amount' && isReversal && 1*action.inputs[inputName]>0) action.inputs[inputName] = -1*action.inputs[inputName];
-		}); //console.log(action); return;
+		});
 		
 		api.request(action).then(main.refreshViews, app.errHandler);
 	}
 	
 	main.refreshViews = function (res) {
+		if (params.postPayURL) {
+			var record = res['@graph'][0];
+			var mssg = record ? "Your payment was processed successfully." : res.error;
+			
+			var goback = confirm(mssg +' Do you want to reload the previous page?');
+	
+			if (goback) {			
+				window.location.href = params.postPayURL
+					.replace("{record_id}","record_id="+record.record_id)
+					.replace("{promo_id}","promo_id="+record.promo_id); 
+			}
+		}
+		
 		app.refresh(2); 
 		app.cards(); // will refresh/open records view as needed;
 	}

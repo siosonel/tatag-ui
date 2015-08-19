@@ -1,5 +1,5 @@
 function homeMain(conf) {
-	var User, resources={}, refresh=0;
+	var User, resources={}, refresh=0, params;
 	var clickedBrand={};
 	var completer = autoComplete({
 		selector: '#ratings-reason',
@@ -14,16 +14,19 @@ function homeMain(conf) {
 	});
 	
 	$(document).ready(function () {
+		params = main.getQueryParams();
 		history.replaceState({}, "home", "/ui/home");
 		
 		main.ratings = homeRatings(api);
+		main.promos = homePromos(api);
 		main.forms = adminForms(api);
 		main.me = me();
 		
 		init();
 		
-		$('#ratingPromptDiv').click(main.clickHandler);
+		$('#ratingPromptDiv, #promoPromptDiv').click(main.clickHandler);
 		$('#ratingsWrapper').click(main.ratings.clickHandler);
+		$('#promosWrapper').click(main.promos.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
 		
 		$('#ratings-rating').val(90);
@@ -49,6 +52,11 @@ function homeMain(conf) {
 		User = res;
 		main.User = User;
 		main.me(User.user_id, User.name, User.login_provider);
+		
+		if (params.promo_id) {
+			console.log('Filter out this already used promo based on relay usage restrictions?');
+			alert("Thank you for supporting promo #"+ params.promo_id +".\n\nIf this promo is for a purchased item, your order will be processed soon.");
+		}
 	}
 	
 	function openForm() {
@@ -60,7 +68,7 @@ function homeMain(conf) {
 		}
 	}
 	
-	 function clickAddRatingBtn() {
+	function clickAddRatingBtn() {
 		$('#addRating').click();
 	}
 	
@@ -82,11 +90,18 @@ function homeMain(conf) {
 	}
 	
 	main.clickHandler = function (e) {
-		app.currView = "ratings";
-		app.ratings(User);
+		var divId = e.target.id.toLowerCase();
 		
-		if (e.target.id=='addRatingLink') {
-			app.ratings.postRenderFxn = clickAddRatingBtn
+		if (divId.search('rating')!=-1) {
+			app.currView = 'ratings';
+			app.ratings(User);
+			if (e.target.id=='addRatingLink') {
+				app.ratings.postRenderFxn = clickAddRatingBtn
+			}
+		}
+		else if (divId.search('promo')!=-1) {
+			app.currView = 'promos';
+			app.promos(User);
 		}
 	}
 	
@@ -112,6 +127,28 @@ function homeMain(conf) {
 			$('#ratingsDivPrompt').click();
 			main.ratings.postRenderFxn = openForm;
 		}
+	}
+	
+	main.getQueryParams = function () {
+		var result = {}
+	
+		location.search.substr(1).split("&").forEach(function(part) {
+			if(!part) return;
+			var item = part.split("=");
+			var key = item[0];
+			var from = key.indexOf("[");
+			if(from==-1) result[key] = decodeURIComponent(item[1]);
+			else {
+				var to = key.indexOf("]");
+				var index = key.substring(from+1,to);
+				key = key.substring(0,from);
+				if(!result[key]) result[key] = [];
+				if(!index) result[key].push(item[1]);
+				else result[key][index] = item[1];
+			}
+		});
+		
+		return result;
 	}
 	
 	main.completer = completer;

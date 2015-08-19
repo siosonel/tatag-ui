@@ -79,6 +79,9 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 				<span id='ratingsDivPrompt' style='font-weight: 700'>Ratings List&#9658;</span>
 			</div>
+			<div id='promoPromptDiv' class='panel'> 
+				<span id='promosDivPrompt' style='font-weight: 700'>Promos&#9658;</span>
+			</div>
 			<div id='arrowFrameDiv' class='panel'>
 				<iframe id='arrowFrame' src='<?php echo $ProtDomain ?>/viz/arrow.php' width="100%" height="610px" scrolling="no" frameborder="no"></iframe>
 			</div>
@@ -86,7 +89,9 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<iframe id='chordFrame' src='<?php echo $ProtDomain ?>/viz/chord_m.php' width="100%" height="700px" scrolling="no" frameborder="no"></iframe>
 			</div>
 		</div>
+		
 		<div id='ratingsWrapper' class="row"></div>
+		<div id='promosWrapper' class="row"></div>
 	</div>
 	
 	<div>	
@@ -127,6 +132,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<script src='js/homeMain.js'></script>
 	<script src='js/adminForms.js'></script>
 	<script src='js/homeRatings.js'></script>
+	<script src='js/homePromos.js'></script>
 	<script src='js/autoComplete.js'></script>
 	<script>	
 		var autocompleteSource = [
