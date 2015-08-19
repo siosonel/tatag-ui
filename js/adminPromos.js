@@ -75,7 +75,7 @@ function adminPromos(api) {
 			app('promosWrapper');
 		}
 	
-		var divId = app.getDivId(e, 'promos'); console.log(divId)
+		var divId = app.getDivId(e, 'promos');
 		if (!divId) return;
 		
 		$('#promoID-formDiv').css('display','none')

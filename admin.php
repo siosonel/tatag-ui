@@ -171,7 +171,7 @@
 							<label>Amount<input type='text' id='promos-amount' value='' /></label>
 						</div>
 						<div class='columns small-6'>
-							<label>Qty<input type='text' id='promos-qty' value='' /></label>
+							<label>Qty<input type='text' id='promos-qty' value='100' /></label>
 						</div>
 					</div>
 					<div class='row'>

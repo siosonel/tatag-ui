@@ -1,13 +1,15 @@
 function adminForms(api) {
 	var currResource, currType, currAltType, currForm, currInputs;
+	var defaultVals={}, tempVals={};
 	var currAreaCode = 206;
+	var dateInputs = ['ended', 'joined', 'revoked'];
 
 	function main(div, type, formURL, altType) {
 		currResource = typeof div=='string' ? app.resources[div] : div;
 		currType = type;
 		currForm = api.byId[formURL];
 		currAltType = altType ? altType : "";
-		
+	
 		renderForm();
 		$('#'+currType+'-formTitle').html(currForm.title); 
 		$('#'+currType+'Modal').foundation('reveal','open');
@@ -15,17 +17,27 @@ function adminForms(api) {
 	
 	function renderForm() { 
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);				
+		
+		if (!defaultVals[currType]) {
+			defaultVals[currType]={}; 
+			currInputs.map(setDefaultVals);
+		}
+		
+		if (currForm['@id'].toLowerCase().search('edit')!=-1) tempVals[currType] = {};
+		else {
+			if (!tempVals[currType]) tempVals[currType] = {};
+			currInputs.map(setTempVals);
+		}
+		
 		currInputs.map(renderInput);
 	}
 	
 	function renderInput(inputName) {
-		if (currResource[inputName] || ['ended', 'joined', 'revoked'].indexOf(inputName) == -1) 
-			var val = currResource[inputName]; 
-			
-		else var date = new Date(), 
-				d=(""+date).split(' '), 
-				m=date.getMonth()+1, 
-				val = d[3]+'-'+m+'-'+d[2]+' '+d[4];
+		var val = inputName in currResource ? currResource[inputName]
+			: inputName in tempVals[currType] ? tempVals[currType][inputName]
+			: inputName in defaultVals[currType] ? defaultVals[currType][inputName]
+			: dateInputs.indexOf(inputName) != -1 ? getDateStr()
+			: null;
 		
 		$('#'+currType+'-'+inputName).val(val);
 		
@@ -37,6 +49,19 @@ function adminForms(api) {
 		else if (currType=='ratings') {
 			if (inputName=='rating') $('#ratings-slider').val(val);
 		}
+	}
+	
+	function getDateStr() {
+		var date = new Date(), d=(""+date).split(' '), m=date.getMonth()+1;
+		return d[3]+'-'+m+'-'+d[2]+' '+d[4];
+	}
+	
+	function setDefaultVals(inputName) {
+		defaultVals[currType][inputName] = $('#'+currType+'-'+inputName).val();
+	}
+	
+	function setTempVals(inputName) {
+		tempVals[currType][inputName] = $('#'+currType+'-'+inputName).val();
 	}
 	
 	main.clickHandler = function formClick(e) {		

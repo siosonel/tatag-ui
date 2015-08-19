@@ -76,7 +76,7 @@ function adminThrottles(api) {
 			app('throttlesWrapper');
 		}
 	
-		var divId = app.getDivId(e, 'throttles'); console.log(divId)
+		var divId = app.getDivId(e, 'throttles');
 		if (!divId) return;
 		
 		$('#throttleID-formDiv').css('display','none')
