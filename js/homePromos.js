@@ -9,7 +9,7 @@ function homePromos(api) {
 		if (!currUser || app.currView != 'promos') return;
 		app.currView = 'promos';
 		
-		var url = "/promo/collection";
+		var url = currUser.links.promoCollection;
 		$('#promosWrapper').children().remove();
 		$('#promosWrapper').append(setTitle(currUser));
 		
