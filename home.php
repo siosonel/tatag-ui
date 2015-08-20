@@ -67,8 +67,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		<div class='small-12' id='titleBar'>
 			<span class='fi-refresh'>&nbsp;</span><a href="/ui/home" style="color: #000;">Home</a> |
 			<a href="/ui/wallet">Wallet</a> |
-			<a href="/ui/team">Teams</a> |
-			<a href="/ui/admin">Admin</a>
+			<a href="/ui/my-teams">Teams</a>
 		</div>
 	</div>
 

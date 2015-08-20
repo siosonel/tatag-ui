@@ -7,9 +7,7 @@ function teamMain(conf) {
 		'baseURL': conf.baseURL //will be used as prefix
 	});
 	
-	$(document).ready(function () {		
-		history.replaceState({}, "team", "/ui/team");
-	
+	$(document).ready(function () {			
 		main.brands = teamBrands(api);
 		main.about = teamAbout(api);
 		main.members = teamMembers(api);

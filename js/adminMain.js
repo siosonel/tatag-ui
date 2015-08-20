@@ -8,9 +8,7 @@ function adminMain(conf) {
 		'baseURL': conf.baseURL
 	});
 	
-	$(document).ready(function () {
-		history.replaceState({}, "admin", "/ui/admin");
-		
+	$(document).ready(function () {		
 		main.brands = adminBrands(api);
 		main.about = adminAbout(api);
 		main.members = adminMembers(api);

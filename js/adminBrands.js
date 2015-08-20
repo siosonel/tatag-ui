@@ -5,7 +5,6 @@ function adminBrands(api) {
 	function main(brandURL) {		
 		if (brandURL) currURL = brandURL;
 		$('#brandsWrapper').children().remove(); //console.log(currURL); console.log(api.byId[currURL]);
-		$('#brandsWrapper').append("<div style='height: 28px; margin: 5px;'><button id='addBrand' class='right tiny'>+New Brand</button></div>")
 		
 		api.deref(currURL, app.refresh())
 			.then(renderBrands, app.errHandler);	
