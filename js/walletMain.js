@@ -43,7 +43,7 @@ function walletMain(conf) {
 	
 	function main(wrapperId) {
 		$('#accountsWrapper').animate({left: '0'});
-		$(wrapperId ? '#'+wrapperId : '#recordsWrapper').animate({left: '100%'});
+		$(wrapperId ? '#'+wrapperId : '#recordsWrapper').animate({left: '105%'});
 	}
 
 	function loadUser(res) {

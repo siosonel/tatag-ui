@@ -28,7 +28,7 @@ function teamBrands(api) {
 		var b = main.brandColors(brandDivId, brand);		
 		
 		$('#brandsWrapper').append(
-			"<div class='large-12 brandItem' id='"+brandDivId+"' style='background-color: "+ b.divBg +"'>"
+			"<div class='small-12 brandItem' id='"+brandDivId+"' style='background-color: "+ b.divBg +"'>"
 			+ "<div class='row' style='margin-bottom:30px;' id='"+ brandDivId +"-label'>"
 			+ 	"<div class='small-8 columns brandLabel'>"
 			+			b.logo

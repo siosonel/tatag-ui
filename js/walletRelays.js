@@ -12,7 +12,7 @@ function walletRelays(api) {
 		$('#relaysWrapper').children().remove();
 		$('#relaysWrapper').append(setTitle(currAcct))
 		
-		$('#accountsWrapper').animate({left: '-100%'});
+		$('#accountsWrapper').animate({left: '-105%'});
 		$('#relaysWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
