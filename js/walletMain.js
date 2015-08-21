@@ -11,10 +11,10 @@ function walletMain(conf) {
 	$(document).ready(function () {
 		params = main.getQueryParams();
 		
-		app.currView = location.pathname.search('-')==-1 ? 'cards' : location.pathname.split('-').pop();
+		app.currView = location.pathname.search('-')==-1 ? 'budgets' : location.pathname.split('-').pop();
 		history.replaceState({}, "wallet", "/ui/wallet-"+ app.currView);
 		
-		main.cards = walletCards(api);		
+		main.budgets = walletBudgets(api);		
 		main.records = walletRecords(api);		
 		main.txn = walletTxn(api);		
 		main.edit = walletEdit(api);
@@ -28,13 +28,13 @@ function walletMain(conf) {
 			.then(setUser, main.errHandler);
 			
 		$('#viewTypeDiv').click(main.clickHandler);
-		$('#accountsWrapper').click(main.cards.toggleAcctItem);
+		$('#accountsWrapper').click(main.budgets.toggleAcctItem);
 		$('#recordsWrapper').click(main.records.toggleRecordItem);
 		$('#relaysWrapper').click(main.relays.toggleRelayItem);
 		$('#scrollTo').click(main.records.scrollMore);
 		$('#txnForm').click(main.txn.formClick);
 		$('#relayInfo').click(main.txn.postRelayRefresh);
-		$('#editCard, #editRelay, #editPrompt').click(main.edit.formClick);
+		$('#editBudget, #editRelay, #editPrompt').click(main.edit.formClick);
 		$('#expenseAcctToUse').change(function () {
 			params.expenseAcctToUse = $('#expenseAcctToUse').val();
 			$('#txn-from').val(params.expenseAcctToUse);
@@ -55,7 +55,7 @@ function walletMain(conf) {
 		main.me(User.user_id, User.name, User.login_provider);
 		
 		viewDataLink = {
-			cards: User.links.userAccounts,
+			budgets: User.links.userAccounts,
 			orders: User.links.orders,
 			itemized: User.links.itemized
 		};
@@ -66,7 +66,7 @@ function walletMain(conf) {
 	
 	main.api = api;
 	main.resources = resources;
-	main.currView = 'cards';
+	main.currView = 'budgets';
 	
 	main.params = function () {return params}
 	
@@ -106,21 +106,24 @@ function walletMain(conf) {
 	
 	main.clickHandler = function (e) {
 		var elemId = e.target.id.toLowerCase();
-		var view = elemId.search('cards') != -1 ? 'cards'
+		var view = elemId.search('budgets') != -1 ? 'budgets'
 			: elemId.search('orders') != -1 ?  'orders'
 			: elemId.search('itemized') != -1 ?  'itemized'
 			: '';
 		
-		if (view) { console.log(view)
-			var btn = app.currView=='relays' || app.currView=='records' ? 'cardsViewPrompt' : app.currView+'ViewPrompt';
+		if (view) {
+			var btn = app.currView=='relays' || app.currView=='records' ? 'budgetsViewPrompt' : app.currView+'ViewPrompt';
 			
 			$('#'+btn).css('color','#fff');
+			
 			app.currView = view;
 			$('#'+view+'ViewPrompt').css('color','#ff0');
 			
 			$currDiv.css('display','none');
-			var wrapperDiv = view!='cards' ? '#'+view+'Wrapper' : '#accountsWrapper,#recordsWrapper,#relaysWrapper';
+			
+			var wrapperDiv = view!='budgets' ? '#'+view+'Wrapper' : '#accountsWrapper,#recordsWrapper,#relaysWrapper';
 			$currDiv = $(wrapperDiv).css('display','block');
+			
 			main[view](viewDataLink[view]);		
 			history.replaceState({}, "wallet", "/ui/wallet-"+ app.currView);
 		}

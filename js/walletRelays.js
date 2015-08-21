@@ -89,7 +89,7 @@ function walletRelays(api) {
 		}
 		
 		if (idArr.indexOf('acctRelayTitle')!=-1) {
-			app.currView = 'cards';
+			app.currView = 'budgets';
 			app('relaysWrapper'); return;
 		}
 		

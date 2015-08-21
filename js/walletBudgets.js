@@ -1,4 +1,4 @@
-function walletCards(api) {	
+function walletBudgets(api) {	
 	var currURL, currAccounts, currAcctDivId, acctsToUse=[], params;
 	var openHeight='300px';
 	
@@ -9,10 +9,10 @@ function walletCards(api) {
 		$('#expenseAcctToUse').children().remove();
 		
 		api.loadId(currURL, app.refresh())
-			.then(renderCards, main.errHandler);		
+			.then(renderBudgets, main.errHandler);		
 	}
 	
-	function renderCards(userAccounts) {
+	function renderBudgets(userAccounts) {
 		if (!userAccounts.items.length) {
 			$("#accountsWrapper").append("<div>You do not have any accounts in your wallet.</div>");
 		}

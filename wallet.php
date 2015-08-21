@@ -35,8 +35,8 @@
 	</div>
 	
 	<div id='viewTypeDiv' class='row'>		
-		<button id='cardsViewPrompt' class='small-4 tiny'>Cards</button>
-		<button id='ordersViewPrompt' class='small-4 tiny'>My Orders</button>
+		<button id='budgetsViewPrompt' class='small-4 tiny'>Budgets</button>
+		<button id='ordersViewPrompt' class='small-4 tiny'>Orders</button>
 		<button id='itemizedViewPrompt' class='small-4 tiny'>Itemized</button>
 	</div>
 	
@@ -92,7 +92,7 @@
 	</div>
 	
 	<div id='editModal' class="reveal-modal medium" style='min-height:50vh; top:30px;' data-reveal>
-		<div id='editCard'>		
+		<div id='editBudget'>		
 			<h4 id='edit-title'></h4>
 			<form>
 				<div class='row'>
@@ -179,7 +179,7 @@
 	</div>
 	
 	<script type="text/javascript" src="js/walletMain.js"></script>
-	<script type="text/javascript" src="js/walletCards.js"></script>
+	<script type="text/javascript" src="js/walletBudgets.js"></script>
 	<script type="text/javascript" src="js/walletRecords.js"></script>
 	<script type="text/javascript" src="js/walletTxn.js"></script>
 	<script type="text/javascript" src="js/walletEdit.js"></script>

@@ -138,7 +138,7 @@ function walletRecords(api) {
 		var typeArr = [id.split('-')[0], pid.split('-')[0], ppid.split('-')[0]];
 		
 		if (idArr.indexOf('acctRecordTitle')!=-1) {
-			app.currView = 'cards';
+			app.currView = 'budgets';
 			app(); return;
 		}		
 		

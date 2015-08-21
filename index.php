@@ -28,6 +28,7 @@ if (isset($_GET['token_id']) AND is_numeric($_GET['token_id']) AND isset($_GET['
 
 
 $handler = trim($_GET['_url'], " \/\\\t\n\r\0\x0B");
+
 if (!$handler OR strpos($handler,'home')!==false) $handler='home'; 	
 else if (strpos($handler,'wallet')!==false) $handler='wallet';
 
