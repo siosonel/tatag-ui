@@ -12,9 +12,6 @@ function homePromos(api) {
 		var url = currUser.links.promoCollection;
 		$('#promosWrapper').children().remove();
 		$('#promosWrapper').append(setTitle(currUser));
-		
-		$('#homeWrapper').animate({left: '-100%'});
-		$('#promosWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
 		api.loadId(url, app.refresh()).then(renderRatings, app.errHandler);
@@ -22,20 +19,14 @@ function homePromos(api) {
 	
 	function setTitle() {
 		$('#promosWrapper').append(
-			"<div class='row subLabel'>"
+			"<div class='row'>"
 			+	"<div class='columns small-8'>"
-			+  	"<span style='vertical-align:top; font-weight: 700;'>&#9668; Promos </span>"
+			+  	"<a href=''>Help</a>"
 			+	"</div>"
 			+	"<div class='columns small-4'>"
 			+	 	"<button id='addPromo' class='right tiny' style='margin:0;'>+New Promo</button>"
 			+ "</div>"
 			+"</div>"
-			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 0 5px;'>"
-			+		"<div class='small-2 columns'>Created</div>"
-			+ 	"<div class='small-10 columns' style='margin-bottom:10px;'>"
-			+ 		"Rating Information"
-			+		"</div>"
-			+'</div>'
 		);
 	}
 	
@@ -55,14 +46,14 @@ function homePromos(api) {
 		
 		$('#promosWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
-			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
-			+ 	"<div class='small-10 columns' style='text-align: left; margin-bottom:10px;'>"
+			+ 	"<div class='small-12 columns' style='text-align: left; margin-bottom:10px;'>"
 			+			(promo.imageURL ? "<img src='"+promo.imageURL+"' class='small'><br />" : "")
+			+			"<button id='pay-"+ promo.promo_id +"' class='right tiny'>"+ promo.amount.toFixed(2) +" hour</button>"  
 			+ 		"<b>"+promo.name +"</b><br />"
-			+			"<button id='pay-"+ promo.promo_id +"' class='tiny'>"+ promo.amount.toFixed(2) +" hour</button><br />"  
 			+			promo.description +"</br >"
 			+			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a>" : "")
 			+			"Expires: "+ promo.expires 
+			//+ date[1] +'/'+ date[2] +"<br/>"+ date[0]
 			+		"</div>"
 			+'</div>'
 		)

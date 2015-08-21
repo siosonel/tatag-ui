@@ -10,9 +10,6 @@ function homeRatings(api) {
 		var url = currUser.links.userRatings;
 		$('#ratingsWrapper').children().remove();
 		$('#ratingsWrapper').append(setTitle(currUser));
-		
-		$('#homeWrapper').animate({left: '-100%'});
-		$('#ratingsWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
 		api.loadId(url, app.refresh()).then(renderRatings, app.errHandler);
@@ -20,21 +17,14 @@ function homeRatings(api) {
 	
 	function setTitle() {
 		$('#ratingsWrapper').append(
-			"<div class='row subLabel'>"
+			"<div class='row'>"
 			+	"<div class='columns small-8'>"
-			+  	"<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currUser.name+" ratings, </span>"
-			+  	"<span style='font-weight:normal;'>&nbsp; user#"+ currUser.user_id +"</span>"
+			+  	"<a href=''>Help</a>"
 			+	"</div>"
 			+	"<div class='columns small-4'>"
 			+	 	"<button id='addRating' class='right tiny' style='margin:0;'>+New Rating</button>"
 			+ "</div>"
 			+"</div>"
-			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 0 5px;'>"
-			+		"<div class='small-2 columns'>Created</div>"
-			+ 	"<div class='small-10 columns' style='margin-bottom:10px;'>"
-			+ 		"Rating Information"
-			+		"</div>"
-			+'</div>'
 		);
 	}
 	
@@ -54,14 +44,13 @@ function homeRatings(api) {
 		
 		$('#ratingsWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
-			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
-			+ 	"<div class='small-10 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		"rating #"+rating.rating_id +" <span class='fi-pencil small'>&nbsp;</span><br />"
-			+			"Brand: "+ rating.brand_name +"</br >"
+			+ 	"<div class='small-12 columns' style='text-align: left; margin-bottom:10px;'>"
+			+ 		"<span class='fi-pencil small right'>&nbsp;</span>"
+			+			rating.brand_name +"</br >"
 			+			"Rating: "+ rating.rating +"</br >"
 			+			"Reason: "+ rating.reason 
+			//+ 	date[1] +'/'+ date[2] +"<br/>"+ date[0]
 			+		"</div>"
-			//+ 	"<div id='"+divId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
 			+'</div>'
 		)
 	}

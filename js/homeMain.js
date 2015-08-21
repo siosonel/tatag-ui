@@ -15,16 +15,20 @@ function homeMain(conf) {
 	
 	$(document).ready(function () {
 		params = main.getQueryParams();
-		history.replaceState({}, "home", "/ui/home");
+		app.currView = location.pathname.search('-')==-1 ? 'about' : location.pathname.split('-').pop();
+		
+		history.replaceState({}, "home", "/ui/home-"+ app.currView);
 		
 		main.ratings = homeRatings(api);
+		main.viz = homeViz(api);
 		main.promos = homePromos(api);
+		main.about = homeAbout(api);
 		main.forms = adminForms(api);
 		main.me = me();
 		
 		init();
-		
-		$('#ratingPromptDiv, #promoPromptDiv').click(main.clickHandler);
+				
+		$('#viewTypeDiv').click(main.clickHandler);
 		$('#ratingsWrapper').click(main.ratings.clickHandler);
 		$('#promosWrapper').click(main.promos.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
@@ -40,8 +44,8 @@ function homeMain(conf) {
 	}
 	
 	function main(otherWrapper) {
-		$('#homeWrapper').animate({left: '5px'});
-		$('#'+otherWrapper).animate({left: '100%'});
+		//$('#homeWrapper').animate({left: '5px'});
+		//$('#'+otherWrapper).animate({left: '100%'});
 	}
 	
 	function loadUser(res) {
@@ -55,8 +59,12 @@ function homeMain(conf) {
 		
 		if (params.promo_id) {
 			console.log('Filter out this already used promo based on relay usage restrictions?');
-			alert("Thank you for supporting promo #"+ params.promo_id +".\n\nIf this promo is for a purchased item, your order will be processed soon.");
+			//alert("Thank you for supporting promo #"+ params.promo_id +".\n\nIf this promo is for a purchased item, your order will be processed soon.");
+			app.currView = 'promos';
 		}
+		
+		$currDiv = $('#'+ app.currView+"Wrapper");
+		$('#'+ app.currView +'ViewPrompt').trigger('click');
 	}
 	
 	function openForm() {
@@ -90,18 +98,22 @@ function homeMain(conf) {
 	}
 	
 	main.clickHandler = function (e) {
-		var divId = e.target.id.toLowerCase();
+		var elemId = e.target.id.toLowerCase();
+		var view = elemId.search('rating') != -1 ? 'ratings'
+			: elemId.search('promo') != -1 ?  'promos'
+			: elemId.search('viz') != -1 ?  'viz'
+			: elemId.search('about') != -1 ?  'about'
+			: '';
 		
-		if (divId.search('rating')!=-1) {
-			app.currView = 'ratings';
-			app.ratings(User);
-			if (e.target.id=='addRatingLink') {
-				app.ratings.postRenderFxn = clickAddRatingBtn
-			}
-		}
-		else if (divId.search('promo')!=-1) {
-			app.currView = 'promos';
-			app.promos(User);
+		if (view) {
+			$('#'+app.currView+'ViewPrompt').css('color','#fff');
+			app.currView = view;
+			$('#'+view+'ViewPrompt').css('color','#ff0');
+			
+			$currDiv.css('display','none');
+			$currDiv = $('#'+view+'Wrapper').css('display','block');
+			app[view](User);		
+			history.replaceState({}, "home", "/ui/home-"+ app.currView);
 		}
 	}
 	
@@ -152,6 +164,7 @@ function homeMain(conf) {
 	}
 	
 	main.completer = completer;
+	main.currView = 'about';
 	
 	return main;
 }

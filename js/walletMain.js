@@ -1,5 +1,6 @@
 function walletMain(conf) {
 	var User, resources={}, refresh=0, params;
+	var $currDiv, viewDataLink={};	
 	
 	var api = apiClass({
 		'userid': conf.userid, 
@@ -9,19 +10,24 @@ function walletMain(conf) {
 	
 	$(document).ready(function () {
 		params = main.getQueryParams();
-		//history.replaceState({}, "wallet", "/ui/wallet");
+		
+		app.currView = location.pathname.search('-')==-1 ? 'cards' : location.pathname.split('-').pop();
+		history.replaceState({}, "wallet", "/ui/wallet-"+ app.currView);
 		
 		main.cards = walletCards(api);		
 		main.records = walletRecords(api);		
 		main.txn = walletTxn(api);		
 		main.edit = walletEdit(api);
 		main.relays = walletRelays(api);
+		main.orders = walletOrders(api);
+		main.itemized = walletItemized(api);
 		main.me = me();
 		
 		api.init('/')
 			.then(loadUser)
 			.then(setUser, main.errHandler);
 			
+		$('#viewTypeDiv').click(main.clickHandler);
 		$('#accountsWrapper').click(main.cards.toggleAcctItem);
 		$('#recordsWrapper').click(main.records.toggleRecordItem);
 		$('#relaysWrapper').click(main.relays.toggleRelayItem);
@@ -47,7 +53,15 @@ function walletMain(conf) {
 	function setUser(res) { 
 		User = res;
 		main.me(User.user_id, User.name, User.login_provider);
-		main.cards(User.links.userAccounts);
+		
+		viewDataLink = {
+			cards: User.links.userAccounts,
+			orders: User.links.orders,
+			itemized: User.links.itemized
+		};
+				
+		$currDiv = $('#'+ app.currView+"Wrapper");
+		$('#'+ app.currView +'ViewPrompt').trigger('click');
 	}
 	
 	main.api = api;
@@ -88,6 +102,28 @@ function walletMain(conf) {
 		})
 		
 		return result;
+	}
+	
+	main.clickHandler = function (e) {
+		var elemId = e.target.id.toLowerCase();
+		var view = elemId.search('cards') != -1 ? 'cards'
+			: elemId.search('orders') != -1 ?  'orders'
+			: elemId.search('itemized') != -1 ?  'itemized'
+			: '';
+		
+		if (view) { console.log(view)
+			var btn = app.currView=='relays' || app.currView=='records' ? 'cardsViewPrompt' : app.currView+'ViewPrompt';
+			
+			$('#'+btn).css('color','#fff');
+			app.currView = view;
+			$('#'+view+'ViewPrompt').css('color','#ff0');
+			
+			$currDiv.css('display','none');
+			var wrapperDiv = view!='cards' ? '#'+view+'Wrapper' : '#accountsWrapper,#recordsWrapper,#relaysWrapper';
+			$currDiv = $(wrapperDiv).css('display','block');
+			main[view](viewDataLink[view]);		
+			history.replaceState({}, "wallet", "/ui/wallet-"+ app.currView);
+		}
 	}
 	
 	return main

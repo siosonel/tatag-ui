@@ -233,7 +233,7 @@
 					</div>
 					<div class='row'>
 						<div class='columns small-12'>
-							<label>Mission<textarea id='about-mission'/></textarea></label>
+							<label>Purpose<textarea id='about-mission'/></textarea></label>
 						</div>
 					</div>
 					<div class='row'>

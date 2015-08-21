@@ -25,6 +25,17 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<link rel="stylesheet" href="css/admin.css">
 	
 	<style>
+		#ratingsWrapper, #vizWrapper, #promosWrapper, #aboutWrapper {
+			display: none;
+			left: 0%;
+		}
+	
+		#aboutWrapper {
+			text-align: center;
+			width: 100%;
+			padding-left: 10px;
+		}
+	
 		#ratingsDivPrompt {}
 		
 		#addRatingLink {
@@ -70,27 +81,24 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			<a href="/ui/my-teams">Teams</a>
 		</div>
 	</div>
+	
+	<div id='viewTypeDiv' class='row'>
+		<button id='ratingsViewPrompt' class='small-3 tiny'>Ratings</button>
+		<button id='vizViewPrompt' class='small-3 tiny'>Viz</button>
+		<button id='promosViewPrompt' class='small-3 tiny'>Promos</button>
+		<button id='aboutViewPrompt' class='small-3 tiny'>About</button>
+	</div>
 
 	<div id='mainWrapper'>
-		<div id='homeWrapper'>
-			<div id='ratingPromptDiv' class='panel'> 
-				<span id='addRatingLink' style='font-weight: 700;'>+New Rating</span>
-				&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-				<span id='ratingsDivPrompt' style='font-weight: 700'>Ratings List&#9658;</span>
-			</div>
-			<div id='promoPromptDiv' class='panel'> 
-				<span id='promosDivPrompt' style='font-weight: 700'>Promos&#9658;</span>
-			</div>
-			<div id='arrowFrameDiv' class='panel'>
-				<iframe id='arrowFrame' src='<?php echo $ProtDomain ?>/viz/arrow.php' width="100%" height="610px" scrolling="no" frameborder="no"></iframe>
-			</div>
-			<div id='chordFrameDiv' class='panel'>
-				<iframe id='chordFrame' src='<?php echo $ProtDomain ?>/viz/chord_m.php' width="100%" height="700px" scrolling="no" frameborder="no"></iframe>
-			</div>
-		</div>
-		
 		<div id='ratingsWrapper' class="row"></div>
+		
+		<div id='vizWrapper'></div>		
+		
 		<div id='promosWrapper' class="row"></div>
+		
+		<div id='aboutWrapper'>
+			<iframe width="100%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
+		</div>
 	</div>
 	
 	<div>	
@@ -132,6 +140,8 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<script src='js/adminForms.js'></script>
 	<script src='js/homeRatings.js'></script>
 	<script src='js/homePromos.js'></script>
+	<script src='js/homeViz.js'></script>
+	<script src='js/homeAbout.js'></script>
 	<script src='js/autoComplete.js'></script>
 	<script>	
 		var autocompleteSource = [

@@ -18,7 +18,11 @@
 	
 	<link rel="stylesheet" href="css/wallet.css">
 	
-	<style></style>
+	<style>
+		#ordersWrapper, #itemizedWrapper {
+			display: none;
+		}
+	</style>
 </head>
 <body>
 	<div id='login_provider'></div>
@@ -30,12 +34,27 @@
 		</div>
 	</div>
 	
+	<div id='viewTypeDiv' class='row'>		
+		<button id='cardsViewPrompt' class='small-4 tiny'>Cards</button>
+		<button id='ordersViewPrompt' class='small-4 tiny'>My Orders</button>
+		<button id='itemizedViewPrompt' class='small-4 tiny'>Itemized</button>
+	</div>
+	
 	<div id='mainWrapper'>	
 		<div class="row" id='accountsWrapper'></div>
 		<div class="row" id='recordsWrapper'></div>
 		<div class="row" id='relaysWrapper'></div>
+		
+		<div class="row" id='ordersWrapper'>
+		<br />Under construction: This view will show promotional items that you paid for. A toggle will allow you to view your team's promo items that others have paid for.
+		</div>
+		
+		<div class="row" id='itemizedWrapper'>
+		<br />Under construction: This view will show your total expenses itemized by purchase or donation type.
+		</div>
+		
 		<button id='scrollTo' class='tiny'>more...</button>
-	</div>	
+	</div>
 	
 	<div id='txnModal' class="reveal-modal medium" style='min-height:50vh; top:30px;' data-reveal>
 		<div id='txnForm'>		
@@ -165,6 +184,8 @@
 	<script type="text/javascript" src="js/walletTxn.js"></script>
 	<script type="text/javascript" src="js/walletEdit.js"></script>
 	<script type="text/javascript" src="js/walletRelays.js"></script>
+	<script type="text/javascript" src="js/walletOrders.js"></script>
+	<script type="text/javascript" src="js/walletItemized.js"></script>
 	<script>
 		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);
 	</script>

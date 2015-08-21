@@ -5,17 +5,25 @@ function adminBrands(api) {
 	function main(brandURL) {		
 		if (brandURL) currURL = brandURL;
 		$('#brandsWrapper').children().remove(); //console.log(currURL); console.log(api.byId[currURL]);
+		$('#brandsWrapper').append("<div style='min-height:2rem;'>"
+			+ "<a herf='' id='adminListHeading' style='line-height:2rem; vertical-align:bottom;'>Help</a>"
+			+	"<button id='addBrand' class='right tiny' style='margin:0;'>+New Brand</button>"
+			+"</div>");
 		
 		api.deref(currURL, app.refresh())
 			.then(renderBrands, app.errHandler);	
 	}
 	
 	function renderBrands(brands) {
-		if (!brands.length) $("#brandsWrapper").append("<div><br />"
+		if (!brands.length) {
+			$('#adminListHeading').html('');
+			
+			$("#brandsWrapper").append("<div><br />"
 			+ "You are currently not an admin in any brand."
 			+ "<br />To have an admin role, request a brand admin to assign that role to you. "
 			+ "<br />-OR-,<br />You could create a new currency brand to administer."
-		+"</div>");
+			+"</div>");
+		}
 		else {
 			currBrands = brands;
 			currBrands.map(renderBrandDiv);

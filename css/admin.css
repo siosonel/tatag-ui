@@ -12,6 +12,18 @@ body {
 
 }
 
+#viewTypeDiv {
+	margin-top: 0;
+}
+
+#viewTypeDiv button {
+	margin-bottom: 0;
+	padding: 0.5rem 0.8rem;
+	background-color: #999;
+	float: left;
+	border: #999;
+}
+
 #mainWrapper {
 	position: relative;
 	/*left:0;*/
@@ -36,8 +48,7 @@ body {
 	left: 5px;
 	width: calc(100% - 10px);
 	text-align: center;
-	padding: 5px;
-	background-color: #fff;
+	background-color: transparent;
 }
 
 .brandItem, .acctItem {

@@ -18,7 +18,11 @@
 	
 	<link rel="stylesheet" href="css/admin.css">
 	
-	<style></style>
+	<style>
+		.brandItem {
+			text-align: left;
+		}
+	</style>
 </head>
 <body>
 	<div id='login_provider'></div>

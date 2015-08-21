@@ -6,35 +6,25 @@
 		</div>
 	</div>
 	
-	<div id='viewType' class='row' style='margin-top: 10px;'>
-		<style>
-			#viewType button {
-				margin-bottom: 0;
-				opacity: 0.8;
-				padding: 0.5rem 0.8rem;
-				float: left;
-			}
-		</style>
-		
-		<button id='my-teams' class='small-3 medium-2 large-1 tiny'>My Teams</button>
-		<button id='teams-admin' class='small-3 medium-2 large-1 tiny'>Admin</button>
-		<button id='teams-search' class='small-3 medium-2 large-1 tiny'>Search</button>
+	<style>
+	</style>
+	
+	<div id='viewTypeDiv' class='row'>		
+		<button id='my-teams' class='small-4 tiny'>My Teams</button>
+		<button id='teams-admin' class='small-4 tiny'>Admin</button>
+		<button id='teams-search' class='small-4 tiny'>Search</button>
 		
 		<script>		
 		$(document).ready(function () {
 			history.replaceState({}, "team", location.pathname);
-			var view = location.pathname.replace("\/ui\/",""); console.log(view)
+			var view = location.pathname.replace("\/ui\/","");
 			
 			$('#'+view).css({'color': '#ff0', 'opacity': 1, 'font-weight':700});
 			
-			$('#viewType').click(function resetTeamView (e) {
+			$('#viewTypeDiv').click(function resetTeamView (e) {
 				if (e.target.id=='addBrand') app.brands.clickHandler(e);
 				else window.location.href = window.location.origin +"/ui/"+ e.target.id;
 			});
-
-			if (view=='teams-admin') $('#viewType').append(
-				"<button id='addBrand' class='small-2 medium-2 large-1 tiny' style='float:right;'>+New</button>"
-			);
 		});
 		</script>		
 	</div>

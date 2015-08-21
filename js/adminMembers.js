@@ -20,13 +20,10 @@ function adminMembers(api) {
 	function setTitle() {
 		$('#membersWrapper').append(
 			"<div class='row subLabel'>"
-			+	"<div class='columns small-8'>"
+			+	"<div class='columns small-12'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" members, </span>"
 			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
 			+	"</div>"
-			+	"<div class='columns small-4'>"
-			+	 "<button id='addMember' class='right tiny' style='margin:0;'>+New Member</button>"
-			+ "</div>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row brandItem' style='margin: 0 5px;'>"
 			+		"<div class='small-2 columns'>Joined</div>"
@@ -41,6 +38,11 @@ function adminMembers(api) {
 	function renderMembers(members) {
 		currCollection = members;
 		members.items.map(renderItem)
+		$('#membersWrapper').append(
+			"<div>"
+			+	 "<button id='addMember' class='tiny' style='margin:0;'>+New Member</button>"
+			+ "</div>"
+		);
 	}
 	
 	function renderItem(member) { //console.log(member)
