@@ -34,7 +34,7 @@ function walletMain(conf) {
 		$('#scrollTo').click(main.records.scrollMore);
 		$('#txnForm').click(main.txn.formClick);
 		$('#relayInfo').click(main.txn.postRelayRefresh);
-		$('#editBudget, #editRelay, #editPrompt').click(main.edit.formClick);
+		$('#editBudget, #editRelay, #editRecord').click(main.edit.formClick);
 		$('#expenseAcctToUse').change(function () {
 			params.expenseAcctToUse = $('#expenseAcctToUse').val();
 			$('#txn-from').val(params.expenseAcctToUse);
@@ -78,8 +78,9 @@ function walletMain(conf) {
 		return refresh+1;
 	}
 	
-	main.errHandler = function errHandler(err) { console.log(err.message)
-		if (err.message=="Unauthorized") main.me.modal();
+	main.errHandler = function errHandler(err) {
+		if (err.message.search("Unauthorized")===0) main.me.modal();
+		else alert(err.message);
 	}
 	
 	main.getQueryParams = function () {

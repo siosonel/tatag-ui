@@ -14,6 +14,7 @@ function teamMain(conf) {
 		main.accounts = teamAccounts(api);
 		main.records = teamRecords(api);
 		main.throttles = teamThrottles(api);
+		main.promos = adminPromos(api);
 		main.forms = adminForms(api);
 		main.me = me();
 		
@@ -25,6 +26,7 @@ function teamMain(conf) {
 		$('#accountsWrapper').click(main.accounts.clickHandler);
 		$('#recordsWrapper').click(main.records.clickHandler);
 		$('#throttlesWrapper').click(main.throttles.clickHandler);
+		$('#promosWrapper').click(main.promos.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
 	});
 	
@@ -62,8 +64,9 @@ function teamMain(conf) {
 		return refresh+1;
 	}
 	
-	main.errHandler = function errHandler(err) { console.log(err.message)
-		if (err.message=="Unauthorized") main.me.modal();
+	main.errHandler = function errHandler(err) {
+		if (err.message.search("Unauthorized")===0) main.me.modal();
+		else alert(err.message);
 	}
 	
 	main.getDivId = function (e, type) {

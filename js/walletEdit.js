@@ -18,14 +18,14 @@ function walletEdit(api) {
 	
 	function renderAcctForm(action) {
 		if (currResource['@type']!='userAccount') {		
-			$('#editCard').css('display','none'); return;
+			$('#editBudget').css('display','none'); return;
 		}
 		
 		currForm = !currResource.links ? null : api.byId[currResource.links['holder-edit']];
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
 		$('#edit-alias').val(currResource.alias);
 		$('#edit-limkey').val(currResource.limkey);		
-		$('#editCard').css('display','block');
+		$('#editBudget').css('display','block');
 		idPrefix = 'edit-';
 	}
 	
@@ -51,7 +51,7 @@ function walletEdit(api) {
 	
 	function renderRecordForm(action) {
 		if (currResource['@type']!='accountRecord') {		
-			$('#editPrompt').css('display','none'); return;
+			$('#editRecord').css('display','none'); return;
 		}
 		
 		currForm = !currResource.links ? null : api.byId[currResource.links['record-'+action]];
@@ -66,7 +66,7 @@ function walletEdit(api) {
 		
 		$('#editRecordConfirm').html(text);
 		$('#edit-status').val(status[action]);
-		$('#editPrompt').css('display','block');
+		$('#editRecord').css('display','block');
 		idPrefix = 'edit-';
 	}
 	

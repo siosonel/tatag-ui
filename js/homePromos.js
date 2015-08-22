@@ -59,12 +59,19 @@ function homePromos(api) {
 		)
 	}
 	
+	function setHolderIdOpt(acct) {
+		if (acct.authcode.search('x')!=-1) $('#promos-holder_id').append(
+			"<option value='"+ acct.holder_id +"'>"+ acct.account_name +", brand "+ acct.brand_name +", Bal: "+ acct.balance +"</option>"
+		);
+	}
+	
 	main.clickHandler = function (e) {
 		if (e.target.id=='addPromo') { 
-			app.completer.reset();
-			$('#promos-brand_id').prop('disabled',false).val('');
+			$('#promoID-formDiv').css('display','none');
+			$('#promoDetailsDiv, #promoRelayDiv, #promoHolderIdDiv').css('display','block');
+			app.api.byType.userAccounts.items.map(setHolderIdOpt);			
+			
 			app.forms(currCollection, 'promos', '/forms#promo-add');
-			initPlaces();
 			return;
 		}
 		else if (e.target.id.substr(0,4)=='pay-') { 

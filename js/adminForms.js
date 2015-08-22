@@ -4,12 +4,13 @@ function adminForms(api) {
 	var currAreaCode = 206;
 	var dateInputs = ['ended', 'joined', 'revoked'];
 
-	function main(div, type, formURL, altType) {
+	function main(div, type, formURL, altType, altFormTarget) {
 		currResource = typeof div=='string' ? app.resources[div] : div;
 		currType = type;
 		currForm = api.byId[formURL];
 		currAltType = altType ? altType : "";
-	
+		currForm.target = arguments.length==5 ? altFormTarget : null;		
+		
 		renderForm();
 		$('#'+currType+'-formTitle').html(currForm.title); 
 		$('#'+currType+'Modal').foundation('reveal','open');

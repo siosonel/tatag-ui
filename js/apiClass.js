@@ -60,8 +60,9 @@ function apiClass(conf) {
 					deferred.resolve(res['@graph'][0]);
 				}
 			},
-			error: function (xhr, status, text) {
-				deferred.reject(new Error(text));
+			error: function (xhr, status, text) { console.log(xhr.responseText);
+				var mssg = JSON.parse(xhr.responseText).error;
+				deferred.reject(new Error(text +': '+ mssg));
 			}
 		});
 		
@@ -120,8 +121,9 @@ function apiClass(conf) {
 						deferred.resolve(res);
 					}
 				},
-				error: function (xhr, status, text) {
-					deferred.reject(new Error(text));
+				error: function (xhr, status, text) { console.log(xhr.responseText);
+					var mssg = JSON.parse(xhr.responseText).error;
+					deferred.reject(new Error(text +': '+ mssg));
 				}
 			})
 		}

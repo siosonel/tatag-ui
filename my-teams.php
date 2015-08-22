@@ -31,6 +31,7 @@
 		<div id='membersWrapper' class="row"></div>
 		<div id='accountsWrapper' class="row"></div>
 		<div id='throttlesWrapper' class="row"></div>
+		<div id='promosWrapper' class="row"></div>
 		<div id='recordsWrapper' class="row">
 			<div id='recordsTitle'></div>
 			<div id='recordsType' class='row'>
@@ -78,6 +79,84 @@
 		<a class="close-reveal-modal">×</a>
 	</div>
 	
+	
+	<div id='promosModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
+		<div id='promosForm'>		
+			<h4 id='promos-formTitle'></h4>
+			<form>
+				<div class='row' id='promoID-formDiv'>
+					<div class='columns small-12'>
+						<label>Promos ID#<input type='text' id='promos-promo_id' value='' disabled='disabled'/></label>
+					</div>
+				</div>	
+				
+				<div id='promoDetailsDiv'>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Name<input type='text' id='promos-name' value='' /></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Description<textarea rows='3' id='promos-description'></textarea></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-6'>
+							<label>Amount<input type='text' id='promos-amount' value='' /></label>
+						</div>
+						<div class='columns small-6'>
+							<label>Expires<input type='text' id='promos-expires' value='2016-12-31 00:00:00' /></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Image URL<input type='text' id='promos-imageURL' value='' /></label>
+						</div>
+					</div>						
+					<div class='row'>
+						<div class='columns small-12'>
+							<label>Link<input type='text' id='promos-iinfoURL' value='' /></label>
+						</div>
+					</div>
+				</div>
+				
+				<div id='promoRelayDiv'>
+					<div id='promoHolderIdDiv' class='row'>
+						<div class='columns small-12'>
+							<label>Route payments to<br />(revenue account w/ 'x' authcode): <select id='promos-holder_id'></select></label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-12'>Limits on usage per week</div>
+					</div>
+					<div class='row'>
+						<div class='columns small-4'>
+							<label>Total<input type='text' id='promos-by_all_limit' value='25' /></label>
+						</div>
+						<div class='columns small-4'>
+							<label>By brand<input type='text' id='promos-by_brand_limit' value='5' /></label>
+						</div>
+						<div class='columns small-4'>
+							<label>By user<input type='text' id='promos-by_user_limit' value='2' /></label>
+						</div>
+					</div>
+					<div class='row'>						
+						<div class='columns small-8'>
+							<label for='promos-by_user_wait'>Before reusing, a user must wait (in hours)</label>
+						</div>				
+						<div class='columns small-4'>
+							<input type='text' id='promos-by_user_wait' value='24' />
+						</div>
+					</div>
+				</div>
+			</form>
+			<button id='promos-submit'>Submit</button>&nbsp;
+			<button id='promos-cancel'>Cancel</button>
+		</div>
+		<a class="close-reveal-modal">×</a>
+	</div>		
+	
 	<script src='js/teamMain.js'></script>
 	<script src='js/teamBrands.js'></script>
 	<script src='js/teamAbout.js'></script>
@@ -85,6 +164,7 @@
 	<script src='js/teamAccounts.js'></script>
 	<script src='js/teamRecords.js'></script>
 	<script src='js/teamThrottles.js'></script>
+	<script src='js/adminPromos.js'></script>
 	<script src='js/adminForms.js'></script>
 	<script>
 		var types = <?php echo file_get_contents(TATAG_DOMAIN ."/ref/brand_classification.json"); ?>;

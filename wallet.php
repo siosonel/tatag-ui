@@ -84,6 +84,7 @@
 				<input type='hidden' id='txn-orig_record_id' value='' /> 
 			</form>
 			<button id='txn-submit'>Submit</button>
+			<button id='txn-cancel'>Cancel</button>
 		</div>
 				
 		<div id='relayInfo'></div>
@@ -168,7 +169,7 @@
 			<button id='editRelay-cancel'>Cancel</button>
 		</div>
 		
-		<div id='editPrompt'>
+		<div id='editRecord'>
 			<p id='editRecordConfirm'></p>
 			<input type='hidden' id='edit-status' value=''/>
 			<button id='editRecord-submit'>Submit</button>&nbsp;

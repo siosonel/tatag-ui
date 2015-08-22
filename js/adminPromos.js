@@ -14,7 +14,7 @@ function adminPromos(api) {
 		$('#promosWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh()).then(renderPromos, app.errHandler)
+		api.loadId(url, app.refresh()).then(renderPromos, app.errHandler);
 	}
 	
 	function setTitle() {
@@ -28,12 +28,6 @@ function adminPromos(api) {
 			+	 	"<button id='addPromo' class='right tiny' style='margin:0;'>+New Promo</button>"
 			+ "</div>"
 			+"</div>"
-			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 0 5px;'>"
-			+		"<div class='small-2 columns'>Created</div>"
-			+ 	"<div class='small-10 columns' style='margin-bottom:10px;'>"
-			+ 		"Promo Information"
-			+		"</div>"
-			+'</div>'
 		);
 	}
 	
@@ -46,30 +40,47 @@ function adminPromos(api) {
 		var date = promo.created.split(' ')[0].split('-');
 		var divId = 'promos-'+ promo.promo_id;
 		app.resources[divId] = promo;
+		app.resources[divId+'-details'] = promo;
+		app.resources[divId+'-relay'] = promo;
+		
+		var pencil = "<span class='fi-pencil small'>&nbsp;</span>";
 		
 		$('#promosWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
-			+			(promo.imageURL ? "<br /><img src='"+ promo.imageURL +"' class='small'/>" : "")
-			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
-			+ 	"<div class='small-10 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		"Promo #"+promo.promo_id +" <span class='fi-pencil small'>&nbsp;</span><br />"
-			+			promo.name +"<br />"
-			+			promo.description +"<br />"
-			+			"Amount: "+ promo.amount +", qty:"+ promo.qty +"<br />"
-			+			"Expires: "+ promo.expires +"<br />"
-			+			"Link: "+ promo.infoURL 
-			+		"</div>"
-			//+ 	"<div id='"+divId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
+		+			(promo.imageURL ? "<br /><img src='"+ promo.imageURL +"' class='small'/>" : "")
+		+ 	"<div id='"+ divId +"-details' class='small-12 columns' style='text-align: left;'>"
+		+ 		"<b>Promo #"+promo.promo_id +"</b> "+ pencil +"<br />"
+		+			promo.name +"<br />"
+		+			promo.description +"<br />"
+		+			"Amount: "+ promo.amount.toFixed(2) +'<br />'
+		+			"Expires: "+ promo.expires +"<br />"
+		+			"Link: "+ promo.infoURL +"<br />"
+		+			"Created: "+ date[1] +'/'+ date[2] +"/"+ date[0]
+		+		"</div>"
+		+		"<div id='"+ divId +"-relay' class='small-12 columns promoLimits' style='text-align: left; margin-bottom:10px;'>"
+		+			"<b>Usage Limits per Week:</b> "+ (promo.links['relay-edit'] ? pencil : "") +"<br />"
+		+			"Total: "+ promo.by_all_limit +', By Brand: '+ promo.by_brand_limit +', By User: '+ promo.by_user_limit + "<br />"
+		+ 		"A user must wait "+ promo.by_user_wait +" hour(s) before reusing"
+		+		"</div>"
 			+'</div>'
 		)
 	}
 	
+	function setHolderIdOpt(acct) {
+		if (acct.authcode.search('x')!=-1) $('#promos-holder_id').append(
+			"<option value='"+ acct.holder_id +"'>"+ acct.account_name +", brand "+ acct.brand_name +", Bal: "+ acct.balance +"</option>"
+		);
+	}
+	
 	main.clickHandler = function (e) {
 		if (e.target.id=='addPromo') { 
-			$('#promoID-formDiv').css('display','none')
+			$('#promoID-formDiv').css('display','none');
+			$('#promoDetailsDiv, #promoRelayDiv, #promoHolderIdDiv').css('display','block');
+			app.api.byType.userAccounts.items.map(setHolderIdOpt);			
+			
 			app.forms(currCollection, 'promos', '/forms#promo-add');
 			return;
-		}		
+		}
 		
 		if (app.getCls(e).indexOf('subLabel') != -1) {
 			app('promosWrapper');
@@ -78,8 +89,20 @@ function adminPromos(api) {
 		var divId = app.getDivId(e, 'promos');
 		if (!divId) return;
 		
-		$('#promoID-formDiv').css('display','none')
-		app.forms(divId, 'promos', '/forms#admin-promo-edit');
+		var type = divId.split('-').pop();
+		var promo = app.resources[divId];
+		$('#promos-promo_id').val(promo.promo_id);
+		
+		if (type=='relay' && promo.links['relay-edit']) {
+			$('#promoHolderIdDiv, #promoDetailsDiv').css('display','none');
+			$('#promoID-formDiv, #promoRelayDiv').css('display','block');
+			app.forms(divId, 'promos', '/forms#relay-edit', null, promo.links['relay-edit-target']);
+		}
+		else if (type=='details') {
+			$('#promoHolderIdDiv, #promoRelayDiv').css('display','none');
+			$('#promoID-formDiv, #promoDetailsDiv').css('display','block');
+			app.forms(divId, 'promos', '/forms#promo-edit');
+		}
 	}
 	
 	return main;

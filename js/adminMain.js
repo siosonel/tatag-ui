@@ -79,7 +79,8 @@ function adminMain(conf) {
 	}
 	
 	main.errHandler = function errHandler(err) {
-		if (err.message=="Unauthorized") main.me.modal();
+		if (err.message.search("Unauthorized")===0) main.me.modal();
+		else alert(err.message);
 	}
 	
 	main.getDivId = function (e, type) {
