@@ -45,8 +45,8 @@ function homePromos(api) {
 		app.resources[divId] = promo;
 		
 		$('#promosWrapper').append(
-			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
-			+ 	"<div class='small-12 columns' style='text-align: left; margin-bottom:10px;'>"
+			"<div id='"+divId+"' class='small-12 medium-6 large-4 columns' style='padding: 0.2rem; float: left;'>"
+			+ 	"<div class='brandItem' style='text-align: left;'>"
 			+			(promo.imageURL ? "<img src='"+promo.imageURL+"' class='small'><br />" : "")
 			+			"<button id='pay-"+ promo.promo_id +"' class='right tiny'>"+ promo.amount.toFixed(2) +" hour</button>"  
 			+ 		"<b>"+promo.name +"</b><br />"

@@ -133,3 +133,7 @@ body {
 .pac-container {
 	z-index: 10000 !important; 
 }
+
+.tabs dd > a, .tabs .tab-title > a{
+    outline: none;
+}
