@@ -54,8 +54,8 @@ if (
 	$location = TATAG_DOMAIN ."/login.php?token_id=$token_id&otk=$otk";
 	$provider = isset($_GET['provider']) ? $_GET['provider'] : ''; //exit($next);
 	
-	if (!$provider) include_once "ui_login.php";
-	else header("location: ". TATAG_DOMAIN ."/login.php?token_id=$token_id&otk=$otk&provider=$provider&next=$next");
+	//rely on tatag api to list all login providers, instead of assuming which ones are allowed
+	header("location: ". TATAG_DOMAIN ."/login.php?token_id=$token_id&otk=$otk&next=$next");
 }
 else {
 	$_SESSION['TOKEN_EXP'] = $expiration; 
