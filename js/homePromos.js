@@ -77,7 +77,7 @@ function homePromos(api) {
 		else if (e.target.id.substr(0,4)=='pay-') { 
 			var promo = app.resources[e.target.parentNode.parentNode.id]; console.log(promo);
 			var postPayURL = encodeURIComponent(homeURL + "?{record_id}&{promo_id}"); console.log(postPayURL);
-			window.location.href = walletURL + "?to=promo-"+ promo.promo_id +"&amount="+ promo.amount + "&postPayURL=" + postPayURL;
+			window.location.href = promo.links.payLink + "&postPayURL=" + postPayURL;
 			
 			return;
 		}

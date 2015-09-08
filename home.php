@@ -9,11 +9,11 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<link rel="icon" type="image/png" href="css/logo5.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
-	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="/ui/css/normalize.css">
 	
 	<script type="text/javascript" src="/common2/lib/jQuery/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="/node_modules/q/q.js"></script>
-	<script type="text/javascript" src="js/apiClass.js"></script>
+	<script type="text/javascript" src="/ui/js/apiClass.js"></script>
 	
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 	
@@ -22,7 +22,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
   <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
 	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
 	
-	<link rel="stylesheet" href="css/admin.css">
+	<link rel="stylesheet" href="/ui/css/admin.css">
 	
 	<style>
 		#ratingsWrapper, #vizWrapper, #promosWrapper, #aboutWrapper {
@@ -213,13 +213,13 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		<a class="close-reveal-modal">×</a>
 	</div>		
 	
-	<script src='js/homeMain.js'></script>
-	<script src='js/adminForms.js'></script>
-	<script src='js/homeRatings.js'></script>
-	<script src='js/homePromos.js'></script>
-	<script src='js/homeViz.js'></script>
-	<script src='js/homeAbout.js'></script>
-	<script src='js/autoComplete.js'></script>
+	<script src='/ui/js/homeMain.js'></script>
+	<script src='/ui/js/adminForms.js'></script>
+	<script src='/ui/js/homeRatings.js'></script>
+	<script src='/ui/js/homePromos.js'></script>
+	<script src='/ui/js/homeViz.js'></script>
+	<script src='/ui/js/homeAbout.js'></script>
+	<script src='/ui/js/autoComplete.js'></script>
 	<script>	
 		var autocompleteSource = [
 			'artistry',

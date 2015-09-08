@@ -15,7 +15,9 @@ function homeMain(conf) {
 	
 	$(document).ready(function () {
 		params = main.getQueryParams();
-		app.currView = location.pathname.search('-')==-1 ? 'ratings' : location.pathname.split('-').pop();
+		app.currView = location.pathname.search('-')!=-1 ? location.pathname.split('-').pop()
+			: conf.userid && conf.userid!="0" ? 'ratings'
+			: 'about';
 		
 		history.replaceState({}, "home", "/ui/home-"+ app.currView);
 		

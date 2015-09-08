@@ -54,7 +54,8 @@ function adminPromos(api) {
 		+			promo.description +"<br />"
 		+			"Amount: "+ promo.amount.toFixed(2) +'<br />'
 		+			"Expires: "+ promo.expires +"<br />"
-		+			"Link: "+ promo.infoURL +"<br />"
+		+			"Promo Link: "+ promo.infoURL +"<br />"
+		+			"Pay Link: <a href='"+ promo.links.payLink +"'>"+ promo.links.payLink +"</a><br />"
 		+			"Created: "+ date[1] +'/'+ date[2] +"/"+ date[0]
 		+		"</div>"
 		+		"<div id='"+ divId +"-relay' class='small-12 columns promoLimits' style='text-align: left; margin-bottom:10px;'>"

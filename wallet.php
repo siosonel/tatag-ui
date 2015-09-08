@@ -5,18 +5,18 @@
 	<link rel="icon" type="image/png" href="css/logo5.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
-	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="/ui/css/normalize.css">
 	
 	<script type="text/javascript" src="/common2/lib/jQuery/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="/node_modules/q/q.js"></script>
-	<script type="text/javascript" src="js/apiClass.js"></script>
+	<script type="text/javascript" src="/ui/js/apiClass.js"></script>
 	
 	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>
 	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
   <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
 	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
 	
-	<link rel="stylesheet" href="css/wallet.css">
+	<link rel="stylesheet" href="/ui/css/wallet.css">
 	
 	<style>
 		#ordersWrapper, #itemizedWrapper {
@@ -179,14 +179,14 @@
 		<a class="close-reveal-modal">×</a>
 	</div>
 	
-	<script type="text/javascript" src="js/walletMain.js"></script>
-	<script type="text/javascript" src="js/walletBudgets.js"></script>
-	<script type="text/javascript" src="js/walletRecords.js"></script>
-	<script type="text/javascript" src="js/walletTxn.js"></script>
-	<script type="text/javascript" src="js/walletEdit.js"></script>
-	<script type="text/javascript" src="js/walletRelays.js"></script>
-	<script type="text/javascript" src="js/walletOrders.js"></script>
-	<script type="text/javascript" src="js/walletItemized.js"></script>
+	<script type="text/javascript" src="/ui/js/walletMain.js"></script>
+	<script type="text/javascript" src="/ui/js/walletBudgets.js"></script>
+	<script type="text/javascript" src="/ui/js/walletRecords.js"></script>
+	<script type="text/javascript" src="/ui/js/walletTxn.js"></script>
+	<script type="text/javascript" src="/ui/js/walletEdit.js"></script>
+	<script type="text/javascript" src="/ui/js/walletRelays.js"></script>
+	<script type="text/javascript" src="/ui/js/walletOrders.js"></script>
+	<script type="text/javascript" src="/ui/js/walletItemized.js"></script>
 	<script>
 		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);
 	</script>
