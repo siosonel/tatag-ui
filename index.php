@@ -32,7 +32,9 @@ $handler = trim($_GET['_url'], " \/\\\t\n\r\0\x0B");
 if (!$handler OR strpos($handler,'home')!==false) $handler='home'; 	
 else if (strpos($handler,'wallet')!==false OR strpos($handler,'pay')!==false) $handler='wallet';
 
-if ($handler != 'home' && (
+if (((isset($_GET['login']) AND $_GET['login']) 
+		OR $handler != 'home'
+	) && (
 	!isset($_SESSION) 
 	OR !$_SESSION['TOKEN_ID']
 	OR !$_SESSION['TOKEN_VAL']
