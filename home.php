@@ -24,6 +24,10 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	
 	<link rel="stylesheet" href="/ui/css/admin.css">
 	
+  <link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick-theme.css"/>
+	<script type="text/javascript" src="/common2/lib/slick/slick.min.js"></script>
+	
 	<style>
 		#ratingsWrapper, #vizWrapper, #promosWrapper, #aboutWrapper {
 			display: none;
@@ -33,7 +37,6 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		#aboutWrapper {
 			text-align: center;
 			width: 100%;
-			padding-left: 10px;
 		}
 	
 		#ratingsDivPrompt {}
@@ -70,6 +73,84 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			/*margin-top: -17px;*/
 		}
 		
+		#aboutBanner {
+			padding: 1rem 0.1rem;
+			margin: 0 0.1rem 0.3rem 0.1rem;
+			background-color: transparent;
+			text-align: center;
+		}
+		
+		#aboutBanner h1 {
+			color: #333;
+			margin-bottom: 0;
+		}
+		
+		#aboutBanner h5 {
+			font-style: italic;
+		}
+		
+		.aboutItem {
+			padding: 1rem 0.2rem 1rem 0.2rem;
+			margin: 0.3rem 0.1rem;
+			background-color: #fff;
+		}
+		
+		.aboutVid {
+			padding: 1rem 0.1rem 1rem 0.1rem;
+			margin: 0.3rem 0.1rem;
+			background-color: #fff;
+		}
+		
+		#aboutWrapper h4 {
+			text-align: center; 
+			padding-left: 0.3rem;
+			margin-bottom: 0;
+		}
+		
+		#aboutWrapper p {
+			padding: 0 0.5rem 0rem 0.5rem;
+			text-align: center;
+		}
+		
+		#aboutWrapper ul {
+			padding: 0 0.5rem 0rem 0.5rem;
+			text-align: left;
+		}
+		
+		#aboutWrapper .slick-dots {
+			text-align: center;
+		}
+		
+		.rateImg {
+			width: 80%;
+		}
+		
+		.slick-slide img {
+			display: inline;
+		}
+		
+		.slick-prev:before {
+			color: #555;
+		}
+		
+		.slick-next:before {
+			color: #555;
+		}
+		
+		.slick-prev {
+			left: 0;
+			z-index: 99999;
+		}
+		
+		.slick-next {
+			right: 5px;
+			z-index: 99999;
+		}
+		
+		button:focus, div:focus {
+			outline:0;
+		}
+		
 	</style>
 </head>
 <body>
@@ -83,10 +164,10 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	</div>
 	
 	<div id='viewTypeDiv' class='row'>
+		<button id='aboutViewPrompt' class='small-3 tiny'>About</button>
 		<button id='ratingsViewPrompt' class='small-3 tiny'>Ratings</button>
 		<button id='vizViewPrompt' class='small-3 tiny'>Viz</button>
 		<button id='promosViewPrompt' class='small-3 tiny'>Promos</button>
-		<button id='aboutViewPrompt' class='small-3 tiny'>About</button>
 	</div>
 
 	<div id='mainWrapper'>
@@ -97,7 +178,47 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		<div id='promosWrapper' class="row"></div>
 		
 		<div id='aboutWrapper'>
-			<iframe width="100%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
+			<div id='aboutBanner'>
+				<h1>tatag.cc</h1>
+				<h5>invert the economy</h5>
+			</div>
+			<div class='aboutItem'>
+				<h4>Rate</h4>
+				<p>
+					<i>Whose money should you accept or refuse?</i>
+				</p>
+				<div id='rateImgDiv'>
+					<div><img src='images/woman-farmer.jpg' class='rateImg'/></div>
+					<div><img src='images/polluter.jpg' class='rateImg' title='&copy; Jonathan Kos-Read'/></div>
+					<div><img src='images/teacher.jpg' class='rateImg'/></div>
+					<div><img src='images/coal-mine.jpg' class='rateImg'/></div>
+				</div>
+			</div>
+			<div class='aboutItem'>
+				<h4>Visualize</h4>
+				<p>
+					<i>What happens when public opinion has a strong influence on market access?</i>
+					<br /><br /><br />
+					(dynamic viz example)
+				</p>
+			</div>
+			<div class='aboutItem'>
+				<h4>Try</h4>
+				<p>
+					<i>Our platform for a sustainable economy</i>
+				</p>
+				<ul>
+					<li>When you register, a <b>currency brand</b> will be created for you.</li>
+					<li>Rate, buy, donate, vote, advertise promotions, merge teams, etc.</li> 
+					<li><b>Issue currency</b> as revenue and expense budgets.</li>
+					<li>Assign an <b>independent brand reputation evaluator</b> to provide real-time advisory on whether to accept or reject a payment offer.</li>
+					<li>Have fun and give us feedback!</li>
+				</ul>
+			</div>
+			<div class='aboutVid'>
+				<h4>Inverted Design</h4>
+				<iframe width="98%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
+			</div>
 		</div>
 	</div>
 	
@@ -242,6 +363,16 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			$('#arrowFrame').attr('height', width<400 ? 710 : 610);
 			$('#chordFrame').attr('height', width<400 ? 400 : width+100);
 		}
+		
+		$(document).ready(function () {
+			$('#rateImgDiv').slick({
+				dots: true,
+				infinite: true,
+				speed: 500,
+				cssEase: 'linear',
+				arrows: true
+			});
+		});
 	</script>
 		
 	<?php include "me.php" ?>

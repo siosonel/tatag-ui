@@ -32,14 +32,15 @@ $handler = trim($_GET['_url'], " \/\\\t\n\r\0\x0B");
 if (!$handler OR strpos($handler,'home')!==false) $handler='home'; 	
 else if (strpos($handler,'wallet')!==false OR strpos($handler,'pay')!==false) $handler='wallet';
 
-if (((isset($_GET['login']) AND $_GET['login']) 
+if ((SITE!='dev' //require login prior to public alpha release
+		OR (isset($_GET['login']) AND $_GET['login']) 
 		OR $handler != 'home'
 	) && (
-	!isset($_SESSION) 
-	OR !$_SESSION['TOKEN_ID']
-	OR !$_SESSION['TOKEN_VAL']
-	OR $time > $_SESSION['TOKEN_EXP']
-)) {
+		!isset($_SESSION) 
+		OR !$_SESSION['TOKEN_ID']
+		OR !$_SESSION['TOKEN_VAL']
+		OR $time > $_SESSION['TOKEN_EXP']
+	)) {
 	require_once "common.php";
 	
 	$data = request(TATAG_DOMAIN ."/token", "POST", new stdClass()); 

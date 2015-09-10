@@ -2,6 +2,7 @@ body {
 	text-align: center;
 	background-color: #ececec;
 	max-width: 62.5rem;
+	margin: auto;
 }
 
 #login_provider {
@@ -20,6 +21,7 @@ body {
 #viewTypeDiv button {
 	margin-bottom: 0;
 	padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
 	background-color: #999;
 	float: left;
 	border: #999;
