@@ -22,138 +22,12 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
   <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
 	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
 	
-	<link rel="stylesheet" href="/ui/css/admin.css">
-	
   <link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick-theme.css"/>
 	<script type="text/javascript" src="/common2/lib/slick/slick.min.js"></script>
-	
-	<style>
-		#ratingsWrapper, #vizWrapper, #promosWrapper, #aboutWrapper {
-			display: none;
-			left: 0%;
-		}
-	
-		#aboutWrapper {
-			text-align: center;
-			width: 100%;
-		}
-	
-		#ratingsDivPrompt {}
 		
-		#addRatingLink {
-			cursor: pointer;
-		}
-		
-		#addRatingLink:hover {
-			color: #00f;
-		}
-		
-		#ratings-rating	{
-			display: inline;
-			width: 30%;
-			font-size: 2em;
-			vertical-align: top;
-			height: 1.2em;
-			margin: -10px 0 0 10px;
-			text-align: center;
-		}
-		
-		#ratings-slider {
-			width: 60%;
-		}
-		
-		#autoCompleteMatchedDisplay {
-			border: 1px solid #eee;
-			margin-top: -17px;
-			list-style-type: none;
-		}
-		
-		#autoCompleteMatchedDisplay li {
-			/*margin-top: -17px;*/
-		}
-		
-		#aboutBanner {
-			padding: 1rem 0.1rem;
-			margin: 0 0.1rem 0.3rem 0.1rem;
-			background-color: transparent;
-			text-align: center;
-		}
-		
-		#aboutBanner h1 {
-			color: #333;
-			margin-bottom: 0;
-		}
-		
-		#aboutBanner h5 {
-			font-style: italic;
-		}
-		
-		.aboutItem {
-			padding: 1rem 0.2rem 1rem 0.2rem;
-			margin: 0.3rem 0.1rem;
-			background-color: #fff;
-		}
-		
-		.aboutVid {
-			padding: 1rem 0.1rem 1rem 0.1rem;
-			margin: 0.3rem 0.1rem;
-			background-color: #fff;
-		}
-		
-		#aboutWrapper h4 {
-			text-align: center; 
-			padding-left: 0.3rem;
-			margin-bottom: 0;
-		}
-		
-		#aboutWrapper p {
-			padding: 0 0.5rem 0rem 0.5rem;
-			text-align: center;
-		}
-		
-		#aboutWrapper ul {
-			padding: 0 0.5rem 0rem 0.5rem;
-			text-align: left;
-			width: 80%;
-			margin: auto;
-		}
-		
-		#aboutWrapper .slick-dots {
-			text-align: center;
-			margin-left: 0;
-		}
-		
-		.rateImg {
-			width: 80%;
-		}
-		
-		.slick-slide img {
-			display: inline;
-		}
-		
-		.slick-prev:before {
-			color: #555;
-		}
-		
-		.slick-next:before {
-			color: #555;
-		}
-		
-		.slick-prev {
-			left: 0;
-			z-index: 99999;
-		}
-		
-		.slick-next {
-			right: 5px;
-			z-index: 99999;
-		}
-		
-		button:focus, div:focus {
-			outline:0;
-		}		
-	</style>
+	<link rel="stylesheet" href="/ui/css/admin.css">
+	<link rel="stylesheet" href="/ui/css/home.css">
 </head>
 <body>
 	<div id='login_provider'></div>
@@ -203,15 +77,20 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<p>
 					<i>What happens when public opinion has a strong influence on market access?</i>
 				</p>
-				<div id='vizSimple'></div>
-				<div id='vizSimpleBtnDiv'></div>
+				<div id='vizSimple'>
+					<div id='yAxisLabel'>Market Access <span class='axisArrow'>&rarr;</span></div>
+					<div id='xAxisLabel'>Income Level <span class='axisArrow'>&rarr;</span></div>
+				</div>
+				<div id='vizSimpleBtnDiv'>
+					<!--<span>Skew: </span><input type='text' name='accessSkew' id='accessSkew' value='2' style='width: 2rem; display: inline; margin-right: 2rem;'/>--> 
+				</div>
 			</div>
 			<div class='aboutItem'>
 				<h4>Try</h4>
 				<p>
 					<i>Our platform for a sustainable economy</i>
 				</p>
-				<ul>
+				<ul style='width:80%;'>
 					<li>Issue your own <b>currency brand</b> as <b>budgets</b>. In other words, your budget is your currency.</li>
 					<li>To maintain traceability, we cancel corresponding expense and revenue budget amounts when two currency issuers transact.</li>
 					<li>Select a brand <b>evaluator bot</b> to provide real-time advisory on whether to accept or reject a payment offer.</li>
@@ -347,10 +226,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	
 	<script type="text/javascript" src="lib/d3/d3.v3.min.js"></script>
 	<script type="text/javascript" src="lib/colorbrewer.js"></script>
-	
-	<script type="text/javascript" src="lib/e4/e4.js"></script>
-	<script type="text/javascript" src="lib/e4/e4_chart_helpers.js"></script>
-	<script type="text/javascript" src="lib/e4/esd3pathgen.js"></script>
+	<script type="text/javascript" src="js/vizSimple.js"></script>
 	
 	<script>	
 		var autocompleteSource = [
@@ -395,141 +271,13 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		});
 	</script>
 	
-	<style>
-		#vizSimple {
-			position: relative;
-			height: 15rem;
-			margin: auto;
-			margin-bottom: 2rem;
-			width: 60%;
-			margin-bottom: 2rem;
-		}
-	
-		#vizSimple .datapt {
-			position: absolute;
-			border-radius: 0.3rem;
-			border: 1px solid #777;
-			background-color: rgba(0,255,255,0.4);
-		}
-		
-		#vizSimpleBtnDiv {
-			width: 100%;
-		}
-	</style>
-	
-	<script>
-		function vizSimpleBase() {
-			var dataset, min, max, prop='qty', dataPtDivs;
-			var totalPts=100;
-			var height = 1*d3.select('#vizSimple').style('height').replace('px',''); 
-			var width; 
-			
-			
-			function main(propName) {
-				prop = propName;
-				setMinMax(dataset);
-				dataPtDivs.transition().duration(2000)
-					//.style('left', getLeftPos)
-					.style('top', getTopPos)
-			}
-			
-			function init() {			
-				dataset = getData();
-				setMinMax(dataset);
-				
-				dataPtDivs = d3.select('#vizSimple')
-					.selectAll('datapt')
-					.data(dataset)
-				.enter().append('div')
-					.attr('class', 'datapt')
-					.style('left', getLeftPos)
-					.style('top', getTopPos)
-					.style('font-weight', function (d) {return 200+d[prop]*5})
-					.style('font-size', function (d) {return (0.7+d[prop]) + 'rem'})
-					.style('line-height', function (d) {return (0.7+d[prop]) + 'rem'})
-					.style('opacity', function (d) {return Math.max(0.6, d[prop]);})
-					.html('$');
-				
-				var propNames = ['qty', 'qRepute', 'bqRepute'];
-				var btnLabels = {
-					qty: 'Wealth Only', 
-					qRepute: ' ... with Reputation', 
-					bqRepute: ' ... and Issuance'
-				};
-				
-				d3.select('#vizSimpleBtnDiv').selectAll('button')
-					.data(propNames)
-				.enter().append('button')
-					.attr('class', 'tiny')
-					.html(function (d) {return btnLabels[d];});
-					
-				$('button', '#vizSimpleBtnDiv').click(function (e) {
-					main(e.target.__data__);
-				});
-			}
-			
-			function getData() {
-				var d = [];
-				var x0 = 0.00001, x1 = 1; //value range
-				var n = 2, p = n+1, q = 1/p; //exponents
-				var y0 = Math.pow(x0,p), y1 = Math.pow(x1,p), yDiff = y1-y0; //simplifies the qty formula below
-				var reputeMin = 0.4, reputeVar = 1 - reputeMin; //reputation settings
-				var budgetVar = 0.5; //simulates the variation in how much budget a currency brand could issue
-				
-				// qty formula adapted from Wolfram as described in
-				// http://stackoverflow.com/questions/918736/random-number-generator-that-produces-a-power-law-distribution
-				for(var i=0; i<totalPts; i++) {
-					var qty = 1 - Math.pow((yDiff*Math.random() + y0),q);
-					var repute = reputeMin + Math.random()*reputeVar;
-					var budget = qty + Math.random()*budgetVar;
-					
-					d.push({
-						i: i/100,
-						qty: qty,
-						qRepute: qty*repute,
-						bqRepute: budget*repute,
-						budget: budget
-					});
-				}
-				
-				return d;	
-			}
-			
-			function setMinMax(d) {
-				var arr=[], range;
-				for(var i=0; i<d.length; i++) arr.push(d[i][prop]);
-				range = d3.extent(arr);
-				min = range[0];
-				max = range[1];
-			}
-			
-			function valSort(a,b) {
-				return a[prop]-b[prop]
-			}
-			
-			function getLeftPos(d,i) {
-				return prop=='bqRepute' ? width*(1 - (max - d.budget)/max) + 'px'
-					: width*(1 - (max - d.qty)/max) + 'px';
-			}
-			
-			function getTopPos(d) {
-				return height*(max - d[prop])/max + 'px'
-			}
-			
-			main.init = function () {
-				width = 0.9*d3.select('#vizSimple').style('width').replace('px','');
-				if (typeof width != 'number') return;
-				
-				clearInterval(main.checkWidth);
-				init();
-			}
-			
-			return main;
-		}
-		
+	<script>		
 		$(document).ready(function () {
 			var vizSimple = vizSimpleBase(); 
 			vizSimple.checkWidth = setInterval(vizSimple.init, 1000);
+			
+			$('#accessSkew').on('change',vizSimple.resetData);
+			$(window).on('resize', vizSimple);
 		});
 	</script>
 	

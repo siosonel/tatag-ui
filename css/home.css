@@ -1,0 +1,172 @@
+
+#ratingsWrapper, #vizWrapper, #promosWrapper, #aboutWrapper {
+	display: none;
+	left: 0%;
+}
+
+#aboutWrapper {
+	text-align: center;
+	width: 100%;
+}
+
+#ratingsDivPrompt {}
+
+#addRatingLink {
+	cursor: pointer;
+}
+
+#addRatingLink:hover {
+	color: #00f;
+}
+
+#ratings-rating	{
+	display: inline;
+	width: 30%;
+	font-size: 2em;
+	vertical-align: top;
+	height: 1.2em;
+	margin: -10px 0 0 10px;
+	text-align: center;
+}
+
+#ratings-slider {
+	width: 60%;
+}
+
+#autoCompleteMatchedDisplay {
+	border: 1px solid #eee;
+	margin-top: -17px;
+	list-style-type: none;
+}
+
+#autoCompleteMatchedDisplay li {
+	/*margin-top: -17px;*/
+}
+
+#aboutBanner {
+	padding: 1rem 0.1rem;
+	margin: 0 0.1rem 0.3rem 0.1rem;
+	background-color: transparent;
+	text-align: center;
+}
+
+#aboutBanner h1 {
+	color: #333;
+	margin-bottom: 0;
+}
+
+#aboutBanner h5 {
+	font-style: italic;
+}
+
+.aboutItem {
+	padding: 1rem 0.2rem 1rem 0.2rem;
+	margin: 0.3rem 0.1rem;
+	background-color: #fff;
+}
+
+.aboutVid {
+	padding: 1rem 0.1rem 1rem 0.1rem;
+	margin: 0.3rem 0.1rem;
+	background-color: #fff;
+}
+
+#aboutWrapper h4 {
+	text-align: center; 
+	padding-left: 0.3rem;
+	margin-bottom: 0;
+}
+
+#aboutWrapper p {
+	padding: 0 0.5rem 0rem 0.5rem;
+	text-align: center;
+}
+
+#aboutWrapper ul {
+	padding: 0 0.5rem 0rem 0.5rem;
+	text-align: left;
+	margin: auto;
+}
+
+#aboutWrapper .slick-dots {
+	text-align: center;
+	margin-left: 0;
+	margin-bottom: 1rem;
+}
+
+.rateImg {
+	width: 80%;
+}
+
+.slick-slide img {
+	display: inline;
+}
+
+.slick-prev:before {
+	color: #555;
+}
+
+.slick-next:before {
+	color: #555;
+}
+
+.slick-prev {
+	left: 0;
+	z-index: 99999;
+}
+
+.slick-next {
+	right: 5px;
+	z-index: 99999;
+}
+
+button:focus, div:focus {
+	outline:0;
+}		
+
+
+#vizSimple {
+	position: relative;
+	height: 15rem;
+	margin: auto;
+	margin-bottom: 2rem;
+	width: 60%;
+	margin-bottom: 2rem;
+	border-bottom: 1px solid #000;
+	border-left: 1px solid #000;
+}
+
+#vizSimple .datapt {
+	position: absolute;
+	border-radius: 0.3rem;
+	border: 1px solid #777;
+	background-color: rgba(0,255,255,0.4);
+}
+
+#vizSimpleBtnDiv {
+	width: 100%;
+  margin-top: 3rem;
+}
+
+#yAxisLabel {
+	position: absolute;
+	-ms-transform: rotate(270deg); /* IE 9 */
+  -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+  transform: rotate(270deg);
+  left: -5rem;
+  top: 6rem;
+}
+
+#xAxisLabel {
+	position: absolute;
+	left: 35%;
+	bottom: -2rem;
+  white-space: nowrap;
+}
+
+.axisArrow {
+	font-size: 2rem; 
+	font-weight: 800; 
+	vertical-align: top;
+	line-height: 1rem;
+}
