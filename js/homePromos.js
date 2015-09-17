@@ -75,9 +75,9 @@ function homePromos(api) {
 			return;
 		}
 		else if (e.target.id.substr(0,4)=='pay-') { 
-			var promo = app.resources[e.target.parentNode.parentNode.id]; console.log(promo);
-			var postPayURL = encodeURIComponent(homeURL + "?{record_id}&{promo_id}"); console.log(postPayURL);
-			window.location.href = promo.links.payLink + "&postPayURL=" + postPayURL;
+			var promo = app.resources[e.target.parentNode.parentNode.id]; //console.log(promo);
+			var postPayURL = encodeURIComponent(homeURL + "/home-promos?{record_id}&{promo_id}"); //console.log(postPayURL);
+			window.open(promo.links.payLink + "&postPayURL=" + postPayURL);
 			
 			return;
 		}

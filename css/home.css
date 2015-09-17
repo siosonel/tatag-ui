@@ -148,12 +148,35 @@ button:focus, div:focus {
   margin-top: 3rem;
 }
 
+#vizSimpleBtnDiv button {
+	/*width: 100%;*/
+}
+
+#vizSimpleBtnDiv td {
+	text-align: center;
+}
+
+#vizSimpleExplained {
+	font-style: italic;
+}
+
+
+#vizSimpleNote {
+	position: absolute;
+	top: 22%;
+	left: 25%;
+	width: 10%;
+	text-align: left;
+  font-size: 0.8rem;
+	font-weight: 700;
+}
+
 #yAxisLabel {
 	position: absolute;
 	-ms-transform: rotate(270deg); /* IE 9 */
   -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
   transform: rotate(270deg);
-  left: -5rem;
+  left: -8rem;
   top: 6rem;
 }
 

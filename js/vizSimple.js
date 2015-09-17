@@ -1,12 +1,26 @@
 function vizSimpleBase() {
 	var dataset, min, max, dataPtDivs;
-	var xProp='qty', yProp='qtySk', skew=2;
+	var xProp='qty', yProp='qtySk2', skew=2;
 	var totalPts=300;
 	var bins, binSize=0.01;
 	
 	var height = 0.9*d3.select('#vizSimple').style('height').replace('px',''); 
 	var width; 
 	
+	var explanation = {
+		qtySk2: {
+			exp: "Right now, there are many whose needs are not addressed by the market.",
+			note: "Growing inequality"
+		},
+		qRepute: {
+			exp: "Can reputation moderate the market influence of the wealthy?",
+			note: "Fight undue influence"
+		},
+		bqRepute: {
+			exp: "Can digital currencies restore equitable access to goods and services?",
+			note: "Raise the bottom"
+		}
+	};
 	
 	function main(xName, yName) {
 		if (typeof xName=='string') xProp = xName;
@@ -20,6 +34,9 @@ function vizSimpleBase() {
 		dataPtDivs.transition().duration(2000)
 			.style('top', getTopPos)
 			.style('left', getLeftPos);
+		
+		$('#vizSimpleExplained').html(explanation[yName].exp);
+		$('#vizSimpleNote').html(explanation[yName].note);
 	}
 	
 	function init() {			
@@ -39,9 +56,10 @@ function vizSimpleBase() {
 			//.style('opacity', function (d) {return Math.max(0.6, d[yProp]);})
 			.html('$');
 		
-		var propNames = ['qtySk', 'qRepute', 'bqRepute'];
+		var propNames = [/*'qtySk',*/ 'qtySk2', 'qRepute', 'bqRepute'];
 		var btnLabels = {
-			qtySk: 'Income Only', 
+			//qtySk: 'Income Only', 
+			qtySk2: "Income Only",
 			qRepute: ' ... with Reputation', 
 			bqRepute: ' ... and Issuance'
 		};
@@ -55,6 +73,9 @@ function vizSimpleBase() {
 		$('button', '#vizSimpleBtnDiv').click(function (e) {
 			main('qty', e.target.__data__);
 		});			
+		
+		$('#vizSimpleExplained').html(explanation[yProp].exp);
+		$('#vizSimpleNote').html(explanation[yProp].note);
 	}
 	
 	function setData() {
@@ -79,6 +100,7 @@ function vizSimpleBase() {
 				i: i/100,
 				qty: qty,
 				qtySk: qtySk,
+				qtySk2: qtySk*qtySk,
 				qRepute: qtySk*repute,
 				bqRepute: budget*repute,
 				budget: budget

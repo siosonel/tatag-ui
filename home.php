@@ -59,31 +59,49 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<h5>invert the economy</h5>
 			</div>
 			<div class='aboutItem'>
-				<h4>Rate</h4>
+				<h4>Reflect</h4>
 				<p>
-					<i>Would you accept the currency issued by<br /><span id='workType' style='text-decoration: underline;'></span>?</i>
+					<i>Should you refuse payments from <br /><span id='workType' style='text-decoration: underline;'></span>?</i>
 				</p>
 				<div id='rateImgDiv'>
 					<!--<div><img src='images/accept-payment.jpg' class='rateImg'/></div>-->
 					<div><img src='images/woman-farmer.jpg' class='rateImg'/></div>
 					<div><img src='images/polluter.jpg' class='rateImg' title='&copy; Jonathan Kos-Read'/></div>
-					<div><img src='images/teacher.jpg' class='rateImg'/></div>
+					<div><img src='images/programmer.jpg' class='rateImg'/></div>					
 					<div><img src='images/coal-mine.jpg' class='rateImg'/></div>
 					<div><img src='images/street-sweeper.jpg' class='rateImg'/></div>
+					<div><img src='images/teacher.jpg' class='rateImg'/></div>
 				</div>
 			</div>
-			<div class='aboutItem'>
-				<h4>Visualize</h4>
-				<p>
-					<i>What happens when public opinion has a strong influence on market access?</i>
+			<div class='aboutItem' style='position: relative;'>
+				<h4>Imagine</h4>
+				<p id='vizSimpleExplained'>
+					<!--<i>What if public opinion has a strong influence on what you are able to buy?</i>-->
 				</p>
 				<div id='vizSimple'>
-					<div id='yAxisLabel'>Market Access <span class='axisArrow'>&rarr;</span></div>
-					<div id='xAxisLabel'>Income Level <span class='axisArrow'>&rarr;</span></div>
+					<div id='yAxisLabel'>Relative Market Influence <span class='axisArrow'>&rarr;</span></div>
+					<div id='xAxisLabel'>Relative Wealth <span class='axisArrow'>&rarr;</span></div>
 				</div>
 				<div id='vizSimpleBtnDiv'>
-					<!--<span>Skew: </span><input type='text' name='accessSkew' id='accessSkew' value='2' style='width: 2rem; display: inline; margin-right: 2rem;'/>--> 
+					<!--<table>
+						<tr>
+							<td><button class="tiny" id=''>Income Only</button></td>
+							<td class='axisArrow'>&rarr;</td>
+							<td><button class="tiny">Inequality</button></td>
+						</tr>
+						<tr>
+							<td class='axisArrow'>&darr;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td><button class="tiny">... with Reputation</button></td>
+							<td class='axisArrow'>&rarr;</td>
+							<td><button class="tiny"> ... and Issuance</button></td>
+						</tr>
+					</table>-->
 				</div>
+				<div id='vizSimpleNote'></div>
 			</div>
 			<div class='aboutItem'>
 				<h4>Try</h4>
@@ -91,10 +109,13 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<i>Our platform for a sustainable economy</i>
 				</p>
 				<ul style='width:80%;'>
-					<li>Issue your own <b>currency brand</b> as <b>budgets</b>. In other words, your budget is your currency.</li>
+					<li>See the <a href='home-ratings'>average of ratings</a> given by users to organizations and companies</li>
+					<li>Learn from the <a href='home-viz'>data visualizations</a> of budget activity as influenced by brand reputation</li>
+					<li>Search the <a href='home-promos'>promotions list</a> to buy products or donate to projects</li>
+					<!--<li>Issue your own <b>currency brand</b> as <b>budgets</b>. In other words, your budget is your currency.</li>
 					<li>To maintain traceability, we cancel corresponding expense and revenue budget amounts when two currency issuers transact.</li>
 					<li>Select a brand <b>evaluator bot</b> to provide real-time advisory on whether to accept or reject a payment offer.</li>
-					<li>Rate, buy, donate, advertise promotions, merge with another currency brand, etc.</li> 
+					<li>Rate, buy, donate, advertise promotions, merge with another currency brand, etc.</li>-->
 				</ul>
 			</div>
 			<div class='aboutVid'>
@@ -254,7 +275,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		$(document).ready(function () {
 			var workType = [
 				//"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", 
-				"a farmer cooperative", "a heavy polluter", "a school", "a strip mining company", "a sanitation agency"
+				"a farmer cooperative", "a heavy polluter", "open-source contributors", "a strip mining company", "a sanitation agency", "a school"
 			];
 			
 			$('#workType').html(workType[0]);

@@ -21,8 +21,8 @@ function walletTxn(api) {
 		if (!currForm) {$('#txnForm').css('display','none'); return;}
 		
 		$('#txnForm').css('display','block');
-		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);		
-		$('#txn-title').html(currForm.title);	
+		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
+		$('#txn-title').html(params.brand ? "Pay "+params.brand : currForm.title);	
 		currInputs.map(main[action]);
 	}
 	
@@ -86,6 +86,13 @@ function walletTxn(api) {
 	}
 	
 	main.formClick = function formClick(e) {
+		if (e.target.id.search('-cancel')!=-1) {
+			$('#txnModal').foundation('reveal','close');
+			if (params.postPayURL) window.close(); /*window.location.href = params.postPayURL
+					.replace("{record_id}","record_id=0")
+					.replace("{promo_id}","promo_id=0");*/
+		}
+		
 		if (e.target.id != 'txn-submit') return;
 		
 		var query = {}, isReversal = currInputs.indexOf('orig_record_id')!=-1;
@@ -112,14 +119,17 @@ function walletTxn(api) {
 		if (params.postPayURL) {
 			var record = res['@graph'][0];
 			var mssg = record ? "Your payment was processed successfully." : res.error;
+			alert(mssg);
+			window.close();
 			
+			/*
 			var goback = confirm(mssg +' Do you want to reload the previous page?');
 	
 			if (goback) {			
 				window.location.href = params.postPayURL
 					.replace("{record_id}","record_id="+record.record_id)
 					.replace("{promo_id}","promo_id="+record.promo_id); 
-			}
+			}*/
 		}
 		
 		app.refresh(2); 
