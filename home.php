@@ -55,8 +55,11 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		
 		<div id='aboutWrapper'>
 			<div id='aboutBanner'>
-				<h1>tatag.cc</h1>
-				<h5>invert the economy</h5>
+				<img src='css/logo5.png' class='aboutLogo'/>
+				<div>
+					<h1>tatag.cc</h1>
+					<h5>invert the economy</h5>
+				</div>
 			</div>
 			<div class='aboutItem'>
 				<h4>Reflect</h4>
@@ -75,9 +78,11 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			</div>
 			<div class='aboutItem' style='position: relative;'>
 				<h4>Imagine</h4>
+				<!--<button class='tiny' id='vizSimpleExplainBack'></button>-->
 				<p id='vizSimpleExplained'>
 					<!--<i>What if public opinion has a strong influence on what you are able to buy?</i>-->
 				</p>
+				<!--<button class='tiny' id='vizSimpleExplainFwd'></button>-->
 				<div id='vizSimple'>
 					<div id='yAxisLabel'>Relative Market Influence <span class='axisArrow'>&rarr;</span></div>
 					<div id='xAxisLabel'>Relative Wealth <span class='axisArrow'>&rarr;</span></div>
@@ -275,7 +280,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		$(document).ready(function () {
 			var workType = [
 				//"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", 
-				"a farmer cooperative", "a heavy polluter", "open-source contributors", "a strip mining company", "a sanitation agency", "a school"
+				"a farmer's cooperative", "a heavy polluter", "open-source contributors", "a strip mining company", "a sanitation agency", "a school"
 			];
 			
 			$('#workType').html(workType[0]);

@@ -7,17 +7,19 @@ function vizSimpleBase() {
 	var height = 0.9*d3.select('#vizSimple').style('height').replace('px',''); 
 	var width; 
 	
+	var propNames = [/*'qtySk',*/ 'qtySk2', 'qRepute', 'bqRepute'];
+	var vizSimpleNext = "<button id='vizSimpleNext' class='tiny'></button>";
 	var explanation = {
 		qtySk2: {
-			exp: "Right now, there are many whose needs are not addressed by the market.",
+			exp: "Right now, there are many whose needs are not addressed by the market. "+ vizSimpleNext,
 			note: "Growing inequality"
 		},
 		qRepute: {
-			exp: "Can reputation moderate the market influence of the wealthy?",
+			exp: "Can reputation systems moderate the influence of the wealthy? "+ vizSimpleNext,
 			note: "Fight undue influence"
 		},
 		bqRepute: {
-			exp: "Can digital currencies restore equitable access to goods and services?",
+			exp: "Can budget-as-currency restore equitable access to goods and services? "+ vizSimpleNext,
 			note: "Raise the bottom"
 		}
 	};
@@ -35,8 +37,10 @@ function vizSimpleBase() {
 			.style('top', getTopPos)
 			.style('left', getLeftPos);
 		
-		$('#vizSimpleExplained').html(explanation[yName].exp);
-		$('#vizSimpleNote').html(explanation[yName].note);
+		if (explanation[yProp]) {
+			$('#vizSimpleExplained').html(explanation[yProp].exp);
+			$('#vizSimpleNote').html(explanation[yProp].note);
+		}
 	}
 	
 	function init() {			
@@ -56,17 +60,17 @@ function vizSimpleBase() {
 			//.style('opacity', function (d) {return Math.max(0.6, d[yProp]);})
 			.html('$');
 		
-		var propNames = [/*'qtySk',*/ 'qtySk2', 'qRepute', 'bqRepute'];
 		var btnLabels = {
 			//qtySk: 'Income Only', 
 			qtySk2: "Income Only",
 			qRepute: ' ... with Reputation', 
-			bqRepute: ' ... and Issuance'
+			bqRepute: ' ... and Budget-as-Currency'
 		};
 		
 		d3.select('#vizSimpleBtnDiv').selectAll('button')
 			.data(propNames)
 		.enter().append('button')
+			.attr('id', function (d) {return 'vizSimpleBtn-'+d;})
 			.attr('class', 'tiny')
 			.html(function (d) {return btnLabels[d];});
 			
@@ -74,8 +78,10 @@ function vizSimpleBase() {
 			main('qty', e.target.__data__);
 		});			
 		
-		$('#vizSimpleExplained').html(explanation[yProp].exp);
+		$('#vizSimpleExplained').html(explanation[yProp].exp).click(triggerNext);
 		$('#vizSimpleNote').html(explanation[yProp].note);
+		$('#vizSimpleBtn-'+ yProp).focus();
+		$('#vizSimpleNext').html(yProp=='bqRepute' ? 'restart &#9658;' : 'next &#9658;');
 	}
 	
 	function setData() {
@@ -152,6 +158,16 @@ function vizSimpleBase() {
 	
 	function getTopPos(d) {
 		return height*(yMax - d[yProp])/yMax + 'px'
+	}
+	
+	function triggerNext(e) {
+		var i = propNames.indexOf(yProp),
+			j = i < propNames.length-1 ? i+1 : 0;
+			
+		$('#vizSimpleBtn-'+ propNames[j]).trigger('click')
+			.focus()
+			
+		$('#vizSimpleNext').html(yProp=='bqRepute' ? 'restart &#9658;' : 'next &#9658;');
 	}
 	
 	main.init = function () {
