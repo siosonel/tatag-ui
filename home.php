@@ -61,10 +61,20 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<h5>invert the economy</h5>
 				</div>
 			</div>
+			<div class='aboutItem' id='howItWorks'>
+				<h4>No funding? <i>No problem!</i></h4>
+				<ul style='width: 90%; margin: 1rem auto;'>
+					<li><b>Issue your team's budgets</b>: these are automatically funded as your currency.</li>
+					<li><b>Use your budgets</b> to pay for goods and services.</li>
+					<li><b>Refuse payments</b> from any team that you don't want to support.</li>
+				</ul>
+				<p>That's it. The teams in our platform are not asking for loans, investment, or donations. 
+				Instead, each team hopes to use its self-issued currency as payment for other teams' products.</p>
+			</div>
 			<div class='aboutItem'>
-				<h4>Reflect</h4>
+				<h4>Support sustainable work</h4>
 				<p>
-					<i>Should you refuse payments from <br /><span id='workType' style='text-decoration: underline;'></span>?</i>
+					<i>Would you refuse payments from <br /><span id='workType'></span>?</i>
 				</p>
 				<div id='rateImgDiv'>
 					<!--<div><img src='images/accept-payment.jpg' class='rateImg'/></div>-->
@@ -77,7 +87,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				</div>
 			</div>
 			<div class='aboutItem' style='position: relative;'>
-				<h4>Imagine</h4>
+				<h4>Influence the future</h4>
 				<!--<button class='tiny' id='vizSimpleExplainBack'></button>-->
 				<p id='vizSimpleExplained'>
 					<!--<i>What if public opinion has a strong influence on what you are able to buy?</i>-->
@@ -109,9 +119,9 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<div id='vizSimpleNote'></div>
 			</div>
 			<div class='aboutItem'>
-				<h4>Try</h4>
+				<h4>Try our platform</h4>
 				<p>
-					<i>Our platform for a sustainable economy</i>
+					<i>Promote a sustainable economy</i>
 				</p>
 				<ul style='width:80%;'>
 					<li>See the <a href='home-ratings'>average of ratings</a> given by users to organizations and companies</li>

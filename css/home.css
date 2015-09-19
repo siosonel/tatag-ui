@@ -127,6 +127,17 @@
 	z-index: 99999;
 }
 
+
+#howItWorks p {
+	width: 95%; 
+	margin: 1rem auto; 
+}
+
+#mainQuestion p {
+	width: 95%; 
+	margin: 1rem auto; 
+}
+
 button:focus, div:focus {
 	outline:0;
 }		

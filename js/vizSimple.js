@@ -8,7 +8,7 @@ function vizSimpleBase() {
 	var width; 
 	
 	var propNames = [/*'qtySk',*/ 'qtySk2', 'qRepute', 'bqRepute'];
-	var vizSimpleNext = "<button id='vizSimpleNext' class='tiny'></button>";
+	var vizSimpleNext = "<button id='vizSimpleNext' class='tiny'>next &#9658;</button>";
 	var explanation = {
 		qtySk2: {
 			exp: "Right now, there are many whose needs are not addressed by the market. "+ vizSimpleNext,
