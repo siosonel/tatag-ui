@@ -11,15 +11,15 @@ function vizSimpleBase() {
 	var vizSimpleNext = "<button id='vizSimpleNext' class='tiny'>next &#9658;</button>";
 	var explanation = {
 		qtySk2: {
-			exp: "Right now, there are many whose needs are not addressed by the market. "+ vizSimpleNext,
+			exp: "Right now, there are many whose needs are not addressed by the market. ", //+ vizSimpleNext,
 			note: "Growing inequality"
 		},
 		qRepute: {
-			exp: "Can reputation systems moderate the influence of the wealthy? "+ vizSimpleNext,
+			exp: "Can reputation systems moderate the influence of the wealthy? ", //+ vizSimpleNext,
 			note: "Fight undue influence"
 		},
 		bqRepute: {
-			exp: "Can budget-as-currency restore equitable access to goods and services? "+ vizSimpleNext,
+			exp: "Can budget-as-currency restore equitable access to goods and services? ", //+ vizSimpleNext,
 			note: "Raise the bottom"
 		}
 	};
@@ -78,10 +78,11 @@ function vizSimpleBase() {
 			main('qty', e.target.__data__);
 		});			
 		
-		$('#vizSimpleExplained').html(explanation[yProp].exp).click(triggerNext);
+		$('#vizSimpleExplained').html(explanation[yProp].exp);
 		$('#vizSimpleNote').html(explanation[yProp].note);
 		$('#vizSimpleBtn-'+ yProp).focus();
-		$('#vizSimpleNext').html(yProp=='bqRepute' ? 'restart &#9658;' : 'next &#9658;');
+		$('#vizSimpleNext').html(yProp=='bqRepute' ? 'repeat &#9658;' : 'next &#9658;')
+			.click(triggerNext);
 	}
 	
 	function setData() {
@@ -114,18 +115,7 @@ function vizSimpleBase() {
 		}
 		
 		d.sort(sortIncr);
-		dataset = d; return;
-		
-		//to simulate power law curve -- will use skew instead
-		/*bins = [];
-		for(var b=0; b < 100; b++) bins.push({min:b*binSize, max:(b+1)*binSize, qty:0, val:b*binSize+binSize/2});
-
-		d.sort(sortIncr);
-		var k=0;
-		for(var s=0; s < d.length; s++) {
-			while (k<bins.length && d[s].qty > bins[k].max) k++; 
-			if (k<100 && d[s].qty >= bins[k].min && d[s].qty < bins[k].max) bins[k].qty++;
-		}*/
+		dataset = d;
 	}
 	
 	function setMinMax(d) {
@@ -167,7 +157,7 @@ function vizSimpleBase() {
 		$('#vizSimpleBtn-'+ propNames[j]).trigger('click')
 			.focus()
 			
-		$('#vizSimpleNext').html(yProp=='bqRepute' ? 'restart &#9658;' : 'next &#9658;');
+		$('#vizSimpleNext').html(yProp=='bqRepute' ? 'repeat &#9658;' : 'next &#9658;');
 	}
 	
 	main.init = function () {

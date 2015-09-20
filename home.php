@@ -64,20 +64,30 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			<div class='aboutItem' id='howItWorks'>
 				<h4>No funding? <i>No problem!</i></h4>
 				<ul style='width: 90%; margin: 1rem auto;'>
-					<li><b>Issue your team's budgets</b>: these are automatically funded as your currency.</li>
+					<li><b>Set your team's budgets</b>: these are automatically funded.</li>
 					<li><b>Use your budgets</b> to pay for goods and services.</li>
 					<li><b>Refuse payments</b> from any team that you don't want to support.</li>
 				</ul>
-				<p>That's it. The teams in our platform are not asking for loans, investment, or donations. 
-				Instead, each team hopes to use its self-issued currency as payment for other teams' products.</p>
+				<p>That's it. Tatag.cc is <i>not</i> a platform for raising money from loans, investment, or donations. 
+				Instead, your budgets are funded as soon as you set them. Your budgets <i>are</i> your currency.</p>
+			</div>
+			<div class='aboutItem' id=''>
+				<h4>Budgets-as-Currency</h4>
+				<button class='tiny' id='vizGoalsNext'></button>
+				<div id='acceptOrRejectDiv' style='display: none'>
+					<button class='tiny' id='acceptPaymentBtn'>Accept</button>
+					<span> OR </span>
+					<button class='tiny' id='rejectPaymentBtn'>Reject</button>					
+				</div>
+				<p id='vizGoalsDesign'></p>		
+				<div id='vizGoals'></div>				
 			</div>
 			<div class='aboutItem'>
-				<h4>Support sustainable work</h4>
+				<h4>Support good work</h4>
 				<p>
 					<i>Would you refuse payments from <br /><span id='workType'></span>?</i>
 				</p>
 				<div id='rateImgDiv'>
-					<!--<div><img src='images/accept-payment.jpg' class='rateImg'/></div>-->
 					<div><img src='images/woman-farmer.jpg' class='rateImg'/></div>
 					<div><img src='images/polluter.jpg' class='rateImg' title='&copy; Jonathan Kos-Read'/></div>
 					<div><img src='images/programmer.jpg' class='rateImg'/></div>					
@@ -88,34 +98,13 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			</div>
 			<div class='aboutItem' style='position: relative;'>
 				<h4>Influence the future</h4>
-				<!--<button class='tiny' id='vizSimpleExplainBack'></button>-->
-				<p id='vizSimpleExplained'>
-					<!--<i>What if public opinion has a strong influence on what you are able to buy?</i>-->
-				</p>
-				<!--<button class='tiny' id='vizSimpleExplainFwd'></button>-->
+				<p id='vizSimpleExplained' style='margin-bottom: 0.2rem;'></p>			
+				<button class='tiny' id='vizSimpleNext'></button>
 				<div id='vizSimple'>
 					<div id='yAxisLabel'>Relative Market Influence <span class='axisArrow'>&rarr;</span></div>
 					<div id='xAxisLabel'>Relative Wealth <span class='axisArrow'>&rarr;</span></div>
 				</div>
-				<div id='vizSimpleBtnDiv'>
-					<!--<table>
-						<tr>
-							<td><button class="tiny" id=''>Income Only</button></td>
-							<td class='axisArrow'>&rarr;</td>
-							<td><button class="tiny">Inequality</button></td>
-						</tr>
-						<tr>
-							<td class='axisArrow'>&darr;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td><button class="tiny">... with Reputation</button></td>
-							<td class='axisArrow'>&rarr;</td>
-							<td><button class="tiny"> ... and Issuance</button></td>
-						</tr>
-					</table>-->
-				</div>
+				<div id='vizSimpleBtnDiv'></div>
 				<div id='vizSimpleNote'></div>
 			</div>
 			<div class='aboutItem'>
@@ -127,10 +116,6 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<li>See the <a href='home-ratings'>average of ratings</a> given by users to organizations and companies</li>
 					<li>Learn from the <a href='home-viz'>data visualizations</a> of budget activity as influenced by brand reputation</li>
 					<li>Search the <a href='home-promos'>promotions list</a> to buy products or donate to projects</li>
-					<!--<li>Issue your own <b>currency brand</b> as <b>budgets</b>. In other words, your budget is your currency.</li>
-					<li>To maintain traceability, we cancel corresponding expense and revenue budget amounts when two currency issuers transact.</li>
-					<li>Select a brand <b>evaluator bot</b> to provide real-time advisory on whether to accept or reject a payment offer.</li>
-					<li>Rate, buy, donate, advertise promotions, merge with another currency brand, etc.</li>-->
 				</ul>
 			</div>
 			<div class='aboutVid'>
@@ -263,6 +248,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<script type="text/javascript" src="lib/d3/d3.v3.min.js"></script>
 	<script type="text/javascript" src="lib/colorbrewer.js"></script>
 	<script type="text/javascript" src="js/vizSimple.js"></script>
+	<script type="text/javascript" src="js/vizGoals.js"></script>
 	
 	<script>	
 		var autocompleteSource = [
@@ -311,6 +297,9 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		$(document).ready(function () {
 			var vizSimple = vizSimpleBase(); 
 			vizSimple.checkWidth = setInterval(vizSimple.init, 1000);
+			
+			var vizGoals = vizGoalsBase(); 
+			vizGoals.checkWidth = setInterval(vizGoals.init, 1000);
 			
 			$('#accessSkew').on('change',vizSimple.resetData);
 			$(window).on('resize', vizSimple);

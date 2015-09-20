@@ -143,7 +143,7 @@ button:focus, div:focus {
 }		
 
 
-#vizSimple {
+#vizSimple, #vizGoals {
 	position: relative;
 	height: 15rem;
 	margin: auto;
@@ -216,3 +216,20 @@ button:focus, div:focus {
 	vertical-align: top;
 	line-height: 1rem;
 }
+
+
+#vizGoals {
+	border: none;
+}
+
+.budget {
+  width: 10%;
+  position: absolute;
+	background-color: rgb(100,200,150);
+}
+
+.vizGoalsLabel {
+  position: absolute;
+	font-weight: 700;
+}
+
