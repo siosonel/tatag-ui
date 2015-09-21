@@ -63,16 +63,16 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			</div>
 			<div class='aboutItem' id='howItWorks'>
 				<h4>No funding? <i>No problem!</i></h4>
-				<ul style='width: 90%; margin: 1rem auto;'>
+				<ul style='width: 30rem; max-width: 90%; margin: 1rem auto;'>
 					<li><b>Set your team's budgets</b>: these are automatically funded.</li>
 					<li><b>Use your budgets</b> to pay for goods and services.</li>
 					<li><b>Refuse payments</b> from any team that you don't want to support.</li>
 				</ul>
-				<p>That's it. Tatag.cc is <i>not</i> a platform for raising money from loans, investment, or donations. 
-				Instead, your budgets are funded as soon as you set them. Your budgets <i>are</i> your currency.</p>
+				<p>That's it. Tatag.cc is <i>not</i> a platform for raising money from lenders, investors, or donors. 
+				Instead, we help teams establish their budgets as a type of digital currency.</p>
 			</div>
 			<div class='aboutItem' id=''>
-				<h4>Budgets-as-Currency</h4>
+				<h4>Main Idea</h4>
 				<button class='tiny' id='vizGoalsNext'></button>
 				<div id='acceptOrRejectDiv' style='display: none'>
 					<button class='tiny' id='acceptPaymentBtn'>Accept</button>
@@ -83,7 +83,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<div id='vizGoals'></div>				
 			</div>
 			<div class='aboutItem'>
-				<h4>Support good work</h4>
+				<h4>Support what you believe in</h4>
 				<p>
 					<i>Would you refuse payments from <br /><span id='workType'></span>?</i>
 				</p>
@@ -302,7 +302,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			vizGoals.checkWidth = setInterval(vizGoals.init, 1000);
 			
 			$('#accessSkew').on('change',vizSimple.resetData);
-			$(window).on('resize', vizSimple);
+			$(window).on('resize', function () {vizSimple(); vizGoals();});
 		});
 	</script>
 	

@@ -129,7 +129,8 @@
 
 
 #howItWorks p {
-	width: 95%; 
+	width: 35rem;
+	max-width: 95%;
 	margin: 1rem auto; 
 }
 
@@ -233,3 +234,12 @@ button:focus, div:focus {
 	font-weight: 700;
 }
 
+#vizGoalsDesign {
+	height: 2rem;
+}
+
+.vizGoalsFlow {
+	position: absolute;
+	font-size: 2rem;
+	font-weight: 800;
+}

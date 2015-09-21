@@ -3,10 +3,9 @@ function vizGoalsBase() {
 	var height = 0.9*d3.select('#vizGoals').style('height').replace('px',''); 
 	var width; 
 	var vizGoalsNext = "<button id='vizGoalsNext' class='tiny'>next &#9658;</button>";
-	var amounts = {A: 0.5, B: 0.3, pay:0.2}
-	var Aacct='exp', Bacct='rev'; 
-	
-	var budgetDivs, d3PayDivs, playInterval;
+		
+	var budgetDivs, d3PayDivs, teamLabels, playInterval;
+	var amounts = {A: 0.5, B: 0.3, pay:0.2}; //start with the same amounts when launched
 	
 	var	A = {
 		rev: {name: "A", left: 0.1, top: 1, amount: 0, text: 'rev'},
@@ -26,6 +25,13 @@ function vizGoalsBase() {
 		} 
 	};
 	
+	//always start with the same roles
+	var Aacct='exp', Bacct='rev'; 
+	
+	//convienient pointers to example accounts within the A and B accounts below
+	var srcA = A[Aacct], payA = A.pay[Aacct];
+	var srcB = B[Bacct], payB = B.pay[Bacct]; 
+	
 	var dataset = [
 		A.rev, A.exp, A.pay.rev, A.pay.exp, 
 		B.rev, B.exp, B.pay.rev, B.pay.exp
@@ -33,29 +39,29 @@ function vizGoalsBase() {
 	
 
 	var explanations = [{
-		exp: "Budget-as-Currency", 
-		note: "",
+		note: "Each team issues currency as <b>rev</b>enue and <b>exp</b>ense budgets.", 
+		fxn: budgetPlan
 	},{
-		exp: "Decentralized Issuance", 
-		note: ""
+		note: "Budgets are automatically funded.", 
+		fxn: budgetAdd
 	},{
-		exp: "Payment Offer", 
-		note: ""
+		note: "Payment Offer: expense budgets are offered as digital payment.", 
+		fxn: budgetUsePrep
 	},{
-		exp: "Payment Offer",
-		note: ""
+		note: "Payment Offer: the payee's <b>automated advisor</b> guides the decision.",
+		fxn: budgetPayOffer
 	},{
-		exp: "An accepted payment leads to budgets being used up.",
-		note: ""
+		note: "An accepted payment leads to budgets being used up.",
+		fxn: budgetPayAccept
 	},{
-		exp: "Rejected payments are refunded.",
-		note: ""
+		note: "Rejected payments are refunded.",
+		fxn: budgetPayReject
 	},{
-		exp: "Rejected payments are refunded.",
-		note: ""
+		note: "Rejected payments are refunded.",
+		fxn: budgetUseVoid
 	},{
-		exp: "Over time, budgets are used up in transactions.",
-		note: ""
+		note: "Over time, a team's budgets are used up in transactions with other teams.",
+		fxn: budgetDecreaseOverTime
 	}];
 	
 	var payColor = "rgb(100,200,150)";
@@ -66,7 +72,9 @@ function vizGoalsBase() {
 		width = 0.9*d3.select('#vizGoals').style('width').replace('px','');		
 		currGoal = currGoal < explanations.length-1 ? currGoal+1 : 0;
 		resetData(e); 
-		$('#vizGoalsDesign').html(explanations[currGoal].exp);
+		
+		$('#vizGoalsDesign').html(explanations[currGoal].note);
+		teamLabels.style('left', getLeftPos).style('top', getTopPos);
 		
 		if (currGoal==0) {
 			$('#vizGoalsNext, #acceptPaymentBtn, #rejectPaymentBtn').prop('disabled', false);
@@ -85,7 +93,7 @@ function vizGoalsBase() {
 			setTimeout(setOpacity, 1000);
 			currGoal = 6;
 		}
-		else if (currGoal==2 || currGoal==5) {
+		else if (currGoal==5) {
 			setTimeout(main, 1000);
 			return;
 		}
@@ -108,25 +116,35 @@ function vizGoalsBase() {
 			.style('background-color', getBgColor)
 			.html(getText)
 		
-		d3.select('#vizGoals')
+		teamLabels = d3.select('#vizGoals')
 			.selectAll('.vizGoalLabels')
-			.data([{
-				text: 'Team A', top: 1.15, left: 0.1
-			},{
-				text: 'Team B', top: 1.15, left: 0.75
-			}])
+			.data([
+				{text: 'Team A', top: 1.15, left: 0.1},
+				{text: 'Team B', top: 1.15, left: 0.75}
+			])
 		.enter().append('div')
 			.attr('class', 'vizGoalsLabel')
 			.style('left', getLeftPos)
-			.style('top', function (d) {return height*d.top +'px'})
+			.style('top', getTopPos)
 			.html(getText)
 		
+		/*d3.select('#vizGoals')
+			.selectAll('.vizGoalsFlow')
+			.data([
+				{left:A.rev.left, deg: 225, }, {left: A.rev.left, deg: 270}, {left: A.rev.left, deg: 315}
+			])
+		.enter().append('div')
+			.attr('class', 'vizGoalsFlow')
+			.style('left', getLeftPos)
+			.style('transform', function (d) {return 'rotate('+ d.deg +'deg)'})
+			.html('&rarr;');*/
+					
 		$('#vizGoalsNext')//.html('play &#9658')
 			.html(currGoal==explanations.length-1 ? 'repeat &#9658;' : 'next &#9658;')
 		
 		$('#vizGoalsNext, #acceptOrRejectDiv').click(main);
 			
-		$('#vizGoalsDesign').html(explanations[currGoal].exp);
+		$('#vizGoalsDesign').html(explanations[currGoal].note);
 		
 		d3PayDivs = d3.selectAll('#Aexp-pay, #Arev-pay, #Bexp-pay, #Brev-pay');
 	}
@@ -145,14 +163,14 @@ function vizGoalsBase() {
 	}
 	
 	function getTopPos(d) {
-		return d.text=='pay' ? height*d.top + 'px' : height*(d.top - d.amount) + 'px'
+		return d.text=='pay' || d.text.search('Team') != -1 ? height*d.top + 'px' : height*(d.top - d.amount) + 'px'
 	}
 	
 	function getText(d) {
 		if (d.text!='pay') return d.text;
-		var alias = {rev: 'debits', exp: 'credits'}
+		var alias = {rev: 'rev', exp: 'exp'};
 		
-		return currGoal !=2 && currGoal !=3 ? null 
+		return currGoal !=3 ? null 
 			: d.name == 'A'+ Aacct ? alias[Aacct]
 			: d.name=='B'+Bacct ? alias[Bacct]
 			: null;
@@ -183,104 +201,110 @@ function vizGoalsBase() {
 	
 	function resetData(e) {
 		if (e && e.target && e.target.innerHTML=='Reject') currGoal=5;
+		explanations[currGoal].fxn();
+	}
 	
-		if (currGoal==0) {			
-			Aacct = A.exp.amount > B.exp.amount ? 'exp' : 'rev'; 
-			Bacct = Aacct=='exp' ? 'rev' : 'exp';
+	function budgetPlan() {
+		//to vary payer and payee roles
+		Aacct = A.exp.amount > B.exp.amount ? 'exp' : 'rev'; 
+		Bacct = Aacct=='exp' ? 'rev' : 'exp';
+		
+		srcA = A[Aacct]; payA = A.pay[Aacct];
+		srcB = B[Bacct]; payB = B.pay[Bacct];
+		
+		A.pay.rev.amount = amounts.A;
+		A.pay.rev.top = 1 - amounts.A - A.rev.amount;
+		A.pay.exp.amount = amounts.A;
+		A.pay.exp.top = 1 - amounts.A - A.exp.amount;
+		
+		B.pay.rev.amount = amounts.B;
+		B.pay.rev.top = 1-amounts.B - B.rev.amount;
+		B.pay.exp.amount = amounts.B;
+		B.pay.exp.top = 1-amounts.B - B.exp.amount;
+		
+		d3PayDivs.style('opacity', '1.0')
+			.style('background-color', 'transparent')
+			.style('border', '1px dashed #555')
+			.style('left', resetLeftPos)
+			.style('top', getTopPos)
+			.style('height', getBudgetHeight);		
 			
-			A.pay.rev.amount = amounts.A;
-			A.pay.rev.top = 1 - amounts.A - A.rev.amount;
-			A.pay.exp.amount = amounts.A;
-			A.pay.exp.top = 1-amounts.A - A.exp.amount;
-			
-			B.pay.rev.amount = amounts.B;
-			B.pay.rev.top = 1-amounts.B - B.rev.amount;
-			B.pay.exp.amount = amounts.B;
-			B.pay.exp.top = 1-amounts.B - B.exp.amount;
-			
-			d3PayDivs.style('opacity', '1.0')
-				.style('background-color', 'transparent')
-				.style('border', '1px dashed #555')
-				.style('left', resetLeftPos)
-				.style('top', getTopPos)
-				.style('height', getBudgetHeight);		
-				
-			toggleNextAcceptReject('inline','none');
-		}
-		else if (currGoal==1) {			
-			A.rev.amount += amounts.A;
-			A.exp.amount += amounts.A;
-			A.pay[Aacct].left = A[Aacct].left;
-			
-			B.rev.amount += amounts.B;
-			B.exp.amount += amounts.B;
-			B.pay[Bacct].left = B[Bacct].left;
-		}
-		else if (currGoal==2) {		
-			document.getElementById('A'+Aacct+'-pay').style.opacity=1;
-			document.getElementById('B'+Bacct+'-pay').style.opacity=1;
-			
-			d3.selectAll('#A'+Aacct+'-pay, #B'+Bacct+'-pay')
-				.style('background-color', payColor);
-			
-			amounts.pay = Math.min(A[Aacct].amount, B[Bacct].amount) * Math.max(0.3,Math.random());
-			A.pay[Aacct].amount = amounts.pay;
-			B.pay[Bacct].amount = amounts.pay; 
-			
-			A.pay[Aacct].top = 1 - A[Aacct].amount;
-			B.pay[Bacct].top = 1 - B[Bacct].amount;
-			
-			A[Aacct].amount = A[Aacct].amount - amounts.pay;
-			B[Bacct].amount = B[Bacct].amount - amounts.pay;
-		} 
-		else if (currGoal==3) {
-			A.pay[Aacct].left = 0.43; 
-			A.pay[Aacct].top = 0.3;
-			B.pay[Bacct].left = 0.55; 
-			B.pay[Bacct].top = 0.3;
-			
-			toggleNextAcceptReject('none','block');
-		}
-		else if (currGoal==4) {
-			//if approved
-			A.pay[Aacct].left = 0.49; 
-			A.pay[Aacct].top = 0.3;
-			B.pay[Bacct].left = 0.49; 
-			B.pay[Bacct].top = 0.3;			
-			toggleNextAcceptReject('inline','none');
-		} 
-		else if (currGoal==5) {
-			//if rejected
-			
-			A.pay[Aacct].left = A[Aacct].left; 
-			B.pay[Bacct].left = B[Bacct].left;
-			
-			A.pay[Aacct].top = 1 - A[Aacct].amount - amounts.pay;
-			B.pay[Bacct].top = 1 - B[Bacct].amount - amounts.pay;
-			toggleNextAcceptReject('inline','none');
-		} 
-		else if (currGoal==6) {		
-			A.pay[Aacct].amount = 0;
-			B.pay[Bacct].amount = 0; 
-			
-			A[Aacct].amount = A[Aacct].amount + amounts.pay;
-			B[Bacct].amount = B[Bacct].amount + amounts.pay;
-			
-			A.pay[Aacct].top = 1 - A[Aacct].amount;
-			B.pay[Bacct].top = 1 - B[Bacct].amount;
-			toggleNextAcceptReject('inline','none');
-		}
-		else if (currGoal==7) {
-			var periodicUse = Math.min(A[Aacct].amount, B[Bacct].amount) * Math.max(0.3,Math.random());			
-			A.rev.amount = A.rev.amount - periodicUse;		
-			A.exp.amount = A.exp.amount - periodicUse;		
-			B.rev.amount = B.rev.amount - periodicUse;		
-			B.exp.amount = B.exp.amount - periodicUse;
-			
-			setAmountsToAdd();
-			amounts.pay = 0;
-			toggleNextAcceptReject('inline','none');
-		}
+		toggleNextAcceptReject('inline','none');
+	}
+	
+	function budgetAdd() {
+		A.rev.amount += amounts.A;
+		A.exp.amount += amounts.A;
+		payA.left = srcA.left;
+		
+		B.rev.amount += amounts.B;
+		B.exp.amount += amounts.B;
+		payB.left = srcB.left;
+	}
+	
+	function budgetUsePrep() {				
+		d3.selectAll('#A'+Aacct+'-pay, #B'+Bacct+'-pay')
+			.style('opacity',1)
+			.style('background-color', payColor);
+		
+		amounts.pay = Math.min(srcA.amount, srcB.amount) * Math.max(0.3,Math.random());
+		payA.amount = amounts.pay;
+		payB.amount = amounts.pay; 
+		
+		payA.top = 1 - srcA.amount;
+		payB.top = 1 - srcB.amount;
+		
+		srcA.amount = srcA.amount - amounts.pay;
+		srcB.amount = srcB.amount - amounts.pay;
+	} 
+	
+	function budgetPayOffer() {
+		payA.left = 0.43; 
+		payA.top = 0.2;
+		payB.left = 0.55; 
+		payB.top = 0.2;
+		
+		toggleNextAcceptReject('none','block');
+	}
+		
+	function budgetPayAccept() {
+		payA.left = 0.49; 
+		payA.top = 0.2;
+		payB.left = 0.49; 
+		payB.top = 0.2;			
+		toggleNextAcceptReject('inline','none');
+	} 
+		
+	function budgetPayReject() {			
+		payA.left = srcA.left; 
+		payB.left = srcB.left;
+		
+		payA.top = 1 - srcA.amount - amounts.pay;
+		payB.top = 1 - srcB.amount - amounts.pay;
+		toggleNextAcceptReject('inline','none');
+	} 
+		
+	function budgetUseVoid() {		
+		payA.amount = 0;
+		payB.amount = 0; 
+		
+		srcA.amount = srcA.amount + amounts.pay;
+		srcB.amount = srcB.amount + amounts.pay;
+		
+		payA.top = 1 - srcA.amount;
+		payB.top = 1 - srcB.amount;
+		toggleNextAcceptReject('inline','none');
+	}
+		
+	function budgetDecreaseOverTime() {		
+		A.rev.amount = A.rev.amount * Math.max(0.3,Math.random());		
+		A.exp.amount = A.exp.amount * Math.max(0.3,Math.random());		
+		B.rev.amount = B.rev.amount * Math.max(0.3,Math.random());		
+		B.exp.amount = B.exp.amount * Math.max(0.3,Math.random());
+		
+		setAmountsToAdd();
+		amounts.pay = 0;
+		toggleNextAcceptReject('inline','none');
 	}
 	
 	function resetLeftPos(d) {
@@ -303,12 +327,6 @@ function vizGoalsBase() {
 	function setAmountsToAdd() {
 		amounts.A = Math.min(1-A.rev.amount, 1-A.exp.amount, Math.max(0.3, Math.random()));
 		amounts.B = Math.min(1-B.rev.amount, 1-B.exp.amount, Math.max(0.3, Math.random()));
-		
-		/*if (amounts.A < 0.005 && amounts.B < 0.005) {
-			currGoal=1;
-			A.pay[Aacct].left = A[Aacct].left;
-			B.pay[Bacct].left = B[Bacct].left;
-		}*/
 	}
 	
 	function playOrPause(e) {

@@ -12,7 +12,7 @@ function vizSimpleBase() {
 	var explanation = {
 		qtySk2: {
 			exp: "Right now, there are many whose needs are not addressed by the market. ", //+ vizSimpleNext,
-			note: "Growing inequality"
+			note: "Growing inequality<br />$ = a household"
 		},
 		qRepute: {
 			exp: "Can reputation systems moderate the influence of the wealthy? ", //+ vizSimpleNext,
