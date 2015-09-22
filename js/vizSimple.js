@@ -19,7 +19,7 @@ function vizSimpleBase() {
 			note: "Fight undue influence"
 		},
 		bqRepute: {
-			exp: "Can budget-as-currency restore equitable access to goods and services? ", //+ vizSimpleNext,
+			exp: "Can budgets-as-currency restore equitable access to goods and services? ", //+ vizSimpleNext,
 			note: "Raise the bottom"
 		}
 	};

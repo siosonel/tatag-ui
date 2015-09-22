@@ -39,19 +39,19 @@ function vizGoalsBase() {
 	
 
 	var explanations = [{
-		note: "Each team issues currency as <b>rev</b>enue and <b>exp</b>ense budgets.", 
+		note: "Each team issues currency as revenue (<b>rev</b>) and expense (<b>exp</b>) budgets.", 
 		fxn: budgetPlan
 	},{
-		note: "Budgets are automatically funded.", 
+		note: "We track these as debits (<b><i>dr</i></b>) and credits (<b><i>cr</i></b>).", 
 		fxn: budgetAdd
 	},{
-		note: "Payment Offer: expense budgets are offered as digital payment.", 
+		note: "Credits are offered as payment for another team's goods and services.", 
 		fxn: budgetUsePrep
 	},{
-		note: "Payment Offer: the payee's <b>automated advisor</b> guides the decision.",
+		note: "The payee's <b>automated advisor</b> evaluates the payer's team reputation.",
 		fxn: budgetPayOffer
 	},{
-		note: "An accepted payment leads to budgets being used up.",
+		note: "An accepted payment cancels payee debits and payer credits.",
 		fxn: budgetPayAccept
 	},{
 		note: "Rejected payments are refunded.",
@@ -64,7 +64,9 @@ function vizGoalsBase() {
 		fxn: budgetDecreaseOverTime
 	}];
 	
-	var payColor = "rgb(100,200,150)";
+	var revColor = "rgb(200,150,150)", 
+		expColor = "rgb(100,200,150)",
+		payColor = "rgb(100,200,150)";
 	
 	function main(e) {
 		$('#vizGoalsNext, #acceptPaymentBtn, #rejectPaymentBtn').prop('disabled', true);
@@ -74,7 +76,9 @@ function vizGoalsBase() {
 		resetData(e); 
 		
 		$('#vizGoalsDesign').html(explanations[currGoal].note);
-		teamLabels.style('left', getLeftPos).style('top', getTopPos);
+		teamLabels.style('left', getLeftPos)
+			.style('top', getTopPos)
+			.style('margin-left', getLabelMarginLeft);
 		
 		if (currGoal==0) {
 			$('#vizGoalsNext, #acceptPaymentBtn, #rejectPaymentBtn').prop('disabled', false);
@@ -83,6 +87,7 @@ function vizGoalsBase() {
 		
 		budgetDivs.html(getText)
 			.style('border', getBorder)
+			.style('background-color', getBgColor)
 		.transition().duration(currGoal==2 ? 0 : 1000)
 			.style('top', getTopPos)
 			.style('left', getLeftPos)
@@ -119,14 +124,17 @@ function vizGoalsBase() {
 		teamLabels = d3.select('#vizGoals')
 			.selectAll('.vizGoalLabels')
 			.data([
-				{text: 'Team A', top: 1.15, left: 0.1},
-				{text: 'Team B', top: 1.15, left: 0.75}
+				{text: 'Team A', top: 1.15, left: 0.1}, {text: 'Team B', top: 1.15, left: 0.75},
+				{text: 'rev', top: 1, left: A.rev.left*1.1}, {text: 'exp', top: 1, left: A.exp.left},
+				{text: 'rev', top: 1, left: B.rev.left}, {text: 'exp', top: 1, left: B.exp.left}
 			])
 		.enter().append('div')
 			.attr('class', 'vizGoalsLabel')
+			.style('font-weight', function (d) {return d.text=='rev' || d.text=='exp' ? 400 : null})
 			.style('left', getLeftPos)
 			.style('top', getTopPos)
-			.html(getText)
+			.html(getLabelText)
+			.style('margin-left', getLabelMarginLeft)
 		
 		/*d3.select('#vizGoals')
 			.selectAll('.vizGoalsFlow')
@@ -163,17 +171,37 @@ function vizGoalsBase() {
 	}
 	
 	function getTopPos(d) {
-		return d.text=='pay' || d.text.search('Team') != -1 ? height*d.top + 'px' : height*(d.top - d.amount) + 'px'
+		return d.text=='pay' || !('amount' in d) 
+			? height*d.top + 'px' : height*(d.top - d.amount) + 'px'
 	}
 	
 	function getText(d) {
-		if (d.text!='pay') return d.text;
-		var alias = {rev: 'rev', exp: 'exp'};
+		if (d.text!='pay') {
+			if (currGoal===0) return "";
+			return d.text=='rev' ? 'dr' : 'cr';
+		}
+		else {		
+			var alias = {rev: 'dr', exp: 'cr'};		
+			
+			return currGoal<2 || currGoal>5 ? null 
+				: d.name == 'A'+ Aacct ? alias[Aacct]
+				: d.name=='B'+Bacct ? alias[Bacct]
+				: null;
+		}
+	}
+	
+	function getLabelText(d) {
+		return d.text;
+	}
+	
+	function getLabelMarginLeft(d) {
+		var w0 = d.text=='rev' || d.text=='exp' 
+			? 0.1*width
+			: width*(A.exp.left + 0.1 - A.rev.left); 
 		
-		return currGoal !=3 ? null 
-			: d.name == 'A'+ Aacct ? alias[Aacct]
-			: d.name=='B'+Bacct ? alias[Bacct]
-			: null;
+		var w1 = 1*$(this).css('width').replace('px','');
+		var m = w0 - w1;
+		return m <= 0 ? '0px' : 0.5*m+'px';
 	}
 	
 	function getBudgetHeight(d) {
@@ -196,7 +224,8 @@ function vizGoalsBase() {
 	}
 	
 	function getBgColor(d,i) {
-		if (d.text=='pay') return currGoal==0 ? 'transparent' : payColor;
+		if (d.text=='pay' && (currGoal==0 || currGoal==1)) return 'transparent';
+		return d.text=='rev' || d.name.search('rev')!=-1 ? revColor: expColor;
 	}
 	
 	function resetData(e) {

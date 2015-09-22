@@ -64,23 +64,12 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			<div class='aboutItem' id='howItWorks'>
 				<h4>No funding? <i>No problem!</i></h4>
 				<ul style='width: 30rem; max-width: 90%; margin: 1rem auto;'>
-					<li><b>Set your team's budgets</b>: these are automatically funded.</li>
-					<li><b>Use your budgets</b> to pay for goods and services.</li>
-					<li><b>Refuse payments</b> from any team that you don't want to support.</li>
+					<li><b>Set your team's budgets</b>: we track these as debits and credits.</li>
+					<li><b>Use your credits</b> to pay for goods and services.</li>
+					<li><b>Accept payments</b> from reputable teams to cancel your debits.</li>
 				</ul>
 				<p>That's it. Tatag.cc is <i>not</i> a platform for raising money from lenders, investors, or donors. 
-				Instead, we help teams establish their budgets as a type of digital currency.</p>
-			</div>
-			<div class='aboutItem' id=''>
-				<h4>Main Idea</h4>
-				<button class='tiny' id='vizGoalsNext'></button>
-				<div id='acceptOrRejectDiv' style='display: none'>
-					<button class='tiny' id='acceptPaymentBtn'>Accept</button>
-					<span> OR </span>
-					<button class='tiny' id='rejectPaymentBtn'>Reject</button>					
-				</div>
-				<p id='vizGoalsDesign'></p>		
-				<div id='vizGoals'></div>				
+				Instead, we help teams establish their <a href='#b-as-c'>budgets as digital currency</a>.</p>
 			</div>
 			<div class='aboutItem'>
 				<h4>Support what you believe in</h4>
@@ -121,6 +110,18 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			<div class='aboutVid'>
 				<h4>Inverted Design</h4>
 				<iframe width="98%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
+			</div>
+			<div class='aboutItem' id=''>
+				<a name='b-as-c'></a>
+				<h4>Budgets-as-Currency</h4>
+				<button class='tiny' id='vizGoalsNext'></button>
+				<div id='acceptOrRejectDiv' style='display: none'>
+					<button class='tiny' id='acceptPaymentBtn'>Accept</button>
+					<span> OR </span>
+					<button class='tiny' id='rejectPaymentBtn'>Reject</button>					
+				</div>
+				<p id='vizGoalsDesign'></p>		
+				<div id='vizGoals'></div>				
 			</div>
 		</div>
 	</div>

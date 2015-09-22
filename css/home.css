@@ -227,6 +227,8 @@ button:focus, div:focus {
   width: 10%;
   position: absolute;
 	background-color: rgb(100,200,150);
+	font-style: italic;
+	line-height: 0.9rem;
 }
 
 .vizGoalsLabel {
