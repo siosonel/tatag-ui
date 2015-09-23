@@ -61,16 +61,30 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<h5>invert the economy</h5>
 				</div>
 			</div>
+			
 			<div class='aboutItem' id='howItWorks'>
+				<h4>Turn your team's<br />budgets <i>into</i> digital currency.</h4>
+				<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
+					<li><b>Use your expense budget</b> to pay for goods and services.</li>
+					<li><b>Use your revenue budget</b> to accept payments from reputable teams.</li>
+					<li><b>Replenish</b> your budgets as needed.</li>
+				</ul>
+				<p>That's it. If your team maintains a <i>good reputation</i> and <i>reasonable budgets</i>, 
+				other teams would reward you with their products. If your ethics or products are 
+				questionable, they'll refuse to transact with you.</p>
+			</div>			
+			<!--<div class='aboutItem' id='howItWorks'>
 				<h4>No funding? <i>No problem!</i></h4>
-				<ul style='width: 30rem; max-width: 90%; margin: 1rem auto;'>
-					<li><b>Set your team's budgets</b>: we track these as debits and credits.</li>
-					<li><b>Use your credits</b> to pay for goods and services.</li>
-					<li><b>Accept payments</b> from reputable teams to cancel your debits.</li>
+				<ul style='width: 33rem; max-width: 90%; margin: 1rem auto;'>
+					<li><b>Set your team's budgets</b>: these are automatically funded.</li>
+					<li><b>Use your expense budget</b> to pay for goods and services.</li>
+					<li><b>Use your revenue budget</b> to accept payments from reputable teams.</li>
+					<li><b>Repeat the budget cycle</b> to replenish what gets used.</li>
 				</ul>
 				<p>That's it. Tatag.cc is <i>not</i> a platform for raising money from lenders, investors, or donors. 
-				Instead, we help teams establish their <a href='#b-as-c'>budgets as digital currency</a>.</p>
-			</div>
+				Instead, we help teams establish their <a href='#b-as-c'>budgets as digital currency</a>, using strict
+				accounting rules and data-driven reputation tracking.</p>
+			</div>-->
 			<div class='aboutItem'>
 				<h4>Support what you believe in</h4>
 				<p>
@@ -101,11 +115,14 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<p>
 					<i>Promote a sustainable economy</i>
 				</p>
-				<ul style='width:80%;'>
+				<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
+					<li>Search the <a href='home-promos'>promotions list</a> to buy products or donate to projects</li>
 					<li>See the <a href='home-ratings'>average of ratings</a> given by users to organizations and companies</li>
 					<li>Learn from the <a href='home-viz'>data visualizations</a> of budget activity as influenced by brand reputation</li>
-					<li>Search the <a href='home-promos'>promotions list</a> to buy products or donate to projects</li>
 				</ul>
+				<p style='margin: 2rem auto; width: 40rem; max-width: 95%;'>Tatag.cc is <i>not</i> a platform for raising money from lenders, investors, or donors. 
+					Instead, we help teams establish their <a href='#b-as-c'>budgets as digital currency</a>, using strict
+					accounting rules and data-driven reputation tracking.</p>
 			</div>
 			<div class='aboutVid'>
 				<h4>Inverted Design</h4>

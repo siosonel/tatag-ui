@@ -44,15 +44,18 @@ function homePromos(api) {
 		var divId = 'promos-'+ promo.promo_id;
 		app.resources[divId] = promo;
 		
+		var pencil = !promo.links['promo-edit'] ? ""
+			: " <span class='fi-pencil small'>&nbsp;</span>";
+		
 		$('#promosWrapper').append(
 			"<div id='"+divId+"' class='small-12 medium-6 large-4 columns' style='padding: 0.2rem; float: left;'>"
 			+ 	"<div class='brandItem' style='text-align: left;'>"
 			+			(promo.imageURL ? "<img src='"+promo.imageURL+"' class='small'><br />" : "")
 			+			"<button id='pay-"+ promo.promo_id +"' class='right tiny'>"+ promo.amount.toFixed(2) +" hour</button>"  
-			+ 		"<b>"+promo.name +"</b><br />"
+			+ 		"<b>"+promo.name +"</b>" + pencil +"<br />"
 			+			promo.description +"</br >"
 			+			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a>" : "")
-			+			"Expires: "+ promo.expires 
+			+			(promo.expires ? "Expires: "+ promo.expires : "")
 			//+ date[1] +'/'+ date[2] +"<br/>"+ date[0]
 			+		"</div>"
 			+'</div>'
@@ -91,6 +94,7 @@ function homePromos(api) {
 		if (!divId) return;
 		
 		var promo = app.resources[divId];
+		if (!promo.links['promo-edit']) return; 
 		
 		$('#promos-brand_id').prop('disabled',true).val(promo.brand_name);
 		app.forms(divId, 'promos', '/forms#promo-edit');

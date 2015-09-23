@@ -1,10 +1,12 @@
 function walletTxn(api) {
-	var currResource, currForm, currInputs, params;
+	var currResource, currForm, currInputs, currAction, params;
 	
 	function main(arg) {		
 		params = app.params();
 	
 		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-");
+		currAction = action;
+		
 		currResource = app.resources[wrapperId]; //console.log(currResource); console.log(api.byId); console.log(action+' '+arguments.length);
 		
 		var relay = !currResource.relay ? null : currResource.relay['budget-'+action];
@@ -29,6 +31,7 @@ function walletTxn(api) {
 	function renderInputs(inputName) {
 		var val = ['to','amount','note'].indexOf(inputName)!=-1 && params[inputName] ? params[inputName]
 			: inputName=='from' ? currResource.relay['default'] 
+			: inputName=="to" ? getToRelay() 
 			: "";
 			
 		var disabled = inputName=='from' ? true : false;
@@ -68,6 +71,24 @@ function walletTxn(api) {
 				+"<h1>"+ relay +"</h1><button class='medium' id='postRelayBtn'>Check Records</button></span>"
 			)
 			.css('display','block');
+	}
+	
+	//used only if there is no to-relay info available
+	function getToRelay() {
+		var accts = api.byType.userAccounts.items;
+		if (!accts || !accts.length) return "";
+		
+		var sign = currAction=='transfer' ? currResource.sign : -1*currResource.sign;		
+		
+		for(var i=0; i<accts.length; i++) {
+			var acct = accts[i];
+			
+			if (acct.account_id != currResource.account_id && acct.sign == sign) {
+				if (acct.relay['budget-'+ currAction]) return acct.relay['budget-'+ currAction]
+			}
+		}
+		
+		return "";
 	}
 	
 	main.add = renderInputs
