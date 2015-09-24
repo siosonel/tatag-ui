@@ -67,10 +67,10 @@
 				</div>
 				<div class='row'>
 					<div class='columns small-8' id='txnFromDiv'>
-						<label>Recipient<input type='text' id='txn-from' value='' /></label>
+						<label>Recipient Token<input type='text' id='txn-from' value='' /></label>
 					</div>
 					<div class='columns small-8' id='txnToDiv'>
-						<label>Recipient<input type='text' id='txn-to' value='' /></label>
+						<label>Recipient Token<input type='text' id='txn-to' value='' /></label>
 					</div>
 					<div class='columns small-4'>
 						<label>amount<input type='text' id='txn-amount' value='' /></label>
@@ -101,7 +101,7 @@
 						<label>alias<input type='text' id='edit-alias' value='' /></label>
 					</div>
 					<div class='columns small-4'>
-						<label>token<input type='text' id='edit-limkey' value='' /></label>
+						<label>token <span id='editRelayId'></span>-<input type='text' id='edit-limkey' value='' /></label>
 					</div>
 				</div>
 			</form>

@@ -39,7 +39,7 @@ function vizGoalsBase() {
 	
 
 	var explanations = [{
-		note: "Each team issues currency as revenue (<b>rev</b>) and expense (<b>exp</b>) budgets.", 
+		note: "A team issues currency as equals amounts of revenue (<b>rev</b>) and expense (<b>exp</b>) budgets.", 
 		fxn: budgetPlan
 	},{
 		note: "We track these as debits (<b><i>dr</i></b>) and credits (<b><i>cr</i></b>).", 

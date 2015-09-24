@@ -69,8 +69,8 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<li><b>Use your revenue budget</b> to accept payments from reputable teams.</li>
 					<li><b>Replenish</b> your budgets as needed.</li>
 				</ul>
-				<p>That's it. If your team maintains a <i>good reputation</i> and <i>reasonable budgets</i>, 
-				other teams would reward you with their products. If your ethics or products are 
+				<p>If your team maintains a <i>good reputation</i> and <i>reasonable budgets</i>, 
+				you will be able to easily transact with other teams. If your ethics or products are 
 				questionable, they'll refuse to transact with you.</p>
 			</div>			
 			<!--<div class='aboutItem' id='howItWorks'>

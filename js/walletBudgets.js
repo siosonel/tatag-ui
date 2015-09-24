@@ -63,7 +63,7 @@ function walletBudgets(api) {
 		+			"<div id='"+ acctDivId +"-viz' class='left detailsDiv'>"
 		+				"Brand <b>"+ acct.brand_name +"</b><br />"
 		+				"Brand #"+ acct.brand_id  +", Unit: "+ acct.unit +"<br />"
-		+				"<span id='"+ acctDivId+"-relays'>Relay Token: <b>" + acct.relay['default'] +"</b><br />(or see token list &#9658;)</span>"
+		+				"<span id='"+ acctDivId+"-relays'>Recipient Token: <b>" + acct.relay['default'] +"</b><br />(or see token list &#9658;)</span>"
 		+			"</div>"
 		+			(acct.throttle_id ? "<span>(This account is throttled, #"+acct.throttle_id+")</span>" : "")
 		+		"</div>"

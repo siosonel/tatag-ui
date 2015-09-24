@@ -25,6 +25,7 @@ function vizSimpleBase() {
 	};
 	
 	function main(xName, yName) {
+		if (!dataset || !dataPtDivs) return;
 		if (typeof xName=='string') xProp = xName;
 		if (typeof yName=='string') yProp = yName;
 		
@@ -119,6 +120,8 @@ function vizSimpleBase() {
 	}
 	
 	function setMinMax(d) {
+		if (!d) return;
+		
 		var xArr=[], yArr=[], xRange, yRange;
 		for(var i=0; i<d.length; i++) {
 			xArr.push(d[i][xProp]);

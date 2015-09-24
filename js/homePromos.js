@@ -47,28 +47,43 @@ function homePromos(api) {
 		var pencil = !promo.links['promo-edit'] ? ""
 			: " <span class='fi-pencil small'>&nbsp;</span>";
 		
+		if (promo.imageTemplate) {
+			var template = api.byId[promo.imageTemplate];
+			var	image = template.data, d=template.delimiter, s=template.substitute;
+			
+			for(var i=0; i<s.length; i++) {
+				image = image.replace(d[0]+s[i]+d[1], promo[s[i]]);
+			}
+		}
+		else if (promo.imageURL) var image ="<img src='"+image+"'>"; 
+		else var image="";
+		
+		var dots = promo.description.length>50 ? '...' : ''; 
+		
 		$('#promosWrapper').append(
 			"<div id='"+divId+"' class='small-12 medium-6 large-4 columns' style='padding: 0.2rem; float: left;'>"
-			+ 	"<div class='brandItem' style='text-align: left;'>"
-			+			(promo.imageURL ? "<img src='"+promo.imageURL+"' class='small'><br />" : "")
-			+			"<button id='pay-"+ promo.promo_id +"' class='right tiny'>"+ promo.amount.toFixed(2) +" hour</button>"  
-			+ 		"<b>"+promo.name +"</b>" + pencil +"<br />"
-			+			promo.description +"</br >"
-			+			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a>" : "")
-			+			(promo.expires ? "Expires: "+ promo.expires : "")
-			//+ date[1] +'/'+ date[2] +"<br/>"+ date[0]
+			+ 	"<div class='promoItem'>"
+			+			image
+			+ 		pencil +"<span class='promoTitle'><b>"+ promo.name +"</b></span><br />"
+			+ 		"<span class='tiny promoTitle'>By: "+ promo.brand_name +"</span><br />"
+			+			"<button id='pay-"+ promo.promo_id +"' class='tiny' style='margin-bottom: 0.25rem;'>"+ promo.amount.toFixed(2) +" hour</button><br />"
+			+			"<span id=''>"+ promo.description.substr(0, 49) + dots + "<br />(more)</span>"
+			// +			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a><br />" : "")
+			// +			(promo.expires ? "Expires: "+ promo.expires +'<br />' : "")
+			// + date[1] +'/'+ date[2] +"<br/>"+ date[0]
+			//+			'Recipient Token: <b>' + promo.relay['budget-use'] +'</b><br />'
 			+		"</div>"
 			+'</div>'
 		)
 	}
 	
 	function setHolderIdOpt(acct) {
-		if (acct.authcode.search('x')!=-1) $('#promos-holder_id').append(
-			"<option value='"+ acct.holder_id +"'>"+ acct.account_name +", brand "+ acct.brand_name +", Bal: "+ acct.balance +"</option>"
+		if (acct.authcode.search('x')!=-1 && acct.sign==-1) $('#promos-holder_id').append(
+			"<option value='"+ acct.holder_id +"'>"+ acct.account_name +", brand "+ acct.brand_name +", Bal: "+ acct.balance.toFixed(2) +"</option>"
 		);
 	}
 	
-	main.clickHandler = function (e) {
+	main.clickHandler = function (e) {	
 		if (e.target.id=='addPromo') { 
 			$('#promoID-formDiv').css('display','none');
 			$('#promoDetailsDiv, #promoRelayDiv, #promoHolderIdDiv').css('display','block');
@@ -77,7 +92,7 @@ function homePromos(api) {
 			app.forms(currCollection, 'promos', '/forms#promo-add');
 			return;
 		}
-		else if (e.target.id.substr(0,4)=='pay-') { 
+		else if (e.target.id && e.target.id.substr(0,4)=='pay-') { 
 			var promo = app.resources[e.target.parentNode.parentNode.id]; //console.log(promo);
 			var postPayURL = encodeURIComponent(homeURL + "/home-promos?{record_id}&{promo_id}"); //console.log(postPayURL);
 			window.open(promo.links.payLink + "&postPayURL=" + postPayURL);
@@ -85,16 +100,22 @@ function homePromos(api) {
 			return;
 		}
 		
-		
 		if (app.getCls(e).indexOf('subLabel') != -1) {
 			app('promosWrapper');
 		}
-	
+		else if (e.target.className.search('promoTitle')!=-1 
+			|| e.target.parentNode.className.search('promoTitle')!=-1
+			|| e.target.className.search('fi-pencil')!=-1
+		) {
+			var targetCls='edit';
+			e.target=e.target.parentNode;
+		}
+		
 		var divId = app.getDivId(e, 'promos');
 		if (!divId) return;
 		
-		var promo = app.resources[divId];
-		if (!promo.links['promo-edit']) return; 
+		var promo = app.resources[divId]; 
+		if (!promo.links['promo-edit'] || !targetCls) return; 
 		
 		$('#promos-brand_id').prop('disabled',true).val(promo.brand_name);
 		app.forms(divId, 'promos', '/forms#promo-edit');

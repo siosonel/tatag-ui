@@ -67,6 +67,7 @@ function walletEdit(api) {
 		$('#editRecordConfirm').html(text);
 		$('#edit-status').val(status[action]);
 		$('#editRecord').css('display','block');
+		$('#editRelayPrefix').html(currResource.relayPrefix);
 		idPrefix = 'edit-';
 	}
 	

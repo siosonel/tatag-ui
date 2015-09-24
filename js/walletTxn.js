@@ -62,8 +62,8 @@ function walletTxn(api) {
 		
 		var optionText = currForm ? "<hr/><span><i>-- OR --</i></span>" : "";
 		var promptText = currResource.record_id 
-			? "Authorize the refund with this 'from' value"
-			: "Authorize the transaction originator with this 'to' value";
+			? "Authorize the refund with this recipient token"
+			: "Authorize the transaction originator with this recipient token";
 		
 		$('#relayInfo')
 			.html(optionText
