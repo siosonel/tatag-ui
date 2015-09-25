@@ -35,7 +35,8 @@ function teamMembers(api) {
 	
 	function renderMembers(members) {
 		currCollection = members;
-		members.items.map(renderItem)
+		members.items.map(renderItem);
+		app.adjustHeight();
 	}
 	
 	function renderItem(member) { //console.log(member)

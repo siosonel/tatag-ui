@@ -37,12 +37,14 @@ function adminMembers(api) {
 	
 	function renderMembers(members) {
 		currCollection = members;
-		members.items.map(renderItem)
+		members.items.map(renderItem);
 		$('#membersWrapper').append(
 			"<div>"
 			+	 "<button id='addMember' class='tiny' style='margin:0;'>+New Member</button>"
 			+ "</div>"
 		);
+		
+		app.adjustHeight();
 	}
 	
 	function renderItem(member) { //console.log(member)

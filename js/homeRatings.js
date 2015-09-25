@@ -35,6 +35,8 @@ function homeRatings(api) {
 			main.postRenderFxn();
 			main.postRenderFxn = null;
 		}
+		
+		app.adjustHeight();
 	}
 	
 	function renderItem(rating) {

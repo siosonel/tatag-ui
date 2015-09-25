@@ -1,5 +1,6 @@
 function searchMain(conf) {
 	var User, resources={}, refresh=0;
+	var subDivHeight={};
 	
 	var api = apiClass({
 		'userid': conf.userid, 
@@ -25,6 +26,8 @@ function searchMain(conf) {
 	}
 	
 	function main(otherWrapper) {
+		main.currView = 'brands';
+		main.adjustHeight();
 		$('#brandsWrapper').animate({left: '0'});
 		$('#'+otherWrapper).animate({left: '100%'});
 	}
@@ -34,6 +37,7 @@ function searchMain(conf) {
 	}
 	
 	function setUser(res) {
+		main.currView = 'brands';
 		User = res;
 		main.me(User.user_id, User.name, User.login_provider);
 		main.brands(User.links.brandCollection);
@@ -70,6 +74,17 @@ function searchMain(conf) {
 			ppCls = e.target.parentNode.parentNode.className.split(' ');
 		
 		return cls.concat(pCls).concat(ppCls) 
+	}
+	
+	main.adjustHeight = function (expandHeight) { 
+		var view = app.currView;
+		if (!arguments.length || !expandHeight) { 
+			subDivHeight[view] = $('#'+view+'Wrapper').height(); 
+			var h = 20;  
+		}
+		else h = 1*expandHeight.replace('px','') + 20;  //console.log([view, subDivHeight[view], h]);
+	
+		$('#mainWrapper').css('min-height', (subDivHeight[view]+h)+'px');
 	}
 	
 	return main;

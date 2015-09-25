@@ -18,7 +18,6 @@ function searchBrands(api) {
 		currBrands = brands;
 		currBrands.items.map(renderBrandDiv);
 		
-		
 		/*if (currBrands.next) $('#brandsWrapper').append(
 			"<button id='prevPage' class='tiny' style='float:left'>Previous</button>"
 		);*/
@@ -26,6 +25,8 @@ function searchBrands(api) {
 		if (currBrands.next) $('#brandsWrapper').append(
 			"<button id='nextPage' class='tiny' style='float:right'>more</button>"
 		);
+		
+		app.adjustHeight();
 	}
 	
 	function renderBrandDiv(brand) {

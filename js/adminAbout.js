@@ -70,7 +70,9 @@ function adminAbout(api) {
 			+ 		"<div class='small-9 columns'>"+ app.refs.byIso3[about.country_code][0] +": "+ app.refs.areaCodesByNum[about.country_code][about.area_code] +"</div>"
 			+		"</div>"
 			+'</div>'
-		)
+		);
+		
+		app.adjustHeight();
 	}
 	
 	main.clickHandler = function (e) {

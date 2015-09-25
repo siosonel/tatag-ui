@@ -67,6 +67,8 @@ function teamAbout(api) {
 			+		"</div>"
 			+'</div>'
 		)
+		
+		app.adjustHeight();
 	}
 	
 	main.clickHandler = function (e) {

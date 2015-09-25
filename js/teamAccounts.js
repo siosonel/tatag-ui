@@ -35,7 +35,8 @@ function teamAccounts(api) {
 	
 	function renderAccounts(accounts) { 
 		currCollection = accounts;
-		accounts.items.map(renderItem)
+		accounts.items.map(renderItem);
+		app.adjustHeight();
 	}
 	
 	function renderItem(account) {

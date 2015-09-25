@@ -40,7 +40,8 @@ function adminAccountHolders(api) {
 	
 	function renderAccounts(holders) { 
 		currCollection = holders;
-		holders.items.map(renderItem)
+		holders.items.map(renderItem);
+		app.adjustHeight();
 	}
 	
 	function renderItem(holder) {
@@ -75,6 +76,7 @@ function adminAccountHolders(api) {
 			$('#accountsWrapper').animate({left: '0px'});
 			$('#accountHoldersWrapper').animate({left: '100%'});
 			app.currView = 'accounts';
+			app.adjustHeight();
 		}
 		
 		var divId = app.getDivId(e, 'accountHolder');

@@ -34,6 +34,7 @@ function adminPromos(api) {
 	function renderPromos(promos) { 
 		currCollection = promos;
 		promos.items.map(renderItem);
+		app.adjustHeight();
 	}
 	
 	function renderItem(promo) {

@@ -27,6 +27,7 @@ function adminBrands(api) {
 		else {
 			currBrands = brands;
 			currBrands.map(renderBrandDiv);
+			app.adjustHeight();
 		}
 	}
 	

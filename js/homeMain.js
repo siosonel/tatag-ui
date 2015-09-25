@@ -1,6 +1,8 @@
 function homeMain(conf) {
 	var User, resources={}, refresh=0, params;
-	var clickedBrand={};
+	var clickedBrand = {};
+	var subDivHeight = {};
+	
 	var completer = autoComplete({
 		selector: '#ratings-reason',
 		source: autocompleteSource,
@@ -164,6 +166,17 @@ function homeMain(conf) {
 		});
 		
 		return result;
+	}
+	
+	main.adjustHeight = function (expandHeight) { 
+		var view = app.currView;
+		if (!arguments.length || !expandHeight) { 
+			subDivHeight[view] = $('#'+view+'Wrapper').height(); 
+			var h = 20;  
+		}
+		else h = 1*expandHeight.replace('px','') + 20;  console.log([view, subDivHeight[view], h]);
+	
+		$('#mainWrapper').css('min-height', (subDivHeight[view]+h)+'px');
 	}
 	
 	main.completer = completer;

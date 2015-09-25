@@ -21,6 +21,8 @@ function homeViz(api) {
 				+"</div>"
 			);
 		}
+		
+		app.adjustHeight();
 	}
 	
 	return main;

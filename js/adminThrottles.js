@@ -40,6 +40,7 @@ function adminThrottles(api) {
 	function renderThrottles(throttles) { 
 		currCollection = throttles;
 		throttles.items.map(renderItem);
+		app.adjustHeight();
 	}
 	
 	function renderItem(throttle) {

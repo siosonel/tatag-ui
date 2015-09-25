@@ -37,6 +37,8 @@ function homePromos(api) {
 			main.postRenderFxn();
 			main.postRenderFxn = null;
 		}
+		
+		app.adjustHeight();
 	}
 	
 	function renderItem(promo) {

@@ -45,6 +45,7 @@ function teamRecords(api) {
 	function renderCollection(collection) { 
 		currCollection = collection;
 		currCollection.items.map(renderItem);
+		app.adjustHeight();
 	}
 	
 	function renderItem(record) {

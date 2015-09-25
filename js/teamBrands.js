@@ -17,6 +17,7 @@ function teamBrands(api) {
 	function renderBrands(brands) {		
 		currBrands = brands;
 		currBrands.map(renderBrandDiv);
+		app.adjustHeight();
 	}
 	
 	function renderBrandDiv(brand) { //console.log(brand);
