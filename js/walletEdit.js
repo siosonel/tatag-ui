@@ -27,6 +27,7 @@ function walletEdit(api) {
 		$('#edit-limkey').val(currResource.limkey);		
 		$('#editBudget').css('display','block');
 		idPrefix = 'edit-';
+		$('#editRelayId').html(currResource.holder_id);
 	}
 	
 	function renderRelayForm(action) {

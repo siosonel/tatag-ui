@@ -40,7 +40,7 @@ function adminForms(api) {
 			: dateInputs.indexOf(inputName) != -1 ? getDateStr()
 			: null;
 		
-		$('#'+currType+'-'+inputName).val(val);
+		$('#'+currType+'-'+inputName).val(val); console.log(currType);
 		
 		if (currType=='about') {
 			if (inputName=='type_system') main.setTypeOpts();
@@ -49,6 +49,15 @@ function adminForms(api) {
 		}
 		else if (currType=='ratings') {
 			if (inputName=='rating') $('#ratings-slider').val(val);
+		}
+		else if ((currType=='accept' && inputName=='joined')
+			|| (currType=='revoke' && inputName=='revoked')) {
+			var date=new Date(), 
+				y=date.getFullYear(), m=date.getMonth()+1, d=date.getDate();
+				if (m<10) m='0'+m;
+				if (d<10) d='0'+d;			
+				
+			$('#'+currType+'-'+inputName).val(y+'-'+m+'-'+d+' 00:00:00');
 		}
 	}
 	

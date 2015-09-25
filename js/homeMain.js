@@ -174,7 +174,7 @@ function homeMain(conf) {
 			subDivHeight[view] = $('#'+view+'Wrapper').height(); 
 			var h = 20;  
 		}
-		else h = 1*expandHeight.replace('px','') + 20;  console.log([view, subDivHeight[view], h]);
+		else h = 1*expandHeight.replace('px','') + 20;  //console.log([view, subDivHeight[view], h]);
 	
 		$('#mainWrapper').css('min-height', (subDivHeight[view]+h)+'px');
 	}

@@ -53,7 +53,7 @@
 			<form>
 				<div class='row'>
 					<div class='columns small-12'>
-						<label>Join on<input type='text' id='accept-joined' value='' /></label>
+						<label>Join on (yyyy-mm-dd hh:mm:ss)<input type='text' id='accept-joined' value='' /></label>
 					</div>
 				</div>
 			</form>
@@ -69,7 +69,7 @@
 			<form>
 				<div class='row'>
 					<div class='columns small-12'>
-						<label>Revoke on<input type='text' id='revoke-revoked' value='' /></label>
+						<label>Revoke on (yyyy-mm-dd hh:mm:ss)<input type='text' id='revoke-revoked' value='' /></label>
 					</div>
 				</div>
 			</form>

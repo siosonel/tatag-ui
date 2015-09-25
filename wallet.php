@@ -97,11 +97,14 @@
 			<h4 id='edit-title'></h4>
 			<form>
 				<div class='row'>
-					<div class='columns small-8'>
+					<div class='columns small-12'>
 						<label>alias<input type='text' id='edit-alias' value='' /></label>
 					</div>
-					<div class='columns small-4'>
-						<label>token <span id='editRelayId'></span>-<input type='text' id='edit-limkey' value='' /></label>
+				</div>
+				<div class='row'>
+					<div class='columns small-12'>
+						<label for='edit-limkey' style='display: inline;'>Recipient token <span id='editRelayId'></span>-</label>
+						<input type='text' id='edit-limkey' value='' style='display: inline; width: 30%'/>
 					</div>
 				</div>
 			</form>
