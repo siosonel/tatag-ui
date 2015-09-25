@@ -35,11 +35,12 @@ function walletRelays(api) {
 		+ "</div>";
 	}
 	
-	function renderRelays(relays) { 
+	function renderRelays(relays) {
+		currHolderRelays = relays;
+		app.resources[currHolderRelays['@id']] = relays;
+	
 		if (!relays.items || !relays.items.length) $('#relaysWrapper').append("<div class='relayItem'>No accountholder relay found.</div>");
 		else {
-			currHolderRelays = relays;
-			app.resources[currHolderRelays['@id']] = relays;
 			relays.items.map(listRelay);
 			paginate(relays);
 		}

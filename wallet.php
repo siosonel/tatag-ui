@@ -114,7 +114,7 @@
 			<form>
 				<div class='row'>
 					<div class='columns small-12'>
-						<label>Relay token for
+						<label>Recipient token for
 							<select id='editRelay-txntype'>
 								<option value='pn'>budget use</option>								
 								<option value='np'>budget issuance</option>
@@ -149,19 +149,22 @@
 					<div class='columns small-12'>Limits on usage per week</div>
 				</div>
 				<div class='row'>
-					<div class='columns small-6'>
+					<div class='columns small-4'>
 						<label>Total<input type='text' id='editRelay-by_all_limit' value='25' /></label>
 					</div>
-					<div class='columns small-6'>
+					<div class='columns small-4'>
 						<label>By brand<input type='text' id='editRelay-by_brand_limit' value='5' /></label>
+					</div>
+					<div class='columns small-4'>
+						<label>By user<input type='text' id='editRelay-by_user_limit' value='2' /></label>
 					</div>
 				</div>
 				<div class='row'>
-					<div class='columns small-6'>
-						<label>By user<input type='text' id='editRelay-by_user_limit' value='2' /></label>
-					</div>
-					<div class='columns small-6'>
-						<label>Reuse wait (in hours)<input type='text' id='editRelay-by_user_wait' value='48' /></label>
+					<div class='columns small-8'>
+						<label for='editRelay-by_user_wait'>Before reusing, a user must wait (in hours)</label>
+					</div>				
+					<div class='columns small-4'>
+						<input type='text' id='editRelay-by_user_wait' value='24' />
 					</div>
 				</div>
 			</form>

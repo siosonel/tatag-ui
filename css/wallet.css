@@ -30,8 +30,9 @@ body {
 #mainWrapper {
 	position: absolute;
 	width: 100%;
-	min-height: 3000px;
+	/*min-height: 3000px;*/
 	overflow-x: hidden;
+	overflow-y: visible;
 	background-color: #ececec;
 	font-size: 0.92rem;
 }

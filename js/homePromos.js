@@ -64,9 +64,9 @@ function homePromos(api) {
 			"<div id='"+divId+"' class='small-12 medium-6 large-4 columns' style='padding: 0.2rem; float: left;'>"
 			+ 	"<div class='promoItem'>"
 			+			image
-			+ 		pencil +"<span class='promoTitle'><b>"+ promo.name +"</b></span><br />"
+			+ 		pencil +"<span class='promoTitle'><b>"+ promo.name.substr(0,100) +"</b></span><br />"
 			+ 		"<span class='tiny promoTitle'>By: "+ promo.brand_name +"</span><br />"
-			+			"<button id='pay-"+ promo.promo_id +"' class='tiny' style='margin-bottom: 0.25rem;'>"+ promo.amount.toFixed(2) +" hour</button><br />"
+			+			"<button id='pay-"+ promo.promo_id +"' class='tiny' style='margin-bottom: 0.25rem;'>"+ promo.amount.toFixed(2) +" XTH</button><br />"
 			+			"<span id=''>"+ promo.description.substr(0, 49) + dots + "<br />(more)</span>"
 			// +			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a><br />" : "")
 			// +			(promo.expires ? "Expires: "+ promo.expires +'<br />' : "")

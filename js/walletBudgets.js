@@ -22,6 +22,7 @@ function walletBudgets(api) {
 			if (app.currView=='records') app.records(app.resources[currAcctDivId]);
 			$('#'+currAcctDivId).css('height', openHeight);
 			$('#'+currAcctDivId+'-forms').css('display', 'block');
+			app.adjustHeight();
 			
 			if (params.to) { 
 				if (!params.expenseAcctToUse) params.expenseAcctToUse = $('#expenseAcctToUse').val();
@@ -157,7 +158,10 @@ function walletBudgets(api) {
 				.css({'background-color': 'rgb(245,245,245)', 'color': 'rgb(190,190,190)'});
 		}
 		
-		if (currAcctDivId==acctDivId) {currAcctDivId = '';}
+		if (currAcctDivId==acctDivId) {
+			currAcctDivId = '';
+			app.adjustHeight();
+		}
 		else {
 			currAcctDivId =  acctDivId;
 			$('#'+currAcctDivId).animate({height: openHeight});	
@@ -169,6 +173,8 @@ function walletBudgets(api) {
 			$('#'+currAcctDivId+'-edit').css('display', 'inline');
 			$('#'+currAcctDivId+'-toggle').html("&#9650;&#9650;&#9650;")
 				.css({'background-color': '#007095', 'color': '#fff'});
+				
+			app.adjustHeight(openHeight);
 		}
 	}
 	

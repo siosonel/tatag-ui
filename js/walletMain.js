@@ -1,6 +1,7 @@
 function walletMain(conf) {
 	var User, resources={}, refresh=0, params;
 	var $currDiv, viewDataLink={};	
+	var subDivHeight = {};
 	
 	var api = apiClass({
 		'userid': conf.userid, 
@@ -128,6 +129,17 @@ function walletMain(conf) {
 			main[view](viewDataLink[view]);		
 			history.replaceState({}, "wallet", "/ui/wallet-"+ app.currView);
 		}
+	}
+	
+	main.adjustHeight = function (expandHeight) { 
+		var view = app.currView=='budgets' ? 'accounts' : app.currView;
+		if (!arguments.length || !expandHeight) { 
+			subDivHeight[view] = $('#'+view+'Wrapper').height(); 
+			var h = 20;  
+		}
+		else h = 1*expandHeight.replace('px','') + 20; //console.log([view, subDivHeight[view], h]);
+	
+		$('#mainWrapper').css('min-height', (subDivHeight[view]+h)+'px');
 	}
 	
 	return main

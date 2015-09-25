@@ -154,7 +154,7 @@ function walletTxn(api) {
 		}
 		
 		app.refresh(2); 
-		app.cards(); // will refresh/open records view as needed;
+		app.budgets(); // will refresh/open records view as needed;
 	}
 	
 	return main;

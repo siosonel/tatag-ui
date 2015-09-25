@@ -42,7 +42,7 @@ function vizGoalsBase() {
 		note: "A team issues currency as equals amounts of revenue (<b>rev</b>) and expense (<b>exp</b>) budgets.", 
 		fxn: budgetPlan
 	},{
-		note: "We track these as debits (<b><i>dr</i></b>) and credits (<b><i>cr</i></b>).", 
+		note: "We track these as obligations (<b>&minus;</b>) and credits (<b>&plus;</b>).", 
 		fxn: budgetAdd
 	},{
 		note: "Credits are offered as payment for another team's goods and services.", 
@@ -51,7 +51,7 @@ function vizGoalsBase() {
 		note: "The payee's <b>automated advisor</b> evaluates the payer's team reputation.",
 		fxn: budgetPayOffer
 	},{
-		note: "An accepted payment cancels payee debits and payer credits.",
+		note: "An accepted payment reduces the payee's obligations and payer's credits.",
 		fxn: budgetPayAccept
 	},{
 		note: "Rejected payments are refunded.",
@@ -178,10 +178,10 @@ function vizGoalsBase() {
 	function getText(d) {
 		if (d.text!='pay') {
 			if (currGoal===0) return "";
-			return d.text=='rev' ? 'dr' : 'cr';
+			return d.text=='rev' ? '<b>&minus;</b>' : '<b>&plus;</b>';
 		}
 		else {		
-			var alias = {rev: 'dr', exp: 'cr'};		
+			var alias = {rev: '<b>&minus;</b>', exp: '<b>&plus;</b>'};		
 			
 			return currGoal<2 || currGoal>5 ? null 
 				: d.name == 'A'+ Aacct ? alias[Aacct]

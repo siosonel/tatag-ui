@@ -41,7 +41,7 @@ function walletEdit(api) {
 		if (currForm) {
 			currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
 			for(var i=0; i<currInputs.length; i++) {
-				$('#editRelay-'+currInputs[i]).val(currResource[currInputs[i]]);
+				if (currResource[currInputs[i]]) $('#editRelay-'+currInputs[i]).val(currResource[currInputs[i]]);
 			}
 		}
 		
@@ -98,7 +98,7 @@ function walletEdit(api) {
 	main.refreshViews = function (res) {
 		app.refresh(2); 
 		if (currResource['@type']=='relay' || currResource['@type']=='holderRelays') app.relays(); 
-		else app.cards(); // will refresh/open records view as needed;
+		else app.budgets(); // will refresh/open records view as needed;
 	}
 	
 	return main;

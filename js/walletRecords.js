@@ -42,6 +42,7 @@ function walletRecords(api) {
 			records.items.map(listRecord);
 			paginate(records);
 			$('#'+currRecordId).css('max-height', maxHeight);
+			app.adjustHeight();
 		}
 	}
 	
@@ -156,11 +157,16 @@ function walletRecords(api) {
 			
 			currRecordId = idArr[typeArr.indexOf('record')];
 			
-			if (prevId == currRecordId) currRecordId='';
+			if (prevId == currRecordId) {
+				currRecordId='';
+				app.adjustHeight();
+			}
 			else {
 				$('#'+currRecordId).animate({'max-height': maxHeight});
 				$('#'+currRecordId+'-toggle').html("&#9650;&#9650;&#9650;")
 				.css({'background-color': '#007095', 'color': '#fff'});
+				
+				app.adjustHeight(maxHeight);
 			}
 			
 			return;
