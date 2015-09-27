@@ -40,7 +40,7 @@ function adminForms(api) {
 			: dateInputs.indexOf(inputName) != -1 ? getDateStr()
 			: null;
 		
-		$('#'+currType+'-'+inputName).val(val); console.log(currType);
+		$('#'+currType+'-'+inputName).val(val);
 		
 		if (currType=='about') {
 			if (inputName=='type_system') main.setTypeOpts();

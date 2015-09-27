@@ -12,7 +12,9 @@ function walletMain(conf) {
 	$(document).ready(function () {
 		params = main.getQueryParams();
 		
-		app.currView = location.pathname.search('-')==-1 ? 'budgets' : location.pathname.split('-').pop();
+		app.currView = location.pathname.search('-')==-1 || location.pathname.substr(0,5)=='/for/'
+			? 'budgets' : location.pathname.split('-').pop();
+		
 		history.replaceState({}, "wallet", "/ui/wallet-"+ app.currView);
 		
 		main.budgets = walletBudgets(api);		
@@ -40,6 +42,8 @@ function walletMain(conf) {
 			params.expenseAcctToUse = $('#expenseAcctToUse').val();
 			$('#txn-from').val(params.expenseAcctToUse);
 		});
+		
+		$('#txn-to').change(main.txn.matchPromo)
 	});
 	
 	function main(wrapperId) {
@@ -51,7 +55,7 @@ function walletMain(conf) {
 		return api.loadType('user');
 	}
 
-	function setUser(res) { 
+	function setUser(res) {
 		User = res;
 		main.me(User.user_id, User.name, User.login_provider);
 		
@@ -85,7 +89,7 @@ function walletMain(conf) {
 	}
 	
 	main.getQueryParams = function () {
-		var result = {}
+		var result = {};
 	
 		location.search.substr(1).split("&").forEach(function(part) {
 			if(!part) return;
@@ -101,7 +105,14 @@ function walletMain(conf) {
 				if(!index) result[key].push(item[1]);
 				else result[key][index] = item[1];
 			}
-		})
+		}); console.log(result);
+		
+		//this is when browser detects for=... in query params
+		if (result['for'] && !result.to) result.to=result['for'];
+		
+		//this if when url uses domain/for/keyword-999 format
+		var p = location.pathname.split("/"); console.log(p);
+		if ((p[1]=='for' || p[1]=='pay') && p.length==3 && !result.to && !isNaN(p[2].split('-')[1])) result.to=p[2];
 		
 		return result;
 	}

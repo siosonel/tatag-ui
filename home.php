@@ -255,6 +255,10 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		<a class="close-reveal-modal">×</a>
 	</div>		
 	
+	<!--<div>
+		<iframe src='/ui/share.php' id='shareIframe' width='100%' height='60px;'></iframe>
+	</div>-->
+	
 	<script src='/ui/js/homeMain.js'></script>
 	<script src='/ui/js/adminForms.js'></script>
 	<script src='/ui/js/homeRatings.js'></script>
@@ -263,10 +267,10 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<script src='/ui/js/homeAbout.js'></script>
 	<script src='/ui/js/autoComplete.js'></script>
 	
-	<script type="text/javascript" src="lib/d3/d3.v3.min.js"></script>
-	<script type="text/javascript" src="lib/colorbrewer.js"></script>
-	<script type="text/javascript" src="js/vizSimple.js"></script>
-	<script type="text/javascript" src="js/vizGoals.js"></script>
+	<script type="text/javascript" src="/ui/lib/d3/d3.v3.min.js"></script>
+	<script type="text/javascript" src="/ui/lib/colorbrewer.js"></script>
+	<script type="text/javascript" src="/ui/js/vizSimple.js"></script>
+	<script type="text/javascript" src="/ui/js/vizGoals.js"></script>
 	
 	<script>	
 		var autocompleteSource = [

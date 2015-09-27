@@ -29,7 +29,8 @@ if (isset($_GET['token_id']) AND is_numeric($_GET['token_id']) AND isset($_GET['
 
 $handler = trim($_GET['_url'], " \/\\\t\n\r\0\x0B");
 
-if (!$handler OR strpos($handler,'home')!==false) $handler='home'; 	
+if (isset($_GET['for']) AND $_GET['for']) $handler = "wallet";  
+else if (!$handler OR strpos($handler,'home')!==false) $handler='home'; 	
 else if (strpos($handler,'wallet')!==false OR strpos($handler,'pay')!==false) $handler='wallet';
 
 if ((SITE!='dev' //require login prior to public alpha release
@@ -48,6 +49,7 @@ if ((SITE!='dev' //require login prior to public alpha release
 	$otk = $data[0]->otk;
 		
 	$nextParams = array();
+	if (isset($_GET['for'])) $nextParams[] = 'for='. $_GET['for'];
 	if (isset($_GET['to'])) $nextParams[] = 'to='. $_GET['to'];
 	if (isset($_GET['amount'])) $nextParams[] = 'amount='. $_GET['amount'];
 	if (isset($_GET['note'])) $nextParams[] = 'note='. $_GET['note'];

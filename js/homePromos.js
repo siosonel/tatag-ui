@@ -74,6 +74,7 @@ function homePromos(api) {
 			// +			(promo.expires ? "Expires: "+ promo.expires +'<br />' : "")
 			// + date[1] +'/'+ date[2] +"<br/>"+ date[0]
 			//+			'Recipient Token: <b>' + promo.relay['budget-use'] +'</b><br />'
+			+		"<span class='sharePrompt'>Share</span>"
 			+		"</div>"
 			+'</div>'
 		)
@@ -97,7 +98,8 @@ function homePromos(api) {
 		else if (e.target.id && e.target.id.substr(0,4)=='pay-') { 
 			var promo = app.resources[e.target.parentNode.parentNode.id]; //console.log(promo);
 			var postPayURL = encodeURIComponent(homeURL + "/home-promos?{record_id}&{promo_id}"); //console.log(postPayURL);
-			window.open(promo.links.payLink + "&postPayURL=" + postPayURL);
+			var sep = promo.links.payLink.search(/\?/)==-1 ? '?' : '&';
+			window.open(promo.links.payLink + sep + "postPayURL=" + postPayURL);
 			
 			return;
 		}
@@ -117,7 +119,14 @@ function homePromos(api) {
 		if (!divId) return;
 		
 		var promo = app.resources[divId]; 
-		if (!promo.links['promo-edit'] || !targetCls) return; 
+		
+		if (e.target.className=='sharePrompt') {
+			/*$('#shareIframe').attr('src', promo.links.promoPage)
+				.css({display:'block'});*/
+			window.location.href = promo.links.promoPage;
+			return;
+		}
+		else if (!promo.links['promo-edit'] || !targetCls) return; 
 		
 		$('#promos-brand_id').prop('disabled',true).val(promo.brand_name);
 		app.forms(divId, 'promos', '/forms#promo-edit');

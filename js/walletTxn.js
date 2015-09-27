@@ -32,7 +32,7 @@ function walletTxn(api) {
 		var val = ['to','amount','note'].indexOf(inputName)!=-1 && params[inputName] ? params[inputName]
 			: inputName=='from' ? currResource.relay['default'] 
 			: inputName=="to" ? getToRelay() 
-			: "";
+			: ""; 
 			
 		var disabled = inputName=='from' ? true : false;
 	
@@ -41,6 +41,9 @@ function walletTxn(api) {
 		
 		if (inputName=='to') $('#txnToDiv').css('display','inline-block');
 		else if (inputName=='from') $('#txnFromDiv').css('display','none');
+		else if (inputName=='amount' && !params.amount) {
+			main.matchPromo(); 
+		}  
 	}
 	
 	function renderReverse(inputName) {
@@ -76,7 +79,7 @@ function walletTxn(api) {
 	//used only if there is no to-relay info available
 	function getToRelay() {
 		var accts = api.byType.userAccounts.items;
-		if (!accts || !accts.length) return "";
+		if (!accts || !accts.length || currAction=='use') return "";
 		
 		var sign = currAction=='transfer' ? currResource.sign : -1*currResource.sign;		
 		
@@ -155,6 +158,39 @@ function walletTxn(api) {
 		
 		app.refresh(2); 
 		app.budgets(); // will refresh/open records view as needed;
+	}
+	
+	main.matchPromo = function () {
+		var to = $('#txn-to').val();
+		if (!to || to.search('-')==-1) return;
+		
+		var searchForm = api.byType.user;
+		
+		api.loadId(app.api.byType['user'].links.promoSearch)
+			.then(fillPromoSearchForm, main.errHandler);
+	}
+	
+	function fillPromoSearchForm(res) {
+		//need to think this through better
+		action = {
+			target: res.target, 
+			query: {"for": $('#txn-to').val()},
+			method:'get', 
+			inputs:null
+		};
+		
+		api.request(action).then(usePromoInfo, app.errHandler);
+	}
+	
+	function usePromoInfo(res) {
+		if (!res['@graph'] || !res['@graph'][0] || !res['@graph'][0].items.length) {
+			$('#txn-title').html('Use Budget');
+			return;
+		}
+		
+		var promo = res['@graph'][0].items[0];
+		$('#txn-amount').val(promo.amount.toFixed(2));
+		$('#txn-title').html('Pay <b>'+ promo.brand_name +'</b>');
 	}
 	
 	return main;

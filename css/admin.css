@@ -150,3 +150,10 @@ body {
 .tabs dd > a, .tabs .tab-title > a{
     outline: none;
 }
+
+#shareIframe {
+	position: absolute;
+	display: none;	
+	border:none; 
+	overflow:hidden;
+}
