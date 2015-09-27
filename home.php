@@ -55,7 +55,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		
 		<div id='aboutWrapper'>
 			<div id='aboutBanner'>
-				<img src='css/logo5.png' class='aboutLogo'/>
+				<img src='/ui/css/logo5.png' class='aboutLogo'/>
 				<div>
 					<h1>tatag.cc</h1>
 					<h5>invert the economy</h5>
@@ -91,12 +91,12 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<i>Would you refuse payments from <br /><span id='workType'></span>?</i>
 				</p>
 				<div id='rateImgDiv'>
-					<div><img src='images/woman-farmer.jpg' class='rateImg'/></div>
-					<div><img src='images/polluter.jpg' class='rateImg' title='&copy; Jonathan Kos-Read'/></div>
-					<div><img src='images/programmer.jpg' class='rateImg'/></div>					
-					<div><img src='images/coal-mine.jpg' class='rateImg'/></div>
-					<div><img src='images/street-sweeper.jpg' class='rateImg'/></div>
-					<div><img src='images/teacher.jpg' class='rateImg'/></div>
+					<div><img src='/ui/images/woman-farmer.jpg' class='rateImg'/></div>
+					<div><img src='/ui/images/polluter.jpg' class='rateImg' title='&copy; Jonathan Kos-Read'/></div>
+					<div><img src='/ui/images/programmer.jpg' class='rateImg'/></div>					
+					<div><img src='/ui/images/coal-mine.jpg' class='rateImg'/></div>
+					<div><img src='/ui/images/street-sweeper.jpg' class='rateImg'/></div>
+					<div><img src='/ui/images/teacher.jpg' class='rateImg'/></div>
 				</div>
 			</div>
 			<div class='aboutItem' style='position: relative;'>
@@ -256,8 +256,17 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	</div>		
 	
 	<!--<div>
-		<iframe src='/ui/share.php' id='shareIframe' width='100%' height='60px;'></iframe>
+		<style>
+			#promoIframe {
+				display: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+		<iframe src='/ad/2' id='promoIframe' width='100%' height='100%'></iframe>
 	</div>-->
+	
 	
 	<script src='/ui/js/homeMain.js'></script>
 	<script src='/ui/js/adminForms.js'></script>

@@ -21,7 +21,7 @@ $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 ?><html>
 <head>
 	<title>Promo</title>	
-	<link rel="icon" type="image/png" href="css/logo5.png">
+	<link rel="icon" type="image/png" href="/ui/css/logo5.png">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
@@ -41,21 +41,61 @@ $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 	<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>-->
 	
   <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
-	<!--<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">-->
-	<style>
-		body p {
+	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
+  <link rel="stylesheet" href="/ui/css/admin.css">
+	<link rel="stylesheet" href="/ui/css/home.css">
+	<style>		
+		body {
+			background-color: #ececec;
+		}
+		
+		#mainDiv {
+			max-width: 600px;
+			margin: 5px auto 0.5rem auto;
+			padding: 1.25rem 0.75rem 0.75rem 0.75rem;
+			text-align: center;
+			background-color: #fff;
+			border-bottom: 1px solid #ccc;
+		}
+		
+		#mainDiv p {
 			text-align: left;
 			padding: 0 1rem;
 		}
 		
-		h3, h4 {		
+		#mainDiv h3, #mainDiv h4 {		
 			font-size: 1.125rem;
 			margin: 0.75rem 1.25rem;
 		} 
 	</style>
 </head>
 <body>
-	<div style='padding: 0.75rem; text-align: center;'>
+	
+	<!--<div id='login_provider'></div>
+	<div class='row'>
+		<div class='small-12' id='titleBar'>
+			<span class='fi-refresh'>&nbsp;</span><a href="/ui/home" style="color: #000;">Home</a> |
+			<a href="/ui/wallet">Wallet</a> |
+			<a href="/ui/my-teams">Teams</a>
+		</div>
+	</div>
+	
+	<div id='viewTypeDiv' class='row'>
+		<button id='aboutViewPrompt' class='small-3 tiny' onclick='reload(this)'>About</button>
+		<button id='ratingsViewPrompt' class='small-3 tiny' onclick='reload(this)'>Ratings</button>
+		<button id='vizViewPrompt' class='small-3 tiny' onclick='reload(this)'>Viz</button>
+		<button id='promosViewPrompt' class='small-3 tiny' style='color: rgb(255, 255, 0);' onclick='reload(this)'>Promos</button>
+	</div>-->
+
+	<div id='aboutBanner'>
+		<!--<img src='/ui/css/logo5.png' class='aboutLogo right'/>-->
+		<div>
+			<h5>Pay for this promo using your own currency 
+				at <a href='https://tatag.cc/'>tatag.cc</a>.</h5>
+		</div>
+	</div>
+	
+	<div id='mainDiv'>
 	<?php echo "
 		<img src='$promo->imageURL' />
 		<$h>$promo->name</$h>
@@ -84,9 +124,6 @@ $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 	<span class='st_email_large' displayText='Email'></span>
 </div>
 
-<!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="edgarsioson">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>-->
-
 <script type="text/javascript">
 	/*stLight.options({
 		publisher: "5d4b36c2-d150-488e-b2f5-6e332e795b81", 
@@ -98,6 +135,25 @@ $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 	function checkout() {
 		window.open("<?php echo $promo->payLink ?>");
 	}
+	
+	function reload(target) {	
+		var elemId = target.id.toLowerCase();
+		var view = elemId.search('rating') != -1 ? 'ratings'
+			: elemId.search('promo') != -1 ?  'promos'
+			: elemId.search('viz') != -1 ?  'viz'
+			: elemId.search('about') != -1 ?  'about'
+			: '';
+		
+		if (view) {
+			var loc = window.location; //console.log(loc.protocol+'//'+ loc.host + "/ui/home-"+ view);
+			loc.href = loc.protocol+'//'+ loc.host + "/ui/home-"+ view;
+		}
+	};
+	
+	if (window.parent && window.parent.location.href != window.location.href) 
+		document.getElementById('aboutBanner').style.display="none";
+	
 </script>
+
 </body>
 </html>
