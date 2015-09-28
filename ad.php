@@ -49,13 +49,18 @@ $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 			background-color: #ececec;
 		}
 		
+		#aboutBanner {
+			max-width: 600px;
+			margin: 0 auto;
+		}
+		
 		#mainDiv {
 			max-width: 600px;
 			margin: 5px auto 0.5rem auto;
 			padding: 1.25rem 0.75rem 0.75rem 0.75rem;
 			text-align: center;
 			background-color: #fff;
-			border-bottom: 1px solid #ccc;
+			/*border-bottom: 1px solid #ccc;*/
 		}
 		
 		#mainDiv p {
@@ -88,14 +93,10 @@ $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 	</div>-->
 
 	<div id='aboutBanner'>
-		<!--<img src='/ui/css/logo5.png' class='aboutLogo right'/>-->
-		<div>
-			<h5>Pay for this promo using your own currency 
-				at <a href='https://tatag.cc/'>tatag.cc</a>.</h5>
-		</div>
+		<h5 style='text-decoration: underline;' id='bannerTitle'>tatag.cc promos</span></h5>
 	</div>
 	
-	<div id='mainDiv'>
+	<div id='mainDiv' class='panel'>
 	<?php echo "
 		<img src='$promo->imageURL' />
 		<$h>$promo->name</$h>
@@ -150,8 +151,18 @@ $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 		}
 	};
 	
-	if (window.parent && window.parent.location.href != window.location.href) 
-		document.getElementById('aboutBanner').style.display="none";
+	var bannerTitle = document.getElementById('bannerTitle');
+	var ref = document.referrer.split("://"); 
+	
+	if (ref[1] && ref[1].search(window.location.hostname)==0) {
+		bannerTitle.innerHTML = "Back to tatag.cc promos";
+		bannerTitle.onclick = function () {window.history.back();};
+	}
+	else {
+		bannerTitle.onclick = function () {
+			window.location.href='<?php echo UI_DOMAIN ?>/home-promos';
+		};		
+	}
 	
 </script>
 
