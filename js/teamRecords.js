@@ -7,7 +7,7 @@ function teamRecords(api) {
 		if (!currBrand || app.currView != 'records') return;
 		app.currView = 'records';
 		
-		var url = currBrand.links.budgetRecords;
+		var url = currBrand.budgetRecords;
 		$('#recordsTitle, #recordsItems').children().remove();
 		setTitle(currBrand);
 		
@@ -39,7 +39,7 @@ function teamRecords(api) {
 	
 	function derefLinks(resource) {
 		budgetRecords = resource;
-		api.loadId(budgetRecords.links[currType]).then(renderCollection)
+		api.loadId(budgetRecords[currType]).then(renderCollection)
 	}
 	
 	function renderCollection(collection) { 

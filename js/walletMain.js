@@ -60,9 +60,9 @@ function walletMain(conf) {
 		main.me(User.user_id, User.name, User.login_provider);
 		
 		viewDataLink = {
-			budgets: User.links.userAccounts,
-			orders: User.links.orders,
-			itemized: User.links.itemized
+			budgets: User.userAccounts,
+			orders: User.orders,
+			itemized: User.itemized
 		};
 				
 		$currDiv = $('#'+ app.currView+"Wrapper");

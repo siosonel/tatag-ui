@@ -8,7 +8,7 @@ function walletRelays(api) {
 		if (!currAcct || app.currView != 'relays') return;
 		app.currView = 'relays';
 		
-		var url = currAcct.links.relays;
+		var url = currAcct.relays;
 		$('#relaysWrapper').children().remove();
 		$('#relaysWrapper').append(setTitle(currAcct))
 		

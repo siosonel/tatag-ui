@@ -14,7 +14,7 @@ function teamBrands(api) {
 			.then(renderBrands, app.errHandler);	
 	}
 	
-	function renderBrands(brands) {		
+	function renderBrands(brands) {
 		currBrands = brands;
 		currBrands.map(renderBrandDiv);
 		app.adjustHeight();
@@ -103,7 +103,7 @@ function teamBrands(api) {
 	})();
 	
 	main.clickHandler = function (e) {
-		var divId = app.getDivId(e,'brand');		
+		var divId = app.getDivId(e,'brand');
 		if (!divId) return;	
 		
 		if (e.target.tagName.toUpperCase()=="BUTTON") {		

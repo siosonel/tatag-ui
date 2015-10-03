@@ -6,7 +6,7 @@ function adminAccounts(api) {
 		if (!currBrand || app.currView != 'accounts') return;
 		app.currView = 'accounts';
 		
-		var url = currBrand.links.brandAccounts;		
+		var url = currBrand.brandAccounts;		
 		$('#accountsWrapper').children().remove();
 		$('#accountsWrapper').append(setTitle(currBrand))
 		
@@ -56,7 +56,7 @@ function adminAccounts(api) {
 			+ 		account.name+"<br />#"+account.account_id+', '+ account.authcode +'&nbsp;'
 			+			(account.throttle_id ? "<span>, throttle #"+account.throttle_id+"&nbsp;</span>" : "")
 			+			"<span class='fi-pencil small'>&nbsp;</span><br />"
-			+			"<span href='"+account.links.holders+"' style='text-decoration:underline'>holders</span>"
+			+			"<span href='"+account.holders+"' style='text-decoration:underline'>holders</span>"
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ account.balance +"</div>"
 			//+ 	"<div id='"+divId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"

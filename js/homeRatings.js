@@ -7,7 +7,7 @@ function homeRatings(api) {
 		if (!currUser || app.currView != 'ratings') return;
 		app.currView = 'ratings';
 		
-		var url = currUser.links.userRatings;
+		var url = currUser.userRatings;
 		$('#ratingsWrapper').children().remove();
 		$('#ratingsWrapper').append(setTitle(currUser));
 

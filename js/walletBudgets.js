@@ -40,7 +40,6 @@ function walletBudgets(api) {
 		
 		app.resources[acctDivId] = acct;
 		if (!acct.relay) acct.relay = {};
-		if (!acct.links) acct.links = {};
 		
 		var b = main.brandColors(acctDivId, acct);		
 		
@@ -69,11 +68,11 @@ function walletBudgets(api) {
 		+			(acct.throttle_id ? "<span>(This account is throttled, #"+acct.throttle_id+")</span>" : "")
 		+		"</div>"
 		+ 	"<div class='small-4 columns'>"
-		+ 		((acct.relay['budget-add'] || acct.links['budget-add']) 
+		+ 		((acct.relay['budget-add'] || acct['budget-add']) 
 			? "<button class='tiny' id='"+acctDivId+"-add' style='width:5.0rem; margin-bottom:0.5rem;'>Add</button><br />" : "")
-		+ 		((acct.relay['budget-transfer'] || acct.links['budget-transfer']) 
+		+ 		((acct.relay['budget-transfer'] || acct['budget-transfer']) 
 			? "<button id='"+acctDivId+"-transfer' class='tiny' style='width:5.0rem; margin-bottom:0.5rem;'>Transfer</button><br />" : "")
-		+			((acct.relay['budget-use'] || acct.links['budget-use']) 
+		+			((acct.relay['budget-use'] || acct['budget-use']) 
 			? "<button id='"+acctDivId+"-use' class='tiny' style='width:5.0rem; margin-bottom:0.5rem;'>Use</button><br />" : "")
 		+		"</div>" 	
 		+ "</div>"

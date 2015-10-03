@@ -6,7 +6,7 @@ function adminMemberAccounts(api) {
 		if (!currResource || app.currView != 'memberAccounts') return;
 		app.currView = 'memberAccounts';
 		
-		var url = currResource.links.accounts; //console.log(currResource); console.log(url);
+		var url = currResource.accounts; //console.log(currResource); console.log(url);
 		$('#memberAccountsWrapper').children().remove();
 		$('#memberAccountsWrapper').append(setTitle(currResource))
 		

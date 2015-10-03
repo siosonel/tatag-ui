@@ -8,7 +8,7 @@ function walletRecords(api) {
 		if (!currAcct || app.currView != 'records') return;
 		app.currView = 'records';
 		
-		var url = currAcct.links.accountRecords;		
+		var url = currAcct.accountRecords;		
 		$('#recordsWrapper').children().remove();
 		$('#recordsWrapper').append(setTitle(currAcct))
 		
@@ -54,8 +54,7 @@ function walletRecords(api) {
 		app.resources[divId] = record;
 		
 		var relay = record.relay ? record.relay : {};
-		var links = record.links ? record.links : {};
-		var actionPrompt = setActionPrompt(divId, record, relay, links);
+		var actionPrompt = setActionPrompt(divId, record, relay, record);
 		var note = record.note ? record.note : "&nbsp;";
 		
 		$('#recordsWrapper').append(
@@ -72,21 +71,21 @@ function walletRecords(api) {
 		);
 	}
 	
-	function setActionPrompt(divId, record, relay, links) {		
-		if (relay['budget-unadd'] || links['budget-unadd']) 
+	function setActionPrompt(divId, record, relay) {		
+		if (relay['budget-unadd'] || record['budget-unadd']) 
 			return "<br /><button class='tiny' id='"+divId+"-unadd' style='margin-top:5px;'>reverse</button>";
 			
-		if (relay['budget-untransfer'] || links['budget-untransfer']) 
+		if (relay['budget-untransfer'] || record['budget-untransfer']) 
 			return "<br /><button class='tiny' id='"+divId+"-untransfer' style='margin-top:5px;'>reverse</button>";
 		
-		if (relay['budget-unuse'] || links['budget-unuse']) 
+		if (relay['budget-unuse'] || record['budget-unuse']) 
 			return "<br /><button class='tiny' id='"+divId+"-unuse' style='margin-top:5px;'>reverse</button>";
 		
 		var prompt = "";
 		
-		if (links['record-hold']) prompt += "<button id='"+divId+"-hold' class='tiny fi-lock' title='hold for manual approval or rejection'></button>";		
-		if (links['record-approve']) prompt += "<button id='"+divId+"-approve' class='fi-check tiny' title='manually approve'></button>"		
-		if (links['record-reject']) prompt += "<button id='"+divId+"-reject' class='fi-x tiny' title='reject transaction'></button>";
+		if (record['record-hold']) prompt += "<button id='"+divId+"-hold' class='tiny fi-lock' title='hold for manual approval or rejection'></button>";		
+		if (record['record-approve']) prompt += "<button id='"+divId+"-approve' class='fi-check tiny' title='manually approve'></button>"		
+		if (record['record-reject']) prompt += "<button id='"+divId+"-reject' class='fi-x tiny' title='reject transaction'></button>";
 		
 		if (!prompt) {
 			var status = record.status;

@@ -6,7 +6,7 @@ function adminAccountHolders(api) {
 		if (!currResource || app.currView != 'accountHolders') return;
 		app.currView = 'accountHolders';
 		
-		var url = currResource.links.holders;	//console.log(currResource); console.log(url);
+		var url = currResource.holders;	//console.log(currResource); console.log(url);
 		$('#accountHoldersWrapper').children().remove();
 		$('#accountHoldersWrapper').append(setTitle(currResource))
 		

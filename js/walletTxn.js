@@ -9,8 +9,8 @@ function walletTxn(api) {
 		
 		currResource = app.resources[wrapperId]; //console.log(currResource); console.log(api.byId); console.log(action+' '+arguments.length);
 		
-		var relay = !currResource.relay ? null : currResource.relay['budget-'+action];
-		currForm = !currResource.links ? null : api.byId[currResource.links['budget-'+action]];
+		var relay = currResource.relay['budget-'+action];
+		currForm = api.byId[currResource['budget-'+action]];
 		
 		$('#expenseSelectDiv').css('display', action=='use' ? 'block' : 'none');
 		
@@ -166,7 +166,7 @@ function walletTxn(api) {
 		
 		var searchForm = api.byType.user;
 		
-		api.loadId(app.api.byType['user'].links.promoSearch)
+		api.loadId(app.api.byType['user'].promoSearch)
 			.then(fillPromoSearchForm, main.errHandler);
 	}
 	

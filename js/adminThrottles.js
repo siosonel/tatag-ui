@@ -6,7 +6,7 @@ function adminThrottles(api) {
 		if (!currBrand || app.currView != 'throttles') return;
 		app.currView = 'throttles';
 		
-		var url = currBrand.links.budgetThrottles;		
+		var url = currBrand.budgetThrottles;		
 		$('#throttlesWrapper').children().remove();
 		$('#throttlesWrapper').append(setTitle(currBrand))
 		

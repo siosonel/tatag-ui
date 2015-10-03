@@ -6,7 +6,7 @@ function adminMembers(api) {
 		if (!currBrand || app.currView != 'members') return;
 		app.currView = 'members';
 		
-		var url = currBrand.links.brandMembers;		
+		var url = currBrand.brandMembers;		
 		$('#membersWrapper').children().remove();
 		$('#membersWrapper').append(setTitle(currBrand))
 		
@@ -59,7 +59,7 @@ function adminMembers(api) {
 			+ 		member.name+"<br />#"+member.member_id+', '
 			+ 		(member.joined ? member.role +'&nbsp;' : '[pending '+ member.role +']&nbsp;')
 			+			"<span class='fi-pencil small'>&nbsp;</span>"
-			+			"<span href='"+member.links.accounts+"' style='text-decoration:underline'>accounts</span>"
+			+			"<span href='"+member.accounts+"' style='text-decoration:underline'>accounts</span>"
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"+ member.hours +"</div>"
 			//+ 	"<div id='"+divId+"-toggle' class='memberDivToggle'>&#9660;&#9660;&#9660;</div>"

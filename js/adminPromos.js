@@ -6,7 +6,7 @@ function adminPromos(api) {
 		if (!currBrand || app.currView != 'promos') return;
 		app.currView = 'promos';
 		
-		var url = currBrand.links.brandPromos;		
+		var url = currBrand.brandPromos;		
 		$('#promosWrapper').children().remove();
 		$('#promosWrapper').append(setTitle(currBrand))
 		
@@ -56,11 +56,11 @@ function adminPromos(api) {
 		+			"Amount: "+ promo.amount.toFixed(2) +'<br />'
 		+			"Expires: "+ promo.expires +"<br />"
 		+			"Promo Link: "+ promo.infoURL +"<br />"
-		+			"Pay Link: <a href='"+ promo.links.payLink +"'>"+ promo.links.payLink +"</a><br />"
+		+			"Pay Link: <a href='"+ promo.payLink +"'>"+ promo.payLink +"</a><br />"
 		+			"Created: "+ date[1] +'/'+ date[2] +"/"+ date[0]
 		+		"</div>"
 		+		"<div id='"+ divId +"-relay' class='small-12 columns promoLimits' style='text-align: left; margin-bottom:10px;'>"
-		+			"<b>Usage Limits per Week:</b> "+ (promo.links['relay-edit'] ? pencil : "") +"<br />"
+		+			"<b>Usage Limits per Week:</b> "+ (promo['relay-edit'] ? pencil : "") +"<br />"
 		+			"Total: "+ promo.by_all_limit +', By Brand: '+ promo.by_brand_limit +', By User: '+ promo.by_user_limit + "<br />"
 		+ 		"A user must wait "+ promo.by_user_wait +" hour(s) before reusing"
 		+		"</div>"
@@ -95,10 +95,10 @@ function adminPromos(api) {
 		var promo = app.resources[divId];
 		$('#promos-promo_id').val(promo.promo_id);
 		
-		if (type=='relay' && promo.links['relay-edit']) {
+		if (type=='relay' && promo['relay-edit']) {
 			$('#promoHolderIdDiv, #promoDetailsDiv').css('display','none');
 			$('#promoID-formDiv, #promoRelayDiv').css('display','block');
-			app.forms(divId, 'promos', '/forms#relay-edit', null, promo.links['relay-edit-target']);
+			app.forms(divId, 'promos', '/forms#relay-edit', null, promo['relay-edit-target']);
 		}
 		else if (type=='details') {
 			$('#promoHolderIdDiv, #promoRelayDiv').css('display','none');

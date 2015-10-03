@@ -69,24 +69,13 @@ function apiClass(conf) {
 		return deferred.promise;
 	}
 	
-	main.loadRel = function (resource, rel) {
-		if (resource[rel]) return resource.rel;
-		if (resource.links && resource.links[rel]) {
-			var link = {}; 
-			link[rel] = resource.links[rel];			
-			return main.deref(link);
-		}
-	}
-	
-	main.deref = function (links, refresh) {
+	main.deref = function (link, refresh) {
 		var promises = [];
 		if (!refresh) refresh=null;
 		
-		for(var rel in links) {
-			if (typeof links[rel]=='string') promises.push(main.loadId(links[rel], refresh));
-			else {				
-				for(var i=0; i<links[rel].length; i++) {promises.push(main.loadId(links[rel][i], refresh));}
-			}
+		if (typeof link=='string') promises.push(main.loadId(link, refresh));
+		else {				
+			for(var i=0; i<link.length; i++) {promises.push(main.loadId(link[i], refresh));}
 		}
 		
 		return Q.all(promises);

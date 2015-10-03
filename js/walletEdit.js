@@ -21,7 +21,7 @@ function walletEdit(api) {
 			$('#editBudget').css('display','none'); return;
 		}
 		
-		currForm = !currResource.links ? null : api.byId[currResource.links['holder-edit']];
+		currForm = api.byId[currResource['holder-edit']];
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
 		$('#edit-alias').val(currResource.alias);
 		$('#edit-limkey').val(currResource.limkey);		
@@ -35,9 +35,9 @@ function walletEdit(api) {
 			$('#editRelay').css('display','none'); return;
 		}
 		
-		currForm = !currResource.links ? null 
-			: currResource['@type']=='holderRelays' ? api.byId[currResource.links['relay-add']]
-			: api.byId[currResource.links['relay-edit']];
+		currForm = currResource['@type']=='holderRelays' 
+			? api.byId[currResource['relay-add']]
+			: api.byId[currResource['relay-edit']];
 			
 		if (currForm) {
 			currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
@@ -55,7 +55,7 @@ function walletEdit(api) {
 			$('#editRecord').css('display','none'); return;
 		}
 		
-		currForm = !currResource.links ? null : api.byId[currResource.links['record-'+action]];
+		currForm = api.byId[currResource['record-'+action]];
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
 		
 		var text = action=='hold' ? "Hold the record for manual (instead of automated) approval or rejection?"

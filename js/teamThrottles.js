@@ -6,7 +6,7 @@ function teamThrottles(api) {
 		if (!currBrand || app.currView != 'throttles') return;
 		app.currView = 'throttles';
 		
-		var url = currBrand.links.teamThrottles;		
+		var url = currBrand.teamThrottles;		
 		$('#throttlesWrapper').children().remove();
 		$('#throttlesWrapper').append(setTitle(currBrand))
 		

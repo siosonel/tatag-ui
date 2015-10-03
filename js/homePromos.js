@@ -9,7 +9,7 @@ function homePromos(api) {
 		if (!currUser || app.currView != 'promos') return;
 		app.currView = 'promos';
 		
-		var url = currUser.links.promoCollection;
+		var url = currUser.promoCollection;
 		$('#promosWrapper').children().remove();
 		$('#promosWrapper').append(setTitle(currUser));
 
@@ -46,7 +46,7 @@ function homePromos(api) {
 		var divId = 'promos-'+ promo.promo_id;
 		app.resources[divId] = promo;
 		
-		var pencil = !promo.links['promo-edit'] ? ""
+		var pencil = !promo['promo-edit'] ? ""
 			: " <span class='fi-pencil small'>&nbsp;</span>";
 		
 		if (promo.imageTemplate) {
@@ -98,8 +98,8 @@ function homePromos(api) {
 		else if (e.target.id && e.target.id.substr(0,4)=='pay-') { 
 			var promo = app.resources[e.target.parentNode.parentNode.id]; //console.log(promo);
 			var postPayURL = encodeURIComponent(homeURL + "/home-promos?{record_id}&{promo_id}"); //console.log(postPayURL);
-			var sep = promo.links.payLink.search(/\?/)==-1 ? '?' : '&';
-			window.open(promo.links.payLink + sep + "postPayURL=" + postPayURL);
+			var sep = promo.payLink.search(/\?/)==-1 ? '?' : '&';
+			window.open(promo.payLink + sep + "postPayURL=" + postPayURL);
 			
 			return;
 		}
@@ -121,11 +121,11 @@ function homePromos(api) {
 		var promo = app.resources[divId]; 
 		
 		if (e.target.className=='morePrompt') {
-			//$('#promoIframe').attr('src', promo.links.promoPage).css({display:'block'});
-			window.location.href = promo.links.promoPage;
+			//$('#promoIframe').attr('src', promo.promoPage).css({display:'block'});
+			window.location.href = promo.promoPage;
 			return;
 		}
-		else if (!promo.links['promo-edit'] || !targetCls) return; 
+		else if (!promo['promo-edit'] || !targetCls) return; 
 		
 		$('#promos-brand_id').prop('disabled',true).val(promo.brand_name);
 		app.forms(divId, 'promos', '/forms#promo-edit');

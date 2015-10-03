@@ -52,7 +52,7 @@ function teamMain(conf) {
 		main.currView = 'brands';
 		User = res;
 		main.me(User.user_id, User.name, User.login_provider);
-		main.brands(User.links.team);
+		main.brands(User.team);
 	}
 	
 	main.refs = {types: types}

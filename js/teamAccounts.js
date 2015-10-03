@@ -6,7 +6,7 @@ function teamAccounts(api) {
 		if (!currBrand || app.currView != 'accounts') return;
 		app.currView = 'accounts';
 		
-		var url = currBrand.links.teamAccounts;		
+		var url = currBrand.teamAccounts;		
 		$('#accountsWrapper').children().remove();
 		$('#accountsWrapper').append(setTitle(currBrand))
 		
