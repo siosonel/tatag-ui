@@ -69,8 +69,8 @@ function adminPromos(api) {
 	}
 	
 	function setHolderIdOpt(acct) {
-		if (acct.authcode.search('x')!=-1) $('#promos-holder_id').append(
-			"<option value='"+ acct.holder_id +"'>"+ acct.account_name +", brand "+ acct.brand_name +", Bal: "+ acct.balance +"</option>"
+		if (acct.account.authcode.search('x')!=-1 && acct.account.sign==-1) $('#promos-holder_id').append(
+			"<option value='"+ acct.holder_id +"'>"+ acct.account.name +", brand "+ acct.account.brand.name +", Bal: "+ acct.account.balance +"</option>"
 		);
 	}
 	

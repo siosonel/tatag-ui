@@ -3,6 +3,7 @@ function apiClass(conf) {
 	var	_id = conf._id ? conf._id : "@id";
 	var	_type = conf._type ? conf._type : "@type";			
 	var byId = {}, byType = {}, curr={};
+	var linkTerms = []
 	
 	function main() {}
 	
@@ -18,6 +19,21 @@ function apiClass(conf) {
 			
 			//index by self-url, will swap any existing values at the same url
 			byId[d[_id]] = d; 
+		}
+		
+		if (d.linkTerms) linkTerms = linkTerms.concat(d.linkTerms);
+	}
+	
+	function linkToCachedInstance(resource) {
+		for(var term in resource) {
+			if (linkTerms.indexOf(term) != -1) {
+				if (typeof resource[term] == 'string' && resource[term] in byId) resource[term] = byId[resource[term]];
+				else if (Array.isArray(resource[term])) {
+					for(var i=0; i< resource[term].length; i++) {
+						if (typeof resource[term][i] == 'string' && resource[term][i] in byId) resource[term][i] = byId[resource[term][i]];
+					}
+				}
+			}
 		}
 	}
 	
@@ -41,6 +57,14 @@ function apiClass(conf) {
 	main.loadId = function (url, refresh) {
 		var deferred = Q.defer();
 		
+		if (typeof url!='string') {
+			if (url['@id']) url = url['@id'];
+			else {
+				console.log("Invalid url, must be a string or an object with an @id property.");
+				return;
+			}
+		}
+		
 		if (!url) deferred.reject(new Error('Blank url.'));
 		else if (url in byId && !refresh) deferred.resolve(byId[url]); // console.log("          (cache:"+url+")");}
 		else $.ajax({
@@ -57,6 +81,7 @@ function apiClass(conf) {
 					}
 										
 					res['@graph'].map(indexGraph);
+					for(var id in byId) linkToCachedInstance(byId[id]);
 					deferred.resolve(res['@graph'][0]);
 				}
 			},
@@ -107,6 +132,7 @@ function apiClass(conf) {
 					else {
 						if (!res['@graph']) res = {'@graph': [res]};									
 						res['@graph'].map(indexGraph);
+						for(var id in byId) linkToCachedInstance(byId[id]);
 						deferred.resolve(res);
 					}
 				},

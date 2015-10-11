@@ -4,7 +4,9 @@ function walletBudgets(api) {
 	
 	function main(userAccountsURL) {
 		params = app.params();
-		if (typeof userAccountsURL=='string') currURL = userAccountsURL;		
+		if (typeof userAccountsURL=='string') currURL = userAccountsURL;	
+		else if ('@id' in userAccountsURL) currURL = userAccountsURL['@id'];	
+			
 		$('#accountsWrapper').children().remove();
 		$('#expenseAcctToUse').children().remove();
 		
@@ -34,14 +36,14 @@ function walletBudgets(api) {
 	}
 	
 	function renderAcctDiv(acct) {
-		var acctDivId = "acct-"+ acct.account_id,
-			alias = acct.alias ? acct.alias : acct.account_name,
-			acctname = alias==acct.account_name ? "" : acct.account_name;
+		var acctDivId = "acct-"+ acct.account.account_id,
+			alias = acct.alias ? acct.alias : acct.account.name,
+			acctname = alias==acct.account.name ? "" : acct.account.name;
 		
 		app.resources[acctDivId] = acct;
 		if (!acct.relay) acct.relay = {};
 		
-		var b = main.brandColors(acctDivId, acct);		
+		var b = main.brandColors(acctDivId, acct);
 		
 		$('#accountsWrapper').append("<div class='small-12 acctItem' id='"+acctDivId+"' style='background-color: "+ b.divBg +"'>"
 		+ "<div class='row' id='"+ acctDivId +"-label' style='margin-bottom:30px;'>"
@@ -52,7 +54,7 @@ function walletBudgets(api) {
 		+     "<span id='"+ acctDivId +"-name' style='font-weight:normal; display: none;'>&nbsp;#"+acct.account_id +' '+acctname+"</span>"
 		+		"</div>"
 		+ 	"<div class='small-4 columns acctBal' id='"+acctDivId+"-bal'>"
-		+ 		(acct.sign*acct.balance).toFixed(2) +" &#9658;"
+		+ 		(acct.account.sign*acct.account.balance).toFixed(2) +" &#9658;"
 		+		"</div>"
 		+ "</div>"
 		+ "<div class='row acctFormDiv' id='"+ acctDivId +"-forms'>"
@@ -61,8 +63,8 @@ function walletBudgets(api) {
 		//+ 		"<h1>"+ acct.holder_id +"-"+ acct.limkey +"</h1><br />"
 		//+			"<a href=''>Review</a> | <a href=''>Edit</a><br />"
 		+			"<div id='"+ acctDivId +"-viz' class='left detailsDiv'>"
-		+				"Brand <b>"+ acct.brand_name +"</b><br />"
-		+				"Brand #"+ acct.brand_id  +", Unit: "+ acct.unit +"<br />"
+		+				"Brand <b>"+ acct.account.brand.name +"</b><br />"
+		+				"Brand #"+ acct.account.brand.brand_id  +", Unit: "+ acct.account.unit +"<br />"
 		+				"<span id='"+ acctDivId+"-relays'>Recipient Token: <b>" + acct.relay['default'] +"</b><br />(or see token list &#9658;)</span>"
 		+			"</div>"
 		+			(acct.throttle_id ? "<span>(This account is throttled, #"+acct.throttle_id+")</span>" : "")
@@ -79,7 +81,7 @@ function walletBudgets(api) {
 		+ "<div id='"+acctDivId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
 		+ "</div>");
 		
-		if (acct.sign==1 && acct) $('#expenseAcctToUse').append("<option value='"+ acctDivId +"'>#"+ acct.account_id+' '+ alias +" @"+ acct.brand_name +"</option>");
+		if (acct.account.sign==1 && acct) $('#expenseAcctToUse').append("<option value='"+ acctDivId +"'>#"+ acct.account.account_id+' '+ alias +" @"+ acct.account.brand.name +"</option>");
 	}
 	
 	main.brandColors = (function () {
@@ -94,13 +96,13 @@ function walletBudgets(api) {
 		
 		function main(divId, obj) {
 			if (!colorIndex[divId]) {
-				var i = obj.brand_id % 11; 
+				var i = obj.account.brand.brand_id % 11; 
 				colorIndex[divId] = {
 					logoBg: colors[i],
 					divBg: colors[11-i].replace("rgb", "rgba").replace(")", ",0.4)"),
 					logo: obj.brand_logo
 						? "<img id='"+ divId +"-img' class='left logoDiv' src='"+ obj.brand_logo +"'/>"
-						: "<div id='"+ divId +"-img' class='left logoDiv' style='background-color: "+ colors[i] +"'>"+ obj.brand_name.substr(0,1).toUpperCase() +"</div>"
+						: "<div id='"+ divId +"-img' class='left logoDiv' style='background-color: "+ colors[i] +"'>"+ obj.account.brand.name.substr(0,1).toUpperCase() +"</div>"
 				}
 			}
 			

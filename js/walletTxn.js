@@ -10,7 +10,7 @@ function walletTxn(api) {
 		currResource = app.resources[wrapperId]; //console.log(currResource); console.log(api.byId); console.log(action+' '+arguments.length);
 		
 		var relay = currResource.relay['budget-'+action];
-		currForm = api.byId[currResource['budget-'+action]];
+		currForm = currResource['budget-'+action];
 		
 		$('#expenseSelectDiv').css('display', action=='use' ? 'block' : 'none');
 		
