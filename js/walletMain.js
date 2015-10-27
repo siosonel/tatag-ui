@@ -26,7 +26,7 @@ function walletMain(conf) {
 		main.itemized = walletItemized(api);
 		main.me = me();
 		
-		api.init('/')
+		api.init('/api')
 			.then(loadUser)
 			.then(setUser, main.errHandler);
 			
@@ -85,7 +85,7 @@ function walletMain(conf) {
 	
 	main.errHandler = function errHandler(err) {
 		if (err.message.search("Unauthorized")===0) main.me.modal();
-		else alert(err.message);
+		else console.log(err.message);
 	}
 	
 	main.getQueryParams = function () {
@@ -105,13 +105,13 @@ function walletMain(conf) {
 				if(!index) result[key].push(item[1]);
 				else result[key][index] = item[1];
 			}
-		}); console.log(result);
+		});
 		
 		//this is when browser detects for=... in query params
 		if (result['for'] && !result.to) result.to=result['for'];
 		
 		//this if when url uses domain/for/keyword-999 format
-		var p = location.pathname.split("/"); console.log(p);
+		var p = location.pathname.split("/");
 		if ((p[1]=='for' || p[1]=='pay') && p.length==3 && !result.to && !isNaN(p[2].split('-')[1])) result.to=p[2];
 		
 		return result;

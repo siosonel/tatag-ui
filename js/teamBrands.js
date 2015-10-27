@@ -10,7 +10,7 @@ function teamBrands(api) {
 		if (brandURL) currURL = brandURL;
 		$('#brandsWrapper').children().remove(); //console.log(currURL); console.log(api.byId[currURL]);
 		
-		api.deref(currURL, app.refresh())
+		api.deref(currURL, !currBrands ? 1 : app.refresh())
 			.then(renderBrands, app.errHandler);	
 	}
 	

@@ -44,7 +44,7 @@ function adminMain(conf) {
 	});
 	
 	function init() {
-		api.init('/')
+		api.init('/api')
 			.then(loadUser)
 			.then(setUser, main.errHandler);
 	}

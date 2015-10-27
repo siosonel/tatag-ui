@@ -10,7 +10,7 @@ function adminBrands(api) {
 			+	"<button id='addBrand' class='right tiny' style='margin:0;'>+New Brand</button>"
 			+"</div>");
 		
-		api.deref(currURL, app.refresh())
+		api.deref(currURL, !currBrands ? 1 : app.refresh())
 			.then(renderBrands, app.errHandler);	
 	}
 	

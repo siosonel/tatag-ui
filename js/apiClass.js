@@ -8,6 +8,8 @@ function apiClass(conf) {
 	function main() {}
 	
 	function indexGraph(d) {
+		if (d.deprecated) deprecatedSupport(d);
+		
 		if (d[_type]) curr[d[_type]] = d; //swap current resource by type
 
 		if (d[_id]) {	
@@ -22,6 +24,13 @@ function apiClass(conf) {
 		}
 		
 		if (d.linkTerms) linkTerms = linkTerms.concat(d.linkTerms);
+	}
+	
+	function deprecatedSupport(d) {
+		for(var i=0; i<d.deprecated; i++) {
+			var mergePatch = d.deprecation[i]['merge-patch'];
+			for(var prop in mergePatch) d[prop] = mergePatch[prop]; 
+		}
 	}
 	
 	function linkToCachedInstance(resource) {
@@ -54,7 +63,7 @@ function apiClass(conf) {
 		}
 	}	
 	
-	main.loadId = function (url, refresh) {
+	main.loadId = function (url, refresh) { console.log(url)
 		var deferred = Q.defer();
 		
 		if (typeof url!='string') {
@@ -68,7 +77,7 @@ function apiClass(conf) {
 		if (!url) deferred.reject(new Error('Blank url.'));
 		else if (url in byId && !refresh) deferred.resolve(byId[url]); // console.log("          (cache:"+url+")");}
 		else $.ajax({
-			url: conf.baseURL + url,
+			url: url.substr(0,1)=='/' ? url : conf.baseURL + url,
 			headers: {
 				"Authorization": "Basic " + btoa(conf.userid + ":" + conf.pass)
 			},
