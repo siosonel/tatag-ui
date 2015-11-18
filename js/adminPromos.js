@@ -6,7 +6,7 @@ function adminPromos(api) {
 		if (!currBrand || app.currView != 'promos') return;
 		app.currView = 'promos';
 		
-		var url = currBrand.brandPromos;		
+		var url = currBrand.promos;
 		$('#promosWrapper').children().remove();
 		$('#promosWrapper').append(setTitle(currBrand))
 		
@@ -31,9 +31,9 @@ function adminPromos(api) {
 		);
 	}
 	
-	function renderPromos(promos) { 
+	function renderPromos(promos) {
 		currCollection = promos;
-		promos.items.map(renderItem);
+		promos.promo.map(renderItem);
 		app.adjustHeight();
 	}
 	

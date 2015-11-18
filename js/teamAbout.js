@@ -6,7 +6,7 @@ function teamAbout(api) {
 		if (!currBrand || app.currView != 'about') return;
 		app.currView = 'about';
 		
-		var url = currBrand['@id'];		
+		var url = currBrand.about;		
 		$('#aboutWrapper').children().remove();
 		$('#aboutWrapper').append(setTitle(currBrand))
 		

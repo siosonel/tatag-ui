@@ -6,7 +6,7 @@ function teamThrottles(api) {
 		if (!currBrand || app.currView != 'throttles') return;
 		app.currView = 'throttles';
 		
-		var url = currBrand.teamThrottles;		
+		var url = currBrand.throttles;		
 		$('#throttlesWrapper').children().remove();
 		$('#throttlesWrapper').append(setTitle(currBrand))
 		
@@ -36,7 +36,7 @@ function teamThrottles(api) {
 	
 	function renderThrottles(throttles) { 
 		currCollection = throttles;
-		throttles.items.map(renderItem);
+		throttles.throttle.map(renderItem);
 		app.adjustHeight();
 	}
 	

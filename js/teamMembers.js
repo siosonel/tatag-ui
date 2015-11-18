@@ -6,7 +6,7 @@ function teamMembers(api) {
 		if (!currBrand || app.currView != 'members') return;
 		app.currView = 'members';
 		
-		var url = currBrand.teamMembers;		
+		var url = currBrand.members;		
 		$('#membersWrapper').children().remove();
 		$('#membersWrapper').append(setTitle(currBrand))
 		
@@ -35,7 +35,7 @@ function teamMembers(api) {
 	
 	function renderMembers(members) {
 		currCollection = members;
-		members.items.map(renderItem);
+		members.member.map(renderItem);
 		app.adjustHeight();
 	}
 	

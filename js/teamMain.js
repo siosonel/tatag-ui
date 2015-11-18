@@ -32,9 +32,17 @@ function teamMain(conf) {
 	});
 	
 	function init() {
-		api.init('/api')
-			.then(loadUser)
-			.then(setUser, main.errHandler);
+		api.init('/api/')
+			.then(setListeners)
+			.then(function (resp) {
+				api.byAudience('personal','me')
+					.byAudience('teamMember','brand');
+			}, main.errHandler);
+	}
+	
+	function setListeners(root) {
+		api.addListener('personal', 'me', setUser)
+			.addListener('teamMember', 'brand', main.brands);
 	}
 	
 	function main(otherWrapper) {
@@ -52,7 +60,7 @@ function teamMain(conf) {
 		main.currView = 'brands';
 		User = res;
 		main.me(User.user_id, User.name, User.login_provider);
-		main.brands(User.team);
+		//main.brands(User.team);
 	}
 	
 	main.refs = {types: types}
