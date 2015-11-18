@@ -20,7 +20,7 @@ function searchMain(conf) {
 	});
 	
 	function init() {
-		api.init('/')
+		api.init('/api/')
 			.then(loadUser)
 			.then(setUser, main.errHandler);
 	}
@@ -40,7 +40,7 @@ function searchMain(conf) {
 		main.currView = 'brands';
 		User = res;
 		main.me(User.user_id, User.name, User.login_provider);
-		main.brands(User.brandCollection);
+		api.loadConcept('public', 'brands').then(main.brands, main.errHandler);
 	}
 	
 	main.refs = {types: types}

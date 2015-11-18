@@ -7,7 +7,7 @@ function homeRatings(api) {
 		if (!currUser || app.currView != 'ratings') return;
 		app.currView = 'ratings';
 		
-		var url = currUser.userRatings;
+		var url = currUser.ratings;
 		$('#ratingsWrapper').children().remove();
 		$('#ratingsWrapper').append(setTitle(currUser));
 
@@ -106,7 +106,7 @@ function homeRatings(api) {
 	}
 	
 	main.clickHandler = function (e) {
-		if (e.target.id=='addRating') { 
+		if (e.target.id=='addRating') {
 			app.completer.reset();
 			$('#ratings-brand_id').prop('disabled',false).val('');
 			app.forms(currCollection, 'ratings', '/form/rating-add');
@@ -131,7 +131,7 @@ function homeRatings(api) {
 		var clickedElemId;
 		currCollection.items.map(function (d) {
 			if (d.brand_id==brand_id) clickedElemId = 'ratings-'+d.rating_id;
-		})
+		});
 		return clickedElemId;
 	} 
 	

@@ -6,6 +6,9 @@ function apiClass(conf) {
 	var linkTerms = [];
 	var get = {};
 	var directions={}, inprocess={};
+	var headers = {
+		Authorization: "Basic " + btoa(conf.userid + ":" + conf.pass)
+	}
 	
 	function main() {}
 	
@@ -35,8 +38,9 @@ function apiClass(conf) {
 				byType[d[_type]] = d;
 			}
 			
-			//index by self-url, will swap any existing values at the same url
-			byId[d[_id]] = d;
+			//index by self-url, will create new or swap any existing values at the same url
+			if (d[_id] in byId) $.extend(byId[d[_id]], d);
+			else byId[d[_id]] = d;
 		}
 		
 		if (d.linkTerms) linkTerms = linkTerms.concat(d.linkTerms);
@@ -64,107 +68,13 @@ function apiClass(conf) {
 	
 	function addListener(audience, term, fxn) {
 		if (!(audience in get)) get[audience] = {};
-		if (!(term in get[audience])) get[audience][term] = getFxn(term, audience, directions[audience][term]);
+		if (!(term in get[audience])) get[audience][term] = phlatDriver({
+			root: main.root, headers: headers, byId: byId, indexGraph: indexGraph, 
+			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance
+		}, term, audience, directions[audience][term]);
+		
 		get[audience][term].addListener(fxn); 
 
-		return main;
-	}
-	
-	function getFxn(term, audience, path, headers) {
-		//var url='';
-		var pathIndex = 0, links, concurrent=0, payload=[];
-		var container; //the resource to which the current request is related
-		var listeners = [];
-		var currData;
-		
-		function main(resource) {
-			if (!arguments.length) resource = root;
-			container = resource;
-			links = resource[path[pathIndex]]; 
-			
-			if (!Array.isArray(links)) links = [links];
-			payload = links.slice();
-			concurrent = 0;
-			
-			links.map(materializeLink);
-		}
-		
-		function materializeLink(url) {
-			if (url && typeof url != 'string') {
-				processServerResponse(url);
-			}
-			else if (!url) {
-				render(path[pathIndex], 'fail');  
-			}
-			else if (url in byId) {
-				processServerResponse(byId[url]);				
-			}
-			else if (inprocess[url]) {
-				//do not trigger duplicate requests in cases where the same
-				//path segment is used for different terms
-				inprocess[url].push(processServerResponse);
-			} 
-			else {
-				inprocess[url] = [];
-				
-				$.ajax({
-					url: url,
-					headers: {
-						"Authorization": "Basic " + btoa(conf.userid + ":" + conf.pass)
-					},
-					dataType: 'json',
-					success: processServerResponse,
-					error: errHandler
-				});
-			}
-		}
-	
-		function errHandler(xhr, status, text) {
-			console.log(status+': '+text);
-		}	
-		
-		function processServerResponse(resp) {
-			if (!resp) {console.log('fail'); return;}
-			
-			if ('@graph' in resp) {
-				resp['@graph'].map(indexGraph);
-				var resource = resp['@graph'][0];
-			}
-			else if (Array.isArray(resp)) {
-				var resource = resp[0];
-			} 
-			else {
-				var resource = resp;
-			}
-			
-			concurrent++;
-			payload[payload.indexOf(resource['@id'])] = resource; //substitute link url with response object
-			
-			if (concurrent < links.length) {}
-			else if (pathIndex < path.length-1) {
-				pathIndex++;
-				main(payload[0]);
-			}
-			else {
-				var data = Array.isArray(container[path[pathIndex]]) ? payload: resource; if (audience=='teamMember') console.log(data);
-				for(var i=0; i<listeners.length; i++) listeners[i](data); 
-				
-				if (inprocess[resource['@id']]) {
-					for(var i=0; i<inprocess[resource['@id']].length; i++) inprocess[resource['@id']][i](data); 
-					inprocess[resource['@id']] = null;
-				}
-				
-				pathIndex = 0;
-				concurrent = 0;
-			}
-		}		
-		
-		main.addListener = function (fxn) {
-			if (listeners.indexOf(fxn)==-1) listeners.push(fxn);
-		}
-		
-		main.listeners = listeners;
-		
 		return main;
 	}
 	
@@ -200,9 +110,7 @@ function apiClass(conf) {
 		else if (url in byId && !refresh) deferred.resolve(byId[url]); // console.log("          (cache:"+url+")");}
 		else $.ajax({
 			url: url.substr(0,1)=='/' ? url : conf.baseURL + url,
-			headers: {
-				"Authorization": "Basic " + btoa(conf.userid + ":" + conf.pass)
-			},
+			headers: headers,
 			dataType: 'json',
 			success: function (res) {
 				if (!res) deferred.reject(new Error('No response body.'));
@@ -252,9 +160,7 @@ function apiClass(conf) {
 			$.ajax({
 				url: conf.baseURL + action.target + params,
 				type: action.method,
-				headers: {
-					"Authorization": "Basic " + btoa(conf.userid + ":" + conf.pass)
-				},
+				headers: headers,
 				dataType: 'json',
 				contentType: 'json',
 				data: JSON.stringify(action.inputs),
@@ -281,12 +187,23 @@ function apiClass(conf) {
 	main.byId = byId;
 	main.byType = byType;	
 	main.curr = curr;
+	main.root = function () {return root;}
 	
 	main.addListener = addListener;
 	
 	main.byAudience = function (audience, term) {
 		get[audience][term]();
 		return main;
+	}
+	
+	main.loadConcept = function (audience, term, refresh) {
+		if (!(audience in get)) get[audience] = {};
+		if (!(term in get[audience])) get[audience][term] = phlatDriver({
+			root: main.root, headers: headers, byId: byId, indexGraph: indexGraph, 
+			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance
+		}, term, audience, directions[audience][term]);
+		
+		return get[audience][term].promise(refresh); 
 	}
 	
 	return main;

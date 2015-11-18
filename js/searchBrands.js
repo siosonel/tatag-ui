@@ -1,20 +1,19 @@
 function searchBrands(api) {
 	var currURL, currBrands;
 		
-	function main(brandURL) {
-		if (!currURL && (!brandURL || !brandURL.length)) {
-			$("#brandsWrapper").html("You do not have any current team memberships.");
-			return;
+	function main(brands) {	
+		if (brands) {
+			if (typeof brands=='string') currURL = brands;
+			else if ('@id' in brands) currURL = brands['@id'];
 		}
-	
-		if (brandURL) currURL = brandURL;
+		
 		$('button', '#brandsWrapper').remove(); //console.log(currURL); console.log(api.byId[currURL]);
 		
 		api.loadId(currURL, app.refresh())
 			.then(renderBrands, app.errHandler);	
 	}
 	
-	function renderBrands(brands) {		
+	function renderBrands(brands) {	console.log(brands);
 		currBrands = brands;
 		currBrands.items.map(renderBrandDiv);
 		

@@ -9,12 +9,12 @@ function homePromos(api) {
 		if (!currUser || app.currView != 'promos') return;
 		app.currView = 'promos';
 		
-		var url = currUser.promoCollection;
+		var url = currUser.promos;
 		$('#promosWrapper').children().remove();
 		$('#promosWrapper').append(setTitle(currUser));
 
 		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh()).then(renderRatings, app.errHandler);
+		api.loadConcept('public', 'promos', app.refresh()).then(renderRatings, app.errHandler);
 	}
 	
 	function setTitle() {
@@ -30,7 +30,7 @@ function homePromos(api) {
 		);
 	}
 	
-	function renderRatings(promos) { 
+	function renderRatings(promos) { console.log(promos);
 		currCollection = promos;
 		promos.items.map(renderItem);
 		if (main.postRenderFxn) {
@@ -90,7 +90,7 @@ function homePromos(api) {
 		if (e.target.id=='addPromo') { 
 			$('#promoID-formDiv').css('display','none');
 			$('#promoDetailsDiv, #promoRelayDiv, #promoHolderIdDiv').css('display','block');
-			app.api.byType.userAccounts.items.map(setHolderIdOpt);			
+			app.api.loadConcept('personal','holding').then(function (res) {console.log(res); res.map(setHolderIdOpt)}, app.errHandler);			
 			
 			app.forms(currCollection, 'promos', '/form/promo-add');
 			return;
