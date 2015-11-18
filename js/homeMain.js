@@ -9,7 +9,7 @@ function homeMain(conf) {
 		minLength: 2
 	});
 	
-	var api = apiClass({
+	var api = phlatSimple({
 		'userid': conf.userid, 
 		'pass': conf.pass,
 		'baseURL': conf.baseURL

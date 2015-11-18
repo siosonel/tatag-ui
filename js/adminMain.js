@@ -3,7 +3,7 @@ function adminMain(conf) {
 	var autocomplete;
 	var subDivHeight={};
 	
-	var api = apiClass({
+	var api = phlatSimple({
 		'userid': conf.userid, 
 		'pass': conf.pass,
 		'baseURL': conf.baseURL

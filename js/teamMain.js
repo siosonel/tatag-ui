@@ -2,7 +2,7 @@ function teamMain(conf) {
 	var User, resources={}, refresh=0;
 	var subDivHeight={};
 	
-	var api = apiClass({
+	var api = phlatSimple({
 		'userid': conf.userid, 
 		'pass': conf.pass,
 		'baseURL': conf.baseURL //will be used as prefix

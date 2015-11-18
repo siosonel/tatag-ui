@@ -1,4 +1,4 @@
-function apiClass(conf) {		
+function phlatSimple(conf) {		
 	var rootURL = '/', root; //may be overridden
 	var	_id = conf._id ? conf._id : "@id";
 	var	_type = conf._type ? conf._type : "@type";			

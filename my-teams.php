@@ -9,7 +9,7 @@
 	
 	<script type="text/javascript" src="/common2/lib/jQuery/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="/node_modules/q/q.js"></script>
-	<script type="text/javascript" src="/ui/js/apiClass.js"></script>
+	<script type="text/javascript" src="/ui/js/phlatSimple.js"></script>
 	<script type="text/javascript" src="/ui/js/phlatDriver.js"></script>
 	
 	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>

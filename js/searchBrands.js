@@ -7,13 +7,15 @@ function searchBrands(api) {
 			else if ('@id' in brands) currURL = brands['@id'];
 		}
 		
+		if (!currURL) {console.log("Missing brands url."); return;}
+		
 		$('button', '#brandsWrapper').remove(); //console.log(currURL); console.log(api.byId[currURL]);
 		
 		api.loadId(currURL, app.refresh())
 			.then(renderBrands, app.errHandler);	
 	}
 	
-	function renderBrands(brands) {	console.log(brands);
+	function renderBrands(brands) {
 		currBrands = brands;
 		currBrands.items.map(renderBrandDiv);
 		
