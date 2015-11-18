@@ -21,16 +21,16 @@ function walletRecords(api) {
 	
 	
 	function setTitle(acct) {
-		var	alias = acct.alias ? acct.alias : acct.account_name,
-			acctname = alias==acct.account_name ? "" : acct.account_name;
+		var	alias = acct.alias ? acct.alias : acct.account.name,
+			acctname = alias==acct.account.name ? "" : acct.account.name;
 			
 		return	"<div id='acctRecordTitle' class='row'>"
 		+ "<div class='small-8 columns acctLabel'>"
 		+ 	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+alias+"</span><br />"
-		+    "<span style='font-weight:normal;'>&nbsp;#"+acct.account_id +' '+acctname+"</span>"
+		+    "<span style='font-weight:normal;'>&nbsp;#"+acct.account.account_id +' '+acctname+"</span>"
 		+	"</div>"
 		+ "<div class='small-4 columns acctBal' style='text-align:right;'>"
-		+ 	(acct.sign*acct.balance).toFixed(2) + "&nbsp;&nbsp;<br />"
+		+ 	(acct.account.sign*acct.account.balance).toFixed(2) + "&nbsp;&nbsp;<br />"
 		+ 	"<button class='tiny' style='float:right; margin:0 5px -5px 0;'><span class='fi-magnifying-glass'></span></div>"		
 		+ "</div>"
 		+ "</div>";

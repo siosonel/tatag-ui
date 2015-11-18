@@ -2,10 +2,10 @@ function walletBudgets(api) {
 	var currURL, currAccounts, currAcctDivId, acctsToUse=[], params;
 	var openHeight='300px';
 	
-	function main(userAccountsURL) {
+	function main(holdingsURL) {
 		params = app.params();
-		if (typeof userAccountsURL=='string') currURL = userAccountsURL;	
-		else if ('@id' in userAccountsURL) currURL = userAccountsURL['@id'];	
+		if (typeof holdingsURL=='string') currURL = holdingsURL;	
+		else if ('@id' in holdingsURL) currURL = holdingsURL['@id'];	
 			
 		$('#accountsWrapper').children().remove();
 		$('#expenseAcctToUse').children().remove();
@@ -26,12 +26,12 @@ function walletBudgets(api) {
 			$('#'+currAcctDivId+'-forms').css('display', 'block');
 			app.adjustHeight();
 			
-			if (params.to) { 
+			if (params.to) {
 				if (!params.expenseAcctToUse) params.expenseAcctToUse = $('#expenseAcctToUse').val();
 				$('#expenseAcctToUse').val(params.expenseAcctToUse);
 				$('#'+ params.expenseAcctToUse +'-use').trigger('click');
 				delete params.to;
-			}
+			} //else console.log(params);
 		}
 	}
 	
@@ -51,7 +51,7 @@ function walletBudgets(api) {
 		+			b.logo
 		+ 		"<span style='vertical-align:top'>&nbsp;"+alias+"&nbsp;</span>"
 		+			"<span id='"+acctDivId+"-edit' class='fi-pencil small' style='display:none'></span><br />"
-		+     "<span id='"+ acctDivId +"-name' style='font-weight:normal; display: none;'>&nbsp;#"+acct.account_id +' '+acctname+"</span>"
+		+     "<span id='"+ acctDivId +"-name' style='font-weight:normal; display: none;'>&nbsp;#"+acct.account.account_id +' '+acctname+"</span>"
 		+		"</div>"
 		+ 	"<div class='small-4 columns acctBal' id='"+acctDivId+"-bal'>"
 		+ 		(acct.account.sign*acct.account.balance).toFixed(2) +" &#9658;"

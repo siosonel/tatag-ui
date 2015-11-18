@@ -52,7 +52,7 @@ function walletMain(conf) {
 	}
 
 	function loadUser(res) {
-		return api.loadType('user');
+		return api.loadId(res.me);
 	}
 
 	function setUser(res) {
@@ -60,7 +60,7 @@ function walletMain(conf) {
 		main.me(User.user_id, User.name, User.login_provider);
 		
 		viewDataLink = {
-			budgets: User.userAccounts,
+			budgets: User.holdings,
 			orders: User.orders,
 			itemized: User.itemized
 		};
