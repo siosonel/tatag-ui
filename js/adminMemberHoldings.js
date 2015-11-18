@@ -1,24 +1,24 @@
-function adminMemberAccounts(api) {
+function adminMemberHoldings(api) {
 	var currURL, currResource, currCollection;
 	
 	function main(member) {
 		if (member) currResource = member; 
-		if (!currResource || app.currView != 'memberAccounts') return;
-		app.currView = 'memberAccounts';
+		if (!currResource || app.currView != 'memberHoldings') return;
+		app.currView = 'memberHoldings';
 		
-		var url = currResource.accounts; //console.log(currResource); console.log(url);
-		$('#memberAccountsWrapper').children().remove();
-		$('#memberAccountsWrapper').append(setTitle(currResource))
+		var url = currResource.holdings; //console.log(currResource); console.log(url);
+		$('#memberHoldingsWrapper').children().remove();
+		$('#memberHoldingsWrapper').append(setTitle(currResource))
 		
 		$('#membersWrapper').animate({left: '-100%'});
-		$('#memberAccountsWrapper').animate({left: '0'});
+		$('#memberHoldingsWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
 		api.loadId(url, app.refresh()).then(renderAccounts, app.errHandler)
 	}
 	
 	function setTitle() {
-		$('#memberAccountsWrapper').append(
+		$('#memberHoldingsWrapper').append(
 			"<div class='row subLabel'>"
 			+		"<div class='columns small-8'>"
 			+	 		"<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currResource.name+" accounts, </span>"
@@ -38,18 +38,18 @@ function adminMemberAccounts(api) {
 		);
 	}
 	
-	function renderAccounts(accounts) {
-		currCollection = accounts;
-		accounts.items.map(renderItem);
+	function renderAccounts(holdings) {
+		currCollection = holdings;
+		holdings.holding.map(renderItem);
 		app.adjustHeight();
 	}
 	
-	function renderItem(holder) { 
+	function renderItem(holder) {
 		var date = holder.created.split(' ')[0].split('-');
-		var divId = 'memberAccount-'+ holder.holder_id;
+		var divId = 'memberHolding-'+ holder.holder_id;
 		app.resources[divId] = holder;
 		
-		$('#memberAccountsWrapper').append(
+		$('#memberHoldingsWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
@@ -74,15 +74,15 @@ function adminMemberAccounts(api) {
 		
 		if (app.getCls(e).indexOf('subLabel') != -1) {
 			$('#membersWrapper').animate({left: '0px'});
-			$('#memberAccountsWrapper').animate({left: '100%'});
+			$('#memberHoldingsWrapper').animate({left: '100%'});
 			app.currView = 'members';
 			app.adjustHeight();
 		}
 		
-		var divId = app.getDivId(e, 'memberAccount');
+		var divId = app.getDivId(e, 'memberHolding');
 		if (!divId) return;
 		
-		app.forms(divId, 'holders', '/forms#admin-holder-edit', 'memberAccounts');
+		app.forms(divId, 'holders', '/forms#admin-holder-edit', 'memberHoldings');
 	}
 	
 	return main;

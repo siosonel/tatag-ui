@@ -104,7 +104,7 @@ function apiClass(conf) {
 				//path segment is used for different terms
 				inprocess[url].push(processServerResponse);
 			} 
-			else { console.log(url);
+			else {
 				inprocess[url] = [];
 				
 				$.ajax({

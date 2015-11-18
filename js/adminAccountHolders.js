@@ -40,7 +40,7 @@ function adminAccountHolders(api) {
 	
 	function renderAccounts(holders) { 
 		currCollection = holders;
-		holders.items.map(renderItem);
+		holders.holder.map(renderItem);
 		app.adjustHeight();
 	}
 	

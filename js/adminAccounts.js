@@ -6,7 +6,7 @@ function adminAccounts(api) {
 		if (!currBrand || app.currView != 'accounts') return;
 		app.currView = 'accounts';
 		
-		var url = currBrand.brandAccounts;		
+		var url = currBrand.accounts;		
 		$('#accountsWrapper').children().remove();
 		$('#accountsWrapper').append(setTitle(currBrand))
 		
@@ -40,7 +40,7 @@ function adminAccounts(api) {
 	
 	function renderAccounts(accounts) { 
 		currCollection = accounts;
-		accounts.items.map(renderItem);
+		accounts.account.map(renderItem);
 		app.adjustHeight();
 	}
 	

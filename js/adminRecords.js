@@ -7,7 +7,7 @@ function adminRecords(api) {
 		if (!currBrand || app.currView != 'records') return;
 		app.currView = 'records';
 		
-		var url = currBrand.budgetRecords;
+		var url = currBrand.records;
 		$('#recordsTitle, #recordsItems').children().remove();
 		setTitle(currBrand);
 		

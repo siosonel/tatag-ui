@@ -13,7 +13,7 @@ function adminMain(conf) {
 		main.brands = adminBrands(api);
 		main.about = adminAbout(api);
 		main.members = adminMembers(api);
-		main.memberAccounts = adminMemberAccounts(api);
+		main.memberHoldings = adminMemberHoldings(api);
 		main.accounts = adminAccounts(api);
 		main.promos = adminPromos(api);
 		main.throttles = adminThrottles(api);
@@ -27,7 +27,7 @@ function adminMain(conf) {
 		$('#brandsWrapper').click(main.brands.clickHandler);
 		$('#aboutWrapper').click(main.about.clickHandler);
 		$('#membersWrapper').click(main.members.clickHandler);
-		$('#memberAccountsWrapper').click(main.memberAccounts.clickHandler);
+		$('#memberHoldingsWrapper').click(main.memberHoldings.clickHandler);
 		$('#accountsWrapper').click(main.accounts.clickHandler);
 		$('#promosWrapper').click(main.promos.clickHandler);
 		$('#throttlesWrapper').click(main.throttles.clickHandler);
@@ -44,9 +44,17 @@ function adminMain(conf) {
 	});
 	
 	function init() {
-		api.init('/api')
-			.then(loadUser)
-			.then(setUser, main.errHandler);
+		api.init('/api/')
+			.then(setListeners)
+			.then(function (resp) {
+				api.byAudience('personal','me')
+					.byAudience('brandAdmin','brand');
+			}, main.errHandler);
+	}
+	
+	function setListeners(root) {
+		api.addListener('personal', 'me', setUser)
+			.addListener('brandAdmin', 'brand', main.brands);
 	}
 	
 	function main(otherWrapper) {
@@ -65,7 +73,7 @@ function adminMain(conf) {
 		User = res;
 		main.User = User;
 		main.me(User.user_id, User.name, User.login_provider);
-		main.brands(User.brand);
+		//main.brands(User.brand);
 	}
 	
 	main.refs = {types: types}

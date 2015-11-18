@@ -6,7 +6,7 @@ function adminMembers(api) {
 		if (!currBrand || app.currView != 'members') return;
 		app.currView = 'members';
 		
-		var url = currBrand.brandMembers;		
+		var url = currBrand.members;		
 		$('#membersWrapper').children().remove();
 		$('#membersWrapper').append(setTitle(currBrand))
 		
@@ -37,7 +37,7 @@ function adminMembers(api) {
 	
 	function renderMembers(members) {
 		currCollection = members;
-		members.items.map(renderItem);
+		members.member.map(renderItem);
 		$('#membersWrapper').append(
 			"<div>"
 			+	 "<button id='addMember' class='tiny' style='margin:0;'>+New Member</button>"
@@ -47,7 +47,7 @@ function adminMembers(api) {
 		app.adjustHeight();
 	}
 	
-	function renderItem(member) { //console.log(member)
+	function renderItem(member) {
 		var date = member.created.split(' ')[0].split('-');
 		var divId = 'member-'+ member.member_id; //console.log(divId)
 		app.resources[divId] = member;
@@ -81,8 +81,8 @@ function adminMembers(api) {
 		}
 		
 		if ($(e.target).attr('href')) {
-			app.currView = 'memberAccounts';
-			app.memberAccounts(app.resources[e.target.parentNode.parentNode.id]);
+			app.currView = 'memberHoldings';
+			app.memberHoldings(app.resources[e.target.parentNode.parentNode.id]);
 			return;
 		}
 		

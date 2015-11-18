@@ -99,7 +99,7 @@ body {
 }
 
 #aboutWrapper, #membersWrapper, #accountsWrapper, #recordsWrapper, 
-#memberAccountsWrapper, #accountHoldersWrapper, #throttlesWrapper,
+#memberHoldingsWrapper, #accountHoldersWrapper, #throttlesWrapper,
 #ratingsWrapper, #promosWrapper {
 	position: absolute;
 	top: 5px;

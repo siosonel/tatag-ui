@@ -6,7 +6,7 @@ function adminThrottles(api) {
 		if (!currBrand || app.currView != 'throttles') return;
 		app.currView = 'throttles';
 		
-		var url = currBrand.budgetThrottles;		
+		var url = currBrand.throttles;		
 		$('#throttlesWrapper').children().remove();
 		$('#throttlesWrapper').append(setTitle(currBrand))
 		
@@ -37,9 +37,9 @@ function adminThrottles(api) {
 		);
 	}
 	
-	function renderThrottles(throttles) { 
+	function renderThrottles(throttles) {
 		currCollection = throttles;
-		throttles.items.map(renderItem);
+		throttles.throttle.map(renderItem);
 		app.adjustHeight();
 	}
 	

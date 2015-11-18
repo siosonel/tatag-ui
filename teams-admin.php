@@ -31,7 +31,7 @@
 		<div id='brandsWrapper' class="row"></div>
 		<div id='aboutWrapper' class="row"></div>
 		<div id='membersWrapper' class="row"></div>
-		<div id='memberAccountsWrapper' class="row"></div>
+		<div id='memberHoldingsWrapper' class="row"></div>
 		<div id='accountsWrapper' class="row"></div>
 		<div id='accountHoldersWrapper' class="row"></div>
 		<div id='promosWrapper' class="row"></div>
@@ -327,7 +327,7 @@
 	<script src='js/adminBrands.js'></script>
 	<script src='js/adminAbout.js'></script>
 	<script src='js/adminMembers.js'></script>
-	<script src='js/adminMemberAccounts.js'></script>
+	<script src='js/adminMemberHoldings.js'></script>
 	<script src='js/adminAccounts.js'></script>
 	<script src='js/adminAccountHolders.js'></script>
 	<script src='js/adminRecords.js'></script>
