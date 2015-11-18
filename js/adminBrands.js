@@ -102,7 +102,7 @@ function adminBrands(api) {
 	
 	main.clickHandler = function (e) {		
 		if (e.target.id=='addBrand') {
-			app.forms({}, 'about', '/forms#brand-registration');
+			app.forms({}, 'about', '/form/brand-registration');
 			if (!addBrandInit) {
 				$('#about-type_id').val(9);
 				$('#about-country_code').val('USA'); 

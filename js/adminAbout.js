@@ -86,7 +86,7 @@ function adminAbout(api) {
 		var divId = app.getDivId(e, 'about');
 		if (!divId) return;
 		
-		app.forms(divId, 'about', '/forms#brand-edit');
+		app.forms(divId, 'about', '/form/brand-edit');
 	}
 	
 	return main;

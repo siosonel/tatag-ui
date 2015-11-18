@@ -69,7 +69,7 @@ function adminThrottles(api) {
 	main.clickHandler = function (e) {
 		if (e.target.id=='addThrottle') { 
 			$('#throttleID-formDiv').css('display','none')
-			app.forms(currCollection, 'throttles', '/forms#throttle-add');
+			app.forms(currCollection, 'throttles', '/form/throttle-add');
 			return;
 		}		
 		
@@ -81,7 +81,7 @@ function adminThrottles(api) {
 		if (!divId) return;
 		
 		$('#throttleID-formDiv').css('display','none')
-		app.forms(divId, 'throttles', '/forms#admin-throttle-edit');
+		app.forms(divId, 'throttles', '/form/admin-throttle-edit');
 	}
 	
 	return main;

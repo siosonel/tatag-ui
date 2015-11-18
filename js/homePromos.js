@@ -92,7 +92,7 @@ function homePromos(api) {
 			$('#promoDetailsDiv, #promoRelayDiv, #promoHolderIdDiv').css('display','block');
 			app.api.byType.userAccounts.items.map(setHolderIdOpt);			
 			
-			app.forms(currCollection, 'promos', '/forms#promo-add');
+			app.forms(currCollection, 'promos', '/form/promo-add');
 			return;
 		}
 		else if (e.target.id && e.target.id.substr(0,4)=='pay-') { 
@@ -128,7 +128,7 @@ function homePromos(api) {
 		else if (!promo['promo-edit'] || !targetCls) return; 
 		
 		$('#promos-brand_id').prop('disabled',true).val(promo.brand_name);
-		app.forms(divId, 'promos', '/forms#promo-edit');
+		app.forms(divId, 'promos', '/form/promo-edit');
 	}
 	
 	return main;

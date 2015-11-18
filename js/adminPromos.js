@@ -80,7 +80,7 @@ function adminPromos(api) {
 			$('#promoDetailsDiv, #promoRelayDiv, #promoHolderIdDiv').css('display','block');
 			app.api.byType.userAccounts.items.map(setHolderIdOpt);			
 			
-			app.forms(currCollection, 'promos', '/forms#promo-add');
+			app.forms(currCollection, 'promos', '/form/promo-add');
 			return;
 		}
 		
@@ -98,12 +98,12 @@ function adminPromos(api) {
 		if (type=='relay' && promo['relay-edit']) {
 			$('#promoHolderIdDiv, #promoDetailsDiv').css('display','none');
 			$('#promoID-formDiv, #promoRelayDiv').css('display','block');
-			app.forms(divId, 'promos', '/forms#relay-edit', null, promo['relay-edit-target']);
+			app.forms(divId, 'promos', '/form/relay-edit', null, promo['relay-edit-target']);
 		}
 		else if (type=='details') {
 			$('#promoHolderIdDiv, #promoRelayDiv').css('display','none');
 			$('#promoID-formDiv, #promoDetailsDiv').css('display','block');
-			app.forms(divId, 'promos', '/forms#promo-edit');
+			app.forms(divId, 'promos', '/form/promo-edit');
 		}
 	}
 	

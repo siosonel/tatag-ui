@@ -42,11 +42,11 @@ function teamBrands(api) {
 			+ "</div>"			
 			
 			+ "<div>Role: "+ brand.role +"&nbsp;"
-			+ (brand.actions && brand.actions.indexOf('/forms#member-accept') !=-1 
+			+ (brand.actions && brand.actions.indexOf('/form/member-accept') !=-1 
 				? "<button class='tiny' id='"+brandDivId+"-accept' style='width:5.0rem; margin-bottom:0.5rem;'>Accept</button>&nbsp;" 
 				: "")
 					
-			+ (brand.actions && brand.actions.indexOf('/forms#member-revoke') !=-1 
+			+ (brand.actions && brand.actions.indexOf('/form/member-revoke') !=-1 
 				? "<button class='tiny' id='"+brandDivId+"-revoke' style='width:5.0rem; margin-bottom:0.5rem;'>Revoke</button>" 
 				: "")
 				
@@ -108,7 +108,7 @@ function teamBrands(api) {
 		
 		if (e.target.tagName.toUpperCase()=="BUTTON") {		
 			var divIdArr = app.getDivId(e,'brand').split('-'), action = divIdArr.pop(), divId=divIdArr.join('-');		
-			app.forms(divId, action, '/forms#member-'+action, 'brands');
+			app.forms(divId, action, '/form/member-'+action, 'brands');
 		}		
 		else {
 			var id = divId.split('-');
