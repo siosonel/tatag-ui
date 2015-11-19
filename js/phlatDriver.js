@@ -4,13 +4,13 @@ function phlatDriver(api, term, audience, path) {
 	var container; //the resource to which the current request is related
 	var listeners = [];
 	var currData;
-	var deferred;
+	var deferred, match;
 	var refresh=0;
 	
 	function main(resource) {
 		if (!arguments.length) resource = api.root();
 		container = resource;
-		links = resource[path[pathIndex]];
+		links = resource[path[pathIndex]]; 
 		
 		if (!Array.isArray(links)) links = [links];
 		payload = links.slice();
@@ -70,12 +70,14 @@ function phlatDriver(api, term, audience, path) {
 		}
 		
 		concurrent++;
-		payload[payload.indexOf(resource['@id'])] = api.byId[resource['@id']]; //substitute link url with response object
+		var x = links.indexOf(resource['@id']);
+		if (x!=-1) payload[x] = resource; //substitute link url with response object
 		
 		if (concurrent < links.length) {}
-		else if (pathIndex < path.length-1) {
+		else if (pathIndex < path.length-1) { 
 			pathIndex++;
-			main(payload[0]);
+			if (!match || path[pathIndex-1] != match["#"]) main(payload[0]);
+			else main(payload.filter(matchResource)[0]);
 		}
 		else {				
 			for(var id in api.byId) api.linkToCachedInstance(api.byId[id]);
@@ -98,7 +100,15 @@ function phlatDriver(api, term, audience, path) {
 			pathIndex = 0;
 			concurrent = 0;
 		}
-	}		
+	}
+	
+	function matchResource(r) {
+		for(var prop in match) {
+			if (prop in r && match[prop] != r[prop]) return false;
+		}
+		
+		return true;
+	}
 	
 	main.addListener = function (fxn) {
 		if (listeners.indexOf(fxn)==-1) listeners.push(fxn);
@@ -106,10 +116,13 @@ function phlatDriver(api, term, audience, path) {
 	
 	main.listeners = listeners;
 	
-	main.promise = function (refreshOrNot) {
-		refresh = refreshOrNot;
+	main.promise = function (refreshOrNot, matchFilter) {
+		match = matchFilter;
+		if (deferred) return deferred.promise;
+	
+		refresh = refreshOrNot;		
 		deferred = Q.defer();
-		main();
+		setTimeout(main, 30);
 		return deferred.promise;
 	}
 	

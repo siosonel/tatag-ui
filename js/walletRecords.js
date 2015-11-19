@@ -7,18 +7,18 @@ function walletRecords(api) {
 		if (acct) currAcct = acct;
 		if (!currAcct || app.currView != 'records') return;
 		app.currView = 'records';
-		
-		var url = currAcct.accountRecords;		
+			
 		$('#recordsWrapper').children().remove();
 		$('#recordsWrapper').append(setTitle(currAcct))
 		
 		$('#accountsWrapper').animate({left: '-105%'});
 		$('#recordsWrapper').animate({left: '0'});
-
-		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh()).then(renderRecords, app.errHandler)
+		
+		var match = {"#": "items", "holder_id": acct.holder_id};
+		
+		//refresh info as needed using refresh argument 
+		api.loadConcept('personal', 'account-records', app.refresh(), match).then(renderRecords, app.errHandler);
 	}
-	
 	
 	function setTitle(acct) {
 		var	alias = acct.alias ? acct.alias : acct.account.name,

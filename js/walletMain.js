@@ -26,7 +26,7 @@ function walletMain(conf) {
 		main.itemized = walletItemized(api);
 		main.me = me();
 		
-		api.init('/api')
+		api.init('/api/')
 			.then(loadUser)
 			.then(setUser, main.errHandler);
 			

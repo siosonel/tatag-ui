@@ -17,7 +17,7 @@ function phlatSimple(conf) {
 		
 		if (d[_type]) curr[d[_type]] = d; //swap current resource by type
 
-		if (d[_id]) {			
+		if (d[_id]) {
 			//set root resource-dependent variables
 			if (d[_id]==rootURL) {
 				root = d;
@@ -196,14 +196,15 @@ function phlatSimple(conf) {
 		return main;
 	}
 	
-	main.loadConcept = function (audience, term, refresh) {
+	main.loadConcept = function (audience, term, refresh, match) {
 		if (!(audience in get)) get[audience] = {};
+		
 		if (!(term in get[audience])) get[audience][term] = phlatDriver({
 			root: main.root, headers: headers, byId: byId, indexGraph: indexGraph, 
 			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance
 		}, term, audience, directions[audience][term]);
 		
-		return get[audience][term].promise(refresh); 
+		return get[audience][term].promise(refresh, match); 
 	}
 	
 	return main;
