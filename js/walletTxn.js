@@ -1,21 +1,28 @@
 function walletTxn(api) {
-	var currResource, currForm, currInputs, currAction, params;
+	var currResource, currForm, currInputs;
+	var currAction, currRelay, params;
 	
-	function main(arg) {		
+	function main(arg, term) {		
 		params = app.params();
 	
 		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-");
+		
 		currAction = action;
+		currResource = app.resources[wrapperId]; //console.log(currResource); //console.log(api.byId); console.log(action+' '+arguments.length);
 		
-		currResource = app.resources[wrapperId]; //console.log(currResource); console.log(api.byId); console.log(action+' '+arguments.length);
+		if (!term) var term = currResource.holder_id ? 'budget' : 'record'; 
 		
-		var relay = currResource.relay['budget-'+action];
-		currForm = currResource['budget-'+action];
+		currRelay = currResource.relay ? currResource.relay[term+'-'+action] : null;
+		$('#expenseSelectDiv').css('display', currAction=='use' ? 'block' : 'none');
 		
-		$('#expenseSelectDiv').css('display', action=='use' ? 'block' : 'none');
-		
-		renderForm(action);
-		renderRelay(relay);		
+		if (!currResource[term+'-'+action]) processForm(null);
+		else api.loadId(currResource[term+'-'+action]).then(processForm, app.errHandler);
+	}
+	
+	function processForm(res) {
+		currForm = res;
+		renderForm(currAction);
+		renderRelay(currRelay);		
 		$('#txnModal').foundation('reveal','open');
 	}
 	
@@ -41,7 +48,7 @@ function walletTxn(api) {
 		
 		if (inputName=='to') $('#txnToDiv').css('display','inline-block');
 		else if (inputName=='from') $('#txnFromDiv').css('display','none');
-		else if (inputName=='amount' && !params.amount) {
+		else if (inputName=='amount' && params.to && !params.amount) {
 			main.matchPromo(); 
 		}  
 	}
@@ -60,7 +67,7 @@ function walletTxn(api) {
 		else if (inputName=='from') $('#txnFromDiv').css('display','inline-block');
 	}
 	
-	function renderRelay(relay) {		
+	function renderRelay(relay) {
 		if (!relay) {$('#relayInfo').css('display','none'); return;}
 		
 		var optionText = currForm ? "<hr/><span><i>-- OR --</i></span>" : "";
@@ -87,7 +94,7 @@ function walletTxn(api) {
 			var acct = accts[i];
 			
 			if (acct.account_id != currResource.account_id && acct.sign == sign) {
-				if (acct.relay['budget-'+ currAction]) return acct.relay['budget-'+ currAction]
+				if (acct.relay['record-'+ currAction]) return acct.relay['record-'+ currAction]
 			}
 		}
 		
@@ -162,7 +169,7 @@ function walletTxn(api) {
 	
 	main.matchPromo = function () {
 		var to = $('#txn-to').val();
-		if (!to || to.search('-')==-1) return;
+		if (!to || to.search('-')==-1 || !isNaN(to.split('-')[0])) return;
 		
 		var searchForm = api.byType.user;
 		

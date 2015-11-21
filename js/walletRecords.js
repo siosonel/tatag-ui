@@ -17,7 +17,7 @@ function walletRecords(api) {
 		var match = {"#": "items", "holder_id": acct.holder_id};
 		
 		//refresh info as needed using refresh argument 
-		api.loadConcept('personal', 'account-records', app.refresh(), match).then(renderRecords, app.errHandler);
+		api.loadConcept('personal', 'account-records', match).then(renderRecords, app.errHandler);
 	}
 	
 	function setTitle(acct) {
@@ -143,8 +143,8 @@ function walletRecords(api) {
 		}		
 		
 		if (e.target.tagName.toUpperCase()=='BUTTON') {
-			if (['hold', 'approve', 'reject'].indexOf(e.target.id.split('-')[2]) !=-1 ) app.edit(e.target.id); 
-			app.txn(e.target.id); return;
+			if (['hold', 'approve', 'reject'].indexOf(e.target.id.split('-')[2]) !=-1 ) app.edit(e.target.id); //console.log(e.target.id);
+			else app.txn(e.target.id, 'budget'); 
 		} 
 		
 		if (typeArr.indexOf('record')!=-1) {

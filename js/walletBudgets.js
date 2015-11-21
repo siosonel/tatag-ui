@@ -4,7 +4,9 @@ function walletBudgets(api) {
 	
 	function main(holdingsURL) {
 		params = app.params();
-		if (typeof holdingsURL=='string') currURL = holdingsURL;	
+		
+		if (!holdingsURL) {console.log(currURL)}
+		else if (typeof holdingsURL=='string') currURL = holdingsURL;	
 		else if ('@id' in holdingsURL) currURL = holdingsURL['@id'];	
 			
 		$('#accountsWrapper').children().remove();
@@ -19,7 +21,7 @@ function walletBudgets(api) {
 			$("#accountsWrapper").append("<div>You do not have any accounts in your wallet.</div>");
 		}
 		else {
-			currAccounts = userAccounts;
+			currAccounts = userAccounts; 
 			currAccounts.items.map(renderAcctDiv); 
 			if (app.currView=='records') app.records(app.resources[currAcctDivId]);
 			$('#'+currAcctDivId).css('height', openHeight);
@@ -36,6 +38,8 @@ function walletBudgets(api) {
 	}
 	
 	function renderAcctDiv(acct) {
+		if (typeof acct=='string') acct = api.byId[acct];
+	
 		var acctDivId = "acct-"+ acct.account.account_id,
 			alias = acct.alias ? acct.alias : acct.account.name,
 			acctname = alias==acct.account.name ? "" : acct.account.name;
@@ -136,7 +140,7 @@ function walletBudgets(api) {
 		if (e.target.tagName.toUpperCase()=='BUTTON') {
 			if (!params.expenseAcctToUse) params.expenseAcctToUse = e.target.parentNode.id;
 			$('#expenseAcctToUse').val(params.expenseAcctToUse);
-			app.txn(e.target.id); 
+			app.txn(e.target.id, 'personal-account-records'); 
 			return;
 		}
 		

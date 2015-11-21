@@ -5,7 +5,6 @@ function phlatDriver(api, term, audience, path) {
 	var listeners = [];
 	var currData;
 	var deferred, match;
-	var refresh=0;
 	
 	function main(resource) {
 		if (!arguments.length) resource = api.root();
@@ -19,16 +18,19 @@ function phlatDriver(api, term, audience, path) {
 		links.map(materializeLink);
 	}
 	
-	function materializeLink(url) {
+	function materializeLink(url) {		
+		var alt = api.applyHints(url), origURL = url;
+		if (alt) url = alt;
+		
 		if (url && typeof url != 'string') {
 			processServerResponse(url);
 		}
-		else if (!url) {
+		else if (!url) {  if (alt) console.log(['null url', url]);
 			var mssg = "Invalid url encountered for "+audience+" "+term+", "+path[pathIndex]+".";
 			if (deferred) deferred.reject(new Error(mssg));
 			else console.log(mssg);  
 		}
-		else if (url in api.byId && (!refresh || pathIndex < path.length-1)) { 
+		else if (url in api.byId && !alt && pathIndex < path.length-1) {
 			refresh = 0;
 			processServerResponse(api.byId[url]);				
 		}
@@ -38,7 +40,7 @@ function phlatDriver(api, term, audience, path) {
 			api.inprocess[url].push(processServerResponse);
 		} 
 		else {
-			api.inprocess[url] = [];
+			api.inprocess[alt ? origURL : url] = [];
 			
 			$.ajax({
 				url: url,
@@ -79,7 +81,8 @@ function phlatDriver(api, term, audience, path) {
 			if (!match || path[pathIndex-1] != match["#"]) main(payload[0]);
 			else main(payload.filter(matchResource)[0]);
 		}
-		else {				
+		else {		
+			api.extendHints(resp);
 			for(var id in api.byId) api.linkToCachedInstance(api.byId[id]);
 		
 			var data = Array.isArray(container[path[pathIndex]]) ? payload: resource; if (audience=='teamMember') console.log(data);
@@ -116,11 +119,10 @@ function phlatDriver(api, term, audience, path) {
 	
 	main.listeners = listeners;
 	
-	main.promise = function (refreshOrNot, matchFilter) {
+	main.promise = function (matchFilter) {
 		match = matchFilter;
 		if (deferred) return deferred.promise;
-	
-		refresh = refreshOrNot;		
+			
 		deferred = Q.defer();
 		setTimeout(main, 30);
 		return deferred.promise;

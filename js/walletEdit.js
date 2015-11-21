@@ -1,5 +1,5 @@
 function walletEdit(api) {
-	var currResource, currForm, currId, idPrefix;
+	var currResource, currForm, currId, currAction, idPrefix;
 
 	function main(id) {
 		if (id) currId = id;
@@ -9,8 +9,10 @@ function walletEdit(api) {
 			recordDivId = arr.join("-");
 				
 		currResource = app.resources[recordDivId]; //console.log(currId); console.log(currResource);		
+		currAction = action;
+		
 		renderAcctForm(action);
-		renderRecordForm(action);
+		api.loadId(currResource['record-'+action]).then(renderRecordForm);
 		renderRelayForm(action);
 		
 		$('#editModal').foundation('reveal','open');
@@ -50,12 +52,14 @@ function walletEdit(api) {
 		idPrefix = 'editRelay-';
 	}
 	
-	function renderRecordForm(action) {
+	function renderRecordForm(form, action) {
+		if (!action) var action = currAction;
+	
 		if (currResource['@type']!='accountRecord') {		
 			$('#editRecord').css('display','none'); return;
 		}
 		
-		currForm = api.byId[currResource['record-'+action]];
+		currForm = form;
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
 		
 		var text = action=='hold' ? "Hold the record for manual (instead of automated) approval or rejection?"

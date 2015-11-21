@@ -2,10 +2,11 @@ function phlatSimple(conf) {
 	var rootURL = '/', root; //may be overridden
 	var	_id = conf._id ? conf._id : "@id";
 	var	_type = conf._type ? conf._type : "@type";			
-	var byId = {}, byType = {}, curr={};
+	var byId = {}, byType = {}, curr={}, hints={};
 	var linkTerms = [];
 	var get = {};
 	var directions={}, inprocess={};
+	
 	var headers = {
 		Authorization: "Basic " + btoa(conf.userid + ":" + conf.pass)
 	}
@@ -13,18 +14,20 @@ function phlatSimple(conf) {
 	function main() {}
 	
 	function indexGraph(d) {
+		var id = d[_id], type = d[_type];
+		
 		if (d.deprecated) deprecatedSupport(d);
 		
-		if (d[_type]) curr[d[_type]] = d; //swap current resource by type
+		if (type) curr[type] = d; //swap current resource by type
 
-		if (d[_id]) {
+		if (id) {
 			//set root resource-dependent variables
-			if (d[_id]==rootURL) {
+			if (id==rootURL) {
 				root = d;
 				if (typeof root.navDirections == 'string') main.loadId(root.navDirections)
 				else directions = root.navDirections;
 			}
-			else if (root && typeof root.navDirections=='string' && d[_id]==root.navDirections) {
+			else if (root && typeof root.navDirections=='string' && id==root.navDirections) {
 				directions = d;
 			} 
 			
@@ -33,17 +36,36 @@ function phlatSimple(conf) {
 			
 			
 			//save typed resources in an array
-			if (d[_type] && !byId[_id]) {
-				if (!byType[d[_type]]) byType[d[_type]] = []
-				byType[d[_type]] = d;
+			if (type && !byId[id]) {
+				if (!byType[type]) byType[type] = []
+				byType[type] = d;
 			}
 			
 			//index by self-url, will create new or swap any existing values at the same url
-			if (d[_id] in byId) $.extend(byId[d[_id]], d);
-			else byId[d[_id]] = d;
+			if (id in byId) {
+				refreshItems(d.pageOf ? d.pageOf : id, d);
+				$.extend(d.pageOf ? d.pageOf : id, d);
+			}
+			else byId[id] = d;
 		}
 		
 		if (d.linkTerms) linkTerms = linkTerms.concat(d.linkTerms);
+	}
+	
+	function refreshItems(id, d) {			
+		if (!d.items || !(id in hints) || !( 'refresh' in hints[id])) return;
+		
+		var cachedResource = byId[id];
+		
+		d.items.reverse();
+		
+		for(var i=0; i<d.items.length; i++) {
+			if (cachedResource.items.indexOf(d.items[i])==-1) cachedResource.items.unshift(d.items[i]);
+		}
+		
+		if (cachedResource.collectionOf) cachedResource[cachedResource.collectionOf] = cachedResource.items;
+		d.items = cachedResource.items;
+		//delete d.items;
 	}
 	
 	function deprecatedSupport(d) {
@@ -66,11 +88,20 @@ function phlatSimple(conf) {
 		}
 	}
 	
+	function applyHints(url) {
+		if (url in hints && 'refresh' in hints[url]) return hints[url].refresh;
+	}
+	
+	function extendHints(res) {
+		if (res.hints) $.extend(true, hints, res.hints);
+	}
+	
 	function addListener(audience, term, fxn) {
 		if (!(audience in get)) get[audience] = {};
 		if (!(term in get[audience])) get[audience][term] = phlatDriver({
 			root: main.root, headers: headers, byId: byId, indexGraph: indexGraph, 
-			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance
+			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance,
+			applyHints: applyHints, extendHints: extendHints
 		}, term, audience, directions[audience][term]);
 		
 		get[audience][term].addListener(fxn); 
@@ -98,7 +129,7 @@ function phlatSimple(conf) {
 	main.loadId = function (url, refresh) {
 		var deferred = Q.defer();
 		
-		if (typeof url!='string') {
+		if (url && typeof url!='string') {
 			if (url['@id']) url = url['@id'];
 			else {
 				console.log("Invalid url, must be a string or an object with an @id property.");
@@ -106,8 +137,11 @@ function phlatSimple(conf) {
 			}
 		}
 		
+		var alt = applyHints(url);
+		if (alt) url = alt;
+		
 		if (!url) deferred.reject(new Error('Blank url.'));
-		else if (url in byId && !refresh) deferred.resolve(byId[url]); // console.log("          (cache:"+url+")");}
+		else if (url in byId && !refresh && !alt) deferred.resolve(byId[url]); // console.log("          (cache:"+url+")");}
 		else $.ajax({
 			url: url.substr(0,1)=='/' ? url : conf.baseURL + url,
 			headers: headers,
@@ -115,6 +149,8 @@ function phlatSimple(conf) {
 			success: function (res) {
 				if (!res) deferred.reject(new Error('No response body.'));
 				else {
+					if (res.hints) $.extend(true, hints, res.hints);
+					
 					if (!res['@graph']) { //console.log('type '+type+' '+res.body[_type])
 						res = {'@graph': [res]}; //coerce to graph layout
 					}
@@ -145,7 +181,7 @@ function phlatSimple(conf) {
 		return Q.all(promises);
 	}
 	
-	main.request = function (action) {
+	main.request = function (action, concept) {
 		var deferred = Q.defer();
 		var cred = action.auth ? action.auth : conf;
 		
@@ -154,7 +190,9 @@ function phlatSimple(conf) {
 		if (!action) deferred.resolve(null) 
 		else {			
 			var params = action.query ? $.param(action.query) : '';
-			if (action.target.search(/\?/)==-1) params = '?'+ params;
+			
+			if (!params) {}
+			else if (action.target.search(/\?/)==-1) params = '?'+ params;
 			else params = '&'+params;
 			
 			$.ajax({
@@ -164,7 +202,13 @@ function phlatSimple(conf) {
 				dataType: 'json',
 				contentType: 'json',
 				data: JSON.stringify(action.inputs),
-				success: function (res) { 
+				success: function (res) {
+					//perform cache invalidation for non-get requests					
+					if (action.method != 'get') {
+						delete byId[action.target + params]
+						delete byId[conf.baseURL + action.target + params];
+					}
+					
 					if (!res) deferred.reject(new Error('No response body.'));
 					else {
 						if (!res['@graph']) res = {'@graph': [res]};									
@@ -177,7 +221,7 @@ function phlatSimple(conf) {
 					var mssg = JSON.parse(xhr.responseText).error;
 					deferred.reject(new Error(text +': '+ mssg));
 				}
-			})
+			});
 		}
 				
 		return deferred.promise;
@@ -186,6 +230,8 @@ function phlatSimple(conf) {
 	main.baseURL = conf.baseURL;
 	main.byId = byId;
 	main.byType = byType;	
+	main.hints = hints;
+	main.applyHints = applyHints;
 	main.curr = curr;
 	main.root = function () {return root;}
 	
@@ -196,15 +242,16 @@ function phlatSimple(conf) {
 		return main;
 	}
 	
-	main.loadConcept = function (audience, term, refresh, match) {
+	main.loadConcept = function (audience, term, match) {
 		if (!(audience in get)) get[audience] = {};
 		
 		if (!(term in get[audience])) get[audience][term] = phlatDriver({
 			root: main.root, headers: headers, byId: byId, indexGraph: indexGraph, 
-			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance
+			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance,
+			applyHints: applyHints, extendHints: extendHints
 		}, term, audience, directions[audience][term]);
 		
-		return get[audience][term].promise(refresh, match); 
+		return get[audience][term].promise(match); 
 	}
 	
 	return main;
