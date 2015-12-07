@@ -45,22 +45,13 @@ var Holding = React.createClass({
     return {editInProgress: false};
   },
 	
-	rawMarkup: function() {;
-    var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
-    return { __html: rawMarkup };
-  },
-	
-	componentWillMount: function () {
-		//this.accountName = this.field(this.props.data.account, 'name');
-	},
-	
   render: function() {
 		var account = this.props.data.account;
 		
     return (
       <div className="holding">
         <h3 className="holdingUser">
-          {account.brand.name} {this.field(account,'name')}, #{account.account_id}
+          {account.brand.name} {this.field('_', this.props.data, 'alias')}, #{account.account_id}
         </h3>
 				<div className='small-4'>{account.balance}</div>
 				{this.editBtn()} {this.saveBtn()} {this.cancelBtn()}
@@ -71,6 +62,6 @@ var Holding = React.createClass({
 
 
 ReactDOM.render(
-  <MyHoldings rootURL='/api/' pollInterval={60000} />,
+  <MyHoldings rootURL='/api/' />,
   document.getElementById('my-holdings')
 );
