@@ -87,6 +87,8 @@ function phlatDriver(api, term, audience, path) {
 		
 			var data = Array.isArray(container[path[pathIndex]]) ? payload: resource; if (audience=='teamMember') console.log(data);
 			
+			api.byConcept[audience+'-'+term] = data; //console.log([audience+'-'+term, data]);
+			
 			//resolve the promise that was set via main.promise, as applicable
 			if (deferred) {
 				deferred.resolve(data);

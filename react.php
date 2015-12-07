@@ -20,8 +20,11 @@
 	</style>	
 </head>
 <body>	
-	<div id="my-holdings"></div>
+	<div id="container"></div>
 	
+	<script type="text/babel" src="/ui/js/components/Editable.js"></script>
+	<script type="text/babel" src="/ui/js/components/MyHoldings.js"></script>
+	<script type="text/babel" src="/ui/js/components/App.js"></script>
 	
 	<script>
 		function errHandler(err) {
@@ -33,10 +36,7 @@
 			'userid': 21, 
 			'pass': 'pass2',
 			'baseURL': '/api/'
-		});
+		});			
 	</script>
-	
-	<script type="text/babel" src="/ui/js/components/Editable.js"></script>
-	<script type="text/babel" src="/ui/js/components/MyHoldings.js"></script>
 </body>
 </html>

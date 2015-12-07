@@ -2,8 +2,10 @@ function phlatSimple(conf) {
 	var rootURL = '/', root; //may be overridden
 	var	_id = conf._id ? conf._id : "@id";
 	var	_type = conf._type ? conf._type : "@type";			
-	var byId = {}, byType = {}, curr={}, hints={};
+	var byId = {}, byType = {}, byConcept={};
+	var curr={}, hints={};
 	var linkTerms = [];
+	var omniListener = function (resp) {}; //function (resp) {console.log(resp)};
 	var get = {};
 	var directions={}, inprocess={};
 	
@@ -44,7 +46,7 @@ function phlatSimple(conf) {
 			//index by self-url, will create new or swap any existing values at the same url
 			if (id in byId) {
 				refreshItems(d.pageOf ? d.pageOf : id, d);
-				$.extend(d.pageOf ? d.pageOf : id, d);
+				$.extend(byId[d.pageOf ? d.pageOf : id], d);
 			}
 			else byId[id] = d;
 		}
@@ -77,11 +79,19 @@ function phlatSimple(conf) {
 	
 	function linkToCachedInstance(resource) {
 		for(var term in resource) {
+			var t = resource[term];
+		
 			if (linkTerms.indexOf(term) != -1) {
-				if (typeof resource[term] == 'string' && resource[term] in byId) resource[term] = byId[resource[term]];
+				if (typeof t == 'string' && t in byId) resource[term] = byId[resource[term]];
+				else if (t!==null && typeof t=='object' && '@id' in t && t['@id'] in byId) {
+					resource[term] = byId[t['@id']];
+				}
 				else if (Array.isArray(resource[term])) {
-					for(var i=0; i< resource[term].length; i++) {
-						if (typeof resource[term][i] == 'string' && resource[term][i] in byId) resource[term][i] = byId[resource[term][i]];
+					for(var i=0; i< t.length; i++) {
+						if (typeof t[i] == 'string' && t[i] in byId) resource[term][i] = byId[t[i]];
+						else if (t[i]!==null && typeof t[i]=='object' && '@id' in t[i] && t['@id'] in byId) {
+							resource[term][i] = byId[t[i]['@id']];
+						}
 					}
 				}
 			}
@@ -96,16 +106,21 @@ function phlatSimple(conf) {
 		if (res.hints) $.extend(true, hints, res.hints);
 	}
 	
-	function addListener(audience, term, fxn) {
+	function setGetter(audience, term) {
 		if (!(audience in get)) get[audience] = {};
+		
 		if (!(term in get[audience])) get[audience][term] = phlatDriver({
-			root: main.root, headers: headers, byId: byId, indexGraph: indexGraph, 
+			root: main.root, headers: headers, 
+			byId: byId, byConcept: byConcept,
+			indexGraph: indexGraph, 
 			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance,
 			applyHints: applyHints, extendHints: extendHints
 		}, term, audience, directions[audience][term]);
-		
-		get[audience][term].addListener(fxn); 
-
+	}
+	
+	function addListener(audience, term, fxn) {
+		setGetter(audience, term);		
+		get[audience][term].addListener(fxn);
 		return main;
 	}
 	
@@ -159,6 +174,8 @@ function phlatSimple(conf) {
 					for(var id in byId) linkToCachedInstance(byId[id]);
 					deferred.resolve(res['@graph'][0]);
 				}
+				
+				omniListener();
 			},
 			error: function (xhr, status, text) { console.log(xhr.responseText);
 				var mssg = JSON.parse(xhr.responseText).error;
@@ -181,7 +198,7 @@ function phlatSimple(conf) {
 		return Q.all(promises);
 	}
 	
-	main.request = function (action, concept) {
+	main.request = function (action, resourceURL) {
 		var deferred = Q.defer();
 		var cred = action.auth ? action.auth : conf;
 		
@@ -205,7 +222,7 @@ function phlatSimple(conf) {
 				success: function (res) {
 					//perform cache invalidation for non-get requests					
 					if (action.method != 'get') {
-						delete byId[action.target + params]
+						delete byId[action.target + params];
 						delete byId[conf.baseURL + action.target + params];
 					}
 					
@@ -216,6 +233,8 @@ function phlatSimple(conf) {
 						for(var id in byId) linkToCachedInstance(byId[id]);
 						deferred.resolve(res);
 					}
+					
+					if (resourceURL) main.loadId(resourceURL, true);
 				},
 				error: function (xhr, status, text) { console.log(xhr.responseText);
 					var mssg = JSON.parse(xhr.responseText).error;
@@ -230,6 +249,7 @@ function phlatSimple(conf) {
 	main.baseURL = conf.baseURL;
 	main.byId = byId;
 	main.byType = byType;	
+	main.byConcept = byConcept;
 	main.hints = hints;
 	main.applyHints = applyHints;
 	main.curr = curr;
@@ -243,15 +263,15 @@ function phlatSimple(conf) {
 	}
 	
 	main.loadConcept = function (audience, term, match) {
-		if (!(audience in get)) get[audience] = {};
-		
-		if (!(term in get[audience])) get[audience][term] = phlatDriver({
-			root: main.root, headers: headers, byId: byId, indexGraph: indexGraph, 
-			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance,
-			applyHints: applyHints, extendHints: extendHints
-		}, term, audience, directions[audience][term]);
-		
-		return get[audience][term].promise(match); 
+		setGetter(audience, term);
+		var p = get[audience][term].promise(match);
+		p.then(omniListener);
+		return p; 
+	}
+	
+	main.omniListener = function (fxn) {
+		omniListener = fxn;
+		return main;
 	}
 	
 	return main;

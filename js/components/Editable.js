@@ -3,6 +3,8 @@ window.Editable = {
 	edited: {},
 	
 	field: function (linkRel, obj, prop) {
+		this.edited = {};
+	
 		if (!(linkRel in this.rendered)) this.rendered[linkRel] = {}; 
 		this.rendered[linkRel][prop] = obj[prop];
 		
@@ -27,7 +29,7 @@ window.Editable = {
 
 	editStyle: function () {
 		return {
-			display: this.state.editInProgress ? 'none' : 'inline-block'
+			display: this.state.editInProgress && !this.props.refresh ? 'none' : 'inline-block'
 		}
 	},
 	
@@ -41,13 +43,13 @@ window.Editable = {
 	
 	saveStyle: function () {
 		return {
-			display: this.state.editInProgress ? 'inline-block' : 'none'
+			display: this.state.editInProgress  && this.state.editInProgress != 2 ? 'inline-block' : 'none'
 		}
 	},
 	
 	saveClick: function (e) {
 		for(var r in this.edited) {
-			if (Object.keys(this.edited[r]).length) { console.log(this.edited[r]);					
+			if (Object.keys(this.edited[r]).length) {				
 				var currResource = r=='_' ? this.props.data : this.props.data[r];
 				var currForm = currResource.edit;
 				var query = {};
@@ -60,11 +62,20 @@ window.Editable = {
 					inputs: this.edited[r]
 				};
 				
-				api.request(action).then(function (resp) {console.log(resp)}, function (r) {console.log('error'); console.log(r);});
+				var match = {};
+				if (this.props.keyName) match[this.props.keyName] = currResource[this.props.keyName];
+				
+				api.request(action, currResource['@id']); //.then(function (resp) {console.log(resp)}, function (r) {console.log('error'); console.log(r);});
 			}
 		}
 		
-		//this.setState({editInProgress: false});
+		this.edited = {};
+		this.setState({editInProgress: false});
+	},
+	
+	progressIcon: function (html) {
+		var style = {display: this.state.editInProgress==2  && !this.props.refresh ? 'inline-block' : 'none'};
+		return <div style={style}>....saving...</div>;
 	},
 	
 	cancelBtn: function () {
@@ -73,7 +84,7 @@ window.Editable = {
 	
 	cancelStyle: function () {
 		return {
-			display: this.state.editInProgress ? 'inline-block' : 'none'
+			display: this.state.editInProgress && this.state.editInProgress != 2? 'inline-block' : 'none'
 		}
 	},
 	
@@ -94,12 +105,14 @@ window.EditableSpan = React.createClass({
 	},
 	
 	render: function(){
-		var html = this.props.editable ? this.state.html : this.props.html;
+		var html = this.props.editable==2 ? this.lastHtml : this.props.editable ? this.state.html : this.props.html;
+		
+		var editable = this.props.editable == 2 ? true : this.props.editable;
 	
 		return <span
 			onInput={this.emitChange} 
 			onBlur={this.emitChange}
-			contentEditable={this.props.editable}
+			contentEditable={editable}
 			style={this.style()}
 			dangerouslySetInnerHTML={{__html: html}}></span>;
 	},
