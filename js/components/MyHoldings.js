@@ -33,8 +33,12 @@ var Holding = React.createClass({
 	mixins: [Editable],
 	
 	getInitialState: function() {
-    return {editInProgress: false};
+    return {editStep: 0};
   },
+	
+	componentWillReceiveProps: function () {
+		this.setState({editStep: this.state.editStep==1 ? 1 : 0});
+	}, 
 	
   render: function() {
 		var account = this.props.data.account;

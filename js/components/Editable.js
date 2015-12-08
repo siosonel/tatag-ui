@@ -2,14 +2,12 @@ window.Editable = {
 	rendered: {},
 	edited: {},
 	
-	field: function (linkRel, obj, prop) {
-		this.edited = {};
-	
+	field: function (linkRel, obj, prop) {	
 		if (!(linkRel in this.rendered)) this.rendered[linkRel] = {}; 
 		this.rendered[linkRel][prop] = obj[prop];
 		
 		return 1 // 'edit' in obj && (obj.edit.inputs.optional.indexOf(prop)!=1 || obj.edit.inputs.required.indexOf(prop)!=1)
-			? <EditableSpan linkRel={linkRel} propName={prop} html={obj[prop]} editable={this.state.editInProgress} onChange={this.trackEdited} />
+			? <EditableSpan linkRel={linkRel} propName={prop} html={obj[prop]} editable={this.state.editStep} onChange={this.trackEdited} />
 			: obj[prop];
 	},
 	
@@ -29,12 +27,12 @@ window.Editable = {
 
 	editStyle: function () {
 		return {
-			display: this.state.editInProgress && !this.props.refresh ? 'none' : 'inline-block'
+			display: this.state.editStep ? 'none' : 'inline-block'
 		}
 	},
 	
 	editClick: function (e) {
-		this.setState({editInProgress: true});
+		this.setState({editStep: 1});
 	},
 
 	saveBtn: function () {
@@ -43,13 +41,15 @@ window.Editable = {
 	
 	saveStyle: function () {
 		return {
-			display: this.state.editInProgress  && this.state.editInProgress != 2 ? 'inline-block' : 'none'
+			display: this.state.editStep == 1 ? 'inline-block' : 'none'
 		}
 	},
 	
 	saveClick: function (e) {
+		var numRequests = 0; 
+		
 		for(var r in this.edited) {
-			if (Object.keys(this.edited[r]).length) {				
+			if (Object.keys(this.edited[r]).length) {	
 				var currResource = r=='_' ? this.props.data : this.props.data[r];
 				var currForm = currResource.edit;
 				var query = {};
@@ -65,17 +65,24 @@ window.Editable = {
 				var match = {};
 				if (this.props.keyName) match[this.props.keyName] = currResource[this.props.keyName];
 				
-				api.request(action, currResource['@id']); //.then(function (resp) {console.log(resp)}, function (r) {console.log('error'); console.log(r);});
+				api.request(action, currResource['@id']).then(this.emptyFunction, this.fieldReset);
+				numRequests++;
+				this.edited[r] = {};
 			}
 		}
 		
-		this.edited = {};
-		this.setState({editInProgress: false});
+		this.setState({editStep: numRequests ? 2 : 0});
+	},
+	
+	emptyFunction: function () {},
+	
+	fieldReset: function (err) { console.log(err);
+		this.setState({editStep: 0});
 	},
 	
 	progressIcon: function (html) {
-		var style = {display: this.state.editInProgress==2  && !this.props.refresh ? 'inline-block' : 'none'};
-		return <div style={style}>....saving...</div>;
+		var style = {display: this.state.editStep==2 ? 'inline-block' : 'none'};
+		return <div style={style}>{html}</div>;
 	},
 	
 	cancelBtn: function () {
@@ -84,12 +91,12 @@ window.Editable = {
 	
 	cancelStyle: function () {
 		return {
-			display: this.state.editInProgress && this.state.editInProgress != 2? 'inline-block' : 'none'
+			display: this.state.editStep==1 ? 'inline-block' : 'none'
 		}
 	},
 	
 	cancelClick: function (e) {
-		this.setState({editInProgress: false});
+		this.setState({editStep: 0});
 	}
 };
 
@@ -104,10 +111,12 @@ window.EditableSpan = React.createClass({
 		this.setState({edited: false, html: this.props.html});
 	},
 	
-	render: function(){
-		var html = this.props.editable==2 ? this.lastHtml : this.props.editable ? this.state.html : this.props.html;
+	render: function(){		
+		if (!this.props.editable) this.lastHtml = '';
 		
-		var editable = this.props.editable == 2 ? true : this.props.editable;
+		var html = this.props.editable && this.lastHtml ? this.lastHtml : this.props.html;
+		
+		var editable = this.props.editable ? true : false;
 	
 		return <span
 			onInput={this.emitChange} 
