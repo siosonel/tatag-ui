@@ -6,7 +6,7 @@ window.MyHoldings = React.createClass({
 		return (
       <div className="myHoldings">
         <h1>Account Holdings</h1>
-				<HoldingList concept={"personal-holdings"} data={this.props.data} />
+				<HoldingList concept={"my-holdings"} data={this.props.data} />
       </div>
     );
   }
@@ -16,7 +16,7 @@ var HoldingList = React.createClass({
 	render: function() {
     var holdingNodes = this.props.data.items.map(function(holding) {
       return (
-        <Holding concept={"personal-holding"} data={holding} key={holding.holder_id} keyName={"holder_id"}></Holding>
+        <Holding concept={"my-holding"} data={holding} key={holding.holder_id} keyName={"holder_id"}></Holding>
       );
     });
 		

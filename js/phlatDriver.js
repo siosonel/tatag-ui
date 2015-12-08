@@ -1,4 +1,4 @@
-function phlatDriver(api, term, audience, path) {
+function phlatDriver(api, concept, path) {
 	//var url='';
 	var pathIndex = 0, links, concurrent=0, payload=[];
 	var container; //the resource to which the current request is related
@@ -26,7 +26,7 @@ function phlatDriver(api, term, audience, path) {
 			processServerResponse(url);
 		}
 		else if (!url) {  if (alt) console.log(['null url', url]);
-			var mssg = "Invalid url encountered for "+audience+" "+term+", "+path[pathIndex]+".";
+			var mssg = "Invalid url encountered for "+concept+", "+path[pathIndex]+".";
 			if (deferred) deferred.reject(new Error(mssg));
 			else console.log(mssg);  
 		}
@@ -85,9 +85,9 @@ function phlatDriver(api, term, audience, path) {
 			api.extendHints(resp);
 			for(var id in api.byId) api.linkToCachedInstance(api.byId[id]);
 		
-			var data = Array.isArray(container[path[pathIndex]]) ? payload: resource; if (audience=='teamMember') console.log(data);
+			var data = Array.isArray(container[path[pathIndex]]) ? payload: resource; 
 			
-			api.byConcept[audience+'-'+term] = data; //console.log([audience+'-'+term, data]);
+			api.byConcept[concept] = data;
 			
 			//resolve the promise that was set via main.promise, as applicable
 			if (deferred) {

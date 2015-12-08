@@ -1,5 +1,6 @@
 function phlatSimple(conf) {		
-	var rootURL = '/', root; //may be overridden
+	var rootURL = '/';  //may be overridden
+	var root; //the root resource
 	var	_id = conf._id ? conf._id : "@id";
 	var	_type = conf._type ? conf._type : "@type";			
 	var byId = {}, byType = {}, byConcept={};
@@ -7,6 +8,7 @@ function phlatSimple(conf) {
 	var linkTerms = [];
 	var omniListener = function (resp) {}; //function (resp) {console.log(resp)};
 	var get = {};
+	var subAccessor = {}; //meant to give concept-getters access to internal properties and functions
 	var directions={}, inprocess={};
 	
 	var headers = {
@@ -105,27 +107,28 @@ function phlatSimple(conf) {
 	function extendHints(res) {
 		if (res.hints) $.extend(true, hints, res.hints);
 	}
-	
-	function setGetter(audience, term) {
-		if (!(audience in get)) get[audience] = {};
-		
-		if (!(term in get[audience])) get[audience][term] = phlatDriver({
-			root: main.root, headers: headers, 
-			byId: byId, byConcept: byConcept,
-			indexGraph: indexGraph, 
-			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance,
-			applyHints: applyHints, extendHints: extendHints
-		}, term, audience, directions[audience][term]);
+
+	function setGetter(concept) {			
+		if (!(concept in get)) get[concept] = phlatDriver(subAccessor, concept, directions[concept]);
 	}
 	
-	function addListener(audience, term, fxn) {
-		setGetter(audience, term);		
-		get[audience][term].addListener(fxn);
+	function addListener(concept, fxn) {
+		setGetter(concept);		
+		get[concept].addListener(fxn);
 		return main;
 	}
 	
 	main.init = function (url) {
 		if (url) rootURL = url;
+		
+		subAccessor = {
+			root: main.root, headers: headers, 
+			byId: byId, byConcept: byConcept,
+			indexGraph: indexGraph, 
+			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance,
+			applyHints: applyHints, extendHints: extendHints
+		};
+		
 		return main.loadId(rootURL);
 	}
 		
@@ -257,14 +260,14 @@ function phlatSimple(conf) {
 	
 	main.addListener = addListener;
 	
-	main.byAudience = function (audience, term) {
-		get[audience][term]();
+	main.byAudience = function (concept) {
+		get[concept]();
 		return main;
 	}
 	
-	main.loadConcept = function (audience, term, match) {
-		setGetter(audience, term);
-		var p = get[audience][term].promise(match);
+	main.loadConcept = function (concept, match) {
+		setGetter(concept);
+		var p = get[concept].promise(match);
 		p.then(omniListener);
 		return p; 
 	}

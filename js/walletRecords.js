@@ -17,7 +17,7 @@ function walletRecords(api) {
 		var match = {"#": "items", "holder_id": acct.holder_id};
 		
 		//refresh info as needed using refresh argument 
-		api.loadConcept('personal', 'account-records', match).then(renderRecords, app.errHandler);
+		api.loadConcept('my-account-records', match).then(renderRecords, app.errHandler);
 	}
 	
 	function setTitle(acct) {
