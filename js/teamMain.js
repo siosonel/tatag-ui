@@ -35,14 +35,14 @@ function teamMain(conf) {
 		api.init('/api/')
 			.then(setListeners)
 			.then(function (resp) {
-				api.byAudience('personal','me')
-					.byAudience('teamMember','brand');
+				api.byAudience('my-me')
+					.byAudience('team-brand');
 			}, main.errHandler);
 	}
 	
 	function setListeners(root) {
-		api.addListener('personal', 'me', setUser)
-			.addListener('teamMember', 'brand', main.brands);
+		api.addListener('my-me', setUser)
+			.addListener('team-brand', main.brands);
 	}
 	
 	function main(otherWrapper) {

@@ -47,14 +47,14 @@ function adminMain(conf) {
 		api.init('/api/')
 			.then(setListeners)
 			.then(function (resp) {
-				api.byAudience('personal','me')
-					.byAudience('brandAdmin','brand');
+				api.byAudience('my-me')
+					.byAudience('admin-brand');
 			}, main.errHandler);
 	}
 	
 	function setListeners(root) {
-		api.addListener('personal', 'me', setUser)
-			.addListener('brandAdmin', 'brand', main.brands);
+		api.addListener('my-me', setUser)
+			.addListener('admin-brand', main.brands);
 	}
 	
 	function main(otherWrapper) {

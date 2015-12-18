@@ -36,7 +36,10 @@ function phlatSimple(conf) {
 			} 
 			
 			//as needed, create an items link for a collection-type resource
-			if (d.collectionOf && (!d.items || !d.items.length)) d.items = d[d.collectionOf]; 
+			if (d.collectionOf) {
+				if (!d.items || !d.items.length) d.items = d[d.collectionOf]; 
+				else if ('items' in d) d[d.collectionOf] = d.items;  
+			}
 			
 			
 			//save typed resources in an array
