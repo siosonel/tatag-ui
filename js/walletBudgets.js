@@ -130,17 +130,17 @@ function walletBudgets(api) {
 			return;
 		}
 		
-		if (e.target.id && e.target.id.slice(-7)=='-relays') {
+		else if (e.target.id && e.target.id.slice(-7)=='-relays') {
 			currAcctDivId = e.target.id.slice(0,-7);
 			app.currView = 'relays';
 			app.relays(app.resources[currAcctDivId]); 
 			return;
 		}
 		
-		if (e.target.tagName.toUpperCase()=='BUTTON') {
+		else if (e.target.tagName.toUpperCase()=='BUTTON') {
 			if (!params.expenseAcctToUse) params.expenseAcctToUse = e.target.parentNode.id;
 			$('#expenseAcctToUse').val(params.expenseAcctToUse);
-			app.txn(e.target.id, 'personal-account-records'); 
+			app.txn(e.target.id); 
 			return;
 		}
 		

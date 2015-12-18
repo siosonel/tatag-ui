@@ -40,7 +40,7 @@ function adminForms(api) {
 			: dateInputs.indexOf(inputName) != -1 ? getDateStr()
 			: null;
 		
-		$('#'+currType+'-'+inputName).val(val);
+		if (inputName != 'rating') $('#'+currType+'-'+inputName).val(val);
 		
 		if (currType=='about') {
 			if (inputName=='type_system') main.setTypeOpts();
@@ -48,7 +48,10 @@ function adminForms(api) {
 			else if (inputName=='area_code') currAreaCode = val;
 		}
 		else if (currType=='ratings') {
-			if (inputName=='rating') $('#ratings-slider').val(val);
+			if (inputName=='rating' && typeof val=='number') {
+				$('#ratings-slider').val(val);
+				$('#ratings-rating').val(val);
+			}
 		}
 		else if ((currType=='accept' && inputName=='joined')
 			|| (currType=='revoke' && inputName=='revoked')) {

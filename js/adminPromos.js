@@ -15,6 +15,7 @@ function adminPromos(api) {
 
 		//refresh info as needed using second argument to loadId
 		api.loadId(url, app.refresh()).then(renderPromos, app.errHandler);
+		api.loadConcept('my-holdings');
 	}
 	
 	function setTitle() {
