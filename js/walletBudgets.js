@@ -32,7 +32,7 @@ function walletBudgets(api) {
 				if (!params.expenseAcctToUse) params.expenseAcctToUse = $('#expenseAcctToUse').val();
 				$('#expenseAcctToUse').val(params.expenseAcctToUse);
 				$('#'+ params.expenseAcctToUse +'-use').trigger('click');
-				delete params.to;
+				//delete params.to;
 			} //else console.log(params);
 		}
 	}

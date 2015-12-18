@@ -33,8 +33,8 @@ if (isset($_GET['for']) AND $_GET['for']) $handler = "wallet";
 else if (!$handler OR strpos($handler,'home')!==false) $handler='home'; 	
 else if (strpos($handler,'wallet')!==false OR strpos($handler,'pay')!==false) $handler='wallet';
 
-if ((SITE!='dev' //require login prior to public alpha release
-		OR (isset($_GET['login']) AND $_GET['login']) 
+if (( /*SITE!='dev' //require login prior to public alpha release
+		OR*/ (isset($_GET['login']) AND $_GET['login']) 
 		OR $handler != 'home'
 	) && (
 		!isset($_SESSION) 
