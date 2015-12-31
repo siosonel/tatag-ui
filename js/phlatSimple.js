@@ -66,10 +66,11 @@ function phlatSimple(conf) {
 		
 		d.items.reverse();
 		
+		if (!Array.isArray(cachedResource.items)) cachedResource.items = [];
 		for(var i=0; i<d.items.length; i++) {
 			if (cachedResource.items.indexOf(d.items[i])==-1) cachedResource.items.unshift(d.items[i]);
 		}
-		
+
 		if (cachedResource.collectionOf) cachedResource[cachedResource.collectionOf] = cachedResource.items;
 		d.items = cachedResource.items;
 		//delete d.items;

@@ -48,12 +48,14 @@ function adminMain(conf) {
 			.then(setListeners)
 			.then(function (resp) {
 				api.byAudience('my-me')
+					.byAudience('my-brands')
 					.byAudience('admin-brand');
 			}, main.errHandler);
 	}
 	
 	function setListeners(root) {
 		api.addListener('my-me', setUser)
+			.addListener('my-brands', function (d) {console.log(d); app.resources['my-brands'] = d})
 			.addListener('admin-brand', main.brands);
 	}
 	
