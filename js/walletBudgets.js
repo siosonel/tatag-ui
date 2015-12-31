@@ -74,11 +74,11 @@ function walletBudgets(api) {
 		+			(acct.throttle_id ? "<span>(This account is throttled, #"+acct.throttle_id+")</span>" : "")
 		+		"</div>"
 		+ 	"<div class='small-4 columns'>"
-		+ 		((acct.relay['budget-add'] || acct['budget-add']) 
+		+ 		((acct.relay['add'] || acct['add']) 
 			? "<button class='tiny' id='"+acctDivId+"-add' style='width:5.0rem; margin-bottom:0.5rem;'>Add</button><br />" : "")
-		+ 		((acct.relay['budget-transfer'] || acct['budget-transfer']) 
+		+ 		((acct.relay['transfer'] || acct['transfer']) 
 			? "<button id='"+acctDivId+"-transfer' class='tiny' style='width:5.0rem; margin-bottom:0.5rem;'>Transfer</button><br />" : "")
-		+			((acct.relay['budget-use'] || acct['budget-use']) 
+		+			((acct.relay['use'] || acct['use']) 
 			? "<button id='"+acctDivId+"-use' class='tiny' style='width:5.0rem; margin-bottom:0.5rem;'>Use</button><br />" : "")
 		+		"</div>" 	
 		+ "</div>"

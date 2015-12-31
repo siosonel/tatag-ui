@@ -5,18 +5,18 @@ function walletTxn(api) {
 	function main(arg, term) {		
 		params = app.params();
 	
-		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-");
+		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-"); console.log(action);
 		
 		currAction = action;
 		currResource = app.resources[wrapperId]; //console.log(currResource); //console.log(api.byId); console.log(action+' '+arguments.length);
 		
-		if (!term) var term = currResource.holder_id ? 'budget' : 'record'; 
+		if (!term) var term = currResource.holder_id ? '' : 'record-'; 
 		
-		currRelay = currResource.relay ? currResource.relay[term+'-'+action] : null;
+		currRelay = currResource.relay ? currResource.relay[term+action] : null;
 		$('#expenseSelectDiv').css('display', currAction=='use' ? 'block' : 'none');
 		
-		if (!currResource[term+'-'+action]) processForm(null);
-		else api.loadId(currResource[term+'-'+action]).then(processForm, app.errHandler);
+		if (!currResource[term+action]) processForm(null);
+		else api.loadId(currResource[term+action]).then(processForm, app.errHandler);
 	}
 	
 	function processForm(res) {

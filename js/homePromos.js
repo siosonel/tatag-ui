@@ -73,7 +73,7 @@ function homePromos(api) {
 			// +			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a><br />" : "")
 			// +			(promo.expires ? "Expires: "+ promo.expires +'<br />' : "")
 			// + date[1] +'/'+ date[2] +"<br/>"+ date[0]
-			//+			'Recipient Token: <b>' + promo.relay['budget-use'] +'</b><br />'
+			//+			'Recipient Token: <b>' + promo.relay['use'] +'</b><br />'
 			//+		"<span class='sharePrompt'>Share</span>"
 			+		"</div>"
 			+'</div>'
