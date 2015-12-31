@@ -12,7 +12,7 @@ function walletEdit(api) {
 		currAction = action;
 		
 		renderAcctForm(action);
-		api.loadId(currResource['record-'+action]).then(renderRecordForm);
+		api.loadId(currResource[action]).then(renderRecordForm);
 		renderRelayForm(action);
 		
 		$('#editModal').foundation('reveal','open');

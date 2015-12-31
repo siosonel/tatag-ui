@@ -8,9 +8,9 @@ function walletTxn(api) {
 		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-"); console.log(action);
 		
 		currAction = action;
-		currResource = app.resources[wrapperId]; //console.log(currResource); //console.log(api.byId); console.log(action+' '+arguments.length);
+		currResource = app.resources[wrapperId]; console.log(currResource); //console.log(api.byId); console.log(action+' '+arguments.length);
 		
-		if (!term) var term = currResource.holder_id ? '' : 'record-'; 
+		if (!term) var term = currResource.holder_id ? '' : ''; console.log([term, action, currResource[term+action]]);
 		
 		currRelay = currResource.relay ? currResource.relay[term+action] : null;
 		$('#expenseSelectDiv').css('display', currAction=='use' ? 'block' : 'none');
@@ -19,7 +19,7 @@ function walletTxn(api) {
 		else api.loadId(currResource[term+action]).then(processForm, app.errHandler);
 	}
 	
-	function processForm(res) {
+	function processForm(res) { console.log(res);
 		currForm = res;
 		renderForm(currAction);
 		renderRelay(currRelay);		

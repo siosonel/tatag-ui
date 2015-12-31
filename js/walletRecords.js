@@ -72,20 +72,20 @@ function walletRecords(api) {
 	}
 	
 	function setActionPrompt(divId, record, relay) {		
-		if (relay['budget-unadd'] || record['budget-unadd']) 
+		if (relay['unadd'] || record['unadd']) 
 			return "<br /><button class='tiny' id='"+divId+"-unadd' style='margin-top:5px;'>reverse</button>";
 			
-		if (relay['budget-untransfer'] || record['budget-untransfer']) 
+		if (relay['untransfer'] || record['untransfer']) 
 			return "<br /><button class='tiny' id='"+divId+"-untransfer' style='margin-top:5px;'>reverse</button>";
 		
-		if (relay['budget-unuse'] || record['budget-unuse']) 
+		if (relay['unuse'] || record['unuse']) 
 			return "<br /><button class='tiny' id='"+divId+"-unuse' style='margin-top:5px;'>reverse</button>";
 		
 		var prompt = "";
 		
-		if (record['record-hold']) prompt += "<button id='"+divId+"-hold' class='tiny fi-lock' title='hold for manual approval or rejection'></button>";		
-		if (record['record-approve']) prompt += "<button id='"+divId+"-approve' class='fi-check tiny' title='manually approve'></button>"		
-		if (record['record-reject']) prompt += "<button id='"+divId+"-reject' class='fi-x tiny' title='reject transaction'></button>";
+		if (record['hold']) prompt += "<button id='"+divId+"-hold' class='tiny fi-lock' title='hold for manual approval or rejection'></button>";		
+		if (record['approve']) prompt += "<button id='"+divId+"-approve' class='fi-check tiny' title='manually approve'></button>"		
+		if (record['reject']) prompt += "<button id='"+divId+"-reject' class='fi-x tiny' title='reject transaction'></button>";
 		
 		if (!prompt) {
 			var status = record.status;
@@ -144,7 +144,7 @@ function walletRecords(api) {
 		
 		if (e.target.tagName.toUpperCase()=='BUTTON') {
 			if (['hold', 'approve', 'reject'].indexOf(e.target.id.split('-')[2]) !=-1 ) app.edit(e.target.id); //console.log(e.target.id);
-			else app.txn(e.target.id, 'budget'); 
+			else app.txn(e.target.id); 
 		} 
 		
 		if (typeArr.indexOf('record')!=-1) {
