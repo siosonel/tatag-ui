@@ -161,9 +161,9 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					</div>
 					<div class='row'>
 						<div class='columns small-12'>
-							<label for='ratings-rating'>Rating (0-100) &nbsp;&nbsp;&nbsp;</label>
+							<label for='ratings-score'>Score (0-100) &nbsp;&nbsp;&nbsp;</label>
 							<input type='range' id='ratings-slider' min='0' max='100' value='90' onchange='app.ratings.setRatingBySlider()' oninput='app.ratings.setRatingBySlider()'/>
-							<input type='text' id='ratings-rating' value='90' onchange='app.ratings.setSliderByText()'/>
+							<input type='text' id='ratings-score' value='90' onchange='app.ratings.setSliderByText()'/>
 						</div>
 					</div>
 					<div class='row'>

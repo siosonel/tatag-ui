@@ -49,7 +49,7 @@ function homeRatings(api) {
 			+ 	"<div class='small-12 columns' style='text-align: left; margin-bottom:10px;'>"
 			+ 		"<span class='fi-pencil small right'>&nbsp;</span>"
 			+			rating.brand_name +"</br >"
-			+			"Rating: "+ rating.rating +"</br >"
+			+			"Rating: "+ rating.score +"</br >"
 			+			"Reason: "+ rating.reason 
 			//+ 	date[1] +'/'+ date[2] +"<br/>"+ date[0]
 			+		"</div>"
@@ -136,11 +136,11 @@ function homeRatings(api) {
 	} 
 	
 	main.setRatingBySlider = function (e) {
-		$('#ratings-rating').val($('#ratings-slider').val());
+		$('#ratings-score').val($('#ratings-slider').val());
 	}
 	
 	main.setSliderByText = function (e) {
-		$('#ratings-slider').val($('#ratings-rating').val());
+		$('#ratings-slider').val($('#ratings-score').val());
 	}
 	
 	return main;
