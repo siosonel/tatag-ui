@@ -90,7 +90,13 @@ function homePromos(api) {
 		if (e.target.id=='addPromo') { 
 			$('#promoID-formDiv').css('display','none');
 			$('#promoDetailsDiv, #promoRelayDiv, #promoHolderIdDiv').css('display','block');
-			app.api.loadConcept('personal','holding').then(function (res) {console.log(res); res.map(setHolderIdOpt)}, app.errHandler);			
+			app.api.loadConcept('my-holding')
+				.then(function (res) {console.log(res); 
+					res.map(function (r) {
+						if (typeof r=='string') api.loadId(r).then(setHolderIdOpt, app.errHandler)
+						else setHolderIdOpt(r);
+					})
+				}, app.errHandler);			
 			
 			app.forms(currCollection, 'promos', '/form/promo-add');
 			return;
