@@ -67,7 +67,7 @@ function adminAccounts(api) {
 	main.clickHandler = function (e) {
 		if (e.target.id=='addAccount') {
 			$('#accounts-sign-row').css('display','block');
-			app.forms(currCollection, 'accounts', '/form/account-add');
+			app.forms(currCollection, 'accounts', currCollection.add);
 			return;
 		}
 		
@@ -86,7 +86,8 @@ function adminAccounts(api) {
 			return;
 		}
 		
-		app.forms(divId, 'accounts', '/form/admin-account-edit');
+		var account = app.resources[divId];
+		app.forms(divId, 'accounts', account.edit);
 	}
 	
 	return main;

@@ -117,8 +117,9 @@ function teamBrands(api) {
 		if (!divId) return;	
 		
 		if (e.target.tagName.toUpperCase()=="BUTTON") {		
-			var divIdArr = app.getDivId(e,'brand').split('-'), action = divIdArr.pop(), divId=divIdArr.join('-');		
-			app.forms(divId+'-membership', action, '/form/member-'+action, 'brands');
+			var divIdArr = app.getDivId(e,'brand').split('-'), action = divIdArr.pop(), divId=divIdArr.join('-');	
+			var m = app.resources[divId+'-membership'];
+			app.forms(divId+'-membership', action, m[action], 'brands');
 		}		
 		else {
 			var id = divId.split('-');

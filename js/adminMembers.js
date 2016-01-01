@@ -67,10 +67,10 @@ function adminMembers(api) {
 		)
 	}
 	
-	main.clickHandler = function (e) {		
+	main.clickHandler = function (e) {
 		if (e.target.id=='addMember') {
 			$('#members-user_id-row').css('display','block');
-			app.forms(currCollection, 'members', '/form/member-add');
+			app.forms(currCollection, 'members', currCollection.add);
 			return;
 		}
 		
@@ -87,9 +87,10 @@ function adminMembers(api) {
 		}
 		
 		var divId = app.getDivId(e, 'member');
-		if (!divId) return; console.log(divId);
+		if (!divId) return; console.log(divId);		
 		
-		app.forms(divId, 'members', '/form/admin-member-edit');
+		var member = app.resources[divId];		
+		app.forms(divId, 'members', member.edit);
 	}
 	
 	return main;

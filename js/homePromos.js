@@ -90,15 +90,18 @@ function homePromos(api) {
 		if (e.target.id=='addPromo') { 
 			$('#promoID-formDiv').css('display','none');
 			$('#promoDetailsDiv, #promoRelayDiv, #promoHolderIdDiv').css('display','block');
-			app.api.loadConcept('my-holding')
-				.then(function (res) {console.log(res); 
-					res.map(function (r) {
-						if (typeof r=='string') api.loadId(r).then(setHolderIdOpt, app.errHandler)
-						else setHolderIdOpt(r);
-					})
-				}, app.errHandler);			
 			
-			app.forms(currCollection, 'promos', '/form/promo-add');
+			app.api.loadConcept('my-holding').then(function (res) {console.log(res); 
+				res.map(function (r) {
+					if (typeof r=='string') api.loadId(r).then(setHolderIdOpt, app.errHandler)
+					else setHolderIdOpt(r);
+				})
+			}, app.errHandler);			
+			
+			app.api.loadConcept('team-promos').then(function (teamPromos) {
+				app.forms(currCollection, 'promos', teamPromos.add);
+			}, app.errHandler);
+			
 			return;
 		}
 		else if (e.target.id && e.target.id.substr(0,4)=='pay-') { 
@@ -134,7 +137,7 @@ function homePromos(api) {
 		else if (!promo['promo-edit'] || !targetCls) return; 
 		
 		$('#promos-brand_id').prop('disabled',true).val(promo.brand_name);
-		app.forms(divId, 'promos', '/form/promo-edit');
+		app.forms(divId, 'promos', promo.edit);
 	}
 	
 	return main;

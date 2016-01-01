@@ -1,16 +1,17 @@
 function adminBrands(api) {
-	var currURL, currBrands;
+	var currCollection, currBrands;
 	var addBrandInit = 0; //to be used to avoid weird ignore of form select defaults
 
-	function main(brandURL) {		
-		if (brandURL) currURL = brandURL;
+	function main(brandCollection) {
+		if (brandCollection) currCollection = brandCollection;
+		
 		$('#brandsWrapper').children().remove(); //console.log(currURL); console.log(api.byId[currURL]);
 		$('#brandsWrapper').append("<div style='min-height:2rem;'>"
 			+ "<a herf='' id='adminListHeading' style='line-height:2rem; vertical-align:bottom;'>Help</a>"
 			+	"<button id='addBrand' class='right tiny' style='margin:0;'>+New Brand</button>"
 			+"</div>");
 		
-		api.deref(currURL, !currBrands ? 1 : app.refresh())
+		api.deref(currCollection.brand, !currBrands ? 1 : app.refresh())
 			.then(renderBrands, app.errHandler);	
 	}
 	
@@ -102,7 +103,7 @@ function adminBrands(api) {
 	
 	main.clickHandler = function (e) {		
 		if (e.target.id=='addBrand') {
-			app.forms('my-brands', 'about', '/form/brand-registration');
+			app.forms(currCollection, 'about', currCollection.add);
 			if (!addBrandInit) {
 				$('#about-type_id').val(9);
 				$('#about-country_code').val('USA'); 

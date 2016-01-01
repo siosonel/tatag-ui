@@ -49,14 +49,12 @@ function adminMain(conf) {
 			.then(function (resp) {
 				api.byAudience('my-me')
 					.byAudience('my-brands')
-					.byAudience('admin-brand');
 			}, main.errHandler);
 	}
 	
 	function setListeners(root) {
 		api.addListener('my-me', setUser)
-			.addListener('my-brands', function (d) {console.log(d); app.resources['my-brands'] = d})
-			.addListener('admin-brand', main.brands);
+			.addListener('my-brands', main.brands);
 	}
 	
 	function main(otherWrapper) {
@@ -75,7 +73,6 @@ function adminMain(conf) {
 		User = res;
 		main.User = User;
 		main.me(User.user_id, User.name, User.login_provider);
-		//main.brands(User.brand);
 	}
 	
 	main.refs = {types: types}

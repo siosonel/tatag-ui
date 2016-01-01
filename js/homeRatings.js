@@ -109,7 +109,7 @@ function homeRatings(api) {
 		if (e.target.id=='addRating') {
 			app.completer.reset();
 			$('#ratings-brand_id').prop('disabled',false).val('');
-			app.forms(currCollection, 'ratings', '/form/rating-add');
+			app.forms(currCollection, 'ratings', currCollection.add);
 			initPlaces();
 			return;
 		}
@@ -124,7 +124,7 @@ function homeRatings(api) {
 		var rating = app.resources[divId];
 		
 		$('#ratings-brand_id').prop('disabled',true).val(rating.brand_name);
-		app.forms(divId, 'ratings', '/form/rating-edit');
+		app.forms(divId, 'ratings', rating.edit);
 	}
 	
 	main.findRenderedItem = function (brand_id) {

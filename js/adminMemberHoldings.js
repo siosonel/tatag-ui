@@ -66,7 +66,7 @@ function adminMemberHoldings(api) {
 	main.clickHandler = function (e) {
 		if (e.target.id=='addAccountHolding') {
 			$('#holders-new-row').css('display', 'block');
-			app.forms(currCollection, 'holders', '/form/holder-add');
+			app.forms(currCollection, 'holders', currCollection.add);
 			return;
 		}		
 		
@@ -82,7 +82,8 @@ function adminMemberHoldings(api) {
 		var divId = app.getDivId(e, 'memberHolding');
 		if (!divId) return;
 		
-		app.forms(divId, 'holders', '/form/admin-holder-edit', 'memberHoldings');
+		var holder = app.resources[divId];		
+		app.forms(divId, 'holders', holder.edit, 'memberHoldings');
 	}
 	
 	return main;
