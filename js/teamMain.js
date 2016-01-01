@@ -36,13 +36,13 @@ function teamMain(conf) {
 			.then(setListeners)
 			.then(function (resp) {
 				api.byAudience('my-me')
-					.byAudience('team-brand');
+					.byAudience('my-membership');
 			}, main.errHandler);
 	}
 	
 	function setListeners(root) {
 		api.addListener('my-me', setUser)
-			.addListener('team-brand', main.brands);
+			.addListener('my-membership', main.brands);
 	}
 	
 	function main(otherWrapper) {

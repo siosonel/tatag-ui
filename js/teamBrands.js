@@ -1,32 +1,39 @@
 function teamBrands(api) {
-	var currURL, currBrands;
+	var currURL, currMemberships, currTeam = {}, numRendered=0;
 		
-	function main(brandURL) {
-		if (!currURL && (!brandURL || !brandURL.length)) {
+	function main(membershipURL) { console.log(membershipURL);
+		if (!currURL && (!membershipURL || !membershipURL.length)) {
 			$("#brandsWrapper").html("You do not have any current team memberships.");
 			return;
 		}
 	
-		if (brandURL) currURL = brandURL;
+		if (membershipURL) currURL = membershipURL;
 		$('#brandsWrapper').children().remove(); //console.log(currURL); console.log(api.byId[currURL]);
 		
-		api.deref(currURL, !currBrands ? 1 : app.refresh())
+		api.deref(currURL, !currMemberships ? 1 : app.refresh())
 			.then(renderBrands, app.errHandler);	
 	}
 	
-	function renderBrands(brands) {
-		currBrands = brands;
-		currBrands.map(renderBrandDiv);
-		app.adjustHeight();
+	function renderBrands(memberships) {
+		numRendered=0;
+		currMemberships = memberships;
+		currMemberships.map(getTeam);
 	}
 	
-	function renderBrandDiv(brand) { //console.log(brand);
-		if (!brand.member_id) return;
+	function getTeam(m,i) { console.log(m.team);
+		currTeam[m.team] = m;
+		api.loadId(m.team).then(renderBrandDiv, app.errHandler);
+	}
+	
+	function renderBrandDiv(brand) {
+		numRendered++;
 		
-		var tally = brand.tally, brandDivId='brand-'+brand.brand_id;		
+		var tally = brand.tally, brandDivId='brand-'+brand.brand_id;
+		var membership = currTeam[brand['@id']];
 		app.resources[brandDivId] = brand;
+		app.resources[brandDivId+'-membership'] = membership;
 		
-		var b = main.brandColors(brandDivId, brand);		
+		var b = main.brandColors(brandDivId, brand);
 		
 		$('#brandsWrapper').append(
 			"<div class='small-12 brandItem' id='"+brandDivId+"' style='background-color: "+ b.divBg +"'>"
@@ -41,12 +48,12 @@ function teamBrands(api) {
 			+		"</div>"
 			+ "</div>"			
 			
-			+ "<div>Role: "+ brand.role +"&nbsp;"
-			+ (brand.actions && brand.actions.indexOf('/form/member-accept') !=-1 
+			+ "<div>Role: "+ membership.role +"&nbsp;"
+			+ (membership.accept 
 				? "<button class='tiny' id='"+brandDivId+"-accept' style='width:5.0rem; margin-bottom:0.5rem;'>Accept</button>&nbsp;" 
 				: "")
 					
-			+ (brand.actions && brand.actions.indexOf('/form/member-revoke') !=-1 
+			+ (membership.revoke 
 				? "<button class='tiny' id='"+brandDivId+"-revoke' style='width:5.0rem; margin-bottom:0.5rem;'>Revoke</button>" 
 				: "")
 				
@@ -72,6 +79,9 @@ function teamBrands(api) {
 			+	"</div>"
 			+"</div>"
 		);
+		
+		
+		if (numRendered==currMemberships.length) app.adjustHeight();
 	}
 	
 	main.brandColors = (function () {
@@ -92,7 +102,7 @@ function teamBrands(api) {
 					divBg: colors[11-i].replace("rgb", "rgba").replace(")", ",0.4)"),
 					logo: obj.brand_logo
 						? "<img id='"+ divId +"-img' class='left logoDiv' src='"+ obj.brand_logo +"'/>"
-						: "<div id='"+ divId +"-img' class='left logoDiv' style='background-color: "+ colors[i] +"'>"+ obj.brand_name.substr(0,1).toUpperCase() +"</div>"
+						: "<div id='"+ divId +"-img' class='left logoDiv' style='background-color: "+ colors[i] +"'>"+ obj.name.substr(0,1).toUpperCase() +"</div>"
 				}
 			}
 			
@@ -108,7 +118,7 @@ function teamBrands(api) {
 		
 		if (e.target.tagName.toUpperCase()=="BUTTON") {		
 			var divIdArr = app.getDivId(e,'brand').split('-'), action = divIdArr.pop(), divId=divIdArr.join('-');		
-			app.forms(divId, action, '/form/member-'+action, 'brands');
+			app.forms(divId+'-membership', action, '/form/member-'+action, 'brands');
 		}		
 		else {
 			var id = divId.split('-');
