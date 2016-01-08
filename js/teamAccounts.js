@@ -41,14 +41,14 @@ function teamAccounts(api) {
 	
 	function renderItem(account) {
 		var date = account.created.split(' ')[0].split('-');
-		var divId = 'acct-'+ account.account_id;
+		var divId = 'acct-'+ account.id;
 		app.resources[divId] = account;
 		
 		$('#accountsWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		account.name+"<br />#"+account.account_id+', '+ account.authcode +'&nbsp;'
+			+ 		account.name+"<br />#"+account.id+', '+ account.authcode +'&nbsp;'
 			+			(account.throttle_id ? "<span>, throttle #"+account.throttle_id+"&nbsp;</span>" : "")
 			+		"</div>"
 			+ 	"<div class='small-3 columns' style='text-align: right;'>"+ account.balance +"</div>"

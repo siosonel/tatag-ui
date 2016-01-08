@@ -104,7 +104,7 @@ function teamBrands(api) {
 						? "<img id='"+ divId +"-img' class='left logoDiv' src='"+ obj.logo +"'/>"
 						: "<div id='"+ divId +"-img' class='left logoDiv' style='background-color: "+ colors[i] +"'>"+ obj.name.substr(0,1).toUpperCase() +"</div>"
 				} 
-			} console.log(divId);
+			}
 			
 			return colorIndex[divId];
 		}

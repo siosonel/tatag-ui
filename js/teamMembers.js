@@ -41,14 +41,14 @@ function teamMembers(api) {
 	
 	function renderItem(member) { //console.log(member)
 		var date = member.created.split(' ')[0].split('-');
-		var divId = 'member-'+ member.member_id; //console.log(divId)
+		var divId = 'member-'+ member.id; //console.log(divId)
 		app.resources[divId] = member;
 		
 		$('#membersWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		member.name+"<br />#"+member.member_id+', '+ member.role +'&nbsp;'
+			+ 		member.name+"<br />#"+member.id+', '+ member.role +'&nbsp;'
 			+		"</div>"
 			+ 	"<div class='small-3 columns' style='text-align: right;'>"+ member.hours +"</div>"
 			//+ 	"<div id='"+divId+"-toggle' class='memberDivToggle'>&#9660;&#9660;&#9660;</div>"

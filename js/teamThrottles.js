@@ -42,14 +42,14 @@ function teamThrottles(api) {
 	
 	function renderItem(throttle) {
 		var date = throttle.created.split(' ')[0].split('-');
-		var divId = 'throttles-'+ throttle.throttle_id;
+		var divId = 'throttles-'+ throttle.id;
 		app.resources[divId] = throttle;
 		
 		$('#throttlesWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='small-10 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		"Throttle #"+throttle.throttle_id +"<br />"
+			+ 		"Throttle #"+throttle.id +"<br />"
 			+			"Applies to the last "+ throttle.period +" seconds</br >"
 			+			"("+ Math.round(throttle.period/60) +" min. || "
 			+ 		(throttle.period/3600).toFixed(1) +" hours || "
