@@ -22,7 +22,7 @@ function teamThrottles(api) {
 			"<div class='row subLabel'>"
 			+	"<div class='columns small-12'>"
 			+  	"<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" throttles, </span>"
-			+  	"<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			+  	"<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.id +"</span>"
 			+	"</div>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 0 5px;'>"

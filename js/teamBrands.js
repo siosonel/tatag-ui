@@ -1,7 +1,7 @@
 function teamBrands(api) {
 	var currURL, currMemberships, currTeam = {}, numRendered=0;
 		
-	function main(membershipURL) { console.log(membershipURL);
+	function main(membershipURL) {
 		if (!currURL && (!membershipURL || !membershipURL.length)) {
 			$("#brandsWrapper").html("You do not have any current team memberships.");
 			return;
@@ -20,7 +20,7 @@ function teamBrands(api) {
 		currMemberships.map(getTeam);
 	}
 	
-	function getTeam(m,i) { console.log(m.team);
+	function getTeam(m,i) {
 		currTeam[m.team] = m;
 		api.loadId(m.team).then(renderBrandDiv, app.errHandler);
 	}
@@ -28,7 +28,7 @@ function teamBrands(api) {
 	function renderBrandDiv(brand) {
 		numRendered++;
 		
-		var tally = brand.tally, brandDivId='brand-'+brand.brand_id;
+		var tally = brand.tally, brandDivId='brand-'+brand.id;
 		var membership = currTeam[brand['@id']];
 		app.resources[brandDivId] = brand;
 		app.resources[brandDivId+'-membership'] = membership;
@@ -41,7 +41,7 @@ function teamBrands(api) {
 			+ 	"<div class='small-8 columns brandLabel'>"
 			+			b.logo
 			+ 		"<span style='vertical-align:top'>&nbsp;"+brand.name+"&nbsp;</span>"
-			+     "<span id='"+ brandDivId +"-name' style='font-weight:normal;'>&nbsp;#"+ brand.brand_id +"</span>"
+			+     "<span id='"+ brandDivId +"-name' style='font-weight:normal;'>&nbsp;#"+ brand.id +"</span>"
 			+		"</div>"
 			+ 	"<div class='small-4 columns brandAbout' id='"+brandDivId+"-about'>"
 			+ 		"About &#9658;"
@@ -94,17 +94,17 @@ function teamBrands(api) {
 		
 		var colorIndex = {};
 		
-		function main(divId, obj) { 
+		function main(divId, obj) {
 			if (!colorIndex[divId]) {
-				var i = obj.brand_id % 11;
+				var i = obj.id % 11;
 				colorIndex[divId] = {
 					logoBg: colors[i],
 					divBg: colors[11-i].replace("rgb", "rgba").replace(")", ",0.4)"),
-					logo: obj.brand_logo
-						? "<img id='"+ divId +"-img' class='left logoDiv' src='"+ obj.brand_logo +"'/>"
+					logo: obj.logo
+						? "<img id='"+ divId +"-img' class='left logoDiv' src='"+ obj.logo +"'/>"
 						: "<div id='"+ divId +"-img' class='left logoDiv' style='background-color: "+ colors[i] +"'>"+ obj.name.substr(0,1).toUpperCase() +"</div>"
-				}
-			}
+				} 
+			} console.log(divId);
 			
 			return colorIndex[divId];
 		}

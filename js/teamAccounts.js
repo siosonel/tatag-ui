@@ -21,7 +21,7 @@ function teamAccounts(api) {
 		$('#accountsWrapper').append(
 			"<div class='subLabel'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" accounts, </span>"
-			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.id +"</span>"
 			+"</div>"
 			+"<div id='brandItemsHeading' class='row acctItem' style='margin: 5px;'>"
 			+		"<div class='small-2 columns'>Created</div>"

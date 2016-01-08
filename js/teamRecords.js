@@ -22,7 +22,7 @@ function teamRecords(api) {
 		$('#recordsTitle').append(
 			"<div class='subLabel'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+", budget "+ currType +"</span>"
-			//+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			//+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.id +"</span>"
 			+"</div>"
 		);
 		

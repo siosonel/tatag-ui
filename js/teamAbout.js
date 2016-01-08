@@ -21,14 +21,14 @@ function teamAbout(api) {
 		$('#aboutWrapper').append(
 			"<div class='subLabel'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; about "+currBrand.name+", </span>"
-			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.id +"</span>"
 			+"</div>"
 		);
 	}
 	
 	function renderResource(about) { //console.log(member)
 		var date = about.created.split(' ')[0].split('-');
-		var divId = 'about-'+ about.brand_id; //console.log(divId)
+		var divId = 'about-'+ about.brand.id; //console.log(divId)
 		app.resources[divId] = about;
 		
 		$('#aboutWrapper').append(
