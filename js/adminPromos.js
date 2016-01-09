@@ -40,7 +40,7 @@ function adminPromos(api) {
 	
 	function renderItem(promo) {
 		var date = promo.created.split(' ')[0].split('-');
-		var divId = 'promos-'+ promo.promo_id;
+		var divId = 'promos-'+ promo.id;
 		app.resources[divId] = promo;
 		app.resources[divId+'-details'] = promo;
 		app.resources[divId+'-relay'] = promo;
@@ -51,17 +51,17 @@ function adminPromos(api) {
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 		+			(promo.imageURL ? "<br /><img src='"+ promo.imageURL +"' class='small'/>" : "")
 		+ 	"<div id='"+ divId +"-details' class='small-12 columns' style='text-align: left;'>"
-		+ 		"<b>Promo #"+promo.promo_id +"</b> "+ pencil +"<br />"
+		+ 		"<b>Promo #"+promo.id +"</b> "+ pencil +"<br />"
 		+			promo.name +"<br />"
 		+			promo.description +"<br />"
 		+			"Amount: "+ promo.amount.toFixed(2) +'<br />'
 		+			"Expires: "+ promo.expires +"<br />"
-		+			"Promo Link: "+ promo.infoURL +"<br />"
+		+			"Promo Link: <a href='"+ promo.infoURL +"' target='Promo Ad'>"+ promo.infoURL +"</a><br />"
 		+			"Pay Link: <a href='"+ promo.payLink +"'>"+ promo.payLink +"</a><br />"
 		+			"Created: "+ date[1] +'/'+ date[2] +"/"+ date[0]
 		+		"</div>"
 		+		"<div id='"+ divId +"-relay' class='small-12 columns promoLimits' style='text-align: left; margin-bottom:10px;'>"
-		+			"<b>Usage Limits per Week:</b> "+ (promo['relay-edit'] ? pencil : "") +"<br />"
+		+			"<b>Usage Limits per Week:</b> "+ (promo.relay.edit ? pencil : "") +"<br />"
 		+			"Total: "+ promo.by_all_limit +', By Brand: '+ promo.by_brand_limit +', By User: '+ promo.by_user_limit + "<br />"
 		+ 		"A user must wait "+ promo.by_user_wait +" hour(s) before reusing"
 		+		"</div>"
@@ -71,7 +71,7 @@ function adminPromos(api) {
 	
 	function setHolderIdOpt(acct) {
 		if (acct.account.authcode.search('x')!=-1 && acct.account.sign==-1) $('#promos-holder_id').append(
-			"<option value='"+ acct.holder_id +"'>"+ acct.account.name +", brand "+ acct.account.brand.name +", Bal: "+ acct.account.balance +"</option>"
+			"<option value='"+ acct.id +"'>"+ acct.account.name +", brand "+ acct.account.brand.name +", Bal: "+ acct.account.balance +"</option>"
 		);
 	}
 	
@@ -94,12 +94,12 @@ function adminPromos(api) {
 		
 		var type = divId.split('-').pop();
 		var promo = app.resources[divId];
-		$('#promos-promo_id').val(promo.promo_id);
+		$('#promos-id').val(promo.id);
 		
-		if (type=='relay' && promo['relay-edit']) {
+		if (type=='relay' && promo.relay.edit) {
 			$('#promoHolderIdDiv, #promoDetailsDiv').css('display','none');
 			$('#promoID-formDiv, #promoRelayDiv').css('display','block');
-			app.forms(divId, 'promos', '/form/relay-edit', null, promo['relay-edit-target']);
+			app.forms(promo.relay, 'promos', '/form/relay-edit');
 		}
 		else if (type=='details') {
 			$('#promoHolderIdDiv, #promoRelayDiv').css('display','none');

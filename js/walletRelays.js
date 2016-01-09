@@ -20,14 +20,14 @@ function walletRelays(api) {
 	}
 	
 	
-	function setTitle(acct) {
-		var	alias = acct.alias ? acct.alias : acct.account_name,
-			acctname = alias==acct.account_name ? "" : acct.account_name;
+	function setTitle(acct) { console.log(acct);
+		var	alias = acct.alias ? acct.alias : acct.account.name,
+			acctname = alias==acct.account.name ? "" : acct.name;
 			
 		return	"<div id='acctRelayTitle' class='row'>"
 		+ "<div class='small-8 columns acctLabel'>"
 		+ 	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+alias+"</span><br />"
-		+    "<span style='font-weight:normal;'>&nbsp;#"+acct.account_id +' '+acctname+"</span>"
+		+    "<span style='font-weight:normal;'>&nbsp;#"+acct.id +' '+acctname+"</span>"
 		+	"</div>"
 		+ "<div class='small-4 columns acctBal' style='text-align:right;'>"
 		+		"<button id='relayAdd' class='right tiny' style='margin:0;'>+New Relay</button>"
@@ -47,7 +47,7 @@ function walletRelays(api) {
 	}
 	
 	function listRelay(relay) {
-		var divId = 'relay-'+relay.relay_id;
+		var divId = 'relay-'+relay.id;
 		app.resources[divId] = relay;
 		
 		$('#relaysWrapper').append(
@@ -93,7 +93,7 @@ function walletRelays(api) {
 		}
 		
 		if (e.target.id.slice(-5)=='-edit') {
-			app.edit(e.target.id.slice(0,-5)); 
+			app.edit(e.target.id); 
 			return;
 		}		
 	}

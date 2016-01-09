@@ -8,7 +8,7 @@ function walletEdit(api) {
 			action = arr.length==3 ? arr.pop() : "", 
 			recordDivId = arr.join("-");
 				
-		currResource = app.resources[recordDivId]; //console.log(currId); console.log(currResource);		
+		currResource = app.resources[recordDivId];
 		currAction = action;
 		
 		renderAcctForm(action);
@@ -38,8 +38,8 @@ function walletEdit(api) {
 		}
 		
 		currForm = currResource['@type']=='holderRelays' 
-			? api.byId[currResource['relay-add']]
-			: api.byId[currResource['relay-edit']];
+			? api.byId[currResource['add']]
+			: api.byId[currResource['edit']];
 			
 		if (currForm) {
 			currInputs = currForm.inputs.required.concat(currForm.inputs.optional);

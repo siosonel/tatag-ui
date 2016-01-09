@@ -48,13 +48,13 @@ function adminMain(conf) {
 			.then(setListeners)
 			.then(function (resp) {
 				api.byAudience('my-me')
-					.byAudience('my-brands')
+					.byAudience('my-issuers')
 			}, main.errHandler);
 	}
 	
 	function setListeners(root) {
 		api.addListener('my-me', setUser)
-			.addListener('my-brands', main.brands);
+			.addListener('my-issuers', main.brands);
 	}
 	
 	function main(otherWrapper) {

@@ -4,10 +4,10 @@ function adminForms(api) {
 	var currAreaCode = 206;
 	var dateInputs = ['ended', 'joined', 'revoked'];
 
-	function main(div, type, formURL, altType, altFormTarget) {
+	function main(div, type, form, altType, altFormTarget) {
 		currResource = typeof div=='string' ? app.resources[div] : div;
 		currType = type;
-		currForm = api.byId[formURL];
+		currForm = typeof form=='string' ? api.byId[form] : form;
 		currAltType = altType ? altType : "";
 		currForm.target = arguments.length==5 ? altFormTarget : null;		
 		
