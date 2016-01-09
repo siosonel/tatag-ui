@@ -22,7 +22,7 @@ function adminMemberHoldings(api) {
 			"<div class='row subLabel'>"
 			+		"<div class='columns small-8'>"
 			+	 		"<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currResource.name+" accounts, </span>"
-			+ 		"<span style='font-weight:normal;'>&nbsp; member#"+ currResource.member_id +"</span>"
+			+ 		"<span style='font-weight:normal;'>&nbsp; member#"+ currResource.id +"</span>"
 			+		"</div>"
 			+		"<div class='columns small-4'>"
 			+	 		"<button id='addAccountHolding' class='right tiny' style='margin:0;'>+New Accountholding</button>"
@@ -46,14 +46,14 @@ function adminMemberHoldings(api) {
 	
 	function renderItem(holder) {
 		var date = holder.created.split(' ')[0].split('-');
-		var divId = 'memberHolding-'+ holder.holder_id;
+		var divId = 'memberHolding-'+ holder.id;
 		app.resources[divId] = holder;
 		
 		$('#memberHoldingsWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		holder.name+"<br />#"+holder.account_id
+			+ 		holder.account.name+"<br />#"+holder.account.id
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"
 			+ 		holder.authcode +"&nbsp; <span class='fi-pencil small'></span>"

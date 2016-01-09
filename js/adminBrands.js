@@ -33,7 +33,7 @@ function adminBrands(api) {
 	}
 	
 	function renderBrandDiv(brand) { //console.log(brand);
-		var tally = brand.tally, brandDivId='brand-'+brand.brand_id;		
+		var tally = brand.tally, brandDivId='brand-'+brand.id;		
 		app.resources[brandDivId] = brand;
 	
 		var b = main.brandColors(brandDivId, brand);
@@ -45,7 +45,7 @@ function adminBrands(api) {
 			+			b.logo
 			+ 		"<span style='vertical-align:top'>&nbsp;"+brand.name+"&nbsp;</span>"
 			+			"<span id='"+brandDivId+"-edit' class='fi-pencil small' style='display:none'></span><br />"
-			+     "<span id='"+ brandDivId +"-name' style='font-weight:normal;'>&nbsp;#"+ brand.brand_id +"</span>"
+			+     "<span id='"+ brandDivId +"-name' style='font-weight:normal;'>&nbsp;#"+ brand.id +"</span>"
 			+		"</div>"
 			+ 	"<div class='small-4 columns brandAbout' id='"+brandDivId+"-about'>"
 			+ 		"About &#9658;"
@@ -85,7 +85,7 @@ function adminBrands(api) {
 		
 		function main(divId, obj) { 
 			if (!colorIndex[divId]) {
-				var i = obj.brand_id % 11;
+				var i = obj.id % 11;
 				colorIndex[divId] = {
 					logoBg: colors[i],
 					divBg: colors[11-i].replace("rgb", "rgba").replace(")", ",0.4)"),

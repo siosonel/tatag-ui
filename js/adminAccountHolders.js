@@ -22,7 +22,7 @@ function adminAccountHolders(api) {
 			"<div class='row subLabel'>"
 			+	"<div class='columns small-8'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currResource.name+" holders, </span>"
-			+  "<span style='font-weight:normal;'>&nbsp; account#"+ currResource.account_id +"</span>"
+			+  "<span style='font-weight:normal;'>&nbsp; account#"+ currResource.id +"</span>"
 			+	"</div>"
 			+	"<div class='columns small-4'>"
 			+	 "<button id='addAccountHolder' class='right tiny' style='margin:0;'>+New Accountholder</button>"
@@ -39,12 +39,14 @@ function adminAccountHolders(api) {
 	}
 	
 	function renderAccounts(holders) { 
-		currCollection = holders;
+		currCollection = holders; 
 		holders.holder.map(renderItem);
 		app.adjustHeight();
 	}
 	
-	function renderItem(holder) {
+	function renderItem(holder) { 
+		if (typeof holder.user=='string') holder.user = app.api.byId[holder.user];
+		
 		var date = holder.created.split(' ')[0].split('-');
 		var divId = 'accountHolder-'+ holder.holder_id;
 		app.resources[divId] = holder;
@@ -53,7 +55,7 @@ function adminAccountHolders(api) {
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		holder.name+"<br />#"+holder.account_id
+			+ 		holder.user.name+"<br />#"+holder.id
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"
 			+ 		holder.authcode +"&nbsp; <span class='fi-pencil small'></span>"

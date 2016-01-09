@@ -22,7 +22,7 @@ function adminAccounts(api) {
 			"<div class='row subLabel'>"
 			+	"<div class='columns small-8'>"
 			+  	"<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" accounts, </span>"
-			+  	"<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			+  	"<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.id +"</span>"
 			+	"</div>"
 			+	"<div class='columns small-4'>"
 			+	 	"<button id='addAccount' class='right tiny' style='margin:0;'>+New Account</button>"
@@ -46,14 +46,14 @@ function adminAccounts(api) {
 	
 	function renderItem(account) {
 		var date = account.created.split(' ')[0].split('-');
-		var divId = 'acct-'+ account.account_id;
+		var divId = 'acct-'+ account.id;
 		app.resources[divId] = account;
 		
 		$('#accountsWrapper').append(
 			"<div id='"+divId+"' class='row brandItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"<br/>"+ date[0] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		account.name+"<br />#"+account.account_id+', '+ account.authcode +'&nbsp;'
+			+ 		account.name+"<br />#"+account.id+', '+ account.authcode +'&nbsp;'
 			+			(account.throttle_id ? "<span>, throttle #"+account.throttle_id+"&nbsp;</span>" : "")
 			+			"<span class='fi-pencil small'>&nbsp;</span><br />"
 			+			"<span href='"+account.holders+"' style='text-decoration:underline'>holders</span>"
