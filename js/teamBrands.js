@@ -40,7 +40,7 @@ function teamBrands(api) {
 		app.resources[brandDivId] = brand;
 		app.resources[brandDivId+'-membership'] = membership;
 		
-		var b = main.brandColors(brandDivId, brand); console.log(b)
+		var b = main.brandColors(brandDivId, brand);
 		
 		$('#brandsWrapper').append(
 			"<div class='small-12 brandItem' id='"+brandDivId+"' style='background-color: "+ b.divBg +"'>"
