@@ -16,13 +16,13 @@ set -e
 if (($# == 1)); then
 	AUDIENCE=$1
 	ENV="stage"
-	REV="head"
+	REV="HEAD"
 	OPT=""
 
 elif (($# == 2)); then
 	AUDIENCE=$1
 	ENV=$2
-	REV="head"
+	REV="HEAD"
 	OPT=""
 
 elif (($# == 3)); then
@@ -38,7 +38,7 @@ elif (($# == 4)); then
 	OPT=$4	
 	
 else
-	echo "Use: From project root, tools/deploy.sh APP_NAME AUDIENCE [ENVIRONMENT=stage] [REVISION_NUM=head] [OPT]"
+	echo "Use: From project root, tools/deploy.sh APP_NAME AUDIENCE [ENVIRONMENT=stage] [REVISION_NUM=HEAD] [OPT]"
 	exit 1
 
 fi
@@ -46,6 +46,7 @@ fi
 # deploy environments are declared and explained in $APP/tools/deploy_env.sh file
 # note the dot at the start of the following line to keep vars in global context 
 . ./tools/deploy_env.sh
+USER="root"
 
 echo "Processing build-deploy request of $APP $AUDIENCE, $REV, to $ENV."
 
@@ -79,7 +80,7 @@ BUILD="tools/builds/$buildrev"
 
 if [[ ! -f $BUILD.tar.gz || "$OPT" == "-f" ]]; then 
 	echo "building tar ... "
-	tools/build.sh $USER $AUDIENCE $REV "$build_delete" $BUILD
+	. tools/build.sh $USER $AUDIENCE $REV "$build_delete" $BUILD
 fi
 
 

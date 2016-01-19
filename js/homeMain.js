@@ -182,5 +182,9 @@ function homeMain(conf) {
 	main.completer = completer;
 	main.currView = 'about';
 	
+	main.isLoggedOn = function () {
+		return conf.userid != 0;
+	}
+	
 	return main;
 }

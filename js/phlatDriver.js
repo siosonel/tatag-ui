@@ -22,7 +22,7 @@ function phlatDriver(api, concept, path) {
 		var alt = api.applyHints(url), origURL = url;
 		if (alt) url = alt;
 		
-		if (url && typeof url != 'string') {
+		if (url && typeof url != 'string' && (!("@id" in url || url['@id'] in api.byId))) { //considers cache invalidation
 			processServerResponse(url);
 		}
 		else if (!url) {  if (alt) console.log(['null url', url]);
@@ -40,6 +40,7 @@ function phlatDriver(api, concept, path) {
 			api.inprocess[url].push(processServerResponse);
 		} 
 		else {
+			if (typeof url!='string') url = url['@id'];
 			api.inprocess[alt ? origURL : url] = [];
 			
 			$.ajax({

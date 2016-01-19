@@ -30,7 +30,7 @@ function homePromos(api) {
 		);
 	}
 	
-	function renderRatings(promos) { console.log(promos);
+	function renderRatings(promos) {
 		currCollection = promos;
 		promos.items.map(renderItem);
 		if (main.postRenderFxn) {
@@ -82,16 +82,20 @@ function homePromos(api) {
 	
 	function setHolderIdOpt(acct) {
 		if (acct.account.authcode.search('x')!=-1 && acct.account.sign==-1) $('#promos-holder_id').append(
-			"<option value='"+ acct.holder_id +"'>"+ acct.account.name +", brand "+ acct.account.brand.name +", Bal: "+ acct.account.balance.toFixed(2) +"</option>"
+			"<option value='"+ acct.id +"'>"+ acct.account.name +", brand "+ acct.account.brand.name +", Bal: "+ acct.account.balance.toFixed(2) +"</option>"
 		);
 	}
 	
 	main.clickHandler = function (e) {	
 		if (e.target.id=='addPromo') { 
+			if (!app.isLoggedOn()) { 
+				location.href = location.origin + location.pathname + '?login=1'; return;
+			}
+
 			$('#promoID-formDiv').css('display','none');
 			$('#promoDetailsDiv, #promoRelayDiv, #promoHolderIdDiv').css('display','block');
 			
-			app.api.loadConcept('my-holding').then(function (res) {console.log(res); 
+			app.api.loadConcept('my-holding').then(function (res) {
 				res.map(function (r) {
 					if (typeof r=='string') api.loadId(r).then(setHolderIdOpt, app.errHandler)
 					else setHolderIdOpt(r);

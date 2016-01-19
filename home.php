@@ -225,7 +225,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					</div>						
 					<div class='row'>
 						<div class='columns small-12'>
-							<label>Link<input type='text' id='promos-iinfoURL' value='' /></label>
+							<label>Link<input type='text' id='promos-infoURL' value='' /></label>
 						</div>
 					</div>
 				</div>

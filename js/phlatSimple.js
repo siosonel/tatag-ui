@@ -4,6 +4,7 @@ function phlatSimple(conf) {
 	var	_id = conf._id ? conf._id : "@id";
 	var	_type = conf._type ? conf._type : "@type";			
 	var byId = {}, byType = {}, byConcept={};
+	var requestedIds = {};
 	var curr={}, hints={};
 	var linkTerms = [];
 	var omniListener = function (resp) {}; //function (resp) {console.log(resp)};
@@ -223,12 +224,13 @@ function phlatSimple(conf) {
 				url: conf.baseURL + action.target + params,
 				type: action.method,
 				headers: headers,
+				cache: false,
 				dataType: 'json',
 				contentType: 'json',
 				data: JSON.stringify(action.inputs),
 				success: function (res) {
 					//perform cache invalidation for non-get requests					
-					if (action.method != 'get') {
+					if (action.method.toLowerCase() != 'get') { //console.log('deleting cached resource')
 						delete byId[action.target + params];
 						delete byId[conf.baseURL + action.target + params];
 					}
@@ -251,8 +253,8 @@ function phlatSimple(conf) {
 		}
 				
 		return deferred.promise;
-	}	
-	
+	}
+
 	main.baseURL = conf.baseURL;
 	main.byId = byId;
 	main.byType = byType;	

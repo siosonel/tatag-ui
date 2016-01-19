@@ -14,7 +14,7 @@ function teamBrands(api) {
 			.then(renderBrands, app.errHandler);	
 	}
 	
-	function renderBrands(memberships) {
+	function renderBrands(memberships) { //console.log(memberships)
 		numRendered=0;
 		currMemberships = memberships;
 		currMemberships.map(getTeam);
@@ -22,18 +22,25 @@ function teamBrands(api) {
 	
 	function getTeam(m,i) {
 		currTeam[m.team] = m;
-		api.loadId(m.team).then(renderBrandDiv, app.errHandler);
+		//api.loadId(m.team, !api.byId[m.team] || typeof api.byId[m.team].tally=='string').then(renderBrandDiv, app.errHandler);
+
+		api.loadId(m.team)
+			.then(function (team) {
+				return api.loadId(team.tally)
+			})
+			.then(renderBrandDiv, app.errHandler)
 	}
 	
-	function renderBrandDiv(brand) {
+	function renderBrandDiv(tally) {
+		var brand = typeof tally.brand=='string' ? api.byId[tally.brand] : tally.brand;
 		numRendered++;
 		
-		var tally = brand.tally, brandDivId='brand-'+brand.id;
+		var brandDivId='brand-'+brand.id;
 		var membership = currTeam[brand['@id']];
 		app.resources[brandDivId] = brand;
 		app.resources[brandDivId+'-membership'] = membership;
 		
-		var b = main.brandColors(brandDivId, brand);
+		var b = main.brandColors(brandDivId, brand); console.log(b)
 		
 		$('#brandsWrapper').append(
 			"<div class='small-12 brandItem' id='"+brandDivId+"' style='background-color: "+ b.divBg +"'>"
@@ -60,22 +67,22 @@ function teamBrands(api) {
 			+ "</div>"
 			
 			+	"<div id='"+brandDivId+"-members'>"
-			+ 	"<b>Memberships</b>"
-			+ 	"<div>Total: "+ tally.numMembers +" members, "+ tally.totalMemberHours +" hours/week &#9658;</div>"
+			+ 		"<b>Memberships</b>"
+			+ 	"	<div>Total: "+ tally.numMembers +" members, "+ tally.totalMemberHours +" hours/week &#9658;</div>"
 			+	"</div>"
 			+	"<div id='"+brandDivId+"-accounts'>"
-			+ 	"<b>Accounts</b>"
-			+ 	"<div>Budgets: -"+ tally.revBudget +" rev., "+ tally.expBudget +" expense &#9658;</div>"
+			+ 		"<b>Accounts</b>"
+			+ 		"<div>Budgets: -"+ tally.revBudget +" rev., "+ tally.expBudget +" expense &#9658;</div>"
 			+	"</div>"
 			+	"<div id='"+brandDivId+"-records'>"
-			+ 	"<b>Transactions</b>"
-			+ 	"<div>Added="+ tally.addedBudget +", In="+ tally.inflow +", Out="+ tally.outflow +" &#9658;</div>"
+			+ 		"<b>Transactions</b>"
+			+ 		"<div>Added="+ tally.addedBudget +", In="+ tally.inflow +", Out="+ tally.outflow +" &#9658;</div>"
 			+	"</div>"
 			+	"<div id='"+brandDivId+"-promos'>"
-			+ 	"<b>Promos &#9658;</b>"
+			+ 		"<b>Promos &#9658;</b>"
 			+	"</div>"
 			+	"<div id='"+brandDivId+"-throttles'>"
-			+ 	"<b>Throttles &#9658;</b>"
+			+ 		"<b>Throttles &#9658;</b>"
 			+	"</div>"
 			+"</div>"
 		);

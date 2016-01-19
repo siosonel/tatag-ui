@@ -30,7 +30,7 @@ if (isset($_GET['token_id']) AND is_numeric($_GET['token_id']) AND isset($_GET['
 $handler = trim($_GET['_url'], " \/\\\t\n\r\0\x0B");
 
 if (isset($_GET['for']) AND $_GET['for']) $handler = "wallet";  
-else if (!$handler OR strpos($handler,'home')!==false) $handler='home'; 	
+else if (!$handler) $handler = 'home'; //OR strpos($handler,'home')!==false) $handler='home'; 	
 else if (strpos($handler,'wallet')!==false OR strpos($handler,'pay')!==false) $handler='wallet';
 
 if (( /*SITE!='dev' //require login prior to public alpha release
@@ -55,7 +55,7 @@ if (( /*SITE!='dev' //require login prior to public alpha release
 	if (isset($_GET['note'])) $nextParams[] = 'note='. $_GET['note'];
 	$nextParams = implode("&", $nextParams);
 	
-	$next = urlencode(UI_DOMAIN."/$handler?$nextParams");
+	$next = urlencode(UI_DOMAIN."$_GET[_url]?$nextParams");
 	$location = TATAG_DOMAIN ."/login.php?token_id=$token_id&otk=$otk";
 	$provider = isset($_GET['provider']) ? $_GET['provider'] : ''; //exit($next);
 	
