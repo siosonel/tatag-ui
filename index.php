@@ -30,7 +30,7 @@ if (isset($_GET['token_id']) AND is_numeric($_GET['token_id']) AND isset($_GET['
 $handler = trim($_GET['_url'], " \/\\\t\n\r\0\x0B");
 
 if (isset($_GET['for']) AND $_GET['for']) $handler = "wallet";  
-else if (!$handler) $handler = 'home'; //OR strpos($handler,'home')!==false) $handler='home'; 	
+else if (!$handler OR strpos($handler,'home')!==false) $handler='home'; 	
 else if (strpos($handler,'wallet')!==false OR strpos($handler,'pay')!==false) $handler='wallet';
 
 if (( /*SITE!='dev' //require login prior to public alpha release

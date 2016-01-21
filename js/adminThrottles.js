@@ -22,7 +22,7 @@ function adminThrottles(api) {
 			"<div class='row subLabel'>"
 			+	"<div class='columns small-8'>"
 			+  	"<span style='vertical-align:top; font-weight: 700;'>&#9668; "+currBrand.name+" throttles, </span>"
-			+  	"<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			+  	"<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.id +"</span>"
 			+	"</div>"
 			+	"<div class='columns small-4'>"
 			+	 	"<button id='addThrottle' class='right tiny' style='margin:0;'>+New Throttle</button>"

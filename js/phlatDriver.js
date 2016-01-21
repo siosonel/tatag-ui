@@ -83,7 +83,7 @@ function phlatDriver(api, concept, path) {
 			else main(payload.filter(matchResource)[0]);
 		}
 		else {		
-			api.extendHints(resp);
+			api.extendHints(resp); 
 			for(var id in api.byId) api.linkToCachedInstance(api.byId[id]);
 		
 			var data = Array.isArray(container[path[pathIndex]]) ? payload: resource; 

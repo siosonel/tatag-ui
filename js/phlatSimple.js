@@ -93,12 +93,12 @@ function phlatSimple(conf) {
 				else if (t!==null && typeof t=='object' && '@id' in t && t['@id'] in byId) {
 					resource[term] = byId[t['@id']];
 				}
-				else if (Array.isArray(resource[term])) {
-					for(var i=0; i< t.length; i++) {
-						if (typeof t[i] == 'string' && t[i] in byId) resource[term][i] = byId[t[i]];
-						else if (t[i]!==null && typeof t[i]=='object' && '@id' in t[i] && t['@id'] in byId) {
-							resource[term][i] = byId[t[i]['@id']];
+				else if (Array.isArray(resource[term])) { 
+					for(var j=0; j<resource[term].length; j++) {
+						if (typeof resource[term][j]=='string') {
+							if (byId[resource[term][j]]) resource[term][j] = byId[resource[term][j]]; 
 						}
+						else linkToCachedInstance(resource[term][j]);
 					}
 				}
 			}

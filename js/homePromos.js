@@ -67,7 +67,7 @@ function homePromos(api) {
 			+ 	"<div class='promoItem'>"
 			+			image
 			+ 		pencil +"<span class='promoTitle'><b>"+ promo.name.substr(0,100) +"</b></span><br />"
-			+ 		"<span class='tiny promoTitle'>By: "+ promo.brand_name +"</span><br />"
+			+ 		"<span class='tiny promoTitle'>By: "+ promo.brand.name +"</span><br />"
 			+			"<button id='pay-"+ promo.promo_id +"' class='tiny' style='margin-bottom: 0.25rem;'>"+ promo.amount.toFixed(2) +" XTH</button><br />"
 			+			"<span class='morePrompt'>"+ promo.description.substr(0, 49) + dots + "<br />(more)</span>"
 			// +			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a><br />" : "")
@@ -140,7 +140,7 @@ function homePromos(api) {
 		}
 		else if (!promo['promo-edit'] || !targetCls) return; 
 		
-		$('#promos-brand_id').prop('disabled',true).val(promo.brand_name);
+		$('#promos-brand_id').prop('disabled',true).val(promo.brand.name);
 		app.forms(divId, 'promos', promo.edit);
 	}
 	
