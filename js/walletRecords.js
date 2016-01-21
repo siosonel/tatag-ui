@@ -27,7 +27,7 @@ function walletRecords(api) {
 		return	"<div id='acctRecordTitle' class='row'>"
 		+ "<div class='small-8 columns acctLabel'>"
 		+ 	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+alias+"</span><br />"
-		+    "<span style='font-weight:normal;'>&nbsp;#"+acct.account.account_id +' '+acctname+"</span>"
+		+    "<span style='font-weight:normal;'>&nbsp;#"+acct.account.id +' '+acctname+"</span>"
 		+	"</div>"
 		+ "<div class='small-4 columns acctBal' style='text-align:right;'>"
 		+ 	(acct.account.sign*acct.account.balance).toFixed(2) + "&nbsp;&nbsp;<br />"

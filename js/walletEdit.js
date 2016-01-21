@@ -23,7 +23,7 @@ function walletEdit(api) {
 			$('#editBudget').css('display','none'); return;
 		}
 		
-		currForm = api.byId[currResource['holder-edit']];
+		currForm = typeof currResource.edit=='string' ? api.byId[currResource.edit] : currResource.edit;
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
 		$('#edit-alias').val(currResource.alias);
 		$('#edit-limkey').val(currResource.limkey);		
