@@ -20,7 +20,7 @@ function walletRelays(api) {
 	}
 	
 	
-	function setTitle(acct) { console.log(acct);
+	function setTitle(acct) {
 		var	alias = acct.alias ? acct.alias : acct.account.name,
 			acctname = alias==acct.account.name ? "" : acct.name;
 			
