@@ -15,7 +15,7 @@ $shortTitle =  substr($promo->name,0,80);
 $shortDesc =  substr($promo->description,0,120);
 $amount = number_format($promo->amount, 2, ".", ",");
 
-$metaDescription = "By $promo->brand_name, $amount XTE for $promo->recipientToken. $shortDesc ...";
+$metaDescription = "By $promo->brand_name, $amount XTE for $promo->code. $shortDesc ...";
 
 $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 ?><html>
@@ -104,7 +104,7 @@ $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 		<button class='small' onclick='checkout()'>$amount XTE</button>
 		<p>$promo->description</p>
 		
-		<p>Recipient token: <a href='$promo->payLink'>$promo->recipientToken</a>.</p>
+		<p>Recipient token: <a href='$promo->payURL'>$promo->code</a>.</p>
 		
 		<p><b>Promo code usage limits per week:</b><br />
 		$promo->by_user_limit per user, $promo->by_brand_limit by brand, $promo->by_all_limit total.<br /> 
@@ -134,7 +134,7 @@ $h = strlen($promo->name) > 80 ? 'h4' : 'h3';
 	});*/
 	
 	function checkout() {
-		window.open("<?php echo $promo->payLink ?>");
+		window.open("<?php echo $promo->payURL ?>");
 	}
 	
 	function reload(target) {	

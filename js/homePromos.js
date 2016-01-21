@@ -111,8 +111,8 @@ function homePromos(api) {
 		else if (e.target.id && e.target.id.substr(0,4)=='pay-') { 
 			var promo = app.resources[e.target.parentNode.parentNode.id]; //console.log(promo);
 			var postPayURL = encodeURIComponent(homeURL + "/home-promos?{record_id}&{promo_id}"); //console.log(postPayURL);
-			var sep = promo.payLink.search(/\?/)==-1 ? '?' : '&';
-			window.open(promo.payLink + sep + "postPayURL=" + postPayURL);
+			var sep = promo.payURL.search(/\?/)==-1 ? '?' : '&';
+			window.open(promo.payURL + sep + "postPayURL=" + postPayURL);
 			
 			return;
 		}
