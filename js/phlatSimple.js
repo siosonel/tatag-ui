@@ -60,21 +60,23 @@ function phlatSimple(conf) {
 		if (d.linkTerms) linkTerms = linkTerms.concat(d.linkTerms);
 	}
 	
+	//must be called before linkToCachedInstance
 	function refreshItems(id, d) {			
 		if (!d.items || !(id in hints) || !( 'refresh' in hints[id])) return;
 		
 		var cachedResource = byId[id];
+		var cachedItems = [];
+		for(var j=0; j<cachedResource.items.length; j++) {
+			cachedItems.push(typeof cachedResource.items[j] == 'string' ? cachedResource.items[j] : cachedResource.items[j]['@id']);
+		}
 		
-		d.items.reverse();
-		
-		if (!Array.isArray(cachedResource.items)) cachedResource.items = [];
 		for(var i=0; i<d.items.length; i++) {
-			if (cachedResource.items.indexOf(d.items[i])==-1) cachedResource.items.unshift(d.items[i]);
+			if (cachedItems.indexOf(d.items[i])==-1) cachedResource.items.unshift(d.items[i]);
 		}
 
 		if (cachedResource.collectionOf) cachedResource[cachedResource.collectionOf] = cachedResource.items;
-		d.items = cachedResource.items;
-		//delete d.items;
+		d.items = cachedResource.items; //prevents overriding cacheResource.items with d.items when $.extend is used in indexGraph
+		//delete d.items; 
 	}
 	
 	function deprecatedSupport(d) {
@@ -105,8 +107,12 @@ function phlatSimple(conf) {
 		}
 	}
 	
-	function applyHints(url) {
-		if (url in hints && 'refresh' in hints[url]) return hints[url].refresh;
+	function applyHints(r) {
+		if (!r) return;
+		var url = typeof r=='string' ? r : r['@id'];
+		if (url in hints && 'refresh' in hints[url]) {
+			return hints[url].refresh;
+		}
 	}
 	
 	function extendHints(res) {
@@ -137,8 +143,8 @@ function phlatSimple(conf) {
 		return main.loadId(rootURL);
 	}
 		
-	main.loadType = function (type, refresh) {
-		if (!byType[type] || refresh) {
+	main.loadType = function (type) {
+		if (!byType[type]) {
 			var url = byId[rootURL][type];
 			return main.loadId(url, true);
 		}
@@ -149,7 +155,7 @@ function phlatSimple(conf) {
 		}
 	}	
 	
-	main.loadId = function (url, refresh) {
+	main.loadId = function (url) {
 		var deferred = Q.defer();
 		
 		if (url && typeof url!='string') {
@@ -161,10 +167,10 @@ function phlatSimple(conf) {
 		}
 		
 		var alt = applyHints(url);
-		if (alt) url = alt;
+		if (alt) url = alt; if (alt) console.log(url);
 		
 		if (!url) deferred.reject(new Error('Blank url.'));
-		else if (url in byId && !refresh && !alt) deferred.resolve(byId[url]); // console.log("          (cache:"+url+")");}
+		else if (url in byId && !alt) deferred.resolve(byId[url]);
 		else $.ajax({
 			url: url.substr(0,1)=='/' ? url : conf.baseURL + url,
 			headers: headers,
@@ -180,7 +186,7 @@ function phlatSimple(conf) {
 										
 					res['@graph'].map(indexGraph);
 					for(var id in byId) linkToCachedInstance(byId[id]);
-					deferred.resolve(res['@graph'][0]);
+					deferred.resolve(res['@graph'][0].pageOf ? byId[res['@graph'][0].pageOf] : res['@graph'][0]);
 				}
 				
 				omniListener();
@@ -194,13 +200,12 @@ function phlatSimple(conf) {
 		return deferred.promise;
 	}
 	
-	main.deref = function (link, refresh) {
+	main.deref = function (link) {
 		var promises = [];
-		if (!refresh) refresh=null;
 		
-		if (typeof link=='string') promises.push(main.loadId(link, refresh));
+		if (typeof link=='string') promises.push(main.loadId(link));
 		else {				
-			for(var i=0; i<link.length; i++) {promises.push(main.loadId(link[i], refresh));}
+			for(var i=0; i<link.length; i++) {promises.push(main.loadId(link[i]));}
 		}
 		
 		return Q.all(promises);

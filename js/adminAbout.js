@@ -14,7 +14,7 @@ function adminAbout(api) {
 		$('#aboutWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh()).then(renderResource, app.errHandler)
+		api.loadId(url).then(renderResource, app.errHandler)
 	}
 	
 	function setTitle() {

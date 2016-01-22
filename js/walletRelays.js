@@ -16,7 +16,7 @@ function walletRelays(api) {
 		$('#relaysWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh()).then(renderRelays, app.errHandler)
+		api.loadId(url).then(renderRelays, app.errHandler)
 	}
 	
 	

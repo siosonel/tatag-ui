@@ -1,36 +1,36 @@
 function walletRecords(api) {
-	 var currRecordId, currAcct, currCollection;
+	 var currRecordId, currHolding, currCollection;
 	 var maxHeight = '250px';
 	 var scrollTo="";
 
-	function main(acct) {
-		if (acct) currAcct = acct;
-		if (!currAcct || app.currView != 'records') return;
+	function main(holding) {
+		if (holding) currHolding = holding;
+		if (!currHolding || app.currView != 'records') return;
 		app.currView = 'records';
 			
 		$('#recordsWrapper').children().remove();
-		$('#recordsWrapper').append(setTitle(currAcct))
+		$('#recordsWrapper').append(setTitle(currHolding))
 		
 		$('#accountsWrapper').animate({left: '-105%'});
 		$('#recordsWrapper').animate({left: '0'});
 		
-		var match = {"#": "items", "holder_id": acct.holder_id};
+		var match = {"#": "holding", "id": holding.id};
 		
 		//refresh info as needed using refresh argument 
 		api.loadConcept('my-account-records', match).then(renderRecords, app.errHandler);
 	}
 	
-	function setTitle(acct) {
-		var	alias = acct.alias ? acct.alias : acct.account.name,
-			acctname = alias==acct.account.name ? "" : acct.account.name;
+	function setTitle(holding) {
+		var	alias = holding.alias ? holding.alias : holding.account.name,
+			acctname = alias==holding.account.name ? "" : holding.account.name;
 			
 		return	"<div id='acctRecordTitle' class='row'>"
 		+ "<div class='small-8 columns acctLabel'>"
 		+ 	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; "+alias+"</span><br />"
-		+    "<span style='font-weight:normal;'>&nbsp;#"+acct.account.id +' '+acctname+"</span>"
+		+    "<span style='font-weight:normal;'>&nbsp;#"+holding.account.id +' '+acctname+"</span>"
 		+	"</div>"
 		+ "<div class='small-4 columns acctBal' style='text-align:right;'>"
-		+ 	(acct.account.sign*acct.account.balance).toFixed(2) + "&nbsp;&nbsp;<br />"
+		+ 	(holding.account.sign*holding.account.balance).toFixed(2) + "&nbsp;&nbsp;<br />"
 		+ 	"<button class='tiny' style='float:right; margin:0 5px -5px 0;'><span class='fi-magnifying-glass'></span></div>"		
 		+ "</div>"
 		+ "</div>";

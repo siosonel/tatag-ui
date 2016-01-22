@@ -14,7 +14,7 @@ function homePromos(api) {
 		$('#promosWrapper').append(setTitle(currUser));
 
 		//refresh info as needed using second argument to loadId
-		api.loadConcept('public-promos', app.refresh()).then(renderRatings, app.errHandler);
+		api.loadConcept('public-promos').then(renderRatings, app.errHandler);
 	}
 	
 	function setTitle() {

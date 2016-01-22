@@ -14,7 +14,7 @@ function adminMemberHoldings(api) {
 		$('#memberHoldingsWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh()).then(renderAccounts, app.errHandler)
+		api.loadId(url).then(renderAccounts, app.errHandler)
 	}
 	
 	function setTitle() {

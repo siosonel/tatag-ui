@@ -11,7 +11,7 @@ function searchBrands(api) {
 		
 		$('button', '#brandsWrapper').remove(); //console.log(currURL); console.log(api.byId[currURL]);
 		
-		api.loadId(currURL, app.refresh())
+		api.loadId(currURL)
 			.then(renderBrands, app.errHandler);	
 	}
 	

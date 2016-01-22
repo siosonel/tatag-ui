@@ -12,7 +12,7 @@ function walletBudgets(api) {
 		$('#accountsWrapper').children().remove();
 		$('#expenseAcctToUse').children().remove();
 		
-		api.loadId(currURL, app.refresh())
+		api.loadId(currURL)
 			.then(renderBudgets, main.errHandler);		
 	}
 	

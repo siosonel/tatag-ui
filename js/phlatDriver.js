@@ -22,7 +22,7 @@ function phlatDriver(api, concept, path) {
 		var alt = api.applyHints(url), origURL = url;
 		if (alt) url = alt;
 		
-		if (url && typeof url != 'string' && (!("@id" in url || url['@id'] in api.byId))) { //considers cache invalidation
+		if (!alt && url && typeof url != 'string' && (!("@id" in url) || url['@id'] in api.byId)) { //considers cache invalidation
 			processServerResponse(url);
 		}
 		else if (!url) {  if (alt) console.log(['null url', url]);
@@ -39,7 +39,7 @@ function phlatDriver(api, concept, path) {
 			//path segment is used for different terms
 			api.inprocess[url].push(processServerResponse);
 		} 
-		else {
+		else {  console.log(url)
 			if (typeof url!='string') url = url['@id'];
 			api.inprocess[alt ? origURL : url] = [];
 			
@@ -77,7 +77,7 @@ function phlatDriver(api, concept, path) {
 		if (x!=-1) payload[x] = resource; //substitute link url with response object
 		
 		if (concurrent < links.length) {}
-		else if (pathIndex < path.length-1) { 
+		else if (pathIndex < path.length-1) {
 			pathIndex++;
 			if (!match || path[pathIndex-1] != match["#"]) main(payload[0]);
 			else main(payload.filter(matchResource)[0]);
@@ -86,8 +86,8 @@ function phlatDriver(api, concept, path) {
 			api.extendHints(resp); 
 			for(var id in api.byId) api.linkToCachedInstance(api.byId[id]);
 		
-			var data = Array.isArray(container[path[pathIndex]]) ? payload: resource; 
-			
+			var data = Array.isArray(container[path[pathIndex]]) ? payload: resource;
+			if (data.pageOf) data = api.byId[data.pageOf];  if (data.pageOf) console.log(data.items)
 			api.byConcept[concept] = data;
 			
 			//resolve the promise that was set via main.promise, as applicable
@@ -124,7 +124,7 @@ function phlatDriver(api, concept, path) {
 	
 	main.promise = function (matchFilter) {
 		match = matchFilter;
-		if (deferred) return deferred.promise;
+		//if (deferred) return deferred.promise;
 			
 		deferred = Q.defer();
 		setTimeout(main, 30);

@@ -14,7 +14,7 @@ function adminMembers(api) {
 		$('#membersWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh()).then(renderMembers, app.errHandler)
+		api.loadId(url).then(renderMembers, app.errHandler)
 	}
 	
 	function setTitle() {

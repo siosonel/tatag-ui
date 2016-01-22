@@ -14,7 +14,7 @@ function adminThrottles(api) {
 		$('#throttlesWrapper').animate({left: '0'});
 
 		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh()).then(renderThrottles, app.errHandler)
+		api.loadId(url).then(renderThrottles, app.errHandler)
 	}
 	
 	function setTitle() {

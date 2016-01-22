@@ -12,7 +12,7 @@ function homeRatings(api) {
 		$('#ratingsWrapper').append(setTitle(currUser));
 
 		//refresh info as needed using second argument to loadId
-		api.loadId(url, app.refresh()).then(renderRatings, app.errHandler);
+		api.loadId(url).then(renderRatings, app.errHandler);
 	}
 	
 	function setTitle() {
