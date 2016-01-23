@@ -53,7 +53,7 @@ function walletRecords(api) {
 		var divId = 'record-'+record.record_id;
 		app.resources[divId] = record;
 		
-		var relay = record.relay ? record.relay : {};
+		var relay = record.relayDefault ? record.relayDefault : {token:'', for:[]};
 		var actionPrompt = setActionPrompt(divId, record, relay, record);
 		var note = record.note ? record.note : "&nbsp;";
 		
@@ -61,7 +61,7 @@ function walletRecords(api) {
 			"<div id='"+divId+"' class='row recordItem' style='margin: 5px;'>"
 			+		"<div class='large-2 medium-2 small-2 columns'>"+ date[1] +'/'+ date[2] +"</div>"
 			+ 	"<div class='large-7 medium-7 small-7 columns' style='text-align: left; margin-bottom:10px;'>"
-			+ 		record.direction+' '+ other +'<br /><i>'+ note +'</i><br />record id: '+ record.record_id + actionPrompt
+			+ 		record.role+' '+ other +'<br /><i>'+ note +'</i><br />record id: '+ record.record_id + actionPrompt
 			+		"</div>"
 			+ 	"<div class='large-3 medium-3 small-3 columns' style='text-align: right;'>"
 			+     displayAmount(record) + displayAdvise(record) 
@@ -72,13 +72,13 @@ function walletRecords(api) {
 	}
 	
 	function setActionPrompt(divId, record, relay) {		
-		if (relay['unadd'] || record['unadd']) 
+		if (relay['for'].indexOf('unadd')!=-1 || record['unadd']) 
 			return "<br /><button class='tiny' id='"+divId+"-unadd' style='margin-top:5px;'>reverse</button>";
 			
-		if (relay['untransfer'] || record['untransfer']) 
+		if (relay['for'].indexOf('untransfer')!=-1 || record['untransfer']) 
 			return "<br /><button class='tiny' id='"+divId+"-untransfer' style='margin-top:5px;'>reverse</button>";
 		
-		if (relay['unuse'] || record['unuse']) 
+		if (relay['for'].indexOf('unuse')!=-1 || record['unuse']) 
 			return "<br /><button class='tiny' id='"+divId+"-unuse' style='margin-top:5px;'>reverse</button>";
 		
 		var prompt = "";
@@ -112,7 +112,7 @@ function walletRecords(api) {
 		
 		var amount = record.amount.toFixed(2);		
 		if (record.status!=7) {			
-			if ((record.direction=='from' && amount>0) || (record.direction=='to' && amount<0)) amount = '('+ amount +')';
+			if ((record.role=='from' && amount>0) || (record.role=='to' && amount<0)) amount = '('+ amount +')';
 			if (record.status==5) amount = '*'+amount; //highlight the need for manual approval, since auto-approval was disabled
 		}
 		

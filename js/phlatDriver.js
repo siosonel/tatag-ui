@@ -39,7 +39,7 @@ function phlatDriver(api, concept, path) {
 			//path segment is used for different terms
 			api.inprocess[url].push(processServerResponse);
 		} 
-		else {  console.log(url)
+		else {
 			if (typeof url!='string') url = url['@id'];
 			api.inprocess[alt ? origURL : url] = [];
 			
@@ -87,7 +87,7 @@ function phlatDriver(api, concept, path) {
 			for(var id in api.byId) api.linkToCachedInstance(api.byId[id]);
 		
 			var data = Array.isArray(container[path[pathIndex]]) ? payload: resource;
-			if (data.pageOf) data = api.byId[data.pageOf];  if (data.pageOf) console.log(data.items)
+			if (data.pageOf) data = api.byId[data.pageOf];
 			api.byConcept[concept] = data;
 			
 			//resolve the promise that was set via main.promise, as applicable

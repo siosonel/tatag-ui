@@ -68,13 +68,13 @@ function homePromos(api) {
 			+			image
 			+ 		pencil +"<span class='promoTitle'><b>"+ promo.name.substr(0,100) +"</b></span><br />"
 			+ 		"<span class='tiny promoTitle'>By: "+ promo.brand.name +"</span><br />"
-			+			"<button id='pay-"+ promo.promo_id +"' class='tiny' style='margin-bottom: 0.25rem;'>"+ promo.amount.toFixed(2) +" XTH</button><br />"
+			+			"<button id='pay-"+ promo.promo_id +"' class='tiny' style='margin-bottom: 0.25rem;'>"+ promo.amount.toFixed(2) +" XTE</button><br />"
 			+			"<span class='morePrompt'>"+ promo.description.substr(0, 49) + dots + "<br />(more)</span>"
 			// +			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a><br />" : "")
 			// +			(promo.expires ? "Expires: "+ promo.expires +'<br />' : "")
 			// + date[1] +'/'+ date[2] +"<br/>"+ date[0]
-			//+			'Recipient Token: <b>' + promo.relay['use'] +'</b><br />'
-			//+		"<span class='sharePrompt'>Share</span>"
+			// +			'Recipient Token: <b>' + promo.code +'</b><br />'
+			// +		"<span class='sharePrompt'>Share</span>"
 			+		"</div>"
 			+'</div>'
 		)

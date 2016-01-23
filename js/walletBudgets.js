@@ -37,17 +37,17 @@ function walletBudgets(api) {
 		}
 	}
 	
-	function renderAcctDiv(acct) {
-		if (typeof acct=='string') acct = api.byId[acct];
+	function renderAcctDiv(holding) {
+		if (typeof holding=='string') holding = api.byId[holding];
 	
-		var acctDivId = "acct-"+ acct.account.id,
-			alias = acct.alias ? acct.alias : acct.account.name,
-			acctname = alias==acct.account.name ? "" : acct.account.name;
+		var acctDivId = "acct-"+ holding.account.id,
+			alias = holding.alias ? holding.alias : holding.account.name,
+			acctname = alias==holding.account.name ? "" : holding.account.name;
 		
-		app.resources[acctDivId] = acct;
-		if (!acct.relay) acct.relay = {};
+		app.resources[acctDivId] = holding;
+		if (!holding.relay) holding.relay = {};
 		
-		var b = main.brandColors(acctDivId, acct);
+		var b = main.brandColors(acctDivId, holding);
 		
 		$('#accountsWrapper').append("<div class='small-12 acctItem' id='"+acctDivId+"' style='background-color: "+ b.divBg +"'>"
 		+ "<div class='row' id='"+ acctDivId +"-label' style='margin-bottom:30px;'>"
@@ -55,37 +55,37 @@ function walletBudgets(api) {
 		+			b.logo
 		+ 		"<span style='vertical-align:top'>&nbsp;"+alias+"&nbsp;</span>"
 		+			"<span id='"+acctDivId+"-edit' class='fi-pencil small' style='display:none'></span><br />"
-		+     "<span id='"+ acctDivId +"-name' style='font-weight:normal; display: none;'>&nbsp;#"+acct.account.id +' '+acctname+"</span>"
+		+     "<span id='"+ acctDivId +"-name' style='font-weight:normal; display: none;'>&nbsp;#"+holding.account.id +' '+acctname+"</span>"
 		+		"</div>"
 		+ 	"<div class='small-4 columns acctBal' id='"+acctDivId+"-bal'>"
-		+ 		(acct.account.sign*acct.account.balance).toFixed(2) +" &#9658;"
+		+ 		(holding.account.sign*holding.account.balance).toFixed(2) +" &#9658;"
 		+		"</div>"
 		+ "</div>"
 		+ "<div class='row acctFormDiv' id='"+ acctDivId +"-forms'>"
 		+ 	"<div class='small-8 columns'>"
 		//+			"<span>Relay:</span><br />"
-		//+ 		"<h1>"+ acct.id +"-"+ acct.limkey +"</h1><br />"
+		//+ 		"<h1>"+ holding.id +"-"+ holding.limkey +"</h1><br />"
 		//+			"<a href=''>Review</a> | <a href=''>Edit</a><br />"
 		+			"<div id='"+ acctDivId +"-viz' class='left detailsDiv'>"
-		+				"Brand <b>"+ acct.account.brand.name +"</b><br />"
-		+				"Brand #"+ acct.account.brand.id  +", Unit: "+ acct.account.unit +"<br />"
-		+				"<span id='"+ acctDivId+"-relays'>Recipient Token: <b>" + acct.relay['default'] +"</b><br />(or see token list &#9658;)</span>"
+		+				"Brand <b>"+ holding.account.brand.name +"</b><br />"
+		+				"Brand #"+ holding.account.brand.id  +", Unit: "+ holding.account.unit +"<br />"
+		+				"<span id='"+ acctDivId+"-relays'>Recipient Token: <b>" + holding.relayDefault.token +"</b><br />(or see token list &#9658;)</span>"
 		+			"</div>"
-		+			(acct.account.throttle.id ? "<span>(This account is throttled, #"+acct.account.throttle.id+")</span>" : "")
+		+			(holding.account.throttle.id ? "<span>(This account is throttled, #"+holding.account.throttle.id+")</span>" : "")
 		+		"</div>"
 		+ 	"<div class='small-4 columns'>"
-		+ 		((acct.relay['add'] || acct['add']) 
+		+ 		((holding.relayDefault.for.indexOf('add')!=-1 || holding['add']) 
 			? "<button class='tiny' id='"+acctDivId+"-add' style='width:5.0rem; margin-bottom:0.5rem;'>Add</button><br />" : "")
-		+ 		((acct.relay['transfer'] || acct['transfer']) 
+		+ 		((holding.relayDefault.for.indexOf('transfer')!=-1 || holding['transfer']) 
 			? "<button id='"+acctDivId+"-transfer' class='tiny' style='width:5.0rem; margin-bottom:0.5rem;'>Transfer</button><br />" : "")
-		+			((acct.relay['use'] || acct['use']) 
+		+		((holding.relayDefault.for.indexOf('use')!=-1 || holding['use']) 
 			? "<button id='"+acctDivId+"-use' class='tiny' style='width:5.0rem; margin-bottom:0.5rem;'>Use</button><br />" : "")
-		+		"</div>" 	
+		+		"</div>"
 		+ "</div>"
 		+ "<div id='"+acctDivId+"-toggle' class='acctDivToggle'>&#9660;&#9660;&#9660;</div>"
 		+ "</div>");
 		
-		if (acct.account.sign==1 && acct) $('#expenseAcctToUse').append("<option value='"+ acctDivId +"'>#"+ acct.account.id+' '+ alias +" @"+ acct.account.brand.name +"</option>");
+		if (holding.account.sign==1 && holding) $('#expenseAcctToUse').append("<option value='"+ acctDivId +"'>#"+ holding.account.id+' '+ alias +" @"+ holding.account.brand.name +"</option>");
 	}
 	
 	main.brandColors = (function () {

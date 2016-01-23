@@ -12,7 +12,7 @@ function walletTxn(api) {
 		
 		if (!term) var term = currResource.holder_id ? '' : ''; console.log([term, action, currResource[term+action]]);
 		
-		currRelay = currResource.relay ? currResource.relay[term+action] : null;
+		currRelay = currResource.relay ? currResource.relay.token : null;
 		$('#expenseSelectDiv').css('display', currAction=='use' ? 'block' : 'none');
 		
 		if (!currResource[term+action]) processForm(null);
@@ -94,7 +94,7 @@ function walletTxn(api) {
 			var acct = accts[i];
 			
 			if (acct.account_id != currResource.account_id && acct.sign == sign) {
-				if (acct.relay['record-'+ currAction]) return acct.relay['record-'+ currAction]
+				if (acct.relay.token) return acct.relay.token
 			}
 		}
 		

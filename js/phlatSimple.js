@@ -62,16 +62,21 @@ function phlatSimple(conf) {
 	
 	//must be called before linkToCachedInstance
 	function refreshItems(id, d) {			
-		if (!d.items || !(id in hints) || !( 'refresh' in hints[id])) return;
+		if (!d.items || !(id in hints) || !( 'refresh' in hints[id]) || !byId[id]) return;
 		
-		var cachedResource = byId[id];
 		var cachedItems = [];
+		var cachedResource = byId[id];
+		if (!cachedResource.items) cachedResource.items = [];
+
 		for(var j=0; j<cachedResource.items.length; j++) {
 			cachedItems.push(typeof cachedResource.items[j] == 'string' ? cachedResource.items[j] : cachedResource.items[j]['@id']);
 		}
 		
-		for(var i=0; i<d.items.length; i++) {
-			if (cachedItems.indexOf(d.items[i])==-1) cachedResource.items.unshift(d.items[i]);
+		var arr = d.items.slice(0);
+		arr.reverse();
+
+		for(var i=0; i<arr.length; i++) {
+			if (cachedItems.indexOf(arr[i])==-1) cachedResource.items.unshift(arr[i]);
 		}
 
 		if (cachedResource.collectionOf) cachedResource[cachedResource.collectionOf] = cachedResource.items;
