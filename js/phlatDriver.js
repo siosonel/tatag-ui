@@ -84,7 +84,7 @@ function phlatDriver(api, concept, path) {
 		}
 		else {		
 			api.extendHints(resp); 
-			for(var id in api.byId) api.linkToCachedInstance(api.byId[id]);
+			for(var id in api.byIdRaw) api.linkToCachedInstance(api.byIdRaw[id]);
 		
 			var data = Array.isArray(container[path[pathIndex]]) ? payload: resource;
 			if (data.pageOf) data = api.byId[data.pageOf];

@@ -5,21 +5,23 @@ function walletTxn(api) {
 	function main(arg, term) {		
 		params = app.params();
 	
-		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-"); console.log(action);
+		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-");
 		
 		currAction = action;
-		currResource = app.resources[wrapperId]; console.log(currResource); //console.log(api.byId); console.log(action+' '+arguments.length);
+		currResource = app.resources[wrapperId]; console.log(action+' '+arguments.length);
 		
-		if (!term) var term = currResource.holder_id ? '' : ''; console.log([term, action, currResource[term+action]]);
+		if (!term) var term = currResource.holder_id ? '' : '';
 		
-		currRelay = currResource.relay ? currResource.relay.token : null;
+		currRelay = currResource.relayDefault && currResource.relayDefault.for.indexOf(action)!=-1 
+			? currResource.relayDefault.token : null; 
+
 		$('#expenseSelectDiv').css('display', currAction=='use' ? 'block' : 'none');
 		
 		if (!currResource[term+action]) processForm(null);
 		else api.loadId(currResource[term+action]).then(processForm, app.errHandler);
 	}
 	
-	function processForm(res) { console.log(res);
+	function processForm(res) {
 		currForm = res;
 		renderForm(currAction);
 		renderRelay(currRelay);		
@@ -27,7 +29,7 @@ function walletTxn(api) {
 	}
 	
 	function renderForm(action) {
-		if (!currForm) {$('#txnForm').css('display','none'); return;}
+		if (!currForm) {$('#txnForm').css('display','none'); return;} 
 		
 		$('#txnForm').css('display','block');
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
@@ -37,7 +39,7 @@ function walletTxn(api) {
 	
 	function renderInputs(inputName) {
 		var val = ['to','amount','note'].indexOf(inputName)!=-1 && params[inputName] ? params[inputName]
-			: inputName=='from' ? currResource.relay['default'] 
+			: inputName=='from' ? currResource.relayDefault.token
 			: inputName=="to" ? getToRelay() 
 			: ""; 
 			
@@ -53,8 +55,8 @@ function walletTxn(api) {
 		}  
 	}
 	
-	function renderReverse(inputName) {
-		var val = inputName=='to' ? currResource.relay['default'] 
+	function renderReverse(inputName) { console.log(inputName)
+		var val = inputName=='to' ? currResource.relayDefault.token
 			: inputName=='orig_record_id' ? currResource['orig_record_id'] 
 			: "";
 				
@@ -94,11 +96,35 @@ function walletTxn(api) {
 			var acct = accts[i];
 			
 			if (acct.account_id != currResource.account_id && acct.sign == sign) {
-				if (acct.relay.token) return acct.relay.token
+				if (acct.relayDefault.token) return acct.relayDefault.token
 			}
 		}
 		
 		return "";
+	}
+
+	function setFormTarget(form, inputs, resource) {
+		var url = form.target ? form.target : resource ? resource['@id'] : '';
+		
+		if (!url) return '';
+		if (!form.query) return url;
+		var q=form.query.required, p = {};
+		
+		for(var i in q) {
+			if (q[i] in inputs) p[q[i]] = inputs[q[i]];
+			else {
+				var prop = q[i].split('-'), val=resource;
+				
+				for(var j in prop) {
+					val = val[prop[j]];
+				}
+			
+				p[q[i]] = val;
+			}
+		}
+		
+		var param = $.param(p);
+		return !param ? '' : url.search(/\?/)==-1 ? url + '?'+param : url + '&'+param;
 	}
 	
 	main.add = renderInputs
@@ -126,23 +152,24 @@ function walletTxn(api) {
 		
 		if (e.target.id != 'txn-submit') return;
 		
-		var query = {}, isReversal = currInputs.indexOf('orig_record_id')!=-1;
-		currForm.query.required.map(function (param) {query[param] = currResource[param]});
-		
-		action = {
-			target: currForm.target, 
-			query: query,
-			method:'post', 
-			inputs:{}
-		};
+		var isReversal = currInputs.indexOf('orig_record_id')!=-1;
+		//currForm.query.required.map(function (param) {query[param] = currResource[param]});
 		
 		$('#txnModal').foundation('reveal','close');
-		
+		var inputs = {};
+
 		currInputs.map(function (inputName) {
-			action.inputs[inputName] = $('#txn-'+inputName).val();
-			if (inputName=='amount' && isReversal && 1*action.inputs[inputName]>0) action.inputs[inputName] = -1*action.inputs[inputName];
+			inputs[inputName] = $('#txn-'+inputName).val();
+			if (inputName=='amount' && isReversal && 1*inputs[inputName]>0) inputs[inputName] = -1*inputs[inputName];
 		});
 		
+		action = {
+			target: setFormTarget(currForm, inputs, currResource),
+			//query: query,
+			method:'post', 
+			inputs: inputs
+		};
+
 		api.request(action).then(main.refreshViews, app.errHandler);
 	}
 	

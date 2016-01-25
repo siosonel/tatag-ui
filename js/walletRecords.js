@@ -39,11 +39,15 @@ function walletRecords(api) {
 	function renderRecords(records) {
 		if (!records.items || !records.items.length) $('#recordsWrapper').append("<div class='recordItem'>No transaction records found.</div>");
 		else {
-			records.items.map(listRecord);
+			records.items.sort(sortByIdDesc).map(listRecord);
 			paginate(records);
 			$('#'+currRecordId).css('max-height', maxHeight);
 			app.adjustHeight();
 		}
+	}
+
+	function sortByIdDesc(a,b) {
+		return b.id - a.id;
 	}
 	
 	function listRecord(record) {
@@ -142,7 +146,7 @@ function walletRecords(api) {
 			app(); return;
 		}		
 		
-		if (e.target.tagName.toUpperCase()=='BUTTON') {
+		if (e.target.tagName.toUpperCase()=='BUTTON') { console.log(e.target.id)
 			if (['hold', 'approve', 'reject'].indexOf(e.target.id.split('-')[2]) !=-1 ) app.edit(e.target.id); //console.log(e.target.id);
 			else app.txn(e.target.id); 
 		} 

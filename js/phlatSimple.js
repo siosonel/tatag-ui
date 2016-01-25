@@ -4,6 +4,7 @@ function phlatSimple(conf) {
 	var	_id = conf._id ? conf._id : "@id";
 	var	_type = conf._type ? conf._type : "@type";			
 	var byId = {}, byType = {}, byConcept={};
+	var byIdRaw = {}; //solves tracking null resource by keeping link string values
 	var requestedIds = {};
 	var curr={}, hints={};
 	var linkTerms = [];
@@ -14,7 +15,7 @@ function phlatSimple(conf) {
 	
 	var headers = {
 		Authorization: "Basic " + btoa(conf.userid + ":" + conf.pass)
-	}
+	};
 	
 	function main() {}
 	
@@ -26,6 +27,9 @@ function phlatSimple(conf) {
 		if (type) curr[type] = d; //swap current resource by type
 
 		if (id) {
+			//save unmodified, non-linked resource copy
+			byIdRaw[id] = $.extend(true, id in byIdRaw ? byIdRaw[id] : {}, d);
+
 			//set root resource-dependent variables
 			if (id==rootURL) {
 				root = d;
@@ -41,7 +45,6 @@ function phlatSimple(conf) {
 				if (!d.items || !d.items.length) d.items = d[d.collectionOf]; 
 				else if ('items' in d && !d[d.collectionOf]) d[d.collectionOf] = d.items;  
 			}
-			
 			
 			//save typed resources in an array
 			if (type && !byId[id]) {
@@ -65,23 +68,32 @@ function phlatSimple(conf) {
 		if (!d.items || !(id in hints) || !( 'refresh' in hints[id]) || !byId[id]) return;
 		
 		var cachedItems = [];
-		var cachedResource = byId[id];
-		if (!cachedResource.items) cachedResource.items = [];
+		var cachedResource = byId[id], cachedRaw = byIdRaw[id];  
+		var rawItems = cachedRaw[cachedRaw.collectionOf]; console.log([id, cachedResource.items, rawItems])
+		if (!cachedResource.items) cachedResource.items = rawItems ? rawItems : [];
+
 
 		for(var j=0; j<cachedResource.items.length; j++) {
-			cachedItems.push(typeof cachedResource.items[j] == 'string' ? cachedResource.items[j] : cachedResource.items[j]['@id']);
+			var item = cachedResource.items[j] ? cachedResource.items[j] : rawItems[j];
+			if (item) cachedItems.push(typeof item == 'string' ? item : item['@id']);
 		}
 		
 		var arr = d.items.slice(0);
 		arr.reverse();
 
 		for(var i=0; i<arr.length; i++) {
-			if (cachedItems.indexOf(arr[i])==-1) cachedResource.items.unshift(arr[i]);
+			if (cachedItems.indexOf(arr[i])==-1) cachedResource.items.push(arr[i]);
 		}
+
+		cachedResource.items.sort(sortByIdDesc);
 
 		if (cachedResource.collectionOf) cachedResource[cachedResource.collectionOf] = cachedResource.items;
 		d.items = cachedResource.items; //prevents overriding cacheResource.items with d.items when $.extend is used in indexGraph
 		//delete d.items; 
+	}
+
+	function sortByIdDesc(a,b) { console.log([a,b]);
+		return b.id - a.id;
 	}
 	
 	function deprecatedSupport(d) {
@@ -91,21 +103,35 @@ function phlatSimple(conf) {
 		}
 	}
 	
-	function linkToCachedInstance(resource) {
-		for(var term in resource) {
-			var t = resource[term];
-		
+	function linkToCachedInstance(raw) {
+		if (!raw || !('@id' in raw)) return;
+		var resource = byId[raw['@id']]; 
+		if (!resource) resource = $.extend(true, {}, raw);
+
+		for(var term in raw) {		
 			if (linkTerms.indexOf(term) != -1) {
-				if (typeof t == 'string' && t in byId) resource[term] = byId[resource[term]];
-				else if (t!==null && typeof t=='object' && '@id' in t && t['@id'] in byId) {
+				var t = raw[term]; //resource[term];
+
+				if (typeof t == 'string' && t in byId) {
+					resource[term] = byId[t];
+				}
+				else if (t!==null && typeof t=='object' && '@id' in t && t['@id'] in byId) { if (t['@id']=='/promo/11') console.log(resource) 
 					resource[term] = byId[t['@id']];
 				}
-				else if (Array.isArray(resource[term])) { 
-					for(var j=0; j<resource[term].length; j++) {
-						if (typeof resource[term][j]=='string') {
-							if (byId[resource[term][j]]) resource[term][j] = byId[resource[term][j]]; 
+				else if (Array.isArray(t)) { 
+					for(var j=0; j<t.length; j++) {
+						var u = t[j];
+
+						if (!u) {}
+						else if (typeof u=='string') {
+							resource[term][j] = byId[u]; 
 						}
-						else linkToCachedInstance(resource[term][j]);
+						else if (u['@id']) { //console.log([resource[term][j]['@id'], byId[resource[term][j]['@id']]])
+							resource[term][j] = byId[u['@id']]; 
+						}
+						else {
+							linkToCachedInstance(u);
+						}
 					}
 				}
 			}
@@ -139,7 +165,7 @@ function phlatSimple(conf) {
 		
 		subAccessor = {
 			root: main.root, headers: headers, 
-			byId: byId, byConcept: byConcept,
+			byId: byId, byConcept: byConcept, byIdRaw: byIdRaw,
 			indexGraph: indexGraph, 
 			inprocess: inprocess, linkToCachedInstance: linkToCachedInstance,
 			applyHints: applyHints, extendHints: extendHints
@@ -190,8 +216,8 @@ function phlatSimple(conf) {
 					}
 										
 					res['@graph'].map(indexGraph);
-					for(var id in byId) linkToCachedInstance(byId[id]);
-					deferred.resolve(res['@graph'][0].pageOf ? byId[res['@graph'][0].pageOf] : res['@graph'][0]);
+					for(var id in byIdRaw) linkToCachedInstance(byIdRaw[id]);
+					deferred.resolve(res['@graph'][0].pageOf ? byId[res['@graph'][0].pageOf] : byId[res['@graph'][0]['@id']]);
 				}
 				
 				omniListener();
@@ -240,17 +266,17 @@ function phlatSimple(conf) {
 				data: JSON.stringify(action.inputs),
 				success: function (res) {
 					//perform cache invalidation for non-get requests					
-					if (action.method.toLowerCase() != 'get') { //console.log('deleting cached resource')
+					if (action.method.toLowerCase() != 'get') { console.log(['deleting cached resource', action.target + params])
 						delete byId[action.target + params];
 						delete byId[conf.baseURL + action.target + params];
 					}
 					
 					if (!res) deferred.reject(new Error('No response body.'));
 					else {
-						if (!res['@graph']) res = {'@graph': [res]};									
+						if (!res['@graph']) res = {'@graph': [res]}; console.log(res)
 						res['@graph'].map(indexGraph);
-						for(var id in byId) linkToCachedInstance(byId[id]);
-						deferred.resolve(res);
+						for(var id in byIdRaw) linkToCachedInstance(byIdRaw[id]);
+						deferred.resolve(byId[res['@graph'][0]['@id']]);
 					}
 					
 					if (resourceURL) main.loadId(resourceURL, true);
@@ -267,6 +293,7 @@ function phlatSimple(conf) {
 
 	main.baseURL = conf.baseURL;
 	main.byId = byId;
+	main.byIdRaw = byIdRaw;
 	main.byType = byType;	
 	main.byConcept = byConcept;
 	main.hints = hints;
