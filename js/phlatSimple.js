@@ -273,7 +273,7 @@ function phlatSimple(conf) {
 					
 					if (!res) deferred.reject(new Error('No response body.'));
 					else {
-						if (!res['@graph']) res = {'@graph': [res]}; console.log(res)
+						if (!res['@graph']) res = {'@graph': [res]};
 						res['@graph'].map(indexGraph);
 						for(var id in byIdRaw) linkToCachedInstance(byIdRaw[id]);
 						deferred.resolve(byId[res['@graph'][0]['@id']]);

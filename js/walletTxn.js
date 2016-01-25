@@ -8,7 +8,7 @@ function walletTxn(api) {
 		var arr = arg.split("-"), action=arr.pop(), wrapperId = arr.join("-");
 		
 		currAction = action;
-		currResource = app.resources[wrapperId]; console.log(action+' '+arguments.length);
+		currResource = app.resources[wrapperId]; //console.log(action+' '+arguments.length);
 		
 		if (!term) var term = currResource.holder_id ? '' : '';
 		
@@ -41,6 +41,7 @@ function walletTxn(api) {
 		var val = ['to','amount','note'].indexOf(inputName)!=-1 && params[inputName] ? params[inputName]
 			: inputName=='from' ? currResource.relayDefault.token
 			: inputName=="to" ? getToRelay() 
+			: $('#txn-'+inputName).val() ? $('#txn-'+inputName).val()
 			: ""; 
 			
 		var disabled = inputName=='from' ? true : false;
@@ -217,12 +218,12 @@ function walletTxn(api) {
 	}
 	
 	function usePromoInfo(res) {
-		if (!res['@graph'] || !res['@graph'][0] || !res['@graph'][0].items.length) {
+		if (!res.items.length) {
 			$('#txn-title').html('Use Budget');
 			return;
 		}
 		
-		var promo = res['@graph'][0].items[0];
+		var promo = res.items[0];
 		$('#txn-amount').val(promo.amount.toFixed(2));
 		$('#txn-title').html('Pay <b>'+ promo.brand_name +'</b>');
 	}
