@@ -124,10 +124,10 @@ function phlatSimple(conf) {
 
 						if (!u) {}
 						else if (typeof u=='string') {
-							resource[term][j] = byId[u]; 
+							if (u in byId) resource[term][j] = byId[u]; 
 						}
 						else if (u['@id']) { //console.log([resource[term][j]['@id'], byId[resource[term][j]['@id']]])
-							resource[term][j] = byId[u['@id']]; 
+							if (u['@id'] in byId) resource[term][j] = byId[u['@id']]; 
 						}
 						else {
 							linkToCachedInstance(u);
@@ -192,7 +192,7 @@ function phlatSimple(conf) {
 		if (url && typeof url!='string') {
 			if (url['@id']) url = url['@id'];
 			else {
-				console.log("Invalid url, must be a string or an object with an @id property.");
+				console.log("Invalid url, must be a string or an object with an @id property.["+ JSON.stringify(url) +']');
 				return;
 			}
 		}
