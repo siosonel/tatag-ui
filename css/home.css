@@ -129,7 +129,7 @@
 }
 
 
-#howItWorks p {
+#howItWorks p, #advantagesDiv p {
 	width: 35rem;
 	max-width: 95%;
 	margin: 1rem auto; 

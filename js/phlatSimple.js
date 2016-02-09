@@ -289,7 +289,8 @@ function phlatSimple(conf) {
 						if (!res['@graph']) res = {'@graph': [res]};
 						res['@graph'].map(indexGraph);
 						for(var id in byIdRaw) linkToCachedInstance(byIdRaw[id]);
-						deferred.resolve(res['@graph'][0].pageOf ? byId[res['@graph'][0].pageOf] : byId[res['@graph'][0]['@id']]);
+						deferred.resolve(res['@graph'][0].pageOf && res['@graph'][0].pageOf in byId
+							? byId[res['@graph'][0].pageOf] : byId[res['@graph'][0]['@id']]);
 					}
 					
 					if (resourceURL) main.loadId(resourceURL, true);

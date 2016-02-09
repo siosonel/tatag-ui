@@ -55,6 +55,8 @@ function walletRecords(api) {
 			other = record.other_acct ? '#'+record.other : record.other;
 		
 		var divId = 'record-'+record.record_id;
+		if (!currRecordId) currRecordId = divId;
+
 		app.resources[divId] = record;
 		
 		var relay = record.relayDefault ? record.relayDefault : {token:'', for:[]};

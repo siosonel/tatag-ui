@@ -37,15 +37,16 @@ function walletBudgets(api) {
 		}
 	}
 	
-	function renderAcctDiv(holding) {
+	function renderAcctDiv(holding, i) {
 		if (typeof holding=='string') holding = api.byId[holding];
 	
 		var acctDivId = "acct-"+ holding.account.id,
 			alias = holding.alias ? holding.alias : holding.account.name,
 			acctname = alias==holding.account.name ? "" : holding.account.name;
-		
+
 		app.resources[acctDivId] = holding;
 		if (!holding.relay) holding.relay = {};
+		if (!currAcctDivId) currAcctDivId = acctDivId;
 		
 		var b = main.brandColors(acctDivId, holding);
 		
@@ -160,7 +161,7 @@ function walletBudgets(api) {
 			$('#'+currAcctDivId+'-name').css('display', 'none');
 			$('#'+currAcctDivId+'-edit').css('display', 'none');
 			$('#'+currAcctDivId+'-toggle').html("&#9660;&#9660;&#9660;")
-				.css({'background-color': 'rgb(245,245,245)', 'color': 'rgb(190,190,190)'});
+				.css({'background-color': '#007095', 'color': '#fff'});
 		}
 		
 		if (currAcctDivId==acctDivId) {

@@ -218,12 +218,12 @@ function walletTxn(api) {
 	}
 	
 	function usePromoInfo(res) {
-		if (!res.items.length) {
+		if (!res.promo.length) {
 			$('#txn-title').html('Use Budget');
 			return;
 		}
 		
-		var promo = res.items[0];
+		var promo = res.promo[0];
 		$('#txn-amount').val(promo.amount.toFixed(2));
 		$('#txn-title').html('Pay <b>'+ promo.brand_name +'</b>');
 	}

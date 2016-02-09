@@ -37,6 +37,15 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		#rateImgDiv {
 			min-height: 391px;
 		}
+
+		#compareDiv .row {
+			margin-bottom: 1rem;
+		}
+
+		#compareDiv .small-6 {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
 	</style>
 </head>
 <body>
@@ -73,8 +82,8 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			</div>
 			
 			<div class='aboutItem' id='howItWorks'>
-				<h4><i>No funding? No problem!</i></h4>
-				<h4><b>Turn your team's<br />budgets <i>into</i> digital currency.</b></h4>
+				<h5><i>No funding? No problem!</i></h5>
+				<h4>Turn your team's<br />budgets <i>into</i> digital currency.</h4>
 				<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
 					<li><b>Use your expense budget</b> to pay for goods and services.</li>
 					<li><b>Use your revenue budget</b> to accept payments from reputable teams.</li>
@@ -110,6 +119,43 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<div><img src='/ui/images/teacher.jpg' class='rateImg'/></div>
 				</div>
 			</div>-->
+			<div id='compareDiv' class='aboutItem'>
+				<h4>Compare</h4>
+				<div class='row'>
+					<div class='columns small-6'><b><u>tatag.cc platform</u></b></div>
+					<div class='columns small-6'><b><u>other funding platforms</u></b></div>
+				</div>
+				<div class='row'>
+					<div class='columns small-6'>A team is automatically funded by something (its budgets) that is easy to set up ...</div>
+					<div class='columns small-6'>A team is conditionally funded by something (cash/money) that is hard to get ...</div>
+				</div><div class='row'>
+					<div class='columns small-6'>... but is NOT guaranteed to be accepted as payment in the market.</div>
+					<div class='columns small-6'>... but IS guaranteed to be accepted as payment in the market.</div>
+				</div>
+				<div class='row'>
+					<div class='columns small-6'>"Late-binding" concern at time-of-use:	Why should I (<i>the goods/service provider</i>) accept your payment?</div>
+					<div class='columns small-6'>"Early binding" concern prior-to-use: Why should I (<i>the lender/investor/donor</i>) fund your team?</div>
+				</div>
+			</div>
+			<div id='advantagesDiv' class='aboutItem' style='position: relative;'>
+				<h4>Advantages</h4>
+				<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
+					<li><b>Low-barrier of entry:</b> anyone can start a team, of any size and experience, and have a default 
+					spendable budget of 10.00 XTE at Day 0. The team could increase or decrease its budgets as appropriate.</li>
+
+					<li>A team prioritizes the <b>widespread and long-term acceptability</b> of it's currency, 
+					instead of trying to always grow revenue and profit. This motivation promotes sustainable economic activity.</li>
+
+					<li>Tatag.cc offers a simple and <b>convenient monetization</b> approach for digital goods and services, 
+					and thus sidesteps the need advertisement-supported products such as music and software. As easy as clicking
+					a payment link: <a href='https://tatag.cc/for/ad-1' target='Ad-1'>https://tatag.cc/for/ad-1</a>.</li>
+
+					<li>The decentralized issuance of currency, independent advisor technology, 
+					and auditable aggregation of market activity offers an <b>evolutionary path</b> for scaling trust and infrastructure.</li>
+				</ul>
+
+				<p>Of course, there are many <a href="">challenges - please contribute</a> towards technical and social solutions!</p>
+			</div>
 			<div class='aboutItem' style='position: relative;'>
 				<h4>Influence the future</h4>
 				<p id='vizSimpleExplained' style='margin-bottom: 0.2rem;'></p>			
@@ -121,20 +167,21 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<div id='vizSimpleBtnDiv'></div>
 				<div id='vizSimpleNote'></div>
 			</div>
-			<div class='aboutItem'>
+			<!-- call to action -->
+			<!--<div class='aboutItem'>
 				<h4>Try our platform</h4>
 				<p>
 					<i>Promote a sustainable economy</i>
 				</p>
 				<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
-					<li>Search the <a href='home-promos'>promotions list</a> to buy products or donate to projects</li>
+					<li>Search the <a href='home-promos'>promotions list</a> to buy products or donate to projects</li>-->
 					<!--<li>See the <a href='home-ratings'>average of ratings</a> given by users to organizations and companies</li>-->
-					<li>Learn from the <a href='home-viz'>data visualizations</a> of budget activity as influenced by brand reputation</li>
+					<!--<li>Learn from the <a href='home-viz'>data visualizations</a> of budget activity as influenced by brand reputation</li>
 				</ul>
 				<p style='margin: 2rem auto; width: 40rem; max-width: 95%;'>Tatag.cc is <i>not</i> a platform for raising money from lenders, investors, or donors. 
 					Instead, we help teams establish their <a href='#b-as-c'>budgets as digital currency</a>, using strict
 					accounting rules and data-driven reputation tracking.</p>
-			</div>
+			</div>-->
 			<div class='aboutItem' id=''>
 				<a name='b-as-c'></a>
 				<h4>Budgets-as-Currency</h4>
