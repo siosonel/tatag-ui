@@ -57,19 +57,22 @@ function phlatSimple(conf) {
 				refreshItems(d.pageOf ? d.pageOf : id, d);
 				$.extend(byId[d.pageOf ? d.pageOf : id], d);
 			}
-			else byId[id] = d;
+			else {
+				byId[id] = d;
+				if (d.pageOf) refreshItems(d.pageOf, d);
+			}
 		}
 		
 		if (d.linkTerms) linkTerms = linkTerms.concat(d.linkTerms);
 	}
 	
 	//must be called before linkToCachedInstance
-	function refreshItems(id, d) {			
-		if (!d.items || !(id in hints) || !( 'refresh' in hints[id]) || !byId[id]) return;
+	function refreshItems(id, d) {
+		if (!d.items || !(id in hints) || !( 'refresh' in hints[id]) || !byId[id]) return; //console.log([id,d]);
 		
 		var cachedItems = [];
 		var cachedResource = byId[id], cachedRaw = byIdRaw[id];  
-		var rawItems = cachedRaw[cachedRaw.collectionOf]; console.log([id, cachedResource.items, rawItems])
+		var rawItems = cachedRaw[cachedRaw.collectionOf]; //console.log([id, cachedResource.items, rawItems])
 		if (!cachedResource.items) cachedResource.items = rawItems ? rawItems : [];
 
 
@@ -89,10 +92,20 @@ function phlatSimple(conf) {
 
 		if (cachedResource.collectionOf) cachedResource[cachedResource.collectionOf] = cachedResource.items;
 		d.items = cachedResource.items; //prevents overriding cacheResource.items with d.items when $.extend is used in indexGraph
-		//delete d.items; 
+		
+
+		if (cachedResource.pageOf && byIdRaw[cachedResource.pageOf]) {
+			var raw = byIdRaw[cachedResource.pageOf];
+			raw[cachedResource.collectionOf] = cachedResource[cachedResource.collectionOf];
+			raw.items = cachedResource[cachedResource.collectionOf];
+			raw.next = d.next;
+			raw.prev = d.prev;
+			cachedResource.next = d.next;
+			cachedResource.prev = d.prev;
+		}
 	}
 
-	function sortByIdDesc(a,b) { console.log([a,b]);
+	function sortByIdDesc(a,b) { //console.log([a,b]);
 		return b.id - a.id;
 	}
 	
@@ -105,17 +118,17 @@ function phlatSimple(conf) {
 	
 	function linkToCachedInstance(raw) {
 		if (!raw || !('@id' in raw)) return;
-		var resource = byId[raw['@id']]; 
-		if (!resource) resource = $.extend(true, {}, raw);
+		if (!(raw['@id'] in byId)) byId[raw['@id']] = $.extend(true, {}, raw);
+		var resource = byId[raw['@id']];
 
 		for(var term in raw) {		
 			if (linkTerms.indexOf(term) != -1) {
 				var t = raw[term]; //resource[term];
 
-				if (typeof t == 'string' && t in byId) {
-					resource[term] = byId[t];
+				if (typeof t == 'string') {
+					if (t in byId) resource[term] = byId[t];
 				}
-				else if (t!==null && typeof t=='object' && '@id' in t && t['@id'] in byId) { if (t['@id']=='/promo/11') console.log(resource) 
+				else if (t!==null && typeof t=='object' && '@id' in t && t['@id'] in byId) {
 					resource[term] = byId[t['@id']];
 				}
 				else if (Array.isArray(t)) { 
@@ -276,10 +289,11 @@ function phlatSimple(conf) {
 						if (!res['@graph']) res = {'@graph': [res]};
 						res['@graph'].map(indexGraph);
 						for(var id in byIdRaw) linkToCachedInstance(byIdRaw[id]);
-						deferred.resolve(byId[res['@graph'][0]['@id']]);
+						deferred.resolve(res['@graph'][0].pageOf ? byId[res['@graph'][0].pageOf] : byId[res['@graph'][0]['@id']]);
 					}
 					
 					if (resourceURL) main.loadId(resourceURL, true);
+					omniListener();
 				},
 				error: function (xhr, status, text) { console.log(xhr.responseText);
 					var mssg = JSON.parse(xhr.responseText).error;

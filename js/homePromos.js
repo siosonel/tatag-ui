@@ -3,6 +3,7 @@ function homePromos(api) {
 	var postRenderFxn;
 	var homeURL = api.baseURL.replace('api','ui\/home');
 	var walletURL = api.baseURL.replace('api','ui\/wallet');
+	var scrollTo;
 	
 	function main(user) {
 		if (user) currUser = user; 
@@ -14,7 +15,9 @@ function homePromos(api) {
 		$('#promosWrapper').append(setTitle(currUser));
 
 		//refresh info as needed using second argument to loadId
-		api.loadConcept('public-promos').then(renderRatings, app.errHandler);
+		api.loadConcept('public-promos').then(renderPromos, app.errHandler);
+
+		$('#scrollTo').off('click').on('click', main.scrollMore);
 	}
 	
 	function setTitle() {
@@ -30,9 +33,11 @@ function homePromos(api) {
 		);
 	}
 	
-	function renderRatings(promos) {
+	function renderPromos(promos) {
 		currCollection = promos;
 		promos.items.map(renderItem);
+		paginate(promos);
+
 		if (main.postRenderFxn) {
 			main.postRenderFxn();
 			main.postRenderFxn = null;
@@ -61,13 +66,16 @@ function homePromos(api) {
 		else var image="";
 		
 		var dots = promo.description.length>50 ? '...' : ''; 
-		
-		$('#promosWrapper').append(
-			"<div id='"+divId+"' class='small-12 medium-6 large-4 columns' style='padding: 0.2rem; float: left;'>"
-			+ 	"<div class='promoItem'>"
+		 
+		if (!$('#'+divId).length) $('#promosWrapper').append(
+			"<div id='"+divId+"' class='small-12 medium-6 large-4 columns' style='padding: 0.2rem; float: left;'></div>"
+		);
+
+		$('#'+divId).html(
+			"<div class='promoItem'>"
 			+			image
 			+ 		pencil +"<span class='promoTitle'><b>"+ promo.name.substr(0,100) +"</b></span><br />"
-			+ 		"<span class='tiny promoTitle'>By: "+ promo.brand.name +"</span><br />"
+			+ 		"<span class='tiny promoTitle'>By: <a href='/"+ promo.brand.id +"'>"+ promo.brand.name +"</a></span><br />"
 			+			"<button id='pay-"+ promo.promo_id +"' class='tiny' style='margin-bottom: 0.25rem;'>"+ promo.amount.toFixed(2) +" XTE</button><br />"
 			+			"<span class='morePrompt'>"+ promo.description.substr(0, 49) + dots + "<br />(more)</span>"
 			// +			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a><br />" : "")
@@ -75,9 +83,21 @@ function homePromos(api) {
 			// + date[1] +'/'+ date[2] +"<br/>"+ date[0]
 			// +			'Recipient Token: <b>' + promo.code +'</b><br />'
 			// +		"<span class='sharePrompt'>Share</span>"
-			+		"</div>"
-			+'</div>'
+			+	"</div>"
 		)
+	}
+
+
+	
+	function paginate(promos) {
+		scrollTo="";
+		if (promos.pageOrder=='desc' && promos.prev) scrollTo = promos.prev;
+		if (promos.pageOrder=='asc' && promos.next) scrollTo = promos.next;
+		$('#scrollTo').css('display', scrollTo ? 'block' : 'none');		
+	}
+	
+	main.scrollMore = function (e) {
+		api.loadId(scrollTo).then(renderPromos, app.errHandler)
 	}
 	
 	function setHolderIdOpt(acct) {

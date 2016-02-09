@@ -16,19 +16,28 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<script type="text/javascript" src="/ui/js/phlatSimple.js"></script>
 	<script type="text/javascript" src="/ui/js/phlatDriver.js"></script>
 	
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>-->
 	
 	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>
 	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
   <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
 	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
 	
-  <link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick.css"/>
+  <!--<link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick-theme.css"/>
-	<script type="text/javascript" src="/common2/lib/slick/slick.min.js"></script>
+	<script type="text/javascript" src="/common2/lib/slick/slick.min.js"></script>-->
 		
 	<link rel="stylesheet" href="/ui/css/admin.css">
 	<link rel="stylesheet" href="/ui/css/home.css">
+	<style>
+		#mainWrapper {
+			overflow: hidden;
+		}
+
+		#rateImgDiv {
+			min-height: 391px;
+		}
+	</style>
 </head>
 <body>
 	<div id='login_provider'></div>
@@ -41,10 +50,10 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	</div>
 	
 	<div id='viewTypeDiv' class='row'>
-		<button id='aboutViewPrompt' class='small-3 tiny'>About</button>
-		<button id='ratingsViewPrompt' class='small-3 tiny'>Ratings</button>
-		<button id='vizViewPrompt' class='small-3 tiny'>Viz</button>
-		<button id='promosViewPrompt' class='small-3 tiny'>Promos</button>
+		<button id='aboutViewPrompt' class='small-4 tiny'>About</button>
+		<button id='promosViewPrompt' class='small-4 tiny'>Promos</button>
+		<!--<button id='ratingsViewPrompt' class='small-3 tiny'>Ratings</button>-->
+		<button id='vizViewPrompt' class='small-4 tiny'>Viz</button>
 	</div>
 
 	<div id='mainWrapper'>
@@ -64,7 +73,8 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			</div>
 			
 			<div class='aboutItem' id='howItWorks'>
-				<h4>Turn your team's<br />budgets <i>into</i> digital currency.</h4>
+				<h4><i>No funding? No problem!</i></h4>
+				<h4><b>Turn your team's<br />budgets <i>into</i> digital currency.</b></h4>
 				<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
 					<li><b>Use your expense budget</b> to pay for goods and services.</li>
 					<li><b>Use your revenue budget</b> to accept payments from reputable teams.</li>
@@ -73,7 +83,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<p>If your team maintains a <i>good reputation</i> and <i>reasonable budgets</i>, 
 				you will be able to easily transact with other teams. If your ethics or products are 
 				questionable, they'll refuse to transact with you.</p>
-			</div>			
+			</div>
 			<!--<div class='aboutItem' id='howItWorks'>
 				<h4>No funding? <i>No problem!</i></h4>
 				<ul style='width: 33rem; max-width: 90%; margin: 1rem auto;'>
@@ -86,7 +96,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				Instead, we help teams establish their <a href='#b-as-c'>budgets as digital currency</a>, using strict
 				accounting rules and data-driven reputation tracking.</p>
 			</div>-->
-			<div class='aboutItem'>
+			<!--<div class='aboutItem'>
 				<h4>Support what you believe in</h4>
 				<p>
 					<i>Would you refuse payments from <br /><span id='workType'></span>?</i>
@@ -99,7 +109,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<div><img src='/ui/images/street-sweeper.jpg' class='rateImg'/></div>
 					<div><img src='/ui/images/teacher.jpg' class='rateImg'/></div>
 				</div>
-			</div>
+			</div>-->
 			<div class='aboutItem' style='position: relative;'>
 				<h4>Influence the future</h4>
 				<p id='vizSimpleExplained' style='margin-bottom: 0.2rem;'></p>			
@@ -118,16 +128,12 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				</p>
 				<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
 					<li>Search the <a href='home-promos'>promotions list</a> to buy products or donate to projects</li>
-					<li>See the <a href='home-ratings'>average of ratings</a> given by users to organizations and companies</li>
+					<!--<li>See the <a href='home-ratings'>average of ratings</a> given by users to organizations and companies</li>-->
 					<li>Learn from the <a href='home-viz'>data visualizations</a> of budget activity as influenced by brand reputation</li>
 				</ul>
 				<p style='margin: 2rem auto; width: 40rem; max-width: 95%;'>Tatag.cc is <i>not</i> a platform for raising money from lenders, investors, or donors. 
 					Instead, we help teams establish their <a href='#b-as-c'>budgets as digital currency</a>, using strict
 					accounting rules and data-driven reputation tracking.</p>
-			</div>
-			<div class='aboutVid'>
-				<h4>Inverted Design</h4>
-				<iframe width="98%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
 			</div>
 			<div class='aboutItem' id=''>
 				<a name='b-as-c'></a>
@@ -141,10 +147,16 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<p id='vizGoalsDesign'></p>		
 				<div id='vizGoals'></div>				
 			</div>
+			<div class='aboutVid'>
+				<h4>Inverted Design</h4>
+				<iframe width="98%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
+			</div>
 		</div>
+
+		<button id='scrollTo' class='tiny'>more...</button>
 	</div>
 	
-	<div>	
+	<!--<div>	
 		<div id='ratingsModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
 			<div id='ratingsForm'>		
 				<h4 id='ratings-formTitle'></h4>
@@ -177,7 +189,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			</div>
 			<a class="close-reveal-modal">×</a>
 		</div>
-	</div>	
+	</div>-->
 		
 	<div id='promosModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
 		<div id='promosForm'>		
@@ -218,7 +230,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 							<input type='text' id='promos-keyword' value='ad' /></label>
 						</div>
 					</div>
-					<div class='row'>
+					<!--<div class='row'>
 						<div class='columns small-12'>
 							<label>Image URL<input type='text' id='promos-imageURL' value='' /></label>
 						</div>
@@ -227,7 +239,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 						<div class='columns small-12'>
 							<label>Link<input type='text' id='promos-infoURL' value='' /></label>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				
 				<div id='promoRelayDiv'>
@@ -281,7 +293,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	
 	<script src='/ui/js/homeMain.js'></script>
 	<script src='/ui/js/adminForms.js'></script>
-	<script src='/ui/js/homeRatings.js'></script>
+	<!--<script src='/ui/js/homeRatings.js'></script>-->
 	<script src='/ui/js/homePromos.js'></script>
 	<script src='/ui/js/homeViz.js'></script>
 	<script src='/ui/js/homeAbout.js'></script>
@@ -316,7 +328,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		}
 		
 		$(document).ready(function () {
-			var workType = [
+			/*var workType = [
 				//"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", 
 				"a farmer's cooperative", "a heavy polluter", "open-source contributors", "a strip mining company", "a sanitation agency", "a school"
 			];
@@ -331,7 +343,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				arrows: true
 			}).on('beforeChange', function(event, slick, currentSlide, nextSlide){ 
 				$('#workType').html(workType[nextSlide]);
-			});
+			});*/
 		});
 	</script>
 	

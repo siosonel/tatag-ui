@@ -23,7 +23,7 @@ function homeMain(conf) {
 		
 		history.replaceState({}, "home", "/ui/home-"+ app.currView);
 		
-		main.ratings = homeRatings(api);
+		//main.ratings = homeRatings(api);
 		main.viz = homeViz(api);
 		main.promos = homePromos(api);
 		main.about = homeAbout(api);
@@ -33,12 +33,12 @@ function homeMain(conf) {
 		init();
 				
 		$('#viewTypeDiv').click(main.clickHandler);
-		$('#ratingsWrapper').click(main.ratings.clickHandler);
+		//$('#ratingsWrapper').click(main.ratings.clickHandler);
 		$('#promosWrapper').click(main.promos.clickHandler);
 		$('.formModal').click(main.forms.clickHandler);
 		
-		$('#ratings-rating').val(90);
-		$('#ratings-reason').on('input', completer);
+		//$('#ratings-rating').val(90);
+		//$('#ratings-reason').on('input', completer);
 	});
 	
 	function init() {

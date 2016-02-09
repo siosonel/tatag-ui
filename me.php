@@ -1,5 +1,5 @@
 <div id='meModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
-	<p id='meLoggedIn'>User ID#: <span id='meUserID'></span> (<a href='?logout=1'>log-out</a>)</p>
+	<p id='meLoggedIn'>User ID#: <span id='meUserID'></span> (<a href='/ui/home-promos?logout=1'>log-out</a>)</p>
 	<p id='meLoggedOut'><a href='?login=1'>Log-In / Register</a></p>
 	<p>Username: <span id='meUserName'></span></p>
 	<p id='meProviderP'>Logged-in using <span id='meLoginProvider'></span></p>

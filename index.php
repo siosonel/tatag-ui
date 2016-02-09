@@ -2,7 +2,7 @@
 require_once "config.php";
 
 $time = time();
-$expiration = $time + 5400;
+$expiration = $time + 2592000;
 
 session_start(); 
 if (isset($_GET['clearSession']) OR isset($_GET['logout']) OR isset($_GET['provider'])) $_SESSION['TOKEN_ID']=0;

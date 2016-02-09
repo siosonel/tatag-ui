@@ -122,8 +122,8 @@ body {
 
 #scrollTo {
 	display:none;
-	position: fixed;
-	bottom: 10px;
+	position: absolute;
+	bottom: -10px;
 	right: 10px;
 }
 
