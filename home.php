@@ -93,6 +93,73 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				you will be able to easily transact with other teams. If your ethics or products are 
 				questionable, they'll refuse to transact with you.</p>
 			</div>
+			
+
+			<style>
+				#funding .funding-wrapper {
+					position: absolute;
+					opacity: 0;
+				}
+
+				.funding-wrapper h5 {
+					margin-top: -0.5rem;
+				}
+
+				.funding-title {
+					position: absolute;
+				}
+
+				.funding-advantage {
+					color: #11aa55;
+					font-weight: 700;
+					font-style: italic;
+				}
+
+				#funding-team, #funding-market, #funding-regulation {
+					cursor: pointer;
+				}
+			</style>
+			<div class='aboutItem' id='funding' style='position:relative; height:35rem;'>
+				<h4>Advantages</h4>
+				<button class='tiny' id='vizFundingNext'>next &#9658;</button>
+
+				<h5 class='funding-title' style='top:10%; left: 15%'>tatag.cc<br/><u>platform</u></h5>
+				<h5 class='funding-title' style='top:10%; left: 70%'>other<br/><u>platforms</u></h5>
+
+				<div id='funding-rightUpper' class='funding-wrapper' style='max-width: 32%; top: 30%; left: 20%;'></div>
+				<div id='funding-rightLower' class='funding-wrapper' style='max-width: 32%; top: 50%; left: 20%;'></div>
+
+				<div id='funding-team' class='funding-wrapper' style='top: 25%; left: 46%;'>
+					<span class='fi-dollar-bill large' style='font-size: 3.5rem; color:#009988;'></span>
+					<h5>Funding<br/>Source</h5>			
+				</div>
+				<div id='funding-market' class='funding-wrapper' style='top: 50%; left: 45%;'>
+					<span class='fi-torsos-all large' style='font-size: 3rem; color:#acee55;'></span>
+					<h5>Payment<br/>Recipients</h5>
+				</div>
+				<div id='funding-regulation' class='funding-wrapper' style='top: 75%; left: 45%;'>
+					<span class='fi-heart large' style='font-size: 3rem; color:#bb5555;'></span>
+					<h5>Dominant<br/>Strategy</h5>
+				</div>
+
+				<div id='funding-leftUpper' class='funding-wrapper' style='max-width: 32%; top: 30%; left: 60%;'></div>
+				<div id='funding-leftLower' class='funding-wrapper' style='max-width: 32%; bottom: 10%; left: 60%;'></div>
+
+				<div id='funding-arrow' class='funding-wrapper' style='width: 36px; top: 50%; left: 80%;'>
+					<div class='fi-arrow-right large' style='left: -2rem; font-size: 2rem;'></div>
+					<div class='' style='font-size: 2rem;'>$</div>
+					<div class='fi-arrow-right large' style='right: -1rem; font-size: 2rem;'></div>
+				</div>
+
+				<div id='funding-funder' class='funding-wrapper' style='top: 50%; left: 80%;'>
+					<span class='fi-torso-female large' style='font-size: 5rem; color:#888;'></span>
+					<h5>Investor</h5>
+					<h5>Lender</h5>
+					<h5>Donor</h5>		
+				</div>
+			</div>
+
+
 			<!--<div class='aboutItem' id='howItWorks'>
 				<h4>No funding? <i>No problem!</i></h4>
 				<ul style='width: 33rem; max-width: 90%; margin: 1rem auto;'>
@@ -119,7 +186,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<div><img src='/ui/images/teacher.jpg' class='rateImg'/></div>
 				</div>
 			</div>-->
-			<div id='compareDiv' class='aboutItem'>
+			<!--<div id='compareDiv' class='aboutItem'>
 				<h4>Compare</h4>
 				<div class='row'>
 					<div class='columns small-6'><b><u>tatag.cc platform</u></b></div>
@@ -140,22 +207,24 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			<div id='advantagesDiv' class='aboutItem' style='position: relative;'>
 				<h4>Advantages</h4>
 				<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
-					<li><b>Low-barrier of entry:</b> anyone can start a team, of any size and experience, and have a default 
+					<li><b>Low-barrier to entry:</b> anyone can start a team, of any size and experience, and have a default 
 					spendable budget of 10.00 XTE at Day 0. The team could increase or decrease its budgets as appropriate.</li>
 
 					<li>A team prioritizes the <b>widespread and long-term acceptability</b> of it's currency, 
 					instead of trying to always grow revenue and profit. This motivation promotes sustainable economic activity.</li>
 
 					<li>Tatag.cc offers a simple and <b>convenient monetization</b> approach for digital goods and services, 
-					and thus sidesteps the need advertisement-supported products such as music and software. As easy as clicking
-					a payment link: <a href='https://tatag.cc/for/ad-1' target='Ad-1'>https://tatag.cc/for/ad-1</a>.</li>
+					and thus sidesteps the need for advertisement-supported products such as music and software. Paste a 
+					a payment link anywhere, like this request for a donation: 
+					<a href='https://tatag.cc/for/ad-1' target='Ad-1'>https://tatag.cc/for/ad-1</a>.</li>
 
 					<li>The decentralized issuance of currency, independent advisor technology, 
 					and auditable aggregation of market activity offers an <b>evolutionary path</b> for scaling trust and infrastructure.</li>
 				</ul>
 
-				<p>Of course, there are many <a href="">challenges - please contribute</a> towards technical and social solutions!</p>
-			</div>
+				<p>Of course, there are many <a href="https://github.com/siosonel/tatag-api/blob/master/CONTRIBUTING.md">
+				challenges - please contribute</a> towards technical and social solutions!</p>
+			</div>-->
 			<div class='aboutItem' style='position: relative;'>
 				<h4>Influence the future</h4>
 				<p id='vizSimpleExplained' style='margin-bottom: 0.2rem;'></p>			
@@ -194,10 +263,10 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<p id='vizGoalsDesign'></p>		
 				<div id='vizGoals'></div>				
 			</div>
-			<div class='aboutVid'>
+			<!--<div class='aboutVid'>
 				<h4>Inverted Design</h4>
 				<iframe width="98%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
-			</div>
+			</div>-->
 		</div>
 
 		<button id='scrollTo' class='tiny'>more...</button>
@@ -350,6 +419,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<script type="text/javascript" src="/ui/lib/colorbrewer.js"></script>
 	<script type="text/javascript" src="/ui/js/vizSimple.js"></script>
 	<script type="text/javascript" src="/ui/js/vizGoals.js"></script>
+	<script type="text/javascript" src="/ui/js/vizFunding.js"></script>
 	
 	<script>	
 		var autocompleteSource = [
@@ -403,7 +473,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			vizGoals.checkWidth = setInterval(vizGoals.init, 1000);
 			
 			$('#accessSkew').on('change',vizSimple.resetData);
-			$(window).on('resize', function () {vizSimple(); vizGoals();});
+			$(window).on('resize', function () {vizSimple(); vizGoals(); vizFunding(0);});
 		});
 	</script>
 	
