@@ -138,8 +138,8 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<h5>Payment<br/>Recipients</h5>
 				</div>
 				<div id='funding-regulation' class='funding-wrapper' style='top: 75%; left: 45%;'>
-					<span class='fi-heart large' style='font-size: 3rem; color:#bb5555;'></span>
-					<h5>Dominant<br/>Strategy</h5>
+					<span class='fi-price-tag large' style='font-size: 3rem; color:#bb5555;'></span>
+					<h5>Processing<br/>and Fees</h5>
 				</div>
 
 				<div id='funding-leftUpper' class='funding-wrapper' style='max-width: 32%; top: 30%; left: 60%;'></div>
@@ -158,7 +158,6 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<h5>Donor</h5>		
 				</div>
 			</div>
-
 
 			<!--<div class='aboutItem' id='howItWorks'>
 				<h4>No funding? <i>No problem!</i></h4>
@@ -225,6 +224,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<p>Of course, there are many <a href="https://github.com/siosonel/tatag-api/blob/master/CONTRIBUTING.md">
 				challenges - please contribute</a> towards technical and social solutions!</p>
 			</div>-->
+
 			<div class='aboutItem' style='position: relative;'>
 				<h4>Influence the future</h4>
 				<p id='vizSimpleExplained' style='margin-bottom: 0.2rem;'></p>			
@@ -263,10 +263,10 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<p id='vizGoalsDesign'></p>		
 				<div id='vizGoals'></div>				
 			</div>
-			<!--<div class='aboutVid'>
+			<div class='aboutVid'>
 				<h4>Inverted Design</h4>
 				<iframe width="98%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
-			</div>-->
+			</div>
 		</div>
 
 		<button id='scrollTo' class='tiny'>more...</button>

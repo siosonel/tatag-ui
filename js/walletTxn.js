@@ -33,7 +33,7 @@ function walletTxn(api) {
 		
 		$('#txnForm').css('display','block');
 		currInputs = currForm.inputs.required.concat(currForm.inputs.optional);
-		$('#txn-title').html(params.brand ? "Pay "+params.brand : currForm.title);	
+		$('#txn-title').html(params.brand ? "Pay "+params.brand : currForm.title);
 		currInputs.map(main[action]);
 	}
 	
@@ -224,8 +224,10 @@ function walletTxn(api) {
 		}
 		
 		var promo = res.promo[0];
+		if (typeof promo=='string') promo = api.byId[promo];
+
 		$('#txn-amount').val(promo.amount.toFixed(2));
-		$('#txn-title').html('Pay <b>'+ promo.brand_name +'</b>');
+		$('#txn-title').html('Pay <b>'+ promo.brand.name +'</b>');
 	}
 	
 	return main;

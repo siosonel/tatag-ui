@@ -9,49 +9,49 @@ var vizFunding = vizMini({
 },
 [
 	[ // 0
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 0, html: "Automatic, recurring funding issued as team budgets.", duration: 1500},
+		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 0, duration: 1500},
 		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
 
 		{id: "funding-team", top: 0.25, left: 0.46, opacity: 1},
 		{id: "funding-market", top: 0.5, left: 0.45, opacity: 1},
 		{id: "funding-regulation", top: 0.75, left: 0.45, opacity: 1},
 
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 0, html: "Scarce funding from lenders, investors, donors, etc."},
+		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 0},
 		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 0},
 		
 		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
 		{id: "funding-funder", top: 0.8, left: 0.5, opacity: 0}
 	],
 	[ // 1
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1, fastForward: true},
-		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0, html: "<span  class='funding-advantage'>Advantage<br/></span>Anyone can start or join a team with guaranteed funding. Defaults to 10.00 XTE units/week."},
+		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1,  html: "Automatic, recurring funding issued as team budgets."},
+		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
 
 		{id: "funding-team", top: 0.25, left: 0.46, opacity: 1},
 		{id: "funding-market", top: 0.5, left: 0.45, opacity: 0},
 		{id: "funding-regulation", top: 0.75, left: 0.45, opacity: 0},
 
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1},
-		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 0, html: "<br/>Teams have to compete for funding."},
+		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1, html: "Scarce funding from lenders, investors, donors, etc."},
+		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 0},
 		
 		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
 		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
 	],
 	[ // 2
 		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1},
-		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 1},
+		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 1, html: "<span  class='funding-advantage'>Advantage<br/></span>Anyone can start or join a team with guaranteed funding. Defaults to 10.00 XTE units/week."},
 
 		{id: "funding-team", top: 0.25, left: 0.46, opacity: 1},
 		{id: "funding-market", top: 0.5, left: 0.45, opacity: 0},
 		{id: "funding-regulation", top: 0.75, left: 0.45, opacity: 0},
 
 		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1},
-		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 1},
+		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 1, html: "<br/>Teams have to compete for funding."},
 
 		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
 		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
 	],
 	[ // 3
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 0, fastForward: true},
+		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 0},
 		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
 
 		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
@@ -65,7 +65,7 @@ var vizFunding = vizMini({
 		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
 	],
 	[ // 4
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1, fastForward: true, html: "Informed decision on whether to accept or reject a payment.", duration: 1500},
+		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1, html: "Informed decision on whether to accept or reject a payment.", duration: 1500},
 		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
 
 		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
@@ -93,7 +93,7 @@ var vizFunding = vizMini({
 		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
 	],
 	[ // 6
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 0, fastForward: true},
+		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 0},
 		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
 
 		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
@@ -107,14 +107,14 @@ var vizFunding = vizMini({
 		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
 	],
 	[ // 7
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1, fastForward: true, html: "How to promote the widespread and long-term acceptability of one's currency."},
+		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1, fastForward: true, html: "Tatag.cc does not need payment intermediaries or settlement."},
 		{id: "funding-leftLower", top: 0.55, left: 0.1, opacity: 0},
 
 		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
 		{id: "funding-market", top: 0.25, left: 0.45, opacity: 0},
 		{id: "funding-regulation", top: 0.25, left: 0.45, opacity: 1},
 
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1, html: "How to accumulate money."},
+		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1, html: "Transactions involve at least one payment intermediary, such as credit card companies."},
 		{id: "funding-rightLower", top: 0.55, left: 0.67, opacity: 0},
 		
 		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
@@ -122,14 +122,15 @@ var vizFunding = vizMini({
 	],
 	[ // 8
 		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1, fastForward: true},
-		{id: "funding-leftLower", top: 0.55, left: 0.1, opacity: 1, html: "<span class='funding-advantage'>Advantage<br/></span>Real-time advisories will continually improve using data-science techniques."},
+		{id: "funding-leftLower", top: 0.55, left: 0.1, opacity: 1, 
+		html: "<span class='funding-advantage'>Advantage<br/></span>No transaction fees, ever. Simply post a <a href='https://tatag.cc/for/ad-1' target='ad-1' style='text-decoration: underline'>payment link</a> in an online article, code, or video, and it should work!"},
 
 		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
 		{id: "funding-market", top: 0.25, left: 0.45, opacity: 0},
 		{id: "funding-regulation", top: 0.25, left: 0.45, opacity: 1},
 
 		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1},
-		{id: "funding-rightLower", top: 0.55, left: 0.67, opacity: 1, html: "Accumulated wealth does not imply contemporary value of the holder's economic participation."},
+		{id: "funding-rightLower", top: 0.55, left: 0.67, opacity: 1, html: "Additional fees may apply that decreases funding."},
 		
 		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
 		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
@@ -171,18 +172,18 @@ function vizMini(opts, elems) {
 			currIndex=i;
 		}
 		else if (i.target && i.target.id=='vizFundingNext') {
-			if (currIndex) paused = !paused; 
-			else currIndex++;
+			/*if (currIndex) paused = !paused; 
+			else*/ currIndex++;
 
-			if (paused) {
-				$('#vizFundingNext').html('play &#9658;');
+			/*if (paused) {
+				$('#vizFundingNext').html('next &#9658'); //('play &#9658;');
 				return;
-			}			
+			}*/			
 		}
 		else return;
 
 		if (currIndex >= elems.length) currIndex=0;
-		$('#vizFundingNext').html(currIndex ? 'pause ||' : 'play &#9658;');
+		$('#vizFundingNext').html('next &#9658;'); //(currIndex ? 'pause ||' : 'play &#9658;');
 
 		maxHeight = 1*container.style('height').replace('px','');
 		maxWidth = 1*container.style('width').replace('px',''); 
@@ -196,7 +197,7 @@ function vizMini(opts, elems) {
 			.style('top', top)
 			.style('left', left);
 
-		if (currIndex!=0) setTimeout(main, duration+2000);
+		if (currIndex!=0 && currIndex!=2 && currIndex!=5 && currIndex!=9) setTimeout(main, duration+1000);
 	}
 
 	function bindKey(d) {
