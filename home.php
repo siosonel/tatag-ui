@@ -118,34 +118,49 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				#funding-team, #funding-market, #funding-regulation {
 					cursor: pointer;
 				}
+
+				#funding-rightUpper, #funding-rightLower { 
+					width: 100%; 
+					top: 30%; 
+					text-align: center; 
+					margin: auto; 
+					padding: 0 3rem
+				}
+
+				#funding-rightLower ul {
+					padding-left: 1rem;
+				}
 			</style>
 			<div class='aboutItem' id='funding' style='position:relative; height:35rem;'>
-				<h4>Advantages</h4>
-				<button class='tiny' id='vizFundingNext'>next &#9658;</button>
+				<!--<h4>Data-driven platform</h4>-->
 
-				<h5 class='funding-title' style='top:10%; left: 15%'>tatag.cc<br/><u>platform</u></h5>
+				<!--<h5 class='funding-title' style='top:10%; left: 15%'>tatag.cc<br/><u>platform</u></h5>
 				<h5 class='funding-title' style='top:10%; left: 70%'>other<br/><u>platforms</u></h5>
 
-				<div id='funding-rightUpper' class='funding-wrapper' style='max-width: 32%; top: 30%; left: 20%;'></div>
-				<div id='funding-rightLower' class='funding-wrapper' style='max-width: 32%; top: 50%; left: 20%;'></div>
+				<div id='funding-leftUpper' class='funding-wrapper' style='max-width: 32%; top: 30%; left: 20%;'></div>
+				<div id='funding-leftLower' class='funding-wrapper' style='max-width: 32%; top: 50%; left: 20%;'></div>-->
 
-				<div id='funding-team' class='funding-wrapper' style='top: 25%; left: 46%;'>
-					<span class='fi-dollar-bill large' style='font-size: 3.5rem; color:#009988;'></span>
-					<h5>Funding<br/>Source</h5>			
+				<div id='funding-team' class='funding-wrapper' style='top: 20%; left: 20%;'>
+					<span class='fi-dollar-bill large' style='font-size: 3rem; color:#009988;'></span>
+					<h5>Practical</h5>			
 				</div>
-				<div id='funding-market' class='funding-wrapper' style='top: 50%; left: 45%;'>
-					<span class='fi-torsos-all large' style='font-size: 3rem; color:#acee55;'></span>
-					<h5>Payment<br/>Recipients</h5>
+				<div id='funding-market' class='funding-wrapper' style='top: 20%; left: 45%;'>
+					<span class='fi-heart large' style='font-size: 3rem; color:#bb5555;'></span>
+					<h5>Ethical</h5>
 				</div>
-				<div id='funding-regulation' class='funding-wrapper' style='top: 75%; left: 45%;'>
-					<span class='fi-price-tag large' style='font-size: 3rem; color:#bb5555;'></span>
-					<h5>Processing<br/>and Fees</h5>
+				<div id='funding-regulation' class='funding-wrapper' style='top: 20%; left: 70%;'>
+					<span class='fi-wrench' style='font-size: 3rem; color:#555555;'></span>
+					<h5>Technical</h5>
 				</div>
 
-				<div id='funding-leftUpper' class='funding-wrapper' style='max-width: 32%; top: 30%; left: 60%;'></div>
-				<div id='funding-leftLower' class='funding-wrapper' style='max-width: 32%; bottom: 10%; left: 60%;'></div>
+				<div id='funding-rightUpper' class='funding-wrapper' style='top: 30%'></div>
+				<div id='funding-rightLower' class='funding-wrapper' style='top: 50%'></div>
 
-				<div id='funding-arrow' class='funding-wrapper' style='width: 36px; top: 50%; left: 80%;'>
+				<div id='funding-nextBtn' class='funding-wrapper' style='top: 65%; left: 44%;'>
+					<button class='tiny' id='vizFundingNext'>next &#9658;</button>
+				</div>
+
+				<!--<div id='funding-arrow' class='funding-wrapper' style='width: 36px; top: 50%; left: 80%;'>
 					<div class='fi-arrow-right large' style='left: -2rem; font-size: 2rem;'></div>
 					<div class='' style='font-size: 2rem;'>$</div>
 					<div class='fi-arrow-right large' style='right: -1rem; font-size: 2rem;'></div>
@@ -156,7 +171,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<h5>Investor</h5>
 					<h5>Lender</h5>
 					<h5>Donor</h5>		
-				</div>
+				</div>-->
 			</div>
 
 			<!--<div class='aboutItem' id='howItWorks'>
@@ -167,7 +182,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<li><b>Use your revenue budget</b> to accept payments from reputable teams.</li>
 					<li><b>Repeat the budget cycle</b> to replenish what gets used.</li>
 				</ul>
-				<p>That's it. Tatag.cc is <i>not</i> a platform for raising money from lenders, investors, or donors. 
+				<p>That's it. Tatag is <i>not</i> a platform for raising money from lenders, investors, or donors. 
 				Instead, we help teams establish their <a href='#b-as-c'>budgets as digital currency</a>, using strict
 				accounting rules and data-driven reputation tracking.</p>
 			</div>-->
@@ -188,7 +203,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			<!--<div id='compareDiv' class='aboutItem'>
 				<h4>Compare</h4>
 				<div class='row'>
-					<div class='columns small-6'><b><u>tatag.cc platform</u></b></div>
+					<div class='columns small-6'><b><u>Tatag platform</u></b></div>
 					<div class='columns small-6'><b><u>other funding platforms</u></b></div>
 				</div>
 				<div class='row'>
@@ -212,7 +227,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<li>A team prioritizes the <b>widespread and long-term acceptability</b> of it's currency, 
 					instead of trying to always grow revenue and profit. This motivation promotes sustainable economic activity.</li>
 
-					<li>Tatag.cc offers a simple and <b>convenient monetization</b> approach for digital goods and services, 
+					<li>Tatag offers a simple and <b>convenient monetization</b> approach for digital goods and services, 
 					and thus sidesteps the need for advertisement-supported products such as music and software. Paste a 
 					a payment link anywhere, like this request for a donation: 
 					<a href='https://tatag.cc/for/ad-1' target='Ad-1'>https://tatag.cc/for/ad-1</a>.</li>
@@ -247,7 +262,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 					<!--<li>See the <a href='home-ratings'>average of ratings</a> given by users to organizations and companies</li>-->
 					<!--<li>Learn from the <a href='home-viz'>data visualizations</a> of budget activity as influenced by brand reputation</li>
 				</ul>
-				<p style='margin: 2rem auto; width: 40rem; max-width: 95%;'>Tatag.cc is <i>not</i> a platform for raising money from lenders, investors, or donors. 
+				<p style='margin: 2rem auto; width: 40rem; max-width: 95%;'>Tatag is <i>not</i> a platform for raising money from lenders, investors, or donors. 
 					Instead, we help teams establish their <a href='#b-as-c'>budgets as digital currency</a>, using strict
 					accounting rules and data-driven reputation tracking.</p>
 			</div>-->
@@ -263,10 +278,12 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 				<p id='vizGoalsDesign'></p>		
 				<div id='vizGoals'></div>				
 			</div>
-			<div class='aboutVid'>
-				<h4>Inverted Design</h4>
-				<iframe width="98%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
-			</div>
+			<?php if (SITE!='dev') { ?>
+				<div class='aboutVid'>
+					<h4>Inverted Design</h4>
+					<iframe width="98%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>
+				</div>
+			<?php } ?>
 		</div>
 
 		<button id='scrollTo' class='tiny'>more...</button>

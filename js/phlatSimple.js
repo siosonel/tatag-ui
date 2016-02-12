@@ -154,7 +154,7 @@ function phlatSimple(conf) {
 	function applyHints(r) {
 		if (!r) return;
 		var url = typeof r=='string' ? r : r['@id'];
-		if (url in hints && 'refresh' in hints[url]) {
+		if (url in hints && 'refresh' in hints[url] && url in byId) {
 			return hints[url].refresh;
 		}
 	}
@@ -172,7 +172,7 @@ function phlatSimple(conf) {
 		get[concept].addListener(fxn);
 		return main;
 	}
-	
+
 	main.init = function (url) {
 		if (url) rootURL = url;
 		
@@ -222,7 +222,7 @@ function phlatSimple(conf) {
 			success: function (res) {
 				if (!res) deferred.reject(new Error('No response body.'));
 				else {
-					if (res.hints) $.extend(true, hints, res.hints);
+					extendHints(res);
 					
 					if (!res['@graph']) { //console.log('type '+type+' '+res.body[_type])
 						res = {'@graph': [res]}; //coerce to graph layout
@@ -269,28 +269,40 @@ function phlatSimple(conf) {
 			else if (action.target.search(/\?/)==-1) params = '?'+ params;
 			else params = '&'+params;
 			
+			var relativeURL = action.target + params;
+			var fullURL = conf.baseURL + action.target + params;
+
 			$.ajax({
-				url: conf.baseURL + action.target + params,
+				url: fullURL,
 				type: action.method,
 				headers: headers,
 				cache: false,
 				dataType: 'json',
 				contentType: 'json',
 				data: JSON.stringify(action.inputs),
-				success: function (res) {
-					//perform cache invalidation for non-get requests					
-					if (action.method.toLowerCase() != 'get') { console.log(['deleting cached resource', action.target + params])
-						delete byId[action.target + params];
-						delete byId[conf.baseURL + action.target + params];
-					}
-					
+				success: function (res) {					
 					if (!res) deferred.reject(new Error('No response body.'));
 					else {
 						if (!res['@graph']) res = {'@graph': [res]};
+						extendHints(res);
+
+						//perform cache invalidation for non-get requests					
+						if (action.method.toLowerCase() != 'get' 
+							&& (!(relativeURL in hints) || !hints[relativeURL].refresh) 
+							&& (!(fullURL in hints) || !hints[fullURL].refresh)
+						) { 
+							console.log(['deleting cached resource', relativeURL]);
+							delete byId[relativeURL];
+							delete byId[fullURL];
+						}
+
 						res['@graph'].map(indexGraph);
 						for(var id in byIdRaw) linkToCachedInstance(byIdRaw[id]);
 						deferred.resolve(res['@graph'][0].pageOf && res['@graph'][0].pageOf in byId
-							? byId[res['@graph'][0].pageOf] : byId[res['@graph'][0]['@id']]);
+							? byId[res['@graph'][0].pageOf] 
+							: res['@graph'][0]['@id'] in byId ? byId[res['@graph'][0]['@id']]
+							: res['@graph'][0]
+						);
 					}
 					
 					if (resourceURL) main.loadId(resourceURL, true);
@@ -305,6 +317,8 @@ function phlatSimple(conf) {
 				
 		return deferred.promise;
 	}
+
+
 
 	main.baseURL = conf.baseURL;
 	main.byId = byId;

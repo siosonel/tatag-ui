@@ -24,7 +24,7 @@ function homePromos(api) {
 		$('#promosWrapper').append(
 			"<div class='row'>"
 			+	"<div class='columns small-8'>"
-			+  	"<a href=''>Help</a>"
+			+ 		"&nbsp;"
 			+	"</div>"
 			+	"<div class='columns small-4'>"
 			+	 	"<button id='addPromo' class='right tiny' style='margin:0;'>+New Promo</button>"
@@ -35,7 +35,7 @@ function homePromos(api) {
 	
 	function renderPromos(promos) {
 		currCollection = promos;
-		promos.items.map(renderItem);
+		promos.promo.sort(sortByIdDesc).map(renderItem);
 		paginate(promos);
 
 		if (main.postRenderFxn) {
@@ -45,16 +45,19 @@ function homePromos(api) {
 		
 		app.adjustHeight();
 	}
+
+	function sortByIdDesc(a,b) {
+		return isNaN(b.id) ? 0 : b.id - a.id;
+	}
 	
 	function renderItem(promo) {
 		var date = promo.created.split(' ')[0].split('-');
 		var divId = 'promos-'+ promo.promo_id;
 		app.resources[divId] = promo;
 		
-		var pencil = !promo['promo-edit'] ? ""
-			: " <span class='fi-pencil small'>&nbsp;</span>";
+		var pencil = !promo.edit ? "" : " <span class='fi-pencil small'>&nbsp;</span>";
 		
-		if (promo.imageTemplate) {
+		/*if (promo.imageTemplate) {
 			var template = api.byId[promo.imageTemplate];
 			var	image = template.data, d=template.delimiter, s=template.substitute;
 			
@@ -63,7 +66,7 @@ function homePromos(api) {
 			}
 		}
 		else if (promo.imageURL) var image ="<img src='"+image+"'>"; 
-		else var image="";
+		else*/ var image="";
 		
 		var dots = promo.description.length>50 ? '...' : ''; 
 		 
@@ -77,11 +80,11 @@ function homePromos(api) {
 			+ 		pencil +"<span class='promoTitle'><b>"+ promo.name.substr(0,100) +"</b></span><br />"
 			+ 		"<span class='tiny promoTitle'>By: <a href='/"+ promo.brand.id +"'>"+ promo.brand.name +"</a></span><br />"
 			+			"<button id='pay-"+ promo.promo_id +"' class='tiny' style='margin-bottom: 0.25rem;'>"+ promo.amount.toFixed(2) +" XTE</button><br />"
-			+			"<span class='morePrompt'>"+ promo.description.substr(0, 49) + dots + "<br />(more)</span>"
+			+			"<span class='morePrompt'>"+ promo.description.substr(0, 69) + dots //+ "<br />(more)</span>"
 			// +			(promo.infoURL ? "<a href='"+promo.imageURL+"'>More info</a><br />" : "")
 			// +			(promo.expires ? "Expires: "+ promo.expires +'<br />' : "")
 			// + date[1] +'/'+ date[2] +"<br/>"+ date[0]
-			// +			'Recipient Token: <b>' + promo.code +'</b><br />'
+			+			'<br />Pay: https://tatag.cc/for/' + promo.code +'<br />(more)</span>'
 			// +		"<span class='sharePrompt'>Share</span>"
 			+	"</div>"
 		)
@@ -109,7 +112,8 @@ function homePromos(api) {
 	main.clickHandler = function (e) {	
 		if (e.target.id=='addPromo') { 
 			if (!app.isLoggedOn()) { 
-				location.href = location.origin + location.pathname + '?login=1'; return;
+				window.open(location.origin + location.pathname + '?login=1'); 
+				return;
 			}
 
 			$('#promoID-formDiv').css('display','none');

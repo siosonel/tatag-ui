@@ -2,156 +2,70 @@ var vizFunding = vizMini({
 		containerId: '#funding', 
 		duration: 1500,
 		jumpTo: {
-			'funding-team': [1,2,3],
-			'funding-market': [4,5,6],
-			'funding-regulation': [7,8,9]
+			'funding-team': [1],
+			'funding-market': [2],
+			'funding-regulation': [3]
 		}
 },
 [
-	[ // 0
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 0, duration: 1500},
-		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
+	[
+		{id: "funding-team", top: 0.18, left: 0.18, opacity: 1, duration: 1500},
+		{id: "funding-market", top: 0.18, left: 0.45, opacity: 1},
+		{id: "funding-regulation", top: 0.18, left: 0.7, opacity: 1},
 
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 1},
-		{id: "funding-market", top: 0.5, left: 0.45, opacity: 1},
-		{id: "funding-regulation", top: 0.75, left: 0.45, opacity: 1},
+		{id: "funding-rightUpper", top: 0.4, left: 0, opacity: 1, html: "<h4>Tatag is a data-driven funding, payment, and reputation platform.</h4>"},
+		{id: "funding-rightLower", top: 0.5, left: 0, opacity: 0},
 
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 0},
-		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 0},
-		
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.8, left: 0.5, opacity: 0}
-	],
-	[ // 1
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1,  html: "Automatic, recurring funding issued as team budgets."},
-		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
+		{id: "funding-nextBtn", top: 0.65, left: 0.44, opacity: 1}
+	],	
+	[
+		{id: "funding-team", top: 0.18, left: 0.18, opacity: 1, duration: 1500},
+		{id: "funding-market", top: 0.18, left: 0.45, opacity: 0.5},
+		{id: "funding-regulation", top: 0.18, left: 0.7, opacity: 0.5},
 
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 1},
-		{id: "funding-market", top: 0.5, left: 0.45, opacity: 0},
-		{id: "funding-regulation", top: 0.75, left: 0.45, opacity: 0},
+		{id: "funding-rightUpper", opacity: 1, html: "<h4>Guaranteed Funding</h4>"},
+		{id: "funding-rightLower", opacity: 1, html: 
+			"<ul>"
+			+ "<li>Funding can be replenished on as-needed basis</li>"
+			+ "<li>The challenge is in getting funds accepted as payment by other teams.</li>"
+			+ "<li>We'll actively recruit users after the testing period, so there'll be more teams to transact with.</li>"
+			+ "</ul>"
+		},
+		{id: "funding-nextBtn", top: 0.1, left: 0.44, opacity: 1}
+	],	
+	[
+		{id: "funding-team", top: 0.18, left: 0.18, opacity: 0.5, duration: 1500},
+		{id: "funding-market", top: 0.18, left: 0.45, opacity: 1},
+		{id: "funding-regulation", top: 0.18, left: 0.7, opacity: 0.5},
 
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1, html: "Scarce funding from lenders, investors, donors, etc."},
-		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 0},
-		
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
-	],
-	[ // 2
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1},
-		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 1, html: "<span  class='funding-advantage'>Advantage<br/></span>Anyone can start or join a team with guaranteed funding. Defaults to 10.00 XTE units/week."},
+		{id: "funding-rightUpper", opacity: 1, html: "<h4>Sustainable Markets</h4>"},
+		{id: "funding-rightLower", opacity: 1, html: 
+			"<ul>"
+			+ "<li>Reject payments from disreputable teams.</li>"
+			+ "<li>Accept payments from reputable teams.</li>"
+			+ "<li>Sell goods and services to other teams who are not viably funded through other means.</li>"
+			+ "</ul>"
+		},
+		{id: "funding-nextBtn", top: 0.1, opacity: 1}
+	],	
+	[
+		{id: "funding-team", top: 0.18, left: 0.18, opacity: 0.5, duration: 1500},
+		{id: "funding-market", top: 0.18, left: 0.45, opacity: 0.5},
+		{id: "funding-regulation", top: 0.18, left: 0.7, opacity: 1},
 
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 1},
-		{id: "funding-market", top: 0.5, left: 0.45, opacity: 0},
-		{id: "funding-regulation", top: 0.75, left: 0.45, opacity: 0},
-
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1},
-		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 1, html: "<br/>Teams have to compete for funding."},
-
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
-	],
-	[ // 3
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 0},
-		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
-
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
-		{id: "funding-market", top: 0.25, left: 0.45, opacity: 1},
-		{id: "funding-regulation", top: 0.75, left: 0.45, opacity: 0},
-
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 0},
-		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 0},
-
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
-	],
-	[ // 4
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1, html: "Informed decision on whether to accept or reject a payment.", duration: 1500},
-		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
-
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
-		{id: "funding-market", top: 0.25, left: 0.45, opacity: 1},
-		{id: "funding-regulation", top: 0.75, left: 0.45, opacity: 0},
-
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1, html: "Guaranteed acceptability of payments."},
-		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 0},
-		
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.8, left: 0.5, opacity: 0}
-	],
-	[ // 5
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1},
-		{id: "funding-leftLower", top: 0.5, left: 0.1, opacity: 1, html: "<span  class='funding-advantage'>Advantage<br/></span>Goods and service providers encourage sustainable activity by rejecting payments from disreputable teams."},
-
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
-		{id: "funding-market", top: 0.25, left: 0.45, opacity: 1},
-		{id: "funding-regulation", top: 0.75, left: 0.45, opacity: 0},
-
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1},
-		{id: "funding-rightLower", top: 0.5, left: 0.67, opacity: 1, html: "Goods and service providers passively support any economic activity represented by a team's currency."},
-		
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
-	],
-	[ // 6
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 0},
-		{id: "funding-leftLower", top: 0.45, left: 0.1, opacity: 0},
-
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
-		{id: "funding-market", top: 0.25, left: 0.45, opacity: 0},
-		{id: "funding-regulation", top: 0.25, left: 0.45, opacity: 1},
-
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 0},
-		{id: "funding-rightLower", top: 0.45, left: 0.67, opacity: 0},
-
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
-	],
-	[ // 7
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1, fastForward: true, html: "Tatag.cc does not need payment intermediaries or settlement."},
-		{id: "funding-leftLower", top: 0.55, left: 0.1, opacity: 0},
-
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
-		{id: "funding-market", top: 0.25, left: 0.45, opacity: 0},
-		{id: "funding-regulation", top: 0.25, left: 0.45, opacity: 1},
-
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1, html: "Transactions involve at least one payment intermediary, such as credit card companies."},
-		{id: "funding-rightLower", top: 0.55, left: 0.67, opacity: 0},
-		
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.8, left: 0.5, opacity: 0}
-	],
-	[ // 8
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1, fastForward: true},
-		{id: "funding-leftLower", top: 0.55, left: 0.1, opacity: 1, 
-		html: "<span class='funding-advantage'>Advantage<br/></span>No transaction fees, ever. Simply post a <a href='https://tatag.cc/for/ad-1' target='ad-1' style='text-decoration: underline'>payment link</a> in an online article, code, or video, and it should work!"},
-
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
-		{id: "funding-market", top: 0.25, left: 0.45, opacity: 0},
-		{id: "funding-regulation", top: 0.25, left: 0.45, opacity: 1},
-
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1},
-		{id: "funding-rightLower", top: 0.55, left: 0.67, opacity: 1, html: "Additional fees may apply that decreases funding."},
-		
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
-	],
-	[ // 9
-		{id: "funding-leftUpper", top: 0.25, left: 0.1, opacity: 1},
-		{id: "funding-leftLower", top: 0.55, left: 0.1, opacity: 1},
-
-		{id: "funding-team", top: 0.25, left: 0.46, opacity: 0},
-		{id: "funding-market", top: 0.25, left: 0.45, opacity: 0},
-		{id: "funding-regulation", top: 0.25, left: 0.45, opacity: 1},
-
-		{id: "funding-rightUpper", top: 0.25, left: 0.67, opacity: 1},
-		{id: "funding-rightLower", top: 0.55, left: 0.67, opacity: 1},
-
-		{id: "funding-arrow", top: 0.6, left: 0.8, opacity: 0},		
-		{id: "funding-funder", top: 0.5, left: 0.8, opacity: 0}
+		{id: "funding-rightUpper", opacity: 1, html: "<h4>Rewarding Challenge</h4>"},
+		{id: "funding-rightLower", opacity: 1, html: 
+			"<ul>"
+			+ "<li>Infrastructure: should Tatag's ledger be decentralized, and how?</li>"
+			+ "<li>Reporting: auditable aggregation of hashed/chained reports + algorithm used.</li>"
+			+ "<li>Advising: evaluate teams and offer real-time advise on whether to accept or reject a payment offer.</li>"
+			+ "</ul>"
+		},
+		{id: "funding-nextBtn", top: 0.1, opacity: 1}
 	]
 ]).init(0);
 
-$('#vizFundingNext').click(vizFunding);
+$('#funding-nextBtn').click(vizFunding);
 
 
 function vizMini(opts, elems) {
@@ -192,12 +106,12 @@ function vizMini(opts, elems) {
 
 		divs.data(elems[currIndex])
 			.html(html)
-			.transition().duration(duration)
+		.transition().duration(duration)
 			.style('opacity', opacity)
 			.style('top', top)
 			.style('left', left);
 
-		if (currIndex!=0 && currIndex!=2 && currIndex!=5 && currIndex!=9) setTimeout(main, duration+1000);
+		//if (currIndex!=0 && currIndex!=3) setTimeout(main, duration+1000);
 	}
 
 	function bindKey(d) {
@@ -209,12 +123,12 @@ function vizMini(opts, elems) {
 	}
 
 	function top(d) {
-		if (!d || !('top' in d)) return;
+		if (!d || !('top' in d)) return this.style.top;
 		return maxHeight*d.top+'px';
 	}
 
 	function left(d) {
-		if (!d || !('left' in d)) return;
+		if (!d || !('left' in d)) return this.style.left;
 		return maxWidth*d.left+'px';
 	}
 
