@@ -3,12 +3,6 @@ function homeMain(conf) {
 	var clickedBrand = {};
 	var subDivHeight = {};
 	
-	var completer = autoComplete({
-		selector: '#ratings-reason',
-		source: autocompleteSource,
-		minLength: 2
-	});
-	
 	var api = phlatSimple({
 		'userid': conf.userid, 
 		'pass': conf.pass,
@@ -23,22 +17,30 @@ function homeMain(conf) {
 		
 		history.replaceState({}, "home", "/ui/home-"+ app.currView);
 		
-		//main.ratings = homeRatings(api);
-		main.viz = homeViz(api);
-		main.promos = homePromos(api);
-		main.about = homeAbout(api);
-		main.forms = adminForms(api);
-		main.me = me();
-		
+		if (typeof homeRatings == 'function') main.ratings = homeRatings(api);
+		if (typeof homeViz == 'function') main.viz = homeViz(api);
+		if (typeof homePromos == 'function') main.promos = homePromos(api);
+		if (typeof homeAbout == 'function') main.about = homeAbout(api);
+		if (typeof adminForms == 'function') main.forms = adminForms(api);
+
+		main.me = me();		
 		init();
 				
 		$('#viewTypeDiv').click(main.clickHandler);
-		//$('#ratingsWrapper').click(main.ratings.clickHandler);
-		$('#promosWrapper').click(main.promos.clickHandler);
-		$('.formModal').click(main.forms.clickHandler);
 		
-		//$('#ratings-rating').val(90);
-		//$('#ratings-reason').on('input', completer);
+		if (main.forms) $('.formModal').click(main.forms.clickHandler);
+		if (main.promos) $('#promosWrapper').click(main.promos.clickHandler);
+		if (main.ratings) {
+			main.completer = autoComplete({
+				selector: '#ratings-reason',
+				source: autocompleteSource,
+				minLength: 2
+			});
+
+			$('#ratingsWrapper').click(main.ratings.clickHandler);
+			$('#ratings-rating').val(90);
+			$('#ratings-reason').on('input', main.completer);
+		}
 	});
 	
 	function init() {
@@ -67,8 +69,9 @@ function homeMain(conf) {
 			app.currView = 'promos';
 		}
 		
-		$currDiv = $('#'+ app.currView+"Wrapper");
-		$('#'+ app.currView +'ViewPrompt').trigger('click');
+		$('#'+app.currView+"ViewPrompt").css('color','#ff0');
+		$currDiv = $('#'+ app.currView+"Wrapper").css('display','block');
+		main[app.currView](User);
 	}
 	
 	function openForm() {
@@ -108,17 +111,18 @@ function homeMain(conf) {
 			: elemId.search('promo') != -1 ?  'promos'
 			: elemId.search('viz') != -1 ?  'viz'
 			: elemId.search('about') != -1 ?  'about'
-			: '';
+			: ''; console.log([app.currView, view])
 		
-		if (view) {
-			$('#'+app.currView+'ViewPrompt').css('color','#fff');
+		if (view && app.currView != view) {
+			location.href = location.origin + '/ui/home-'+ view;
+			/*$('#'+app.currView+'ViewPrompt').css('color','#fff');
 			app.currView = view;
 			$('#'+view+'ViewPrompt').css('color','#ff0');
 			
 			$currDiv.css('display','none');
 			$currDiv = $('#'+view+'Wrapper').css('display','block');
 			app[view](User);		
-			history.replaceState({}, "home", "/ui/home-"+ app.currView);
+			history.replaceState({}, "home", "/ui/home-"+ app.currView);*/			
 		}
 	}
 	
@@ -179,7 +183,6 @@ function homeMain(conf) {
 		$('#mainWrapper').css('min-height', (subDivHeight[view]+h)+'px');
 	}
 	
-	main.completer = completer;
 	main.currView = 'about';
 	
 	main.isLoggedOn = function () {

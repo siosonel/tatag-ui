@@ -9,59 +9,61 @@ var vizFunding = vizMini({
 },
 [
 	[
-		{id: "funding-team", top: 0.18, left: 0.18, opacity: 1, duration: 1500},
-		{id: "funding-market", top: 0.18, left: 0.45, opacity: 1},
-		{id: "funding-regulation", top: 0.18, left: 0.7, opacity: 1},
+		{id: "funding-team", top: 0.15, left: 0.18, opacity: 1, duration: 1500},
+		{id: "funding-market", top: 0.15, left: 0.45, opacity: 1},
+		{id: "funding-regulation", top: 0.15, left: 0.7, opacity: 1},
 
-		{id: "funding-rightUpper", top: 0.4, left: 0, opacity: 1, html: "<h4>Tatag is a data-driven funding, payment, and reputation platform.</h4>"},
-		{id: "funding-rightLower", top: 0.5, left: 0, opacity: 0},
+		{id: "funding-rightUpper", top: 0.6, left: 0, opacity: 1, html: "<h4>Tatag is a data-driven funding, payment, and reputation platform.</h4>"},
+		{id: "funding-rightLower", top: 0.8, left: 0, opacity: 1, html: 
+			"<h5 style=''>Try it - <a href='https://tatag.cc/for/software-1' target='software-1'>https://tatag.cc/for/software-1</a></h5>"
+		},
 
-		{id: "funding-nextBtn", top: 0.65, left: 0.44, opacity: 1}
+		{id: "funding-nextBtn", top: 0.4, left: 0.44, opacity: 1}
 	],	
 	[
-		{id: "funding-team", top: 0.18, left: 0.18, opacity: 1, duration: 1500},
-		{id: "funding-market", top: 0.18, left: 0.45, opacity: 0.5},
-		{id: "funding-regulation", top: 0.18, left: 0.7, opacity: 0.5},
+		{id: "funding-team", top: 0.15, left: 0.18, opacity: 1, duration: 1500},
+		{id: "funding-market", top: 0.15, left: 0.45, opacity: 0.5},
+		{id: "funding-regulation", top: 0.15, left: 0.7, opacity: 0.5},
 
-		{id: "funding-rightUpper", opacity: 1, html: "<h4>Guaranteed Funding</h4>"},
-		{id: "funding-rightLower", opacity: 1, html: 
+		{id: "funding-rightUpper", top: 0.4, opacity: 1, html: "<h4>Guaranteed Funding</h4>"},
+		{id: "funding-rightLower", top: 0.5, left: 0, opacity: 1, html: 
 			"<ul>"
-			+ "<li>Funding can be replenished on as-needed basis</li>"
-			+ "<li>The challenge is in getting funds accepted as payment by other teams.</li>"
+			+ "<li>No need to compete for scarce funding.</li>"
+			+ "<li>The challenge is in getting your funds accepted as payment by other teams.</li>"
 			+ "<li>We'll actively recruit users after the testing period, so there'll be more teams to transact with.</li>"
 			+ "</ul>"
 		},
-		{id: "funding-nextBtn", top: 0.1, left: 0.44, opacity: 1}
+		{id: "funding-nextBtn", top: 0.3, left: 0.44, opacity: 1}
 	],	
 	[
-		{id: "funding-team", top: 0.18, left: 0.18, opacity: 0.5, duration: 1500},
-		{id: "funding-market", top: 0.18, left: 0.45, opacity: 1},
-		{id: "funding-regulation", top: 0.18, left: 0.7, opacity: 0.5},
+		{id: "funding-team", top: 0.15, left: 0.18, opacity: 0.5, duration: 1500},
+		{id: "funding-market", top: 0.15, left: 0.45, opacity: 1},
+		{id: "funding-regulation", top: 0.15, left: 0.7, opacity: 0.5},
 
-		{id: "funding-rightUpper", opacity: 1, html: "<h4>Sustainable Markets</h4>"},
-		{id: "funding-rightLower", opacity: 1, html: 
+		{id: "funding-rightUpper", top: 0.4, opacity: 1, html: "<h4>Sustainable Markets</h4>"},
+		{id: "funding-rightLower", top: 0.5, left: 0, opacity: 1, html: 
 			"<ul>"
 			+ "<li>Reject payments from disreputable teams.</li>"
 			+ "<li>Accept payments from reputable teams.</li>"
 			+ "<li>Sell goods and services to other teams who are not viably funded through other means.</li>"
 			+ "</ul>"
 		},
-		{id: "funding-nextBtn", top: 0.1, opacity: 1}
+		{id: "funding-nextBtn", top: 0.3, left: 0.44, opacity: 1}
 	],	
 	[
-		{id: "funding-team", top: 0.18, left: 0.18, opacity: 0.5, duration: 1500},
-		{id: "funding-market", top: 0.18, left: 0.45, opacity: 0.5},
-		{id: "funding-regulation", top: 0.18, left: 0.7, opacity: 1},
+		{id: "funding-team", top: 0.15, left: 0.18, opacity: 0.5, duration: 1500},
+		{id: "funding-market", top: 0.15, left: 0.45, opacity: 0.5},
+		{id: "funding-regulation", top: 0.15, left: 0.7, opacity: 1},
 
-		{id: "funding-rightUpper", opacity: 1, html: "<h4>Rewarding Challenge</h4>"},
-		{id: "funding-rightLower", opacity: 1, html: 
+		{id: "funding-rightUpper", top: 0.4, opacity: 1, html: "<h4>Rewarding Challenge</h4>"},
+		{id: "funding-rightLower", top: 0.5, left: 0, opacity: 1, html: 
 			"<ul>"
 			+ "<li>Infrastructure: should Tatag's ledger be decentralized, and how?</li>"
 			+ "<li>Reporting: auditable aggregation of hashed/chained reports + algorithm used.</li>"
 			+ "<li>Advising: evaluate teams and offer real-time advise on whether to accept or reject a payment offer.</li>"
 			+ "</ul>"
 		},
-		{id: "funding-nextBtn", top: 0.1, opacity: 1}
+		{id: "funding-nextBtn", top: 0.3, left: 0.44, opacity: 1}
 	]
 ]).init(0);
 
