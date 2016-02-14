@@ -16,11 +16,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<script type="text/javascript" src="/ui/js/phlatSimple.js"></script>
 	<script type="text/javascript" src="/ui/js/phlatDriver.js"></script>
 	
-	<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>-->
-	
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
-  <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
+  	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
 	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
 	
   <!--<link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick.css"/>

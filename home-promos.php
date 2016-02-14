@@ -89,6 +89,9 @@
 	<a class="close-reveal-modal">&times;</a>
 </div>		
 
+<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>
+<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
+
 <script src='/ui/js/adminForms.js'></script>
 <script src='/ui/js/homeMain.js'></script>	
 <script src='/ui/js/homePromos.js'></script>

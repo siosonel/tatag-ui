@@ -13,10 +13,8 @@ var vizFunding = vizMini({
 		{id: "funding-market", top: 0.15, left: 0.45, opacity: 1},
 		{id: "funding-regulation", top: 0.15, left: 0.7, opacity: 1},
 
-		{id: "funding-rightUpper", top: 0.6, left: 0, opacity: 1, html: "<h4>Tatag is a data-driven funding, payment, and reputation platform.</h4>"},
-		{id: "funding-rightLower", top: 0.8, left: 0, opacity: 1, html: 
-			"<h5 style=''>Try it - <a href='https://tatag.cc/for/software-1' target='software-1'>https://tatag.cc/for/software-1</a></h5>"
-		},
+		{id: "funding-rightUpper", top: 0.55, left: 0, opacity: 1, html: "<h4>Tatag is a platform for recognizing value in what people do.</h4>"},
+		{id: "funding-rightLower", top: 0.65, left: 0, opacity: 0, html: ""},
 
 		{id: "funding-nextBtn", top: 0.4, left: 0.44, opacity: 1}
 	],	

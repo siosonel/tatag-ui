@@ -88,6 +88,19 @@
 		</div>
 	</div>
 
+	<div class='aboutItem' style='position: relative; min-height: 15rem; padding-top: 3rem;'>
+		<h4>Try it!</h4>
+		<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
+			<li>Browse <a href='/ui/home-promos'>the promos</a></li>
+			<li>Embed a payment link anywhere such as: <a href='https://tatag.cc/for/software-1' target='software-1'>Donate 1.00 XTE</a></li>
+			<li>
+				<a href='https://github.com/siosonel/tatag-api/blob/master/CONTRIBUTING.md'>Develop apps</a>, 
+				see the <a href='https://tatag.cc/api/ref/docs.html'>API documentation</a>
+			</li>
+		</ul>
+		<p>or learn more below</p>
+	</div>
+
 	<div class='aboutItem' style='position: relative;'>
 		<h4>Influence the future</h4>
 		<p id='vizSimpleExplained' style='margin-bottom: 0.2rem;'></p>			
@@ -140,6 +153,10 @@
 		vizGoals.checkWidth = setInterval(vizGoals.init, 1000);
 		
 		$('#accessSkew').on('change',vizSimple.resetData);
-		$(window).on('resize', function () {vizSimple(); vizGoals(); vizFunding(0);});
+		$(window).on('resize', function () {
+			vizSimple(); 
+			vizGoals(); 
+			vizFunding(0);
+		});
 	});
 </script>
