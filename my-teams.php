@@ -111,6 +111,16 @@
 						</div>
 					</div>
 					<div class='row'>
+						<div class='columns small-6'>
+							<label for='promos-keyword'><b>Keyword</b> for promo code,<br /> 
+								e.g. <b>food</b>-111, <b>ride</b>-18
+							</label>
+						</div>
+						<div class='columns small-6'>
+							<input type='text' id='promos-keyword' value='ad' /></label>
+						</div>
+					</div>
+					<!--<div class='row'>
 						<div class='columns small-12'>
 							<label>Image URL<input type='text' id='promos-imageURL' value='' /></label>
 						</div>
@@ -119,7 +129,7 @@
 						<div class='columns small-12'>
 							<label>Link<input type='text' id='promos-infoURL' value='' /></label>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				
 				<div id='promoRelayDiv'>

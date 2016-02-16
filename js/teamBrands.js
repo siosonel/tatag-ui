@@ -88,7 +88,13 @@ function teamBrands(api) {
 		);
 		
 		
-		if (numRendered==currMemberships.length) app.adjustHeight();
+		if (numRendered==currMemberships.length) {
+			app.adjustHeight();
+			if (app.hash && typeof app[app.hash]=='function') {
+				var id = $('#brandsWrapper').children().first().attr('id');
+				$('#'+id+'-'+app.hash).trigger('click');
+			}
+		}
 	}
 	
 	main.brandColors = (function () {

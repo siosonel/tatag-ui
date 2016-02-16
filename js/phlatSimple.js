@@ -287,7 +287,8 @@ function phlatSimple(conf) {
 						extendHints(res);
 
 						//perform cache invalidation for non-get requests					
-						if (action.method.toLowerCase() != 'get' 
+						if (!('@id' in res['@graph'][0])
+							&& action.method.toLowerCase() != 'get' 
 							&& (!(relativeURL in hints) || !hints[relativeURL].refresh) 
 							&& (!(fullURL in hints) || !hints[fullURL].refresh)
 						) { 

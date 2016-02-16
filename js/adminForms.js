@@ -5,11 +5,11 @@ function adminForms(api) {
 	var dateInputs = ['ended', 'joined', 'revoked'];
 
 	function main(div, type, form, altType, altFormTarget) {
-		currResource = typeof div=='string' ? app.resources[div] : div;
+		currResource = typeof div=='string' ? app.resources[div] : div; 
 		currType = type;
 		currForm = typeof form=='string' ? api.byId[form] : form;
 		currAltType = altType ? altType : "";
-		currForm.target = arguments.length==5 ? altFormTarget : null;		
+		currForm.target = arguments.length==5 ? altFormTarget : null;
 		
 		renderForm();
 		$('#'+currType+'-formTitle').html(currForm.title); 
@@ -76,18 +76,26 @@ function adminForms(api) {
 	function setTempVals(inputName) {
 		tempVals[currType][inputName] = $('#'+currType+'-'+inputName).val();
 	}
+
+	main.currForm = function (form) {
+		if (form) currForm = form;
+	}
 	
 	main.clickHandler = function formClick(e) {		
 		if (e.target.id.search('-cancel')!=-1) {$('#'+currType+'Modal').foundation('reveal','close'); return;}
 		if (e.target.id.search('-submit')==-1) return;
 		
 		var query = {};
-		if (currForm.query) currForm.query.required.map(function (param) {query[param] = currResource[param]});
+		if (currForm.query) currForm.query.required.concat(currForm.query.optional)
+			.map(function (param) {
+				if (param in currResource) query[param] = currResource[param];
+				else if ($('#'+currType+'-'+param).length) query[param] = $('#'+currType+'-'+param).val();
+			});
 		
 		action = {
 			target: currForm.target ? currForm.target : currResource['@id'], 
 			query: query,
-			method:'post', 
+			method: currForm.method, 
 			inputs:{}
 		};
 		
@@ -97,7 +105,7 @@ function adminForms(api) {
 			action.inputs[inputName] = $('#'+currType+'-'+inputName).val();
 		}); //console.log(action); return;
 		
-		api.request(action).then(main.refreshViews, app.errHandler);
+		api.request(action).then(currForm.callBack ? currForm.callBack : main.refreshViews, app.errHandler);
 	}
 	
 	main.refreshViews = function (res) { //console.log(currAltType+' '+currType); console.log(currResource);

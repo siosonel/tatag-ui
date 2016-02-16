@@ -11,36 +11,51 @@ function homePromos(api) {
 		app.currView = 'promos';
 		
 		var url = currUser.promos;
-		$('#promosWrapper').children().remove();
-		$('#promosWrapper').append(setTitle(currUser));
-
-		//refresh info as needed using second argument to loadId
-		api.loadConcept('public-promos').then(renderPromos, app.errHandler);
+		
+		if (app.hash=='search') actOnHash("search", "block");
+		else if (app.hash=='popular') actOnHash("popular", "none", "promos-popular");
+		else actOnHash("latest", "none", "promos");
 
 		$('#scrollTo').off('click').on('click', main.scrollMore);
 	}
 	
-	function setTitle() {
-		$('#promosWrapper').append(
-			"<div class='row'>"
-			+	"<div class='columns small-8'>"
-			+ 		"&nbsp;"
-			+	"</div>"
-			+	"<div class='columns small-4'>"
-			+	 	"<button id='addPromo' class='right tiny' style='margin:0;'>+New Promo</button>"
-			+ "</div>"
-			+"</div>"
-		);
+	function actOnHash(hash, formDisplay, concept) {
+		$('#promos-'+hash).css('text-decoration', 'underline');
+		
+		if (concept) {
+			api.loadConcept("public-"+concept).then(renderPromos, app.errHandler);
+		}
+
+		if (hash=='search') {
+			var promos;
+			api.loadConcept('public-promos').then(function (res) {
+				promos = res;
+				return api.loadId(res.search)
+			}).then(function (form) {
+				form.callBack = renderPromos;
+				app.forms(promos, 'search', form);
+			}, app.errHandler);
+		}
 	}
 	
 	function renderPromos(promos) {
-		currCollection = promos;
-		promos.promo.sort(sortByIdDesc).map(renderItem);
-		paginate(promos);
+		$('#promosWrapper').children().remove();
+		if (!promos || !promos.promo.length) {
+			$('#promosWrapper').html(
+				app.hash=="search" ? "<br/><br/><h5>No matching promo results found. Please revise your search keyword, brand, and/or price.</h5>"
+				: app.hash=="popular" ? "<br/><br/><h5>No active popular promo collection items found.</h5>"
+				: "<br/><br/><h5>There are no active promos. <a href='/ui/my-teams#promos'>Add or reactivate a promo</a> to get things started</a>.</h5>"
+			);
+		}
+		else {
+			currCollection = promos;
+			promos.promo.sort(sortByIdDesc).map(renderItem);
+			paginate(promos);
 
-		if (main.postRenderFxn) {
-			main.postRenderFxn();
-			main.postRenderFxn = null;
+			if (main.postRenderFxn) {
+				main.postRenderFxn();
+				main.postRenderFxn = null;
+			}
 		}
 		
 		app.adjustHeight();
@@ -109,8 +124,11 @@ function homePromos(api) {
 		);
 	}
 	
-	main.clickHandler = function (e) {	
-		if (e.target.id=='addPromo') { 
+	main.clickHandler = function (e) { console.log(e)
+		if (e.target.id=='search-submit') { console.log(app.api.byConcept['public-promos']);
+			app.api.forms(app.api.byConcept['public-promos'], 'search', app.api.byConcept['public-promos'].search);
+		}
+		else if (e.target.id=='addPromo') { 
 			if (!app.isLoggedOn()) { 
 				window.open(location.origin + location.pathname + '?login=1'); 
 				return;
@@ -166,6 +184,9 @@ function homePromos(api) {
 		
 		$('#promos-brand_id').prop('disabled',true).val(promo.brand.name);
 		app.forms(divId, 'promos', promo.edit);
+	}
+
+	main.searchSubmit = function (e) {
 	}
 	
 	return main;

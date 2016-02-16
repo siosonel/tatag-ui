@@ -35,8 +35,6 @@
 	}
 </style>
 
-
-
 <div id='aboutWrapper'>
 	<div id='aboutBanner'>
 		<img src='/ui/css/logo5.png' class='aboutLogo'/>
@@ -88,11 +86,12 @@
 		</div>
 	</div>
 
-	<div class='aboutItem' style='position: relative; min-height: 15rem; padding-top: 3rem;'>
+	<div class='aboutItem' style='position: relative; min-height: 23rem; padding-top: 3rem;'>
 		<h4>Try it!</h4>
 		<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
 			<li>Browse <a href='/ui/home-promos'>the promos</a></li>
-			<li>Embed a payment link anywhere such as: <a href='https://tatag.cc/for/software-1' target='software-1'>Donate 1.00 XTE</a></li>
+			<li>Link to a <a href='https://tatag.cc/ad/1' target='software-1'>promo page</a> or <a href='https://tatag.cc/for/software-1' target='software-1'>recipient token (software-1)</a> anywhere
+			</li>
 			<li>
 				<a href='https://github.com/siosonel/tatag-api/blob/master/CONTRIBUTING.md'>Develop apps</a>, 
 				see the <a href='https://tatag.cc/api/ref/docs.html'>API documentation</a>
@@ -101,7 +100,7 @@
 		<p>or learn more below</p>
 	</div>
 
-	<div class='aboutItem' style='position: relative;'>
+	<div id='advantages' class='aboutItem' style='position: relative;'>
 		<h4>Influence the future</h4>
 		<p id='vizSimpleExplained' style='margin-bottom: 0.2rem;'></p>			
 		<button class='tiny' id='vizSimpleNext'></button>
@@ -114,7 +113,7 @@
 	</div>
 
 
-	<div class='aboutItem' id=''>
+	<div id='budgets-as-currency' class='aboutItem' id=''>
 		<a name='b-as-c'></a>
 		<h4>Budgets-as-Currency</h4>
 		<button class='tiny' id='vizGoalsNext'></button>

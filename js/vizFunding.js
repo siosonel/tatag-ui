@@ -41,9 +41,9 @@ var vizFunding = vizMini({
 		{id: "funding-rightUpper", top: 0.4, opacity: 1, html: "<h4>Sustainable Markets</h4>"},
 		{id: "funding-rightLower", top: 0.5, left: 0, opacity: 1, html: 
 			"<ul>"
+			+ "<li>Select an Advisor application that best fits your team's values.</li>"
 			+ "<li>Reject payments from disreputable teams.</li>"
-			+ "<li>Accept payments from reputable teams.</li>"
-			+ "<li>Sell goods and services to other teams who are not viably funded through other means.</li>"
+			+ "<li>Accept payments from reputable teams, especially those who are not viably funded through other means.</li>"
 			+ "</ul>"
 		},
 		{id: "funding-nextBtn", top: 0.3, left: 0.44, opacity: 1}

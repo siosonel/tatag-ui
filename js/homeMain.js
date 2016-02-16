@@ -2,6 +2,7 @@ function homeMain(conf) {
 	var User, resources={}, refresh=0, params;
 	var clickedBrand = {};
 	var subDivHeight = {};
+	var hashVals = ["latest","popular","search"];
 	
 	var api = phlatSimple({
 		'userid': conf.userid, 
@@ -10,12 +11,13 @@ function homeMain(conf) {
 	});
 	
 	$(document).ready(function () {
+		main.hash = location.hash.substr(1);
 		params = main.getQueryParams();
 		app.currView = location.pathname.search('-')!=-1 ? location.pathname.split('-').pop()
 			: conf.userid && conf.userid!="0" ? 'promos'
 			: 'about';
 		
-		history.replaceState({}, "home", "/ui/home-"+ app.currView);
+		history.replaceState({}, "home", "/ui/home-"+ app.currView + location.hash);
 		
 		if (typeof homeRatings == 'function') main.ratings = homeRatings(api);
 		if (typeof homeViz == 'function') main.viz = homeViz(api);
@@ -29,7 +31,9 @@ function homeMain(conf) {
 		$('#viewTypeDiv').click(main.clickHandler);
 		
 		if (main.forms) $('.formModal').click(main.forms.clickHandler);
+		
 		if (main.promos) $('#promosWrapper').click(main.promos.clickHandler);
+		
 		if (main.ratings) {
 			main.completer = autoComplete({
 				selector: '#ratings-reason',
@@ -41,6 +45,8 @@ function homeMain(conf) {
 			$('#ratings-rating').val(90);
 			$('#ratings-reason').on('input', main.completer);
 		}
+
+		$('a', '#promoBar').click(hashHandler);
 	});
 	
 	function init() {
@@ -85,6 +91,14 @@ function homeMain(conf) {
 	
 	function clickAddRatingBtn() {
 		$('#addRating').click();
+	}
+
+	function hashHandler(e) {
+		main.hash = e && e.target && e.target.id ? e.target.id.split('-')[1] : location.hash.substr(1);
+		if (hashVals.indexOf(main.hash)==-1) return;
+
+		$("a", "#promoBar").css("text-decoration","none");
+		main[app.currView](User);
 	}
 	
 	main.params = {}

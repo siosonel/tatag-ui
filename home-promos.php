@@ -1,6 +1,42 @@
-<div id='promosWrapper' class="row"></div>
+<div id='promoBar'>
+	<a  href='#latest' id='promos-latest'>Latest</a> |
+	<a href='#popular' id='promos-popular'>Popular</a> |
+	<a href='#search'  id='promos-search'>Search</a> |
+	<a href='/ui/my-teams#promos' id='promos-my' target='Team Promos'>My Promos</a>
+</div>
+
+
+<div id='promosWrapper' class="row" style='position:relative;'></div>
 
 <button id='scrollTo' class='tiny'>more...</button>
+
+
+<div id='searchModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px; padding:0.5rem;' data-reveal>
+	<h4 id='promos-formTitle'>Search Promos</h4>
+	<form>
+		<div class='row' id='promoID-formDiv'>
+			<div class='row'>
+				<div class='columns small-12'>
+					<label>Keyword<input type='text' id='search-keyword' value=''/></label>
+				</div>
+				<div class='columns small-12'>
+					<label>Brand name or #<input type='text' id='search-brand_id' value='' /></label>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='columns small-6'>
+					<label>Amount Min<input type='text' id='search-amount_min' value='0'/></label>
+				</div>
+				<div class='columns small-6'>
+					<label>Amount Max<input type='text' id='search-amount_max' value='99999'/></label>
+				</div>
+			</div>
+		</div>
+	</form>
+	<button id='search-submit' class='tiny'>Submit</button>
+	<a class="close-reveal-modal">&times;</a>
+</div>
+
 
 <div id='promosModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
 	<div id='promosForm'>		

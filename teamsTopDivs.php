@@ -16,7 +16,7 @@
 		
 		<script>		
 		$(document).ready(function () {
-			history.replaceState({}, "team", location.pathname);
+			history.replaceState({}, "team", location.pathname + location.hash);
 			var view = location.pathname.replace("\/ui\/","");
 			
 			$('#'+view).css({'color': '#ff0', 'opacity': 1, 'font-weight':700});

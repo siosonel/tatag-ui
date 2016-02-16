@@ -2,7 +2,7 @@ function adminPromos(api) {
 	var currBrand, currResource, currCollection;
 	
 	function main(brand) {
-		if (brand) currBrand = brand; 
+		if (brand) currBrand = brand;
 		if (!currBrand || app.currView != 'promos') return;
 		app.currView = 'promos';
 		
@@ -39,11 +39,12 @@ function adminPromos(api) {
 	}
 	
 	function renderItem(promo) {
+		var relay = promo.relay;
 		var date = promo.created.split(' ')[0].split('-');
 		var divId = 'promos-'+ promo.id;
 		app.resources[divId] = promo;
 		app.resources[divId+'-details'] = promo;
-		app.resources[divId+'-relay'] = promo;
+		app.resources[divId+'-relay'] = relay;
 		
 		var pencil = "<span class='fi-pencil small'>&nbsp;</span>";
 		
@@ -61,9 +62,9 @@ function adminPromos(api) {
 		+			"Created: "+ date[1] +'/'+ date[2] +"/"+ date[0]
 		+		"</div>"
 		+		"<div id='"+ divId +"-relay' class='small-12 columns promoLimits' style='text-align: left; margin-bottom:10px;'>"
-		+			"<b>Usage Limits per Week:</b> "+ (promo.relay.edit ? pencil : "") +"<br />"
-		+			"Total: "+ promo.by_all_limit +', By Brand: '+ promo.by_brand_limit +', By User: '+ promo.by_user_limit + "<br />"
-		+ 		"A user must wait "+ promo.by_user_wait +" hour(s) before reusing"
+		+			"<b>Usage Limits per Week:</b> "+ (relay.edit ? pencil : "") +"<br />"
+		+			"Total: "+ relay.by_all_limit +', By Brand: '+ relay.by_brand_limit +', By User: '+ relay.by_user_limit + "<br />"
+		+ 		"A user must wait "+ relay.by_user_wait +" hour(s) before reusing"
 		+		"</div>"
 			+'</div>'
 		)
@@ -92,19 +93,20 @@ function adminPromos(api) {
 		var divId = app.getDivId(e, 'promos');
 		if (!divId) return;
 		
+
+		var resource = app.resources[divId];
 		var type = divId.split('-').pop();
-		var promo = app.resources[divId];
-		$('#promos-id').val(promo.id);
+		$('#promos-promo_id').val(resource.id);
 		
-		if (type=='relay' && promo.relay.edit) {
+		if (type=='relay' && resource.edit) {
 			$('#promoHolderIdDiv, #promoDetailsDiv').css('display','none');
 			$('#promoID-formDiv, #promoRelayDiv').css('display','block');
-			app.forms(promo.relay, 'promos', '/form/relay-edit');
+			app.forms(resource, 'promos', resource.edit);
 		}
 		else if (type=='details') {
 			$('#promoHolderIdDiv, #promoRelayDiv').css('display','none');
 			$('#promoID-formDiv, #promoDetailsDiv').css('display','block');
-			app.forms(divId, 'promos', promo.edit);
+			app.forms(resource, 'promos', resource.edit);
 		}
 	}
 	
