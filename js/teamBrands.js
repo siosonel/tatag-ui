@@ -91,8 +91,10 @@ function teamBrands(api) {
 		if (numRendered==currMemberships.length) {
 			app.adjustHeight();
 			if (app.hash && typeof app[app.hash]=='function') {
-				var id = $('#brandsWrapper').children().first().attr('id');
+				var id = $('#brandsWrapper').children().last().attr('id');
 				$('#'+id+'-'+app.hash).trigger('click');
+				history.replaceState({}, "Teams", location.pathname); 
+				app.hash = "";
 			}
 		}
 	}

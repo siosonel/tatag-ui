@@ -61,6 +61,9 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		<button id='vizViewPrompt' class='small-4 tiny'>Viz</button>
 	</div>
 
+	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
+
 	<div id='mainWrapper'>
 		<?php
 			$handler = str_replace("/", "", $_GET['_url']);

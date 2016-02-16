@@ -22,11 +22,17 @@ function homePromos(api) {
 	function actOnHash(hash, formDisplay, concept) {
 		$('#promos-'+hash).css('text-decoration', 'underline');
 		
+		if (hash!='search') {
+			$('#searchDiv').css('display', 'none');
+		}
+
 		if (concept) {
 			api.loadConcept("public-"+concept).then(renderPromos, app.errHandler);
 		}
 
 		if (hash=='search') {
+			$('#searchDiv').css('display', 'block');
+
 			var promos;
 			api.loadConcept('public-promos').then(function (res) {
 				promos = res;
@@ -40,12 +46,14 @@ function homePromos(api) {
 	
 	function renderPromos(promos) {
 		$('#promosWrapper').children().remove();
+
 		if (!promos || !promos.promo.length) {
-			$('#promosWrapper').html(
-				app.hash=="search" ? "<br/><br/><h5>No matching promo results found. Please revise your search keyword, brand, and/or price.</h5>"
+			var noMatch = app.hash=="search" ? "<br/><br/><h5>No matching promo results found. Please revise your search keyword, brand, and/or price.</h5>"
 				: app.hash=="popular" ? "<br/><br/><h5>No active popular promo collection items found.</h5>"
 				: "<br/><br/><h5>There are no active promos. <a href='/ui/my-teams#promos'>Add or reactivate a promo</a> to get things started</a>.</h5>"
-			);
+			
+
+			$('#promosWrapper').html(noMatch);
 		}
 		else {
 			currCollection = promos;
@@ -124,7 +132,7 @@ function homePromos(api) {
 		);
 	}
 	
-	main.clickHandler = function (e) { console.log(e)
+	main.clickHandler = function (e) {
 		if (e.target.id=='search-submit') { console.log(app.api.byConcept['public-promos']);
 			app.api.forms(app.api.byConcept['public-promos'], 'search', app.api.byConcept['public-promos'].search);
 		}
@@ -186,7 +194,9 @@ function homePromos(api) {
 		app.forms(divId, 'promos', promo.edit);
 	}
 
-	main.searchSubmit = function (e) {
+	main.keyHandler = function (e) {
+		var key = event.keyCode || event.which;
+		if (key==13) $('#search-submit').trigger('click');
 	}
 	
 	return main;

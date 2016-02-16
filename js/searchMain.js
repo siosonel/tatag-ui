@@ -40,7 +40,7 @@ function searchMain(conf) {
 		main.currView = 'brands';
 		User = res;
 		main.me(User.user_id, User.name, User.login_provider);
-		api.loadConcept('public', 'brands').then(main.brands, main.errHandler);
+		api.loadConcept('public-brands').then(main.brands, main.errHandler);
 	}
 	
 	main.refs = {types: types}

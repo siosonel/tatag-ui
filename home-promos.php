@@ -5,37 +5,53 @@
 	<a href='/ui/my-teams#promos' id='promos-my' target='Team Promos'>My Promos</a>
 </div>
 
+<style>
+	#searchDiv input {
+		margin-top: 0.25rem;
+		margin-bottom: 0.25rem;
+	}
+</style>
 
-<div id='promosWrapper' class="row" style='position:relative;'></div>
-
-<button id='scrollTo' class='tiny'>more...</button>
-
-
-<div id='searchModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px; padding:0.5rem;' data-reveal>
+<!--<div id='searchModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px; padding:0.5rem;' data-reveal>-->
+<div id='searchDiv' class='promoItem' style='margin: 0.5rem; min-height:0; height:auto; background-color: rgb(220,230,230);'>
 	<h4 id='promos-formTitle'>Search Promos</h4>
-	<form>
+	<form style='margin-bottom: 0'>
 		<div class='row' id='promoID-formDiv'>
 			<div class='row'>
 				<div class='columns small-12'>
-					<label>Keyword<input type='text' id='search-keyword' value=''/></label>
-				</div>
-				<div class='columns small-12'>
-					<label>Brand name or #<input type='text' id='search-brand_id' value='' /></label>
+					<label><input type='text' id='search-keyword' value='' placeholder='keyword-, name, or description'/></label>
 				</div>
 			</div>
-			<div class='row'>
-				<div class='columns small-6'>
-					<label>Amount Min<input type='text' id='search-amount_min' value='0'/></label>
+			<div class='row' style='line-height:3rem;'>
+				<div class='columns small-12 medium-6'>
+					<div class='row'>
+						<div class='columns small-3' style='text-align: center;'>Brand</div>
+						<div class='columns small-9'>
+							<input type='text' id='search-brand_id' value='' placeholder='name or ID#'/></label>
+						</div>
+					</div>
 				</div>
-				<div class='columns small-6'>
-					<label>Amount Max<input type='text' id='search-amount_max' value='99999'/></label>
+				<div class='columns small-12 medium-6'>
+					<div class='row'>
+						<div class='columns small-3' style='text-align: center;'>Amount</div>				
+						<div class='columns small-4'>
+							<input type='text' id='search-amount_min' value='0'/>
+						</div>
+						<div class='columns small-1' style='text-align: center;'>to</div>
+						<div class='columns small-4'>
+							<input type='text' id='search-amount_max' value='99999'/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</form>
-	<button id='search-submit' class='tiny'>Submit</button>
-	<a class="close-reveal-modal">&times;</a>
+	<button id='search-submit' class='tiny' style='position: absolute; top: 0.5rem; right: 0.5rem;'>Submit</button>
 </div>
+
+
+<div id='promosWrapper' class="row" style='position:relative;'></div>
+<button id='scrollTo' class='tiny'>more...</button>
 
 
 <div id='promosModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
@@ -124,9 +140,6 @@
 	</div>
 	<a class="close-reveal-modal">&times;</a>
 </div>		
-
-<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>
-<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
 
 <script src='/ui/js/adminForms.js'></script>
 <script src='/ui/js/homeMain.js'></script>	

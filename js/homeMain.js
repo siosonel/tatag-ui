@@ -30,7 +30,10 @@ function homeMain(conf) {
 				
 		$('#viewTypeDiv').click(main.clickHandler);
 		
-		if (main.forms) $('.formModal').click(main.forms.clickHandler);
+		if (main.forms) {
+			$('.formModal, #searchDiv').click(main.forms.clickHandler);
+			$('#searchDiv').keyup(main.promos.keyHandler);
+		}
 		
 		if (main.promos) $('#promosWrapper').click(main.promos.clickHandler);
 		

@@ -211,7 +211,7 @@ function walletTxn(api) {
 			target: res.target, 
 			query: {"for": $('#txn-to').val()},
 			method:'get', 
-			inputs:null
+			inputs:{}
 		};
 		
 		api.request(action).then(usePromoInfo, app.errHandler);
