@@ -6,8 +6,8 @@ function adminBrands(api) {
 		if (brandCollection) currCollection = brandCollection;
 		
 		$('#brandsWrapper').children().remove(); //console.log(currURL); console.log(api.byId[currURL]);
-		$('#brandsWrapper').append("<div style='min-height:2rem;'>"
-			+ "<a herf='' id='adminListHeading' style='line-height:2rem; vertical-align:bottom;'>Help</a>"
+		$('#brandsWrapper').append(
+			"<div style='min-height:2rem;'>"
 			+	"<button id='addBrand' class='right tiny' style='margin:0;'>+New Brand</button>"
 			+"</div>");
 		

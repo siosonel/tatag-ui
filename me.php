@@ -18,8 +18,8 @@
 	<h4>Tutorial</h4>
 	<p>(work in progress)</p>
 
-	<h4>Bugs/Issues</h4>
-	<p>Submit at: <a href='https://github.com/siosonel/tatag-ui/issues'>Github</a></p>
+	<h4>Requests/Bugs/Issues</h4>
+	<p>Submit to: <a href='https://github.com/siosonel/tatag-ui/issues'>Github</a></p>
 
 	<h4>For developers</h4>
 	<p>See <a href='https://tatag.cc/api/ref/docs.html'>API Documentation</a></p>

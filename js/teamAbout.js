@@ -18,6 +18,8 @@ function teamAbout(api) {
 	}
 	
 	function setTitle() {
+		if (!currBrand.id && currBrand.brand_id) currBrand.id = currBrand.brand_id;
+
 		$('#aboutWrapper').append(
 			"<div class='subLabel'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; about "+currBrand.name+", </span>"
@@ -26,9 +28,9 @@ function teamAbout(api) {
 		);
 	}
 	
-	function renderResource(about) { //console.log(member)
+	function renderResource(about) {
 		var date = about.created.split(' ')[0].split('-');
-		var divId = 'about-'+ about.brand.id; //console.log(divId)
+		var divId = 'about-'+ about.brand_id;
 		app.resources[divId] = about;
 		
 		$('#aboutWrapper').append(

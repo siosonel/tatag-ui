@@ -17,11 +17,13 @@ function adminAbout(api) {
 		api.loadId(url).then(renderResource, app.errHandler)
 	}
 	
-	function setTitle() {
+	function setTitle() {		
+		if (!currBrand.id && currBrand.brand_id) currBrand.id = currBrand.brand_id;
+
 		$('#aboutWrapper').append(
 			"<div class='subLabel'>"
 			+	 "<span style='vertical-align:top; font-weight: 700;'>&#9668; about "+currBrand.name+", </span>"
-			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.brand_id +"</span>"
+			+  "<span style='font-weight:normal;'>&nbsp; brand#"+ currBrand.id +"</span>"
 			+"</div>"
 		);
 	}

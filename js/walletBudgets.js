@@ -16,7 +16,7 @@ function walletBudgets(api) {
 			.then(renderBudgets, main.errHandler);		
 	}
 	
-	function renderBudgets(userAccounts) {
+	function renderBudgets(userAccounts) { console.log(userAccounts)
 		if (!userAccounts.items.length) {
 			$("#accountsWrapper").append("<div>You do not have any accounts in your wallet.</div>");
 		}
@@ -104,7 +104,7 @@ function walletBudgets(api) {
 				var i = obj.account.brand.id % 11;
 				colorIndex[divId] = {
 					logoBg: colors[i],
-					divBg: colors[11-i].replace("rgb", "rgba").replace(")", ",0.4)"),
+					divBg: colors[10-i].replace("rgb", "rgba").replace(")", ",0.4)"),
 					logo: obj.account.brand.logo
 						? "<img id='"+ divId +"-img' class='left logoDiv' src='"+ obj.account.brand.logo +"'/>"
 						: "<div id='"+ divId +"-img' class='left logoDiv' style='background-color: "+ colors[i] +"'>"+ obj.account.brand.name.substr(0,1).toUpperCase() +"</div>"

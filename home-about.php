@@ -90,7 +90,7 @@
 		<h4>Try it!</h4>
 		<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
 			<li>Browse <a href='/ui/home-promos'>the promos</a></li>
-			<li>Link to a <a href='https://tatag.cc/ad/1' target='software-1'>promo page</a> or <a href='https://tatag.cc/for/software-1' target='software-1'>recipient token (software-1)</a> anywhere
+			<li>Link to a <a href='https://tatag.cc/ad/1' target='oss-1'>promo page</a> or <a href='https://tatag.cc/for/oss-1' target='oss-1'>recipient token (oss-1)</a> anywhere
 			</li>
 			<li>
 				<a href='https://github.com/siosonel/tatag-api/blob/master/CONTRIBUTING.md'>Develop apps</a>, 
