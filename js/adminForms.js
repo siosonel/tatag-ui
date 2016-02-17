@@ -99,13 +99,25 @@ function adminForms(api) {
 			inputs:{}
 		};
 		
-		$('#'+currType+'Modal').foundation('reveal','close');
+		$('#'+currType+'Modal').foundation('reveal','close'); console.log(currForm)
 		
+		var errorMessages = [];
+
 		currInputs.map(function (inputName) {
 			action.inputs[inputName] = $('#'+currType+'-'+inputName).val();
+			
+			if (currForm.validate && currForm.validate[inputName]) { console.log(currForm.validate[inputName])
+				for(var testType in currForm.validate[inputName]) {
+					if (testType=='regex') {
+						var regex = new RegExp(currForm.validate[inputName].regex.value);
+						if (!regex.test(action.inputs[inputName])) errorMessages.push(currForm.validate[inputName].regex.errorMessage)
+					}
+				}
+			}
 		}); //console.log(action); return;
 		
-		api.request(action).then(currForm.callBack ? currForm.callBack : main.refreshViews, app.errHandler);
+		if (errorMessages.length) alert(errorMessages.join(" "));
+		else api.request(action).then(currForm.callBack ? currForm.callBack : main.refreshViews, app.errHandler);
 	}
 	
 	main.refreshViews = function (res) { //console.log(currAltType+' '+currType); console.log(currResource);

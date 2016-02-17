@@ -27,11 +27,16 @@
 		top: 30%; 
 		text-align: center; 
 		margin: auto; 
-		padding: 0 3rem
+	}
+
+	#funding-rightUpper {
+		padding: 0 3rem;		
 	}
 
 	#funding-rightLower ul {
-		padding-left: 1rem;
+		width: 33rem; 
+		max-width: 90%; 
+		margin: 0 auto;
 	}
 </style>
 
@@ -65,7 +70,7 @@
 		<div id='funding-leftLower' class='funding-wrapper' style='max-width: 32%; top: 50%; left: 20%;'></div>
 		-->
 
-		<div id='funding-team' class='funding-wrapper' style='top: 20%; left: 20%;'>
+		<div id='funding-team' class='funding-wrapper' style='top: 20%; left: 15%;'>
 			<span class='fi-dollar-bill large' style='font-size: 3rem; color:#009988;'></span>
 			<h5>Practical</h5>			
 		</div>
@@ -81,7 +86,7 @@
 		<div id='funding-rightUpper' class='funding-wrapper' style='top: 30%'></div>
 		<div id='funding-rightLower' class='funding-wrapper' style='top: 45%; left: -0.1'></div>
 
-		<div id='funding-nextBtn' class='funding-wrapper' style='top: 65%; left: 44%;'>
+		<div id='funding-nextBtn' class='funding-wrapper' style='top: 65%; left: 44.5%;'>
 			<button class='tiny' id='vizFundingNext'>next &#9658;</button>
 		</div>
 	</div>

@@ -155,7 +155,7 @@ button:focus, div:focus {
 	border-left: 1px solid #000;
 }
 
-#vizSimpleNext, #vizFundingNext {
+#vizSimpleNext, #vizFundingNext, #vizGoalsNext, #acceptPaymentBtn, #rejectPaymentBtn {
   padding: 0.5rem 0.7rem;
   margin: 0;
 }

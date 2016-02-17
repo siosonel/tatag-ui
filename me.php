@@ -18,7 +18,7 @@
 	<h4>Tutorial</h4>
 	<p>(work in progress)</p>
 
-	<h4>Requests/Bugs/Issues</h4>
+	<h4>Feature Requests, Bugs, Issues</h4>
 	<p>Submit to: <a href='https://github.com/siosonel/tatag-ui/issues'>Github</a></p>
 
 	<h4>For developers</h4>

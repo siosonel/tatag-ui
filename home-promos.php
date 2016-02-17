@@ -13,7 +13,7 @@
 </style>
 
 <!--<div id='searchModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px; padding:0.5rem;' data-reveal>-->
-<div id='searchDiv' class='promoItem' style='margin: 0.5rem; min-height:0; height:auto; background-color: rgb(220,230,230);'>
+<div id='searchDiv' class='promoItem' style='display: none; margin: 0.5rem; min-height:0; height:auto; background-color: rgb(220,230,230);'>
 	<h4 id='promos-formTitle'>Search Promos</h4>
 	<form style='margin-bottom: 0'>
 		<div class='row' id='promoID-formDiv'>
