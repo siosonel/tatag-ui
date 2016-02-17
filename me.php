@@ -14,6 +14,19 @@
 	<a class="close-reveal-modal">×</a>
 </div>
 
+<div id='helpModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
+	<h4>Tutorial</h4>
+	<p>(work in progress)</p>
+
+	<h4>Bugs/Issues</h4>
+	<p>Submit at: <a href='https://github.com/siosonel/tatag-ui/issues'>Github</a></p>
+
+	<h4>For developers</h4>
+	<p>See <a href='https://tatag.cc/api/ref/docs.html'>API Documentation</a></p>
+	
+	<a class="close-reveal-modal">×</a>
+</div>
+
 <script>
 	function me() {
 		var provider = {fb: 'facebook', tw: 'twitter', gp: 'google-plus', email: 'email'};
@@ -44,8 +57,13 @@
 			$('#meModal').foundation('reveal', 'open');
 		}
 		
-		return main
+		return main;
 	}
+
+
+	$('#helpPrompt').click(function () {
+		$('#helpModal').foundation('reveal', 'open');
+	});
 </script>
 
 <?php if (SITE=='live') { ?>

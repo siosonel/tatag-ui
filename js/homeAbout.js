@@ -8,6 +8,10 @@ function homeAbout(api) {
 		
 		app.currView = 'about';
 		app.adjustHeight();
+
+		if (app.hash) $('html,body').animate({
+        	scrollTop: $("#"+app.hash).offset().top
+    	}, 'slow');
 	}
 	
 	return main;

@@ -27,6 +27,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	<link rel="stylesheet" href="/ui/css/home.css">
 	<style>
 		#mainWrapper {
+			margin-bottom:2rem;
 			overflow: hidden;
 		}
 
@@ -53,6 +54,7 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			<a href="/ui/my-teams">Teams</a>
 		</div>
 	</div>
+	<div id='helpPrompt'>Help</div>
 	
 	<div id='viewTypeDiv' class='row'>
 		<button id='aboutViewPrompt' class='small-4 tiny'>About</button>
@@ -73,16 +75,13 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			include "$handler.php"; 
 		?>
 	</div>	
-	
+
 	<script>
 		var app = homeMain(<?php echo '{'
 			.'"userid":"'.$_SESSION['TOKEN_ID'].'",'
 			.'"pass":"'.$_SESSION['TOKEN_VAL'].'",'
 			.'"baseURL": "'. TATAG_DOMAIN .'"'
 		.'}'; ?>);
-	</script>
-	
-	<script>
 	</script>
 	
 	<?php include "me.php" ?>

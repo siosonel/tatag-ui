@@ -34,6 +34,7 @@
 			<a href="/ui/my-teams">Teams</a>
 		</div>
 	</div>
+	<div id='helpPrompt'>Help</div>
 	
 	<div id='viewTypeDiv' class='row'>		
 		<button id='budgetsViewPrompt' class='small-4 tiny'>Budgets</button>

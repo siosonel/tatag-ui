@@ -86,7 +86,7 @@
 		</div>
 	</div>
 
-	<div class='aboutItem' style='position: relative; min-height: 23rem; padding-top: 3rem;'>
+	<div id='try-it' class='aboutItem' style='position: relative; min-height: 23rem; padding-top: 3rem;'>
 		<h4>Try it!</h4>
 		<ul style='width: 33rem; max-width: 90%; margin: 1.5rem auto;'>
 			<li>Browse <a href='/ui/home-promos'>the promos</a></li>
@@ -125,7 +125,7 @@
 		<p id='vizGoalsDesign'></p>		
 		<div id='vizGoals'></div>				
 	</div>
-	<?php if (SITE!='dev') { ?>
+	<?php if (1 || SITE!='dev') { ?>
 		<div class='aboutVid'>
 			<h4>Inverted Design</h4>
 			<iframe width="98%" height="350rem" src="https://www.youtube.com/embed/r71QSqVWUFc" frameborder="0" allowfullscreen></iframe>

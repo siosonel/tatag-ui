@@ -22,9 +22,9 @@
 	<style></style>
 </head>
 <body>
-	<div id='login_provider'></div>
-		
-	<?php include 'teamsTopDivs.php' ?>	
+	<div id='login_provider'></div>		
+	<?php include 'teamsTopDivs.php' ?>
+	<div id='helpPrompt'>Help</div>
 	
 	<div id='mainWrapper'>	
 		<div id='brandsWrapper' class="row"></div>

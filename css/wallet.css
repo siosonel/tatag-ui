@@ -10,6 +10,15 @@ body {
 	left: 5px;
 }
 
+
+
+		#helpPrompt {
+			position:absolute; 
+			top:0; 
+			right:5px; 
+			font-size: 0.9rem;
+		}
+
 #titleBar {
 
 }
