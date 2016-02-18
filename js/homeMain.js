@@ -22,7 +22,12 @@ function homeMain(conf) {
 		if (typeof homeRatings == 'function') main.ratings = homeRatings(api);
 		if (typeof homeViz == 'function') main.viz = homeViz(api);
 		if (typeof homePromos == 'function') main.promos = homePromos(api);
-		if (typeof homeAbout == 'function') main.about = homeAbout(api);
+		
+		if (typeof homeAbout == 'function') {
+			main.about = homeAbout(api);
+			vizFunding.init(0);
+		}
+
 		if (typeof adminForms == 'function') main.forms = adminForms(api);
 
 		main.me = me();		

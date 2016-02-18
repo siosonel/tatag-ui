@@ -69,12 +69,11 @@
 		<div id='funding-leftUpper' class='funding-wrapper' style='max-width: 32%; top: 30%; left: 20%;'></div>
 		<div id='funding-leftLower' class='funding-wrapper' style='max-width: 32%; top: 50%; left: 20%;'></div>
 		-->
-
-		<div id='funding-team' class='funding-wrapper' style='top: 20%; left: 15%;'>
+		<div id='funding-team' class='funding-wrapper' style='top: 20%; left: 21%;'>
 			<span class='fi-dollar-bill large' style='font-size: 3rem; color:#009988;'></span>
 			<h5>Practical</h5>			
 		</div>
-		<div id='funding-market' class='funding-wrapper' style='top: 20%; left: 45%;'>
+		<div id='funding-market' class='funding-wrapper' style='top: 20%; left: 47.5%;'>
 			<span class='fi-heart large' style='font-size: 3rem; color:#bb5555;'></span>
 			<h5>Ethical</h5>
 		</div>
@@ -86,7 +85,7 @@
 		<div id='funding-rightUpper' class='funding-wrapper' style='top: 30%'></div>
 		<div id='funding-rightLower' class='funding-wrapper' style='top: 45%; left: -0.1'></div>
 
-		<div id='funding-nextBtn' class='funding-wrapper' style='top: 65%; left: 44.5%;'>
+		<div id='funding-nextBtn' class='funding-wrapper' style='top: 30%; left: 47%;'>
 			<button class='tiny' id='vizFundingNext'>next &#9658;</button>
 		</div>
 	</div>

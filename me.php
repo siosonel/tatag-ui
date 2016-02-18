@@ -23,6 +23,8 @@
 
 	<h4>For developers</h4>
 	<p>See <a href='https://tatag.cc/api/ref/docs.html'>API Documentation</a></p>
+	<p>Source code: <a href='https://github.com/siosonel/tatag-ui/'>Wallet UI</a>, 
+	<a href='https://github.com/siosonel/tatag-api/'>API</a></p>
 	
 	<a class="close-reveal-modal">×</a>
 </div>
