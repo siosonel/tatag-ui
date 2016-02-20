@@ -12,8 +12,10 @@
 	<script type="text/javascript" src="/ui/js/phlatSimple.js"></script>
 	<script type="text/javascript" src="/ui/js/phlatDriver.js"></script>
 	
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/foundation.min.js"></script>
 	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.dropdown.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/vendor/modernizr.js"></script>
   <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
 	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
 	
@@ -34,7 +36,15 @@
 			<a href="/ui/my-teams">Teams</a>
 		</div>
 	</div>
-	<div id='helpPrompt'>Help</div>
+	<div id='helpPrompt' data-dropdown='helpMenu' data-options='is_hover:true; hover_timeout: 5000'>Help/FAQ</div>	
+	<ul id='helpMenu' class='f-dropdown alignRight' data-dropdown-content>
+		<li><a href='/ui/home-faq'>FAQ</a></li>
+		<li>Tutorial (work in progress)</li>
+		<li><a href='https://github.com/siosonel/tatag-ui/issues'>Feature Requests, Bugs</a></li>
+		<li><a href='https://tatag.cc/api/ref/docs.html'>API Documentation</a></li>
+		<li><a href='https://github.com/siosonel/tatag-api/'>API source code</a></li>
+		<li><a href='https://github.com/siosonel/tatag-ui/'>Wallet source code</a></li>
+	</ul> 
 	
 	<div id='viewTypeDiv' class='row'>		
 		<button id='budgetsViewPrompt' class='small-4 tiny'>Budgets</button>

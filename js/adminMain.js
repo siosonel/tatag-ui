@@ -9,7 +9,9 @@ function adminMain(conf) {
 		'baseURL': conf.baseURL
 	});
 	
-	$(document).ready(function () {		
+	$(document).ready(function () {
+		$(document).foundation();
+
 		main.brands = adminBrands(api);
 		main.about = adminAbout(api);
 		main.members = adminMembers(api);

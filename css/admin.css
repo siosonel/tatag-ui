@@ -16,6 +16,11 @@ body {
 	right:5px; 
 	font-size: 0.9rem;
 	cursor: pointer;
+	color: #999;
+}
+
+#helpPrompt:hover {
+	color: #000;
 }
 
 #titleBar {

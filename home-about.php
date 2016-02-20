@@ -104,7 +104,7 @@
 		<p>or learn more below</p>
 	</div>
 
-	<div id='advantages' class='aboutItem' style='position: relative;'>
+	<div id='influence' class='aboutItem' style='position: relative;'>
 		<h4>Influence the future</h4>
 		<p id='vizSimpleExplained' style='margin-bottom: 0.2rem;'></p>			
 		<button class='tiny' id='vizSimpleNext'></button>

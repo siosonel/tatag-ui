@@ -11,6 +11,8 @@ function homeMain(conf) {
 	});
 	
 	$(document).ready(function () {
+		$(document).foundation();
+
 		main.hash = location.hash.substr(1);
 		params = main.getQueryParams();
 		app.currView = location.pathname.search('-')!=-1 ? location.pathname.split('-').pop()

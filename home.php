@@ -43,6 +43,10 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			padding-left: 2rem;
 			padding-right: 2rem;
 		}
+
+		#helpMenu.open {
+		   
+		}
 	</style>
 </head>
 <body>
@@ -54,7 +58,15 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 			<a href="/ui/my-teams">Teams</a>
 		</div>
 	</div>
-	<div id='helpPrompt'>Help</div>
+	<div id='helpPrompt' data-dropdown='helpMenu' data-options='is_hover:true; hover_timeout: 5000'>Help/FAQ</div>	
+	<ul id='helpMenu' class='f-dropdown alignRight' data-dropdown-content>
+		<li><a href='/ui/home-faq'>FAQ</a></li>
+		<li>Tutorial (work in progress)</li>
+		<li><a href='https://github.com/siosonel/tatag-ui/issues'>Feature Requests, Bugs</a></li>
+		<li><a href='https://tatag.cc/api/ref/docs.html'>API Documentation</a></li>
+		<li><a href='https://github.com/siosonel/tatag-api/'>API source code</a></li>
+		<li><a href='https://github.com/siosonel/tatag-ui/'>Wallet source code</a></li>
+	</ul> 
 	
 	<div id='viewTypeDiv' class='row'>
 		<button id='aboutViewPrompt' class='small-4 tiny'>About</button>
@@ -63,8 +75,11 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		<button id='vizViewPrompt' class='small-4 tiny'>Viz</button>
 	</div>
 
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/foundation.min.js"></script>
 	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.accordion.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.dropdown.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/vendor/modernizr.js"></script>
 
 	<div id='mainWrapper'>
 		<?php

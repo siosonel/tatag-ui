@@ -12,8 +12,10 @@
 	<script type="text/javascript" src="/ui/js/phlatSimple.js"></script>
 	<script type="text/javascript" src="/ui/js/phlatDriver.js"></script>
 	
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/foundation.min.js"></script>
 	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.dropdown.js"></script>
+	<script src="/common2/lib/foundation-5.3.3/js/vendor/modernizr.js"></script>
   <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
 	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
 	
@@ -24,7 +26,6 @@
 <body>
 	<div id='login_provider'></div>		
 	<?php include 'teamsTopDivs.php' ?>
-	<div id='helpPrompt'>Help</div>
 	
 	<div id='mainWrapper'>	
 		<div id='brandsWrapper' class="row"></div>

@@ -9,6 +9,8 @@ function teamMain(conf) {
 	});
 	
 	$(document).ready(function () {
+		$(document).foundation();
+
 		main.hash = location.hash.substr(1);
 		main.brands = teamBrands(api);
 		main.about = teamAbout(api);

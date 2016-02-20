@@ -5,6 +5,15 @@
 			<span class='fi-refresh'>&nbsp;</span><a href="/ui/team" style="color: #000;">Teams</a>
 		</div>
 	</div>
+	<div id='helpPrompt' data-dropdown='helpMenu' data-options='is_hover:true; hover_timeout: 5000'>Help/FAQ</div>	
+	<ul id='helpMenu' class='f-dropdown alignRight' data-dropdown-content>
+		<li><a href='/ui/home-faq'>FAQ</a></li>
+		<li>Tutorial (work in progress)</li>
+		<li><a href='https://github.com/siosonel/tatag-ui/issues'>Feature Requests, Bugs</a></li>
+		<li><a href='https://tatag.cc/api/ref/docs.html'>API Documentation</a></li>
+		<li><a href='https://github.com/siosonel/tatag-api/'>API source code</a></li>
+		<li><a href='https://github.com/siosonel/tatag-ui/'>Wallet source code</a></li>
+	</ul> 
 	
 	<style>
 	</style>

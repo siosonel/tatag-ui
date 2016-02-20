@@ -14,7 +14,10 @@
 	<a class="close-reveal-modal">×</a>
 </div>
 
-<div id='helpModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>
+<div id='helpModal' class="reveal-modal medium formModal" style='min-height:50vh; top:30px;' data-reveal>	
+	<h4>FAQ</h4>
+	<p>See the <a href='/ui/home-faq'>frequently asked questions</a>.</p>
+
 	<h4>Tutorial</h4>
 	<p>(work in progress)</p>
 
@@ -63,9 +66,9 @@
 	}
 
 
-	$('#helpPrompt').click(function () {
+	/*$('#helpPrompt').click(function () {
 		$('#helpModal').foundation('reveal', 'open');
-	});
+	});*/
 </script>
 
 <?php if (SITE=='live') { ?>

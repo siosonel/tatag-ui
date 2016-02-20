@@ -9,7 +9,9 @@ function walletMain(conf) {
 		'baseURL': conf.baseURL
 	});
 	
-	$(document).ready(function () {
+	$(document).ready(function () {		
+		$(document).foundation();
+
 		params = main.getQueryParams();
 		
 		app.currView = location.pathname.search('-')==-1 || location.pathname.substr(0,5)=='/for/'
