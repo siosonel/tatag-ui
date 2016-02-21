@@ -7,17 +7,8 @@
 	
 	<link rel="stylesheet" href="/ui/css/normalize.css">
 	
-	<script type="text/javascript" src="/common2/lib/jQuery/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="/node_modules/q/q.js"></script>
-	<script type="text/javascript" src="/ui/js/phlatSimple.js"></script>
-	<script type="text/javascript" src="/ui/js/phlatDriver.js"></script>
-	
-	<script src="/common2/lib/foundation-5.3.3/js/foundation.min.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.dropdown.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/vendor/modernizr.js"></script>
-  <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
-	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
+  	<link rel="stylesheet" href="/ui/bower_components/foundation/css/foundation.css">
+	<link rel="stylesheet" href="/ui/bower_components/foundation-icon-fonts/foundation-icons.css">
 	
 	<link rel="stylesheet" href="/ui/css/wallet.css">
 	
@@ -197,14 +188,24 @@
 		<a class="close-reveal-modal">×</a>
 	</div>
 	
-	<script type="text/javascript" src="/ui/js/walletMain.js"></script>
-	<script type="text/javascript" src="/ui/js/walletBudgets.js"></script>
-	<script type="text/javascript" src="/ui/js/walletRecords.js"></script>
-	<script type="text/javascript" src="/ui/js/walletTxn.js"></script>
-	<script type="text/javascript" src="/ui/js/walletEdit.js"></script>
-	<script type="text/javascript" src="/ui/js/walletRelays.js"></script>
-	<script type="text/javascript" src="/ui/js/walletOrders.js"></script>
-	<script type="text/javascript" src="/ui/js/walletItemized.js"></script>
+
+	<script src="/ui/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="/ui/bower_components/q/q.js"></script>	
+	<script src="/ui/bower_components/foundation/js/foundation.min.js"></script>
+	<script src="/ui/bower_components/foundation/js/foundation/foundation.reveal.js"></script>
+	<script src="/ui/bower_components/foundation/js/foundation/foundation.dropdown.js"></script>
+	
+	<script src="/ui/js/phlatSimple.js"></script>
+	<script src="/ui/js/phlatDriver.js"></script>
+	
+	<script src="/ui/js/walletMain.js"></script>
+	<script src="/ui/js/walletBudgets.js"></script>
+	<script src="/ui/js/walletRecords.js"></script>
+	<script src="/ui/js/walletTxn.js"></script>
+	<script src="/ui/js/walletEdit.js"></script>
+	<script src="/ui/js/walletRelays.js"></script>
+	<script src="/ui/js/walletOrders.js"></script>
+	<script src="/ui/js/walletItemized.js"></script>
 	<script>
 		var app = walletMain(<?php echo '{"userid":"'.$_SESSION['TOKEN_ID'].'","pass":"'.$_SESSION['TOKEN_VAL'].'", "baseURL": "'. TATAG_DOMAIN .'"}'; ?>);
 	</script>

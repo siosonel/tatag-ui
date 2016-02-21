@@ -6,27 +6,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<link rel="stylesheet" href="css/normalize.css">
-	
-	<script type="text/javascript" src="/common2/lib/jQuery/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="/node_modules/q/q.js"></script>
-	<script type="text/javascript" src="/ui/js/phlatSimple.js"></script>
-	<script type="text/javascript" src="/ui/js/phlatDriver.js"></script>
-	
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-	
-	<script src="/common2/lib/foundation-5.3.3/js/foundation.min.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.dropdown.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/vendor/modernizr.js"></script>
-  <link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
+  	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
 	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
 	
 	<link rel="stylesheet" href="css/admin.css">
-	
-	<style></style>
 </head>
 <body>
-	<div id='login_provider'></div>	
+	<div id='login_provider'></div>
+	
+	
+	<script src="/ui/bower_components/jquery/dist/jquery.min.js"></script>
 	<?php include 'teamsTopDivs.php' ?>
 	
 	<div id='mainWrapper'>	
@@ -334,18 +323,28 @@
 			<a class="close-reveal-modal">×</a>
 		</div>
 	</div>
+
+
+	<script src="/ui/bower_components/q/q.js"></script>
 	
-	<script src='js/adminMain.js'></script>
-	<script src='js/adminBrands.js'></script>
-	<script src='js/adminAbout.js'></script>
-	<script src='js/adminMembers.js'></script>
-	<script src='js/adminMemberHoldings.js'></script>
-	<script src='js/adminAccounts.js'></script>
-	<script src='js/adminAccountHolders.js'></script>
-	<script src='js/adminRecords.js'></script>
-	<script src='js/adminForms.js'></script>
-	<script src='js/adminPromos.js'></script>
-	<script src='js/adminThrottles.js'></script>
+	<script src="/ui/bower_components/foundation/js/foundation.min.js"></script>
+	<script src="/ui/bower_components/foundation/js/foundation/foundation.reveal.js"></script>
+	<script src="/ui/bower_components/foundation/js/foundation/foundation.dropdown.js"></script>
+
+	<script src="/ui/js/phlatSimple.js"></script>
+	<script src="/ui/js/phlatDriver.js"></script>
+
+	<script src='/ui/js/adminMain.js'></script>
+	<script src='/ui/js/adminBrands.js'></script>
+	<script src='/ui/js/adminAbout.js'></script>
+	<script src='/ui/js/adminMembers.js'></script>
+	<script src='/ui/js/adminMemberHoldings.js'></script>
+	<script src='/ui/js/adminAccounts.js'></script>
+	<script src='/ui/js/adminAccountHolders.js'></script>
+	<script src='/ui/js/adminRecords.js'></script>
+	<script src='/ui/js/adminForms.js'></script>
+	<script src='/ui/js/adminPromos.js'></script>
+	<script src='/ui/js/adminThrottles.js'></script>
 	<script>
 		var types = <?php echo file_get_contents(TATAG_DOMAIN ."/ref/brand_classification.json"); ?>;
 		var locs = <?php echo file_get_contents(TATAG_DOMAIN ."/ref/countries.json"); ?>;
@@ -354,5 +353,7 @@
 	</script>
 		
 	<?php include "me.php" ?>
+
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 </body>
 </html>

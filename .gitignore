@@ -1,4 +1,6 @@
 _exclude/*
+bower_components/*
+
 config/*
 config.php
 tools/builds/*

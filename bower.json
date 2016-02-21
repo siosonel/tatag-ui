@@ -1,0 +1,30 @@
+{
+  "name": "tatag-ui",
+  "authors": [
+    "Edgar Sioson <siosonel@gmail.com>"
+  ],
+  "description": "a front-end user interface for the Tatag API",
+  "main": "index.php",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "http://edgarsioson.com/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "5.5.*",
+    "foundation-icon-fonts": "*",
+    "colorbrewer": "^1.0.0",
+    "d3": "3",
+    "jquery": "2.1.4"
+  },
+  "resolutions": {
+    "jquery": ">= 2.1.0",
+    "q": "1.0.1",
+    "foundation": "5.5.*"
+  }
+}

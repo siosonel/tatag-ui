@@ -36,7 +36,7 @@
   <dd class="accordion-navigation">
     <a href="#panel3b">Why would a seller refuse a payment?</a>
     <div id="panel3b" class="content">
-	    <p>One reason is similar to having coupon restrictions: <b>a team would typically limit its commitments</b> to the platform as far as providing goods and services. In fact, recipient tokens in Tatag are created with default restrictions on how often it's used by a user, team, or overall in a given seven day period. A user may also be forced to wait a given number of hours before beign able to reuse a recipient token to initiate a payment.</p>
+	    <p>One reason is similar to having coupon restrictions: <b>a team would typically limit its commitments</b> to the platform as far as providing goods and services. In fact, recipient tokens in Tatag are created with default restrictions on how often it's used by a user, team, or overall within a seven day window. A user may also be forced to wait a given number of hours before beign able to reuse a recipient token to initiate a payment.</p>
 
 		<p>Another reason is that <b>the seller already has spendable funds</b> via its expense budget, so there is not as much pressure to blindly accept payments regardless of the issuing team's reputation. A team can be more selective on who benefits from its goods and services.</p>
 

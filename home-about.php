@@ -138,8 +138,8 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="/ui/lib/d3/d3.v3.min.js"></script>
-<script type="text/javascript" src="/ui/lib/colorbrewer.js"></script>
+<script type="text/javascript" src="/ui/bower_components/d3/d3.min.js"></script>
+<script type="text/javascript" src="/ui/bower_components/colorbrewer/colorbrewer.js"></script>
 
 <script src='/ui/js/homeMain.js'></script>	
 <script src='/ui/js/homeAbout.js'></script>

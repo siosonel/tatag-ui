@@ -11,17 +11,8 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 	
 	<link rel="stylesheet" href="/ui/css/normalize.css">
 	
-	<script type="text/javascript" src="/common2/lib/jQuery/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="/node_modules/q/q.js"></script>
-	<script type="text/javascript" src="/ui/js/phlatSimple.js"></script>
-	<script type="text/javascript" src="/ui/js/phlatDriver.js"></script>
-	
-  	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/css/foundation.min.css">
-	<link rel="stylesheet" href="/common2/lib/foundation-5.3.3/icons/foundation-icons.css">
-	
-  <!--<link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="/common2/lib/slick/slick-theme.css"/>
-	<script type="text/javascript" src="/common2/lib/slick/slick.min.js"></script>-->
+  	<link rel="stylesheet" href="/ui/bower_components/foundation/css/foundation.css">
+	<link rel="stylesheet" href="/ui/bower_components/foundation-icon-fonts/foundation-icons.css">
 		
 	<link rel="stylesheet" href="/ui/css/admin.css">
 	<link rel="stylesheet" href="/ui/css/home.css">
@@ -75,11 +66,15 @@ $ProtDomain = $protocol ."://". $_SERVER['SERVER_NAME'];
 		<button id='vizViewPrompt' class='small-4 tiny'>Viz</button>
 	</div>
 
-	<script src="/common2/lib/foundation-5.3.3/js/foundation.min.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.reveal.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.accordion.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/foundation/foundation.dropdown.js"></script>
-	<script src="/common2/lib/foundation-5.3.3/js/vendor/modernizr.js"></script>
+	<script src="/ui/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="/ui/bower_components/q/q.js"></script>
+	<script src="/ui/bower_components/foundation/js/foundation.min.js"></script>
+	<script src="/ui/bower_components/foundation/js/foundation/foundation.reveal.js"></script>
+	<script src="/ui/bower_components/foundation/js/foundation/foundation.accordion.js"></script>
+	<script src="/ui/bower_components/foundation/js/foundation/foundation.dropdown.js"></script>
+	
+	<script src="/ui/js/phlatSimple.js"></script>
+	<script src="/ui/js/phlatDriver.js"></script>
 
 	<div id='mainWrapper'>
 		<?php

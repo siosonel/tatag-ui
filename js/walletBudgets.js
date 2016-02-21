@@ -16,7 +16,7 @@ function walletBudgets(api) {
 			.then(renderBudgets, main.errHandler);		
 	}
 	
-	function renderBudgets(userAccounts) { console.log(userAccounts)
+	function renderBudgets(userAccounts) {
 		if (!userAccounts.items.length) {
 			$("#accountsWrapper").append("<div>You do not have any accounts in your wallet.</div>");
 		}
